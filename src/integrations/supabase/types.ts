@@ -21,6 +21,7 @@ export type Database = {
           division: Database["public"]["Enums"]["division"]
           golf_national_ranking: number | null
           id: string
+          is_hbcu: boolean
           logo_url: string | null
           min_act_score: number | null
           min_sat_score: number | null
@@ -31,6 +32,7 @@ export type Database = {
           scholarships_available: number | null
           school_size: Database["public"]["Enums"]["school_size"]
           state: string
+          team_gender: string
           updated_at: string
           website_url: string | null
         }
@@ -40,6 +42,7 @@ export type Database = {
           division: Database["public"]["Enums"]["division"]
           golf_national_ranking?: number | null
           id?: string
+          is_hbcu?: boolean
           logo_url?: string | null
           min_act_score?: number | null
           min_sat_score?: number | null
@@ -50,6 +53,7 @@ export type Database = {
           scholarships_available?: number | null
           school_size: Database["public"]["Enums"]["school_size"]
           state: string
+          team_gender?: string
           updated_at?: string
           website_url?: string | null
         }
@@ -59,6 +63,7 @@ export type Database = {
           division?: Database["public"]["Enums"]["division"]
           golf_national_ranking?: number | null
           id?: string
+          is_hbcu?: boolean
           logo_url?: string | null
           min_act_score?: number | null
           min_sat_score?: number | null
@@ -69,6 +74,7 @@ export type Database = {
           scholarships_available?: number | null
           school_size?: Database["public"]["Enums"]["school_size"]
           state?: string
+          team_gender?: string
           updated_at?: string
           website_url?: string | null
         }

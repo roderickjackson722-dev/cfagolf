@@ -1,5 +1,6 @@
 export type Division = 'D1' | 'D2' | 'D3' | 'NAIA' | 'JUCO';
 export type SchoolSize = 'Small' | 'Medium' | 'Large' | 'Very Large';
+export type TeamGender = 'Men' | 'Women' | 'Both';
 
 export interface College {
   id: string;
@@ -17,6 +18,8 @@ export interface College {
   out_of_state_cost: number | null;
   website_url: string | null;
   logo_url: string | null;
+  team_gender: TeamGender;
+  is_hbcu: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -26,6 +29,8 @@ export interface CollegeFilters {
   divisions: Division[];
   states: string[];
   schoolSizes: SchoolSize[];
+  teamGenders: TeamGender[];
+  hbcuOnly: boolean;
   maxRanking: number | null;
   minScholarships: number | null;
   maxScoringAvg: number | null;
@@ -36,10 +41,11 @@ export interface CollegeFilters {
 
 export const DIVISIONS: Division[] = ['D1', 'D2', 'D3', 'NAIA', 'JUCO'];
 export const SCHOOL_SIZES: SchoolSize[] = ['Small', 'Medium', 'Large', 'Very Large'];
+export const TEAM_GENDERS: TeamGender[] = ['Men', 'Women', 'Both'];
 
 export const US_STATES = [
   'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
-  'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
+  'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
   'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan',
   'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
   'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio',

@@ -1,8 +1,7 @@
-import { Heart, ExternalLink, MapPin, Users, Trophy, GraduationCap, DollarSign, School, Scale } from 'lucide-react';
+import { Heart, ExternalLink, MapPin, Users, Trophy, GraduationCap, DollarSign, School, Scale, UserCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { College } from '@/types/college';
 import { useAuth } from '@/hooks/useAuth';
 import { useFavorites } from '@/hooks/useFavorites';
@@ -97,7 +96,7 @@ export function CollegeCard({ college }: CollegeCardProps) {
           )}
 
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
               <Badge variant={divisionVariants[college.division]}>
                 {college.division}
               </Badge>
@@ -105,6 +104,15 @@ export function CollegeCard({ college }: CollegeCardProps) {
                 <Badge variant="ranking">
                   <Trophy className="w-3 h-3 mr-1" />
                   #{college.golf_national_ranking}
+                </Badge>
+              )}
+              <Badge variant="outline" className="text-xs">
+                <UserCircle className="w-3 h-3 mr-1" />
+                {college.team_gender === 'Both' ? "Men & Women" : college.team_gender}
+              </Badge>
+              {college.is_hbcu && (
+                <Badge variant="secondary" className="text-xs border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
+                  HBCU
                 </Badge>
               )}
             </div>
@@ -144,7 +152,7 @@ export function CollegeCard({ college }: CollegeCardProps) {
           <div className="flex items-center gap-2 text-muted-foreground">
             <GraduationCap className="w-4 h-4 text-primary" />
             <div>
-              <div className="text-xs uppercase tracking-wide">Scoring Avg</div>
+              <div className="text-xs uppercase tracking-wide">Golf Scoring Avg</div>
               <div className="font-medium text-foreground">
                 {college.recruiting_scoring_avg ?? 'N/A'}
               </div>

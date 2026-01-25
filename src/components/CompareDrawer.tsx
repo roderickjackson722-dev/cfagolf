@@ -33,8 +33,10 @@ export function CompareDrawer() {
 
   const metrics = [
     { label: 'Division', getValue: (c: typeof compareList[0]) => c.division, icon: Trophy },
+    { label: 'Team Gender', getValue: (c: typeof compareList[0]) => c.team_gender === 'Both' ? 'Men & Women' : c.team_gender, icon: Users },
+    { label: 'HBCU', getValue: (c: typeof compareList[0]) => c.is_hbcu ? 'Yes' : 'No', icon: School },
     { label: 'National Ranking', getValue: (c: typeof compareList[0]) => c.golf_national_ranking ? `#${c.golf_national_ranking}` : 'Unranked', icon: Trophy },
-    { label: 'Scoring Avg', getValue: (c: typeof compareList[0]) => c.recruiting_scoring_avg ?? 'N/A', icon: GraduationCap },
+    { label: 'Golf Scoring Avg', getValue: (c: typeof compareList[0]) => c.recruiting_scoring_avg ?? 'N/A', icon: GraduationCap },
     { label: 'Scholarships', getValue: (c: typeof compareList[0]) => c.scholarships_available ?? 'N/A', icon: Trophy },
     { label: 'State', getValue: (c: typeof compareList[0]) => c.state, icon: MapPin },
     { label: 'Conference', getValue: (c: typeof compareList[0]) => c.conference ?? 'N/A', icon: Users },

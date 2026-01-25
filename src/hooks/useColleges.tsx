@@ -28,6 +28,16 @@ export function useColleges(filters: CollegeFilters) {
         query = query.in('school_size', filters.schoolSizes);
       }
 
+      // Apply team gender filter
+      if (filters.teamGenders.length > 0) {
+        query = query.in('team_gender', filters.teamGenders);
+      }
+
+      // Apply HBCU filter
+      if (filters.hbcuOnly) {
+        query = query.eq('is_hbcu', true);
+      }
+
       // Apply ranking filter
       if (filters.maxRanking) {
         query = query.lte('golf_national_ranking', filters.maxRanking);

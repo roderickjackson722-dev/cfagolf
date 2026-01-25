@@ -15,6 +15,8 @@ const initialFilters: FilterType = {
   divisions: [],
   states: [],
   schoolSizes: [],
+  teamGenders: [],
+  hbcuOnly: false,
   maxRanking: null,
   minScholarships: null,
   maxScoringAvg: null,

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, ArrowLeft, Search, Filter, Scale, Trash2, ExternalLink, School, Trophy, MapPin, GraduationCap, Users, DollarSign } from 'lucide-react';
+import { Heart, ArrowLeft, Search, Filter, Scale, Trash2, ExternalLink, School, Trophy, MapPin, GraduationCap, DollarSign, UserCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,7 +14,7 @@ import { CompareProvider, useCompare } from '@/hooks/useCompare';
 import { useFavoriteColleges } from '@/hooks/useFavoriteColleges';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useAuth } from '@/hooks/useAuth';
-import { DIVISIONS, Division } from '@/types/college';
+import { DIVISIONS } from '@/types/college';
 import { cn } from '@/lib/utils';
 
 const divisionVariants: Record<string, 'd1' | 'd2' | 'd3' | 'naia' | 'juco'> = {
@@ -199,7 +199,7 @@ function FavoritesContent() {
                       )}
                       
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
                           <Badge variant={divisionVariants[college.division]} className="text-xs">
                             {college.division}
                           </Badge>
@@ -207,6 +207,15 @@ function FavoritesContent() {
                             <Badge variant="ranking" className="text-xs">
                               <Trophy className="w-3 h-3 mr-1" />
                               #{college.golf_national_ranking}
+                            </Badge>
+                          )}
+                          <Badge variant="outline" className="text-xs">
+                            <UserCircle className="w-3 h-3 mr-1" />
+                            {college.team_gender === 'Both' ? "M & W" : college.team_gender}
+                          </Badge>
+                          {college.is_hbcu && (
+                            <Badge variant="secondary" className="text-xs border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
+                              HBCU
                             </Badge>
                           )}
                         </div>
