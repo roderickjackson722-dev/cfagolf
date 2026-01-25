@@ -226,6 +226,81 @@ export type Database = {
         }
         Relationships: []
       }
+      scholarship_offers: {
+        Row: {
+          academic_scholarship: number | null
+          athletic_scholarship: number | null
+          books_fees: number | null
+          created_at: string
+          decision_deadline: string | null
+          division: string | null
+          id: string
+          is_favorite: boolean | null
+          loans_offered: number | null
+          need_based_aid: number | null
+          net_cost: number | null
+          notes: string | null
+          offer_date: string | null
+          offer_type: string | null
+          other_grants: number | null
+          room_board_cost: number | null
+          school_name: string
+          status: string | null
+          tuition_cost: number | null
+          updated_at: string
+          user_id: string
+          work_study: number | null
+        }
+        Insert: {
+          academic_scholarship?: number | null
+          athletic_scholarship?: number | null
+          books_fees?: number | null
+          created_at?: string
+          decision_deadline?: string | null
+          division?: string | null
+          id?: string
+          is_favorite?: boolean | null
+          loans_offered?: number | null
+          need_based_aid?: number | null
+          net_cost?: number | null
+          notes?: string | null
+          offer_date?: string | null
+          offer_type?: string | null
+          other_grants?: number | null
+          room_board_cost?: number | null
+          school_name: string
+          status?: string | null
+          tuition_cost?: number | null
+          updated_at?: string
+          user_id: string
+          work_study?: number | null
+        }
+        Update: {
+          academic_scholarship?: number | null
+          athletic_scholarship?: number | null
+          books_fees?: number | null
+          created_at?: string
+          decision_deadline?: string | null
+          division?: string | null
+          id?: string
+          is_favorite?: boolean | null
+          loans_offered?: number | null
+          need_based_aid?: number | null
+          net_cost?: number | null
+          notes?: string | null
+          offer_date?: string | null
+          offer_type?: string | null
+          other_grants?: number | null
+          room_board_cost?: number | null
+          school_name?: string
+          status?: string | null
+          tuition_cost?: number | null
+          updated_at?: string
+          user_id?: string
+          work_study?: number | null
+        }
+        Relationships: []
+      }
       target_schools: {
         Row: {
           category: string

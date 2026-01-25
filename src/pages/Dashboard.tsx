@@ -87,7 +87,9 @@ const tools = [
     title: "Scholarship Offer Calculator",
     description: "Analyze offer values",
     status: 'available',
-    downloadable: true
+    downloadable: true,
+    interactive: true,
+    path: '/tools/scholarship-calculator'
   },
   {
     id: 'timeline',
