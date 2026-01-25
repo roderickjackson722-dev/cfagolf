@@ -13,7 +13,7 @@ import {
   Heart,
   Download,
   ChevronRight,
-  User
+  Loader2
 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
@@ -23,6 +23,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
+import { pdfGenerators } from '@/lib/pdfTemplates';
+import { toast } from '@/hooks/use-toast';
 
 const tools = [
   {
@@ -93,7 +95,29 @@ const tools = [
 
 const Dashboard = () => {
   const { user, loading, hasPaidAccess, profile } = useAuth();
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
+  const [downloadingTool, setDownloadingTool] = useState<string | null>(null);
+
+  const handleDownload = async (toolId: string, toolTitle: string) => {
+    setDownloadingTool(toolId);
+    try {
+      const generator = pdfGenerators[toolId];
+      if (generator) {
+        generator();
+        toast({
+          title: "Download Started",
+          description: `${toolTitle} PDF has been downloaded.`,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Download Failed",
+        description: "There was an error generating the PDF. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setDownloadingTool(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -187,8 +211,7 @@ const Dashboard = () => {
               {tools.map((tool) => (
                 <Card 
                   key={tool.id} 
-                  className="card-hover cursor-pointer group"
-                  onClick={() => setSelectedTool(tool.id)}
+                  className="card-hover group"
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between">
@@ -210,8 +233,24 @@ const Dashboard = () => {
                     <CardDescription className="text-sm">
                       {tool.description}
                     </CardDescription>
-                    <Button variant="ghost" size="sm" className="mt-3 p-0 h-auto text-primary">
-                      Open Tool <ChevronRight className="w-4 h-4 ml-1" />
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="mt-3 p-0 h-auto text-primary"
+                      onClick={() => handleDownload(tool.id, tool.title)}
+                      disabled={downloadingTool === tool.id}
+                    >
+                      {downloadingTool === tool.id ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                          Downloading...
+                        </>
+                      ) : (
+                        <>
+                          <Download className="w-4 h-4 mr-1" />
+                          Download PDF
+                        </>
+                      )}
                     </Button>
                   </CardContent>
                 </Card>
