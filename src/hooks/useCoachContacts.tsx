@@ -164,10 +164,22 @@ export const useCoachContacts = () => {
     .filter(c => c.follow_up_date && new Date(c.follow_up_date) >= new Date())
     .sort((a, b) => new Date(a.follow_up_date!).getTime() - new Date(b.follow_up_date!).getTime());
 
+  // Calculate stats
+  const stats = {
+    totalContacts: contacts.length,
+    responsesReceived: contacts.filter(c => c.response_received).length,
+    responseRate: contacts.length > 0 
+      ? Math.round((contacts.filter(c => c.response_received).length / contacts.length) * 100)
+      : 0,
+    offers: contacts.filter(c => c.status === 'offer').length,
+    committed: contacts.filter(c => c.status === 'committed').length,
+  };
+
   return {
     contacts,
     contactsByStatus,
     upcomingFollowUps,
+    stats,
     isLoading,
     error,
     addContact,
