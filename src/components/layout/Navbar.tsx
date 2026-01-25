@@ -47,7 +47,7 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            {user && hasPaidAccess && (
+            {user && (
               <>
                 <Link
                   to="/dashboard"
@@ -123,7 +123,7 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              {user && hasPaidAccess && (
+              {user && (
                 <>
                   <Link
                     to="/dashboard"

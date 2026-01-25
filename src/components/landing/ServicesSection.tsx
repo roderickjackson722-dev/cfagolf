@@ -6,9 +6,12 @@ import {
   Users, 
   FileText, 
   Calculator,
-  ClipboardList
+  ClipboardList,
+  ArrowRight
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const services = [
   {
@@ -88,6 +91,19 @@ export function ServicesSection() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Link to="/login">
+            <Button size="lg" className="rounded-full font-semibold px-8">
+              Access All Tools
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
+          <p className="text-sm text-muted-foreground mt-3">
+            Sign up free to access your recruiting dashboard
+          </p>
         </div>
       </div>
     </section>
