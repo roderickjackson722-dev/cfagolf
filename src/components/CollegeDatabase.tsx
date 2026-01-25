@@ -3,6 +3,9 @@ import { CollegeFilters as FilterType } from '@/types/college';
 import { useColleges, useCollegeStats } from '@/hooks/useColleges';
 import { CollegeCard } from '@/components/CollegeCard';
 import { CollegeFilters } from '@/components/CollegeFilters';
+import { CompareDrawer } from '@/components/CompareDrawer';
+import { CompareFloatingBar } from '@/components/CompareFloatingBar';
+import { CompareProvider } from '@/hooks/useCompare';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { GraduationCap, MapPin, Trophy, Users } from 'lucide-react';
@@ -20,7 +23,7 @@ const initialFilters: FilterType = {
   maxCost: null,
 };
 
-export function CollegeDatabase() {
+function CollegeDatabaseContent() {
   const [filters, setFilters] = useState<FilterType>(initialFilters);
   const { data: colleges, isLoading } = useColleges(filters);
   const { data: stats } = useCollegeStats();
@@ -112,6 +115,18 @@ export function CollegeDatabase() {
           )}
         </div>
       </section>
+
+      {/* Compare Components */}
+      <CompareFloatingBar />
+      <CompareDrawer />
     </div>
+  );
+}
+
+export function CollegeDatabase() {
+  return (
+    <CompareProvider>
+      <CollegeDatabaseContent />
+    </CompareProvider>
   );
 }
