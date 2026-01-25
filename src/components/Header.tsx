@@ -1,11 +1,11 @@
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { UserMenu } from './UserMenu';
 import { Button } from '@/components/ui/button';
 
 export function Header() {
-  const { user, loading } = useAuth();
+  const { user, loading, hasPaidAccess } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -20,9 +20,17 @@ export function Header() {
           </div>
         </Link>
 
-        <nav className="flex items-center gap-4">
+        <nav className="flex items-center gap-2 sm:gap-4">
           {!loading && (
             <>
+              {user && hasPaidAccess && (
+                <Link to="/favorites">
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    <Heart className="w-4 h-4" />
+                    <span className="hidden sm:inline">Favorites</span>
+                  </Button>
+                </Link>
+              )}
               {user ? (
                 <UserMenu />
               ) : (
