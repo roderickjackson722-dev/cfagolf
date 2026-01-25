@@ -1,7 +1,7 @@
 import { ArrowRight, Star, Users, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import cfaLogo from '@/assets/cfa-logo.png';
+import rangePic from '@/assets/range-pic.jpg';
 
 export function HeroSection() {
   return (
@@ -69,14 +69,14 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right - Logo/Image */}
+          {/* Right - Golf Range Image */}
           <div className="hidden lg:flex justify-center items-center">
             <div className="relative">
-              <div className="absolute inset-0 bg-white/10 rounded-full blur-3xl scale-110" />
+              <div className="absolute inset-0 bg-white/10 rounded-3xl blur-3xl scale-110" />
               <img 
-                src={cfaLogo} 
-                alt="College Fairway Advisors" 
-                className="relative w-80 h-80 object-contain drop-shadow-2xl"
+                src={rangePic} 
+                alt="Golfers practicing on the range" 
+                className="relative w-[480px] h-80 object-cover rounded-2xl shadow-2xl border-4 border-white/20"
               />
             </div>
           </div>
