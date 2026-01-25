@@ -240,6 +240,63 @@ export type Database = {
           },
         ]
       }
+      tournament_results: {
+        Row: {
+          course_name: string | null
+          created_at: string
+          field_size: number | null
+          finish_position: number | null
+          id: string
+          location: string | null
+          notes: string | null
+          relative_to_par: number | null
+          round_scores: Json | null
+          rounds: number | null
+          total_score: number | null
+          tournament_date: string
+          tournament_name: string
+          tournament_type: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          course_name?: string | null
+          created_at?: string
+          field_size?: number | null
+          finish_position?: number | null
+          id?: string
+          location?: string | null
+          notes?: string | null
+          relative_to_par?: number | null
+          round_scores?: Json | null
+          rounds?: number | null
+          total_score?: number | null
+          tournament_date: string
+          tournament_name: string
+          tournament_type?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          course_name?: string | null
+          created_at?: string
+          field_size?: number | null
+          finish_position?: number | null
+          id?: string
+          location?: string | null
+          notes?: string | null
+          relative_to_par?: number | null
+          round_scores?: Json | null
+          rounds?: number | null
+          total_score?: number | null
+          tournament_date?: string
+          tournament_name?: string
+          tournament_type?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

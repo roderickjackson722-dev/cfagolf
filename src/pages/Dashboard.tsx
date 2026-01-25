@@ -51,7 +51,9 @@ const tools = [
     title: "Tournament Result Log",
     description: "Track your competitive results",
     status: 'available',
-    downloadable: true
+    downloadable: true,
+    interactive: true,
+    path: '/tools/tournament-log'
   },
   {
     id: 'coach-tracker',

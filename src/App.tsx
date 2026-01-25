@@ -11,6 +11,7 @@ import Database from "./pages/Database";
 import Dashboard from "./pages/Dashboard";
 import TargetSchoolBuilder from "./pages/TargetSchoolBuilder";
 import CoachTracker from "./pages/CoachTracker";
+import TournamentLog from "./pages/TournamentLog";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
 import Favorites from "./pages/Favorites";
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tools/target-schools" element={<TargetSchoolBuilder />} />
             <Route path="/tools/coach-tracker" element={<CoachTracker />} />
+            <Route path="/tools/tournament-log" element={<TournamentLog />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/favorites" element={<Favorites />} />
