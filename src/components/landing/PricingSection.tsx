@@ -53,7 +53,7 @@ export function PricingSection() {
                 Complete recruiting toolkit for junior golfers
               </CardDescription>
               <div className="pt-6">
-                <span className="text-5xl font-bold text-foreground">$299</span>
+                <span className="text-5xl font-bold text-foreground">$499</span>
                 <span className="text-xl text-muted-foreground">.99</span>
                 <p className="text-sm text-muted-foreground mt-2">One-time payment • Lifetime access</p>
               </div>
@@ -80,8 +80,8 @@ export function PricingSection() {
 
               <p className="text-center text-sm text-muted-foreground">
                 Questions? Email us at{' '}
-                <a href="mailto:info@cfa.golf" className="text-primary hover:underline">
-                  info@cfa.golf
+                <a href="mailto:contact@cfa.golf" className="text-primary hover:underline">
+                  contact@cfa.golf
                 </a>
               </p>
             </CardContent>
