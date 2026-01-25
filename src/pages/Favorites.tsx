@@ -7,7 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Header } from '@/components/Header';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/landing/Footer';
 import { CompareDrawer } from '@/components/CompareDrawer';
 import { CompareFloatingBar } from '@/components/CompareFloatingBar';
 import { CompareProvider, useCompare } from '@/hooks/useCompare';
@@ -85,9 +86,9 @@ function FavoritesContent() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <div className="container py-16 text-center">
+      <div className="min-h-screen bg-background flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex flex-col items-center justify-center py-16 text-center">
           <Heart className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4" />
           <h1 className="text-2xl font-bold mb-2">Sign In Required</h1>
           <p className="text-muted-foreground mb-6">Please log in to view your favorites.</p>
@@ -95,20 +96,21 @@ function FavoritesContent() {
             <Link to="/login">Sign In</Link>
           </Button>
         </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <div className="min-h-screen bg-background flex flex-col">
+      <Navbar />
       
       {/* Hero Section */}
-      <section className="golf-gradient py-12 md:py-16">
+      <section className="cfa-gradient py-12 md:py-16">
         <div className="container">
           <div className="flex items-center gap-4 mb-6">
             <Button variant="ghost" size="icon" asChild className="text-primary-foreground hover:bg-primary-foreground/10">
-              <Link to="/">
+              <Link to="/database">
                 <ArrowLeft className="w-5 h-5" />
               </Link>
             </Button>
@@ -305,6 +307,7 @@ function FavoritesContent() {
       
       <CompareFloatingBar />
       <CompareDrawer />
+      <Footer />
     </div>
   );
 }
