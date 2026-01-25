@@ -79,7 +79,9 @@ const tools = [
     title: "Campus Visit Comparison",
     description: "Evaluate and compare visits",
     status: 'available',
-    downloadable: true
+    downloadable: true,
+    interactive: true,
+    path: '/tools/campus-visits'
   },
   {
     id: 'scholarship-calc',

@@ -14,6 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
+      campus_visits: {
+        Row: {
+          academics_rating: number | null
+          campus_rating: number | null
+          coaching_rating: number | null
+          college_id: string | null
+          cons: string | null
+          created_at: string
+          custom_school_name: string | null
+          facilities_rating: number | null
+          follow_up_needed: boolean | null
+          id: string
+          notes: string | null
+          overall_rating: number | null
+          photo_urls: Json | null
+          pros: string | null
+          questions_asked: string | null
+          team_culture_rating: number | null
+          updated_at: string
+          user_id: string
+          visit_date: string
+          visit_type: string | null
+        }
+        Insert: {
+          academics_rating?: number | null
+          campus_rating?: number | null
+          coaching_rating?: number | null
+          college_id?: string | null
+          cons?: string | null
+          created_at?: string
+          custom_school_name?: string | null
+          facilities_rating?: number | null
+          follow_up_needed?: boolean | null
+          id?: string
+          notes?: string | null
+          overall_rating?: number | null
+          photo_urls?: Json | null
+          pros?: string | null
+          questions_asked?: string | null
+          team_culture_rating?: number | null
+          updated_at?: string
+          user_id: string
+          visit_date: string
+          visit_type?: string | null
+        }
+        Update: {
+          academics_rating?: number | null
+          campus_rating?: number | null
+          coaching_rating?: number | null
+          college_id?: string | null
+          cons?: string | null
+          created_at?: string
+          custom_school_name?: string | null
+          facilities_rating?: number | null
+          follow_up_needed?: boolean | null
+          id?: string
+          notes?: string | null
+          overall_rating?: number | null
+          photo_urls?: Json | null
+          pros?: string | null
+          questions_asked?: string | null
+          team_culture_rating?: number | null
+          updated_at?: string
+          user_id?: string
+          visit_date?: string
+          visit_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campus_visits_college_id_fkey"
+            columns: ["college_id"]
+            isOneToOne: false
+            referencedRelation: "colleges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       coach_contacts: {
         Row: {
           coach_name: string
@@ -221,6 +298,57 @@ export type Database = {
           id?: string
           phone?: string | null
           state?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      recruiting_milestones: {
+        Row: {
+          category: string
+          completed_date: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_completed: boolean | null
+          notes: string | null
+          priority: number | null
+          reminder_days_before: number | null
+          reminder_enabled: boolean | null
+          target_date: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          completed_date?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_completed?: boolean | null
+          notes?: string | null
+          priority?: number | null
+          reminder_days_before?: number | null
+          reminder_enabled?: boolean | null
+          target_date: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          completed_date?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_completed?: boolean | null
+          notes?: string | null
+          priority?: number | null
+          reminder_days_before?: number | null
+          reminder_enabled?: boolean | null
+          target_date?: string
+          title?: string
           updated_at?: string
           user_id?: string
         }
