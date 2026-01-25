@@ -51,12 +51,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        golf: {
-          forest: "hsl(var(--golf-forest))",
-          sage: "hsl(var(--golf-sage))",
-          mint: "hsl(var(--golf-mint))",
-          charcoal: "hsl(var(--golf-charcoal))",
-          gold: "hsl(var(--golf-gold))",
+        cfa: {
+          forest: "hsl(var(--cfa-forest))",
+          sage: "hsl(var(--cfa-sage))",
+          beige: "hsl(var(--cfa-beige))",
+          cream: "hsl(var(--cfa-cream))",
+          sand: "hsl(var(--cfa-sand))",
+          charcoal: "hsl(var(--cfa-charcoal))",
+          gold: "hsl(var(--cfa-gold))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
