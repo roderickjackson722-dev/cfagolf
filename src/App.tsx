@@ -9,6 +9,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import Landing from "./pages/Landing";
 import Database from "./pages/Database";
 import Dashboard from "./pages/Dashboard";
+import TargetSchoolBuilder from "./pages/TargetSchoolBuilder";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
 import Favorites from "./pages/Favorites";
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/" element={<Landing />} />
             <Route path="/database" element={<Database />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/tools/target-schools" element={<TargetSchoolBuilder />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/favorites" element={<Favorites />} />

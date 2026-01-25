@@ -139,6 +139,50 @@ export type Database = {
         }
         Relationships: []
       }
+      target_schools: {
+        Row: {
+          category: string
+          college_id: string | null
+          created_at: string
+          custom_school_name: string | null
+          id: string
+          notes: string | null
+          priority: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          college_id?: string | null
+          created_at?: string
+          custom_school_name?: string | null
+          id?: string
+          notes?: string | null
+          priority?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          college_id?: string | null
+          created_at?: string
+          custom_school_name?: string | null
+          id?: string
+          notes?: string | null
+          priority?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "target_schools_college_id_fkey"
+            columns: ["college_id"]
+            isOneToOne: false
+            referencedRelation: "colleges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

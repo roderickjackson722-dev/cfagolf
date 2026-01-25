@@ -76,6 +76,20 @@ export function useColleges(filters: CollegeFilters) {
   });
 }
 
+export function useAllColleges() {
+  return useQuery({
+    queryKey: ['all-colleges'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('colleges')
+        .select('id, name, state, division, logo_url, recruiting_scoring_avg')
+        .order('name', { ascending: true });
+      if (error) throw error;
+      return data as Pick<College, 'id' | 'name' | 'state' | 'division' | 'logo_url' | 'recruiting_scoring_avg'>[];
+    },
+  });
+}
+
 export function useCollegeStats() {
   return useQuery({
     queryKey: ['college-stats'],
