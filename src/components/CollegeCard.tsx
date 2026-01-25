@@ -1,10 +1,12 @@
-import { Heart, ExternalLink, MapPin, Users, Trophy, GraduationCap, DollarSign, School } from 'lucide-react';
+import { Heart, ExternalLink, MapPin, Users, Trophy, GraduationCap, DollarSign, School, Scale } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { College } from '@/types/college';
 import { useAuth } from '@/hooks/useAuth';
 import { useFavorites } from '@/hooks/useFavorites';
+import { useCompare } from '@/hooks/useCompare';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -23,6 +25,18 @@ const divisionVariants: Record<string, 'd1' | 'd2' | 'd3' | 'naia' | 'juco'> = {
 export function CollegeCard({ college }: CollegeCardProps) {
   const { user, hasPaidAccess } = useAuth();
   const { isFavorite, toggleFavorite, isPending } = useFavorites();
+  const { addToCompare, removeFromCompare, isInCompare, compareList } = useCompare();
+  
+  const inCompare = isInCompare(college.id);
+  const canAddMore = compareList.length < 4;
+
+  const handleCompareToggle = () => {
+    if (inCompare) {
+      removeFromCompare(college.id);
+    } else if (canAddMore) {
+      addToCompare(college);
+    }
+  };
 
   const formatCurrency = (value: number | null) => {
     if (!value) return 'N/A';
@@ -47,9 +61,29 @@ export function CollegeCard({ college }: CollegeCardProps) {
   );
 
   return (
-    <Card className="group relative overflow-hidden border-border/50 bg-card shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1">
-      <CardHeader className="pb-3">
-        <div className="flex items-start gap-4">
+    <Card className={cn(
+      "group relative overflow-hidden border-border/50 bg-card shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1",
+      inCompare && "ring-2 ring-primary border-primary"
+    )}>
+      {/* Compare Checkbox */}
+      <div className="absolute top-3 left-3 z-10">
+        <div
+          onClick={handleCompareToggle}
+          className={cn(
+            "flex items-center justify-center w-7 h-7 rounded-md cursor-pointer transition-all",
+            inCompare 
+              ? "bg-primary text-primary-foreground" 
+              : "bg-background/80 backdrop-blur-sm border border-border hover:border-primary hover:bg-primary/10",
+            !canAddMore && !inCompare && "opacity-50 cursor-not-allowed"
+          )}
+          title={inCompare ? "Remove from compare" : canAddMore ? "Add to compare" : "Maximum 4 colleges"}
+        >
+          <Scale className="w-4 h-4" />
+        </div>
+      </div>
+
+      <CardHeader className="pb-3 pt-4">
+        <div className="flex items-start gap-4 pl-8">
           {/* College Logo */}
           {college.logo_url && !imageError ? (
             <img
