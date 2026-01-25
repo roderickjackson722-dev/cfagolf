@@ -26,7 +26,7 @@ const divisionVariants: Record<string, 'd1' | 'd2' | 'd3' | 'naia' | 'juco'> = {
 };
 
 function FavoritesContent() {
-  const { user, hasPaidAccess } = useAuth();
+  const { user } = useAuth();
   const { data: colleges, isLoading } = useFavoriteColleges();
   const { toggleFavorite, isPending } = useFavorites();
   const { addToCompare, removeFromCompare, isInCompare, compareList } = useCompare();
@@ -83,14 +83,14 @@ function FavoritesContent() {
     }).format(value);
   };
 
-  if (!user || !hasPaidAccess) {
+  if (!user) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
         <div className="container py-16 text-center">
           <Heart className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4" />
-          <h1 className="text-2xl font-bold mb-2">Access Required</h1>
-          <p className="text-muted-foreground mb-6">Please log in with a paid account to view your favorites.</p>
+          <h1 className="text-2xl font-bold mb-2">Sign In Required</h1>
+          <p className="text-muted-foreground mb-6">Please log in to view your favorites.</p>
           <Button asChild>
             <Link to="/login">Sign In</Link>
           </Button>

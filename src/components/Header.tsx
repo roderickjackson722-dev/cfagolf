@@ -5,7 +5,7 @@ import { UserMenu } from './UserMenu';
 import { Button } from '@/components/ui/button';
 
 export function Header() {
-  const { user, loading, hasPaidAccess } = useAuth();
+  const { user, loading } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -23,7 +23,7 @@ export function Header() {
         <nav className="flex items-center gap-2 sm:gap-4">
           {!loading && (
             <>
-              {user && hasPaidAccess && (
+              {user && (
                 <Link to="/favorites">
                   <Button variant="ghost" size="sm" className="gap-2">
                     <Heart className="w-4 h-4" />
