@@ -75,7 +75,7 @@ const Pricing = () => {
                   Complete recruiting toolkit for junior golfers
                 </CardDescription>
                 <div className="pt-6">
-                  <span className="text-5xl font-bold text-foreground">$299</span>
+                  <span className="text-5xl font-bold text-foreground">$499</span>
                   <span className="text-xl text-muted-foreground">.99</span>
                   <p className="text-sm text-muted-foreground mt-2">One-time payment • Lifetime access</p>
                 </div>
@@ -95,7 +95,7 @@ const Pricing = () => {
 
                 {user ? (
                   <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                    Upgrade Now - $299.99
+                    Upgrade Now - $499.99
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 ) : (
@@ -109,8 +109,8 @@ const Pricing = () => {
 
                 <p className="text-center text-sm text-muted-foreground">
                   Questions? Email us at{' '}
-                  <a href="mailto:info@cfa.golf" className="text-primary hover:underline">
-                    info@cfa.golf
+                  <a href="mailto:contact@cfa.golf" className="text-primary hover:underline">
+                    contact@cfa.golf
                   </a>
                 </p>
               </CardContent>
