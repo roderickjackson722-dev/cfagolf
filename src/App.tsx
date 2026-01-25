@@ -11,6 +11,7 @@ import Database from "./pages/Database";
 import Dashboard from "./pages/Dashboard";
 import TargetSchoolBuilder from "./pages/TargetSchoolBuilder";
 import CoachTracker from "./pages/CoachTracker";
+import CampusVisits from "./pages/CampusVisits";
 import TournamentLog from "./pages/TournamentLog";
 import ScholarshipCalculator from "./pages/ScholarshipCalculator";
 import Profile from "./pages/Profile";
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tools/target-schools" element={<TargetSchoolBuilder />} />
             <Route path="/tools/coach-tracker" element={<CoachTracker />} />
+            <Route path="/tools/campus-visits" element={<CampusVisits />} />
             <Route path="/tools/tournament-log" element={<TournamentLog />} />
             <Route path="/tools/scholarship-calculator" element={<ScholarshipCalculator />} />
             <Route path="/profile" element={<Profile />} />
