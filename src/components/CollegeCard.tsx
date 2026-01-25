@@ -1,4 +1,4 @@
-import { Heart, ExternalLink, MapPin, Users, Trophy, GraduationCap, DollarSign } from 'lucide-react';
+import { Heart, ExternalLink, MapPin, Users, Trophy, GraduationCap, DollarSign, School } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,7 @@ import { College } from '@/types/college';
 import { useAuth } from '@/hooks/useAuth';
 import { useFavorites } from '@/hooks/useFavorites';
 import { cn } from '@/lib/utils';
+import { useState } from 'react';
 
 interface CollegeCardProps {
   college: College;
@@ -37,10 +38,30 @@ export function CollegeCard({ college }: CollegeCardProps) {
     return new Intl.NumberFormat('en-US').format(value);
   };
 
+  const [imageError, setImageError] = useState(false);
+
+  const LogoPlaceholder = () => (
+    <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-border/50 shrink-0">
+      <School className="w-8 h-8 text-primary/60" />
+    </div>
+  );
+
   return (
     <Card className="group relative overflow-hidden border-border/50 bg-card shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1">
       <CardHeader className="pb-3">
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-4">
+          {/* College Logo */}
+          {college.logo_url && !imageError ? (
+            <img
+              src={college.logo_url}
+              alt={`${college.name} logo`}
+              className="w-16 h-16 rounded-lg object-contain bg-white p-1 border border-border/50 shrink-0"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <LogoPlaceholder />
+          )}
+
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-2">
               <Badge variant={divisionVariants[college.division]}>
@@ -53,18 +74,15 @@ export function CollegeCard({ college }: CollegeCardProps) {
                 </Badge>
               )}
             </div>
-            <h3 className="font-semibold text-lg leading-tight text-foreground truncate">
+            <h3 className="font-semibold text-lg leading-tight text-foreground line-clamp-2">
               {college.name}
             </h3>
             <div className="flex items-center gap-1 mt-1 text-muted-foreground text-sm">
-              <MapPin className="w-3.5 h-3.5" />
-              <span>{college.state}</span>
-              {college.conference && (
-                <>
-                  <span className="mx-1">•</span>
-                  <span>{college.conference}</span>
-                </>
-              )}
+              <MapPin className="w-3.5 h-3.5 shrink-0" />
+              <span className="truncate">
+                {college.state}
+                {college.conference && ` • ${college.conference}`}
+              </span>
             </div>
           </div>
           
