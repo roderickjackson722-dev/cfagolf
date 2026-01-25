@@ -14,6 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
+      coach_contacts: {
+        Row: {
+          coach_name: string
+          coach_title: string | null
+          contact_type: string | null
+          created_at: string
+          email: string | null
+          first_contact_date: string | null
+          follow_up_date: string | null
+          id: string
+          notes: string | null
+          phone: string | null
+          priority: number | null
+          response_received: boolean | null
+          school_name: string
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          coach_name: string
+          coach_title?: string | null
+          contact_type?: string | null
+          created_at?: string
+          email?: string | null
+          first_contact_date?: string | null
+          follow_up_date?: string | null
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          priority?: number | null
+          response_received?: boolean | null
+          school_name: string
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          coach_name?: string
+          coach_title?: string | null
+          contact_type?: string | null
+          created_at?: string
+          email?: string | null
+          first_contact_date?: string | null
+          follow_up_date?: string | null
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          priority?: number | null
+          response_received?: boolean | null
+          school_name?: string
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       colleges: {
         Row: {
           conference: string | null

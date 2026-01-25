@@ -63,7 +63,7 @@ const categoryConfig = {
 };
 
 const TargetSchoolBuilder = () => {
-  const { user, loading, hasPaidAccess } = useAuth();
+  const { user, loading } = useAuth();
   const { 
     dreamSchools, 
     matchSchools, 
@@ -94,10 +94,6 @@ const TargetSchoolBuilder = () => {
 
   if (!user) {
     return <Navigate to="/login" replace />;
-  }
-
-  if (!hasPaidAccess) {
-    return <Navigate to="/pricing" replace />;
   }
 
   const filteredColleges = colleges.filter(c => 

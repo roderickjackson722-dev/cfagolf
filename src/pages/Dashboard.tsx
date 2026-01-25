@@ -59,7 +59,9 @@ const tools = [
     title: "Coach Contact Tracker",
     description: "Manage coach communications",
     status: 'available',
-    downloadable: true
+    downloadable: true,
+    interactive: true,
+    path: '/tools/coach-tracker'
   },
   {
     id: 'pre-call-prep',
@@ -131,10 +133,6 @@ const Dashboard = () => {
 
   if (!user) {
     return <Navigate to="/login" replace />;
-  }
-
-  if (!hasPaidAccess) {
-    return <Navigate to="/pricing" replace />;
   }
 
   return (
