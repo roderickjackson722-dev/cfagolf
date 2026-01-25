@@ -33,7 +33,9 @@ const tools = [
     title: "Target School List Builder",
     description: "Build your personalized college list",
     status: 'available',
-    downloadable: true
+    downloadable: true,
+    interactive: true,
+    path: '/tools/target-schools'
   },
   {
     id: 'video-specs',
@@ -218,12 +220,19 @@ const Dashboard = () => {
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
                         <tool.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
                       </div>
-                      {tool.downloadable && (
-                        <Badge variant="secondary" className="text-xs">
-                          <Download className="w-3 h-3 mr-1" />
-                          PDF
-                        </Badge>
-                      )}
+                      <div className="flex gap-1">
+                        {'interactive' in tool && tool.interactive && (
+                          <Badge variant="default" className="text-xs">
+                            Interactive
+                          </Badge>
+                        )}
+                        {tool.downloadable && (
+                          <Badge variant="secondary" className="text-xs">
+                            <Download className="w-3 h-3 mr-1" />
+                            PDF
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                     <CardTitle className="text-base font-semibold mt-3">
                       {tool.title}
@@ -233,25 +242,35 @@ const Dashboard = () => {
                     <CardDescription className="text-sm">
                       {tool.description}
                     </CardDescription>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="mt-3 p-0 h-auto text-primary"
-                      onClick={() => handleDownload(tool.id, tool.title)}
-                      disabled={downloadingTool === tool.id}
-                    >
-                      {downloadingTool === tool.id ? (
-                        <>
-                          <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-                          Downloading...
-                        </>
-                      ) : (
-                        <>
-                          <Download className="w-4 h-4 mr-1" />
-                          Download PDF
-                        </>
+                    <div className="flex gap-2 mt-3">
+                      {'path' in tool && tool.path && (
+                        <Link to={tool.path}>
+                          <Button variant="default" size="sm">
+                            <ChevronRight className="w-4 h-4 mr-1" />
+                            Open Tool
+                          </Button>
+                        </Link>
                       )}
-                    </Button>
+                      <Button 
+                        variant={'path' in tool ? "outline" : "ghost"}
+                        size="sm" 
+                        className={!('path' in tool) ? "p-0 h-auto text-primary" : ""}
+                        onClick={() => handleDownload(tool.id, tool.title)}
+                        disabled={downloadingTool === tool.id}
+                      >
+                        {downloadingTool === tool.id ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                            Downloading...
+                          </>
+                        ) : (
+                          <>
+                            <Download className="w-4 h-4 mr-1" />
+                            PDF
+                          </>
+                        )}
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
