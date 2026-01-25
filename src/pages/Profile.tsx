@@ -28,6 +28,7 @@ import { toast } from '@/hooks/use-toast';
 import { useTargetSchools } from '@/hooks/useTargetSchools';
 import { useCoachContacts } from '@/hooks/useCoachContacts';
 import { useTournamentResults } from '@/hooks/useTournamentResults';
+import { AvatarUpload } from '@/components/AvatarUpload';
 
 const US_STATES = [
   'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
@@ -54,6 +55,7 @@ interface ProfileData {
   handicap: number | null;
   home_course: string;
   goal_division: string;
+  avatar_url: string | null;
 }
 
 const Profile = () => {
@@ -75,6 +77,7 @@ const Profile = () => {
     handicap: null,
     home_course: '',
     goal_division: '',
+    avatar_url: null,
   });
 
   useEffect(() => {
@@ -105,6 +108,7 @@ const Profile = () => {
         handicap: data.handicap,
         home_course: data.home_course || '',
         goal_division: data.goal_division || '',
+        avatar_url: data.avatar_url || null,
       });
     }
   };
@@ -201,6 +205,23 @@ const Profile = () => {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Profile Form */}
             <div className="lg:col-span-2 space-y-6">
+              {/* Profile Photo */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Profile Photo</CardTitle>
+                  <CardDescription>
+                    Upload a photo to personalize your profile
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex justify-center">
+                  <AvatarUpload
+                    currentAvatarUrl={profileData.avatar_url}
+                    onUploadComplete={(url) => setProfileData({ ...profileData, avatar_url: url || null })}
+                    size="lg"
+                  />
+                </CardContent>
+              </Card>
+
               {/* Personal Information */}
               <Card>
                 <CardHeader>
