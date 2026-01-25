@@ -16,9 +16,10 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { CollegeFilters as FilterType, DIVISIONS, SCHOOL_SIZES, US_STATES, Division, SchoolSize } from '@/types/college';
+import { CollegeFilters as FilterType, DIVISIONS, SCHOOL_SIZES, TEAM_GENDERS, US_STATES, Division, SchoolSize, TeamGender } from '@/types/college';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Switch } from '@/components/ui/switch';
 
 interface CollegeFiltersProps {
   filters: FilterType;
@@ -42,6 +43,13 @@ export function CollegeFilters({ filters, onFiltersChange }: CollegeFiltersProps
     onFiltersChange({ ...filters, schoolSizes: newSizes });
   };
 
+  const toggleTeamGender = (gender: TeamGender) => {
+    const newGenders = filters.teamGenders.includes(gender)
+      ? filters.teamGenders.filter(g => g !== gender)
+      : [...filters.teamGenders, gender];
+    onFiltersChange({ ...filters, teamGenders: newGenders });
+  };
+
   const addState = (state: string) => {
     if (!filters.states.includes(state)) {
       onFiltersChange({ ...filters, states: [...filters.states, state] });
@@ -58,6 +66,8 @@ export function CollegeFilters({ filters, onFiltersChange }: CollegeFiltersProps
       divisions: [],
       states: [],
       schoolSizes: [],
+      teamGenders: [],
+      hbcuOnly: false,
       maxRanking: null,
       minScholarships: null,
       maxScoringAvg: null,
@@ -72,6 +82,8 @@ export function CollegeFilters({ filters, onFiltersChange }: CollegeFiltersProps
     filters.divisions.length > 0 ||
     filters.states.length > 0 ||
     filters.schoolSizes.length > 0 ||
+    filters.teamGenders.length > 0 ||
+    filters.hbcuOnly ||
     filters.maxRanking ||
     filters.minScholarships ||
     filters.maxScoringAvg ||
@@ -177,6 +189,36 @@ export function CollegeFilters({ filters, onFiltersChange }: CollegeFiltersProps
               </div>
             </div>
 
+            {/* Team Gender Filter */}
+            <div>
+              <Label className="text-sm font-medium mb-3 block">Team Gender</Label>
+              <div className="flex flex-wrap gap-2">
+                {TEAM_GENDERS.map((gender) => (
+                  <Button
+                    key={gender}
+                    variant={filters.teamGenders.includes(gender) ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => toggleTeamGender(gender)}
+                    className="rounded-pill"
+                  >
+                    {gender === 'Both' ? "Men & Women" : gender}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* HBCU Filter */}
+            <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+              <div>
+                <Label className="text-sm font-medium">HBCU Only</Label>
+                <p className="text-xs text-muted-foreground">Show only Historically Black Colleges and Universities</p>
+              </div>
+              <Switch
+                checked={filters.hbcuOnly}
+                onCheckedChange={(checked) => onFiltersChange({ ...filters, hbcuOnly: checked })}
+              />
+            </div>
+
             {/* Numeric Filters */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -209,7 +251,7 @@ export function CollegeFilters({ filters, onFiltersChange }: CollegeFiltersProps
 
               <div>
                 <Label className="text-sm font-medium mb-3 block">
-                  Max Scoring Avg: {filters.maxScoringAvg || 'Any'}
+                  Max Golf Scoring Avg: {filters.maxScoringAvg || 'Any'}
                 </Label>
                 <Slider
                   value={[filters.maxScoringAvg || 80]}
