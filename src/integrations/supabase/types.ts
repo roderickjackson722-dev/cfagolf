@@ -168,29 +168,59 @@ export type Database = {
       }
       profiles: {
         Row: {
+          avatar_url: string | null
+          city: string | null
+          club_team: string | null
           created_at: string
           email: string | null
           full_name: string | null
+          goal_division: string | null
+          graduation_year: number | null
+          handicap: number | null
           has_paid_access: boolean | null
+          high_school: string | null
+          home_course: string | null
           id: string
+          phone: string | null
+          state: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          avatar_url?: string | null
+          city?: string | null
+          club_team?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
+          goal_division?: string | null
+          graduation_year?: number | null
+          handicap?: number | null
           has_paid_access?: boolean | null
+          high_school?: string | null
+          home_course?: string | null
           id?: string
+          phone?: string | null
+          state?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          avatar_url?: string | null
+          city?: string | null
+          club_team?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
+          goal_division?: string | null
+          graduation_year?: number | null
+          handicap?: number | null
           has_paid_access?: boolean | null
+          high_school?: string | null
+          home_course?: string | null
           id?: string
+          phone?: string | null
+          state?: string | null
           updated_at?: string
           user_id?: string
         }
