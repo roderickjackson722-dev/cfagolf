@@ -25,6 +25,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { pdfGenerators } from '@/lib/pdfTemplates';
 import { toast } from '@/hooks/use-toast';
+import { ReferralCard } from '@/components/ReferralCard';
 
 const tools = [
   {
@@ -281,36 +282,42 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Progress Section */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Your Recruiting Progress</CardTitle>
-              <CardDescription>Track your journey through the recruiting process</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-muted-foreground">Profile Completion</span>
-                  <span className="font-medium text-foreground">25%</span>
+          {/* Two Column Layout for Progress and Referral */}
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* Progress Section */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Your Recruiting Progress</CardTitle>
+                <CardDescription>Track your journey through the recruiting process</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-muted-foreground">Profile Completion</span>
+                    <span className="font-medium text-foreground">25%</span>
+                  </div>
+                  <Progress value={25} className="h-2" />
                 </div>
-                <Progress value={25} className="h-2" />
-              </div>
-              <div>
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-muted-foreground">Schools Researched</span>
-                  <span className="font-medium text-foreground">0 / 20</span>
+                <div>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-muted-foreground">Schools Researched</span>
+                    <span className="font-medium text-foreground">0 / 20</span>
+                  </div>
+                  <Progress value={0} className="h-2" />
                 </div>
-                <Progress value={0} className="h-2" />
-              </div>
-              <div>
-                <div className="flex justify-between text-sm mb-2">
-                  <span className="text-muted-foreground">Coach Contacts Made</span>
-                  <span className="font-medium text-foreground">0 / 10</span>
+                <div>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-muted-foreground">Coach Contacts Made</span>
+                    <span className="font-medium text-foreground">0 / 10</span>
+                  </div>
+                  <Progress value={0} className="h-2" />
                 </div>
-                <Progress value={0} className="h-2" />
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+
+            {/* Referral Card */}
+            <ReferralCard />
+          </div>
         </div>
       </main>
       <Footer />

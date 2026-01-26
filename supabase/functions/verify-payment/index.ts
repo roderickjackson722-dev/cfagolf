@@ -27,6 +27,8 @@ serve(async (req) => {
 
     if (session.payment_status === "paid") {
       const userId = session.metadata?.user_id;
+      const referralId = session.metadata?.referral_id;
+      const discountApplied = session.metadata?.discount_applied;
       
       if (userId) {
         const supabaseAdmin = createClient(
@@ -34,10 +36,27 @@ serve(async (req) => {
           Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
         );
 
+        // Grant access
         await supabaseAdmin
           .from('profiles')
           .update({ has_paid_access: true })
           .eq('user_id', userId);
+
+        // Track referral usage if applicable
+        if (referralId && referralId !== "none") {
+          // Record the referral use
+          await supabaseAdmin
+            .from('referral_uses')
+            .insert({
+              referral_id: referralId,
+              referred_user_id: userId,
+              payment_amount: session.amount_total || 0,
+              discount_applied: parseInt(discountApplied || "0"),
+            });
+
+          // Increment the uses count
+          await supabaseAdmin.rpc('increment_referral_uses', { referral_id: referralId });
+        }
 
         return new Response(JSON.stringify({ 
           success: true, 

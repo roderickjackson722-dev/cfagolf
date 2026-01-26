@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
 import { US_STATES } from '@/types/college';
-import { ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Check } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Check, Users } from 'lucide-react';
 
 const currentYear = new Date().getFullYear();
 const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1);
@@ -19,6 +19,7 @@ const MEMBERSHIP_PRICE = 2499.99;
 
 export function AuthForm() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   
   // Sign in state
   const [signInEmail, setSignInEmail] = useState('');
@@ -45,8 +46,22 @@ export function AuthForm() {
   const [promoApplied, setPromoApplied] = useState<{ discount: number; name: string } | null>(null);
   const [isCheckingPromo, setIsCheckingPromo] = useState(false);
   
+  // Referral code support
+  const [referralCode, setReferralCode] = useState('');
+  const [referralApplied, setReferralApplied] = useState<{ discount: number } | null>(null);
+  const [isCheckingReferral, setIsCheckingReferral] = useState(false);
+  
   const [isLoading, setIsLoading] = useState(false);
   const { signIn, signUp } = useAuth();
+
+  // Check for referral code in URL
+  useEffect(() => {
+    const refCode = searchParams.get('ref');
+    if (refCode) {
+      setReferralCode(refCode);
+      checkReferralCode(refCode);
+    }
+  }, [searchParams]);
 
   const handleSignIn = async () => {
     if (!signInEmail || !signInPassword) {
@@ -101,9 +116,11 @@ export function AuthForm() {
     setTimeout(() => {
       if (code === 'FOUNDERS50') {
         setPromoApplied({ discount: 50, name: 'Founders Fee - 50% Off' });
+        setReferralApplied(null); // Clear referral if promo is applied
         toast.success('Promo code applied! 50% off');
       } else if (code === 'CFAADMIN2025') {
         setPromoApplied({ discount: 100, name: 'Admin Access - Free' });
+        setReferralApplied(null);
         toast.success('Promo code applied! Free access');
       } else if (code) {
         setPromoApplied(null);
@@ -113,9 +130,57 @@ export function AuthForm() {
     }, 500);
   };
 
+  const checkReferralCode = async (code?: string) => {
+    const codeToCheck = (code || referralCode).toUpperCase().trim();
+    if (!codeToCheck) return;
+    
+    setIsCheckingReferral(true);
+    
+    try {
+      const { data, error } = await supabase
+        .from('referrals')
+        .select('discount_percent, is_active')
+        .eq('referral_code', codeToCheck)
+        .eq('is_active', true)
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (data) {
+        setReferralApplied({ discount: data.discount_percent });
+        if (!promoApplied) {
+          toast.success(`Referral code applied! ${data.discount_percent}% off`);
+        }
+      } else {
+        setReferralApplied(null);
+        if (code) {
+          // Only show error if manually entered (not from URL)
+        } else {
+          toast.error('Invalid referral code');
+        }
+      }
+    } catch (error) {
+      console.error('Error checking referral:', error);
+      setReferralApplied(null);
+    } finally {
+      setIsCheckingReferral(false);
+    }
+  };
+
   const getDiscountedPrice = () => {
-    if (!promoApplied) return MEMBERSHIP_PRICE;
-    return MEMBERSHIP_PRICE * (1 - promoApplied.discount / 100);
+    if (promoApplied && promoApplied.discount > 0) {
+      return MEMBERSHIP_PRICE * (1 - promoApplied.discount / 100);
+    }
+    if (referralApplied && referralApplied.discount > 0) {
+      return MEMBERSHIP_PRICE * (1 - referralApplied.discount / 100);
+    }
+    return MEMBERSHIP_PRICE;
+  };
+
+  const getActiveDiscount = () => {
+    if (promoApplied) return promoApplied.discount;
+    if (referralApplied) return referralApplied.discount;
+    return 0;
   };
 
   const handlePayAndSignUp = async () => {
@@ -155,7 +220,10 @@ export function AuthForm() {
 
       // Now proceed with checkout
       const { data, error } = await supabase.functions.invoke('create-membership-checkout', {
-        body: { promoCode: promoApplied ? promoCode : null },
+        body: { 
+          promoCode: promoApplied ? promoCode : null,
+          referralCode: referralApplied && !promoApplied ? referralCode : null,
+        },
       });
 
       if (error) throw error;
@@ -331,7 +399,7 @@ export function AuthForm() {
         </p>
         
         <div className="flex items-baseline gap-2">
-          {promoApplied && promoApplied.discount > 0 && (
+          {getActiveDiscount() > 0 && (
             <span className="text-lg line-through text-muted-foreground">
               ${MEMBERSHIP_PRICE.toLocaleString()}
             </span>
@@ -339,12 +407,54 @@ export function AuthForm() {
           <span className="text-2xl font-bold text-primary">
             ${getDiscountedPrice().toLocaleString()}
           </span>
-          {promoApplied && (
+          {getActiveDiscount() > 0 && (
             <span className="text-sm text-primary font-medium">
-              ({promoApplied.discount}% off)
+              ({getActiveDiscount()}% off)
             </span>
           )}
         </div>
+      </div>
+
+      {/* Referral Code Section */}
+      <div className="space-y-2">
+        <Label htmlFor="referral-code" className="flex items-center gap-2">
+          <Users className="w-4 h-4" />
+          Referral Code
+        </Label>
+        <div className="flex gap-2">
+          <Input
+            id="referral-code"
+            type="text"
+            placeholder="Enter referral code"
+            value={referralCode}
+            onChange={(e) => {
+              setReferralCode(e.target.value);
+              setReferralApplied(null);
+            }}
+            className="flex-1"
+            disabled={!!promoApplied}
+          />
+          <Button 
+            type="button" 
+            variant="outline" 
+            onClick={() => checkReferralCode()}
+            disabled={!referralCode || isCheckingReferral || !!promoApplied}
+          >
+            {isCheckingReferral ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : referralApplied ? (
+              <Check className="w-4 h-4 text-primary" />
+            ) : (
+              'Apply'
+            )}
+          </Button>
+        </div>
+        {referralApplied && !promoApplied && (
+          <p className="text-sm text-primary font-medium flex items-center gap-1">
+            <Check className="w-4 h-4" />
+            Referral Discount - {referralApplied.discount}% Off
+          </p>
+        )}
       </div>
 
       {/* Promo Code Section */}
@@ -386,6 +496,7 @@ export function AuthForm() {
             {promoApplied.name}
           </p>
         )}
+        <p className="text-xs text-muted-foreground">Promo codes override referral discounts</p>
       </div>
 
       <div className="flex gap-3 pt-2">
