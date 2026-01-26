@@ -21,7 +21,7 @@ const services = [
   },
   {
     icon: Video,
-    title: "LPGA Pro Webinars",
+    title: "LPGA and PGA Pro Webinars",
     description: "Exclusive partnered webinars featuring LPGA professionals sharing insights on collegiate golf and beyond."
   },
   {
