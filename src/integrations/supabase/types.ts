@@ -362,6 +362,7 @@ export type Database = {
           payment_amount: number
           referral_id: string
           referred_user_id: string
+          referrer_notified: boolean | null
         }
         Insert: {
           created_at?: string
@@ -370,6 +371,7 @@ export type Database = {
           payment_amount: number
           referral_id: string
           referred_user_id: string
+          referrer_notified?: boolean | null
         }
         Update: {
           created_at?: string
@@ -378,6 +380,7 @@ export type Database = {
           payment_amount?: number
           referral_id?: string
           referred_user_id?: string
+          referrer_notified?: boolean | null
         }
         Relationships: [
           {
@@ -396,8 +399,12 @@ export type Database = {
           id: string
           is_active: boolean
           max_uses: number | null
+          notify_on_use: boolean | null
           referral_code: string
           referrer_user_id: string
+          reward_type: string | null
+          reward_value: number | null
+          total_rewards_earned: number | null
           updated_at: string
           uses_count: number
         }
@@ -407,8 +414,12 @@ export type Database = {
           id?: string
           is_active?: boolean
           max_uses?: number | null
+          notify_on_use?: boolean | null
           referral_code: string
           referrer_user_id: string
+          reward_type?: string | null
+          reward_value?: number | null
+          total_rewards_earned?: number | null
           updated_at?: string
           uses_count?: number
         }
@@ -418,8 +429,12 @@ export type Database = {
           id?: string
           is_active?: boolean
           max_uses?: number | null
+          notify_on_use?: boolean | null
           referral_code?: string
           referrer_user_id?: string
+          reward_type?: string | null
+          reward_value?: number | null
+          total_rewards_earned?: number | null
           updated_at?: string
           uses_count?: number
         }
