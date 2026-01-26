@@ -1,14 +1,18 @@
 import { ArrowRight, Star, Users, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import rangePic from '@/assets/range-pic.jpg';
+import heroBg from '@/assets/hero-bg.jpg';
 
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 cfa-gradient opacity-95" />
-      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+      {/* Background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
+      {/* Dark overlay for text visibility */}
+      <div className="absolute inset-0 bg-primary/75" />
       
       <div className="relative container mx-auto px-4 py-20 md:py-28 lg:py-36">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -69,17 +73,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right - Golf Range Image */}
-          <div className="hidden lg:flex justify-center items-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-white/10 rounded-3xl blur-3xl scale-110" />
-              <img 
-                src={rangePic} 
-                alt="Golfers practicing on the range" 
-                className="relative w-[480px] h-80 object-cover rounded-2xl shadow-2xl border-4 border-white/20"
-              />
-            </div>
-          </div>
         </div>
       </div>
 
