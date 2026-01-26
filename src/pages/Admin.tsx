@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users } from 'lucide-react';
+import { Shield, Database, Users, CreditCard } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -7,6 +7,7 @@ import { useIsAdmin } from '@/hooks/useAdmin';
 import { useColleges } from '@/hooks/useColleges';
 import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
 import { AdminUserTable } from '@/components/admin/AdminUserTable';
+import { AdminMembershipTable } from '@/components/admin/AdminMembershipTable';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -94,6 +95,10 @@ const Admin = () => {
                 <Users className="w-4 h-4" />
                 Users
               </TabsTrigger>
+              <TabsTrigger value="memberships" className="flex items-center gap-2">
+                <CreditCard className="w-4 h-4" />
+                Memberships
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
@@ -131,6 +136,24 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminUserTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Membership Management Tab */}
+            <TabsContent value="memberships">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="w-5 h-5 text-primary" />
+                    <CardTitle>Memberships & Payments</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View all customer memberships, payment history, and revenue statistics from Stripe.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminMembershipTable />
                 </CardContent>
               </Card>
             </TabsContent>
