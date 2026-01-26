@@ -7,18 +7,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const features = [
+  "Monthly One-on-One Coaching Calls",
+  "Partnered Webinars with LPGA Pros",
+  "Sessions with Current & Former College Coaches",
   "Full College Golf Database Access",
-  "Target School List Builder",
-  "Swing Video Shot List & Specs",
-  "Tournament Result Log Template",
-  "Coach Contact Tracker",
-  "Pre-Call Question Prep Sheet",
-  "Campus Visit Comparison Worksheet",
-  "Scholarship Offer Analysis Calculator",
+  "Personalized Target School List Building",
+  "Tournament Result Tracking & Resume Building",
+  "Coach Contact Strategy & Follow-up Support",
+  "Campus Visit Preparation & Comparison",
+  "Scholarship Offer Analysis & Negotiation Tips",
   "12-Month Recruiting Timeline (by grade)",
-  "Highlight Video Review Tips",
-  "Save Favorite Schools",
-  "Compare Colleges Side-by-Side"
+  "Highlight Video Review & Feedback",
+  "Priority Email Support"
 ];
 
 const Pricing = () => {
@@ -44,16 +44,16 @@ const Pricing = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-              Unlock Full Access
+              Annual Consulting
             </span>
             <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Get the Complete{' '}
-              <span className="text-primary">Recruiting Toolkit</span>
+              Get Personalized{' '}
+              <span className="text-primary">Recruiting Guidance</span>
             </h1>
             <p className="text-lg text-muted-foreground">
               {user 
-                ? "Upgrade your account to access all tools and features."
-                : "Join CFA to access the full suite of recruiting tools and college database."}
+                ? "Upgrade to our annual consulting service for hands-on support."
+                : "Partner with CFA for a full year of expert recruiting guidance and industry connections."}
             </p>
           </div>
 
@@ -69,15 +69,14 @@ const Pricing = () => {
 
               <CardHeader className="text-center pb-4 pt-8">
                 <CardTitle className="text-2xl font-display font-bold text-foreground">
-                  CFA Membership
+                  CFA Annual Consulting
                 </CardTitle>
                 <CardDescription className="text-muted-foreground">
-                  Complete recruiting toolkit for junior golfers
+                  Complete hands-on recruiting guidance for junior golfers
                 </CardDescription>
                 <div className="pt-6">
-                  <span className="text-5xl font-bold text-foreground">$499</span>
-                  <span className="text-xl text-muted-foreground">.99</span>
-                  <p className="text-sm text-muted-foreground mt-2">One-time payment • Lifetime access</p>
+                  <span className="text-5xl font-bold text-foreground">$2,499</span>
+                  <p className="text-sm text-muted-foreground mt-2">Annual commitment • Monthly coaching calls included</p>
                 </div>
               </CardHeader>
 
@@ -95,13 +94,13 @@ const Pricing = () => {
 
                 {user ? (
                   <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                    Upgrade Now - $499.99
+                    Start Consulting - $2,499/year
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 ) : (
                   <Link to="/login" className="block">
                     <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                      Sign Up & Purchase
+                      Get Started Today
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
                   </Link>

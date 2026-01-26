@@ -4,18 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const features = [
+  "Monthly One-on-One Coaching Calls",
+  "Partnered Webinars with LPGA Pros",
+  "Sessions with Current & Former College Coaches",
   "Full College Golf Database Access",
-  "Target School List Builder",
-  "Swing Video Shot List & Specs",
-  "Tournament Result Log Template",
-  "Coach Contact Tracker",
-  "Pre-Call Question Prep Sheet",
-  "Campus Visit Comparison Worksheet",
-  "Scholarship Offer Analysis Calculator",
+  "Personalized Target School List Building",
+  "Tournament Result Tracking & Resume Building",
+  "Coach Contact Strategy & Follow-up Support",
+  "Campus Visit Preparation & Comparison",
+  "Scholarship Offer Analysis & Negotiation Tips",
   "12-Month Recruiting Timeline (by grade)",
-  "Highlight Video Review Tips",
-  "Save Favorite Schools",
-  "Compare Colleges Side-by-Side"
+  "Highlight Video Review & Feedback",
+  "Priority Email Support"
 ];
 
 export function PricingSection() {
@@ -24,14 +24,14 @@ export function PricingSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-            Simple Pricing
+            Annual Consulting
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            One Membership,{' '}
-            <span className="text-primary">Complete Access</span>
+            Personalized Guidance,{' '}
+            <span className="text-primary">Proven Results</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Get everything you need to navigate the college golf recruiting process with confidence.
+            Partner with our expert team for a full year of hands-on recruiting support and industry connections.
           </p>
         </div>
 
@@ -47,15 +47,14 @@ export function PricingSection() {
 
             <CardHeader className="text-center pb-4 pt-8">
               <CardTitle className="text-2xl font-display font-bold text-foreground">
-                CFA Membership
+                CFA Annual Consulting
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                Complete recruiting toolkit for junior golfers
+                Complete hands-on recruiting guidance for junior golfers
               </CardDescription>
               <div className="pt-6">
-                <span className="text-5xl font-bold text-foreground">$499</span>
-                <span className="text-xl text-muted-foreground">.99</span>
-                <p className="text-sm text-muted-foreground mt-2">One-time payment • Lifetime access</p>
+                <span className="text-5xl font-bold text-foreground">$2,499</span>
+                <p className="text-sm text-muted-foreground mt-2">Annual commitment • Monthly coaching calls included</p>
               </div>
             </CardHeader>
 
