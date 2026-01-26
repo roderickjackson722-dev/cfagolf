@@ -32,30 +32,30 @@ function CollegeDatabaseContent() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative golf-gradient py-16 md:py-24 overflow-hidden">
+      {/* Hero Section - Reduced padding */}
+      <section className="relative golf-gradient py-8 md:py-12 overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
         <div className="container relative">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground mb-4 animate-fade-in">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-primary-foreground mb-3 animate-fade-in">
               College Golf Database
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 animate-fade-in">
+            <p className="text-base md:text-lg text-primary-foreground/80 mb-4 animate-fade-in">
               Find your perfect college golf program. Search by division, academics, cost, and more.
             </p>
             
             {stats && (
-              <div className="flex flex-wrap justify-center gap-6 text-primary-foreground/90 animate-fade-in">
+              <div className="flex flex-wrap justify-center gap-4 text-primary-foreground/90 animate-fade-in text-sm">
                 <div className="flex items-center gap-2">
-                  <GraduationCap className="w-5 h-5" />
+                  <GraduationCap className="w-4 h-4" />
                   <span className="font-semibold">{stats.total}</span> Colleges
                 </div>
                 <div className="flex items-center gap-2">
-                  <Trophy className="w-5 h-5" />
+                  <Trophy className="w-4 h-4" />
                   <span className="font-semibold">{Object.keys(stats.divisionCounts).length}</span> Divisions
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5" />
+                  <MapPin className="w-4 h-4" />
                   <span className="font-semibold">{Object.keys(stats.stateCounts).length}</span> States
                 </div>
               </div>
@@ -64,8 +64,8 @@ function CollegeDatabaseContent() {
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="container py-8 md:py-12">
+      {/* Main Content - Reduced top padding */}
+      <section className="container py-4 md:py-6">
         <div className="space-y-6">
           {/* Filters */}
           <CollegeFilters filters={filters} onFiltersChange={setFilters} />

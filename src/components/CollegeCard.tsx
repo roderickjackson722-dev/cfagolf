@@ -1,4 +1,4 @@
-import { Heart, ExternalLink, MapPin, Users, Trophy, GraduationCap, DollarSign, School, Scale, UserCircle } from 'lucide-react';
+import { Heart, ExternalLink, MapPin, Users, Trophy, DollarSign, School, Scale, UserCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -149,26 +149,6 @@ export function CollegeCard({ college }: CollegeCardProps) {
 
       <CardContent className="pt-0">
         <div className="grid grid-cols-2 gap-3 text-sm">
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <GraduationCap className="w-4 h-4 text-primary" />
-            <div>
-              <div className="text-xs uppercase tracking-wide">Golf Scoring Avg</div>
-              <div className="font-medium text-foreground">
-                {college.recruiting_scoring_avg ?? 'N/A'}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <Trophy className="w-4 h-4 text-primary" />
-            <div>
-              <div className="text-xs uppercase tracking-wide">Scholarships</div>
-              <div className="font-medium text-foreground">
-                {college.scholarships_available ?? 'N/A'}
-              </div>
-            </div>
-          </div>
-
           <div className="flex items-center gap-2 text-muted-foreground">
             <Users className="w-4 h-4 text-primary" />
             <div>
