@@ -1,12 +1,14 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database } from 'lucide-react';
+import { Shield, Database, Users } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
 import { useColleges } from '@/hooks/useColleges';
 import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
+import { AdminUserTable } from '@/components/admin/AdminUserTable';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
 
 const defaultFilters: CollegeFilters = {
@@ -77,28 +79,62 @@ const Admin = () => {
               </h1>
             </div>
             <p className="text-muted-foreground">
-              Manage college data, logos, and system settings
+              Manage college data, users, and system settings
             </p>
           </div>
 
-          {/* College Management */}
-          <Card>
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <Database className="w-5 h-5 text-primary" />
-                <CardTitle>College Database</CardTitle>
-              </div>
-              <CardDescription>
-                Add, edit, or remove colleges from the database. Upload logos and manage all college information.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <AdminCollegeTable 
-                colleges={colleges} 
-                isLoading={collegesLoading} 
-              />
-            </CardContent>
-          </Card>
+          {/* Tabs for different sections */}
+          <Tabs defaultValue="colleges" className="space-y-6">
+            <TabsList>
+              <TabsTrigger value="colleges" className="flex items-center gap-2">
+                <Database className="w-4 h-4" />
+                Colleges
+              </TabsTrigger>
+              <TabsTrigger value="users" className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                Users
+              </TabsTrigger>
+            </TabsList>
+
+            {/* College Management Tab */}
+            <TabsContent value="colleges">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Database className="w-5 h-5 text-primary" />
+                    <CardTitle>College Database</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Add, edit, or remove colleges from the database. Upload logos and manage all college information.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminCollegeTable 
+                    colleges={colleges} 
+                    isLoading={collegesLoading} 
+                  />
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* User Management Tab */}
+            <TabsContent value="users">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-primary" />
+                    <CardTitle>Registered Users</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View all registered user profiles, manage paid access status, and see user details.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminUserTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
       <Footer />
