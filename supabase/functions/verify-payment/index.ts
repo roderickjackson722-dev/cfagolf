@@ -13,6 +13,35 @@ serve(async (req) => {
   }
 
   try {
+    // Authentication check - verify the user is authenticated
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized - No valid authorization header" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 401 }
+      );
+    }
+
+    const supabaseClient = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+      { global: { headers: { Authorization: authHeader } } }
+    );
+
+    // Verify the JWT and get user claims
+    const token = authHeader.replace("Bearer ", "");
+    const { data: claimsData, error: claimsError } = await supabaseClient.auth.getClaims(token);
+    
+    if (claimsError || !claimsData?.claims) {
+      console.error("Auth claims error:", claimsError);
+      return new Response(
+        JSON.stringify({ error: "Unauthorized - Invalid token" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 401 }
+      );
+    }
+
+    const authenticatedUserId = claimsData.claims.sub;
+
     const { sessionId } = await req.json();
     
     if (!sessionId) {
@@ -25,6 +54,19 @@ serve(async (req) => {
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
+    // Authorization check - verify the session belongs to the authenticated user
+    const sessionUserId = session.metadata?.user_id;
+    if (!sessionUserId || sessionUserId !== authenticatedUserId) {
+      console.error("Authorization failed: session user_id mismatch", {
+        sessionUserId,
+        authenticatedUserId,
+      });
+      return new Response(
+        JSON.stringify({ error: "Forbidden - You are not authorized to verify this payment" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 403 }
+      );
+    }
+
     if (session.payment_status === "paid") {
       const userId = session.metadata?.user_id;
       const referralId = session.metadata?.referral_id;
@@ -36,6 +78,25 @@ serve(async (req) => {
           Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
         );
 
+        // Idempotency check - verify profile hasn't already been updated
+        const { data: profile } = await supabaseAdmin
+          .from('profiles')
+          .select('has_paid_access')
+          .eq('user_id', userId)
+          .single();
+
+        if (profile?.has_paid_access) {
+          // Already processed - return success without re-processing
+          return new Response(JSON.stringify({ 
+            success: true, 
+            paid: true,
+            message: "Payment already verified and access granted!" 
+          }), {
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+            status: 200,
+          });
+        }
+
         // Grant access
         await supabaseAdmin
           .from('profiles')
@@ -44,18 +105,28 @@ serve(async (req) => {
 
         // Track referral usage if applicable
         if (referralId && referralId !== "none") {
-          // Record the referral use
-          await supabaseAdmin
+          // Check if referral use already recorded (idempotency)
+          const { data: existingUse } = await supabaseAdmin
             .from('referral_uses')
-            .insert({
-              referral_id: referralId,
-              referred_user_id: userId,
-              payment_amount: session.amount_total || 0,
-              discount_applied: parseInt(discountApplied || "0"),
-            });
+            .select('id')
+            .eq('referral_id', referralId)
+            .eq('referred_user_id', userId)
+            .single();
 
-          // Increment the uses count
-          await supabaseAdmin.rpc('increment_referral_uses', { referral_id: referralId });
+          if (!existingUse) {
+            // Record the referral use
+            await supabaseAdmin
+              .from('referral_uses')
+              .insert({
+                referral_id: referralId,
+                referred_user_id: userId,
+                payment_amount: session.amount_total || 0,
+                discount_applied: parseInt(discountApplied || "0"),
+              });
+
+            // Increment the uses count
+            await supabaseAdmin.rpc('increment_referral_uses', { referral_id: referralId });
+          }
         }
 
         return new Response(JSON.stringify({ 
