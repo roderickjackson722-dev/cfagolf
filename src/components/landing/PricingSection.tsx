@@ -1,11 +1,13 @@
-import { Check, Star, ArrowRight } from 'lucide-react';
+import { Check, Star, ArrowRight, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
+const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
+
 const features = [
   "Monthly One-on-One Coaching Calls",
-  "Partnered Webinars with LPGA Pros",
+  "Partnered Webinars with LPGA and PGA Pros",
   "Sessions with Current & Former College Coaches",
   "Full College Golf Database Access",
   "Personalized Target School List Building",
@@ -77,11 +79,24 @@ export function PricingSection() {
                 </Button>
               </Link>
 
+              <div className="relative py-2">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-card px-2 text-muted-foreground">or</span>
+                </div>
+              </div>
+
+              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="block">
+                <Button variant="outline" size="lg" className="w-full h-14 text-lg font-semibold rounded-full">
+                  <Calendar className="mr-2 w-5 h-5" />
+                  Schedule Free Consultation
+                </Button>
+              </a>
+
               <p className="text-center text-sm text-muted-foreground">
-                Questions? Email us at{' '}
-                <a href="mailto:contact@cfa.golf" className="text-primary hover:underline">
-                  contact@cfa.golf
-                </a>
+                Have questions? Book a free 15-minute call with our team
               </p>
             </CardContent>
           </Card>
