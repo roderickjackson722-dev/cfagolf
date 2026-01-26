@@ -15,7 +15,15 @@ interface AuthContextType {
   session: Session | null;
   profile: Profile | null;
   loading: boolean;
-  signUp: (email: string, password: string) => Promise<{ error: Error | null }>;
+  signUp: (email: string, password: string, profileData?: {
+    full_name?: string;
+    graduation_year?: number;
+    high_school?: string;
+    state?: string;
+    city?: string;
+    handicap?: number;
+    phone?: string;
+  }) => Promise<{ error: Error | null }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   hasPaidAccess: boolean;
@@ -72,14 +80,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({
+  const signUp = async (
+    email: string, 
+    password: string,
+    profileData?: {
+      full_name?: string;
+      graduation_year?: number;
+      high_school?: string;
+      state?: string;
+      city?: string;
+      handicap?: number;
+      phone?: string;
+    }
+  ) => {
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: window.location.origin,
       },
     });
+    
+    // If signup successful and we have profile data, update the profile
+    if (!error && data.user && profileData) {
+      await supabase
+        .from('profiles')
+        .update({
+          ...profileData,
+          email,
+        })
+        .eq('user_id', data.user.id);
+    }
+    
     return { error };
   };
 
