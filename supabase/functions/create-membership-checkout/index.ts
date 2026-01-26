@@ -26,8 +26,13 @@ serve(async (req) => {
     Deno.env.get("SUPABASE_ANON_KEY") ?? ""
   );
 
+  const supabaseAdmin = createClient(
+    Deno.env.get("SUPABASE_URL") ?? "",
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+  );
+
   try {
-    const { promoCode } = await req.json();
+    const { promoCode, referralCode } = await req.json();
     
     const authHeader = req.headers.get("Authorization")!;
     const token = authHeader.replace("Bearer ", "");
@@ -43,14 +48,37 @@ serve(async (req) => {
     const normalizedPromoCode = promoCode?.toUpperCase()?.trim();
     const promoConfig = normalizedPromoCode ? PROMO_CODES[normalizedPromoCode] : null;
 
-    // If 100% discount, grant access immediately without payment
-    if (promoConfig && promoConfig.discount === 100) {
-      // Use service role to update profile
-      const supabaseAdmin = createClient(
-        Deno.env.get("SUPABASE_URL") ?? "",
-        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
-      );
+    // Check for referral code
+    let referralData: { id: string; discount_percent: number; referrer_user_id: string } | null = null;
+    if (referralCode && !promoConfig) {
+      const normalizedReferralCode = referralCode.toUpperCase().trim();
+      const { data } = await supabaseAdmin
+        .from('referrals')
+        .select('id, discount_percent, referrer_user_id')
+        .eq('referral_code', normalizedReferralCode)
+        .eq('is_active', true)
+        .maybeSingle();
+      
+      // Don't allow self-referral
+      if (data && data.referrer_user_id !== user.id) {
+        referralData = data;
+      }
+    }
 
+    // Determine discount
+    let discountPercent = 0;
+    let discountName = "";
+    
+    if (promoConfig) {
+      discountPercent = promoConfig.discount;
+      discountName = promoConfig.name;
+    } else if (referralData) {
+      discountPercent = referralData.discount_percent;
+      discountName = `Referral Discount - ${discountPercent}% Off`;
+    }
+
+    // If 100% discount, grant access immediately without payment
+    if (discountPercent === 100) {
       await supabaseAdmin
         .from('profiles')
         .update({ has_paid_access: true })
@@ -73,7 +101,12 @@ serve(async (req) => {
       customerId = customers.data[0].id;
     }
 
-    // Calculate discounted amount for promo codes
+    // Calculate discounted amount
+    const discountedAmount = discountPercent > 0 
+      ? Math.round(MEMBERSHIP_AMOUNT * (1 - discountPercent / 100))
+      : MEMBERSHIP_AMOUNT;
+
+    // Build checkout config
     let checkoutConfig: any = {
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
@@ -83,20 +116,22 @@ serve(async (req) => {
       metadata: {
         user_id: user.id,
         promo_code: normalizedPromoCode || "none",
+        referral_id: referralData?.id || "none",
+        discount_applied: discountedAmount < MEMBERSHIP_AMOUNT ? (MEMBERSHIP_AMOUNT - discountedAmount).toString() : "0",
       },
     };
 
-    if (promoConfig && promoConfig.discount === 50) {
-      // Use line_items with custom price for 50% discount
+    if (discountPercent > 0) {
+      // Use line_items with custom price for discount
       checkoutConfig.line_items = [
         {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "CFA Golf 6-Month Consulting Membership (50% Off)",
-              description: "6-month college golf recruiting consulting - Founders Discount",
+              name: `CFA Golf 6-Month Consulting Membership (${discountPercent}% Off)`,
+              description: `6-month college golf recruiting consulting - ${discountName}`,
             },
-            unit_amount: Math.round(MEMBERSHIP_AMOUNT / 2), // 50% off
+            unit_amount: discountedAmount,
           },
           quantity: 1,
         },

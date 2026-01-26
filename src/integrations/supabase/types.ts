@@ -354,6 +354,77 @@ export type Database = {
         }
         Relationships: []
       }
+      referral_uses: {
+        Row: {
+          created_at: string
+          discount_applied: number
+          id: string
+          payment_amount: number
+          referral_id: string
+          referred_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          discount_applied: number
+          id?: string
+          payment_amount: number
+          referral_id: string
+          referred_user_id: string
+        }
+        Update: {
+          created_at?: string
+          discount_applied?: number
+          id?: string
+          payment_amount?: number
+          referral_id?: string
+          referred_user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referral_uses_referral_id_fkey"
+            columns: ["referral_id"]
+            isOneToOne: false
+            referencedRelation: "referrals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      referrals: {
+        Row: {
+          created_at: string
+          discount_percent: number
+          id: string
+          is_active: boolean
+          max_uses: number | null
+          referral_code: string
+          referrer_user_id: string
+          updated_at: string
+          uses_count: number
+        }
+        Insert: {
+          created_at?: string
+          discount_percent?: number
+          id?: string
+          is_active?: boolean
+          max_uses?: number | null
+          referral_code: string
+          referrer_user_id: string
+          updated_at?: string
+          uses_count?: number
+        }
+        Update: {
+          created_at?: string
+          discount_percent?: number
+          id?: string
+          is_active?: boolean
+          max_uses?: number | null
+          referral_code?: string
+          referrer_user_id?: string
+          updated_at?: string
+          uses_count?: number
+        }
+        Relationships: []
+      }
       scholarship_offers: {
         Row: {
           academic_scholarship: number | null
@@ -562,6 +633,10 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      increment_referral_uses: {
+        Args: { referral_id: string }
+        Returns: undefined
       }
     }
     Enums: {
