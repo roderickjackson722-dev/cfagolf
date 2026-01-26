@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, GraduationCap, Database, User, LogIn, Heart } from 'lucide-react';
+import { Menu, X, GraduationCap, Database, User, LogIn, Heart, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
+import { useIsAdmin } from '@/hooks/useAdmin';
 import { UserMenu } from '@/components/UserMenu';
 import cfaLogo from '@/assets/cfa-logo.png';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, loading, hasPaidAccess } = useAuth();
+  const { data: isAdmin } = useIsAdmin();
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
@@ -70,6 +72,19 @@ export function Navbar() {
                   <Heart className="w-4 h-4" />
                   Favorites
                 </Link>
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                      isActive('/admin')
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                    }`}
+                  >
+                    <Shield className="w-4 h-4" />
+                    Admin
+                  </Link>
+                )}
               </>
             )}
           </nav>
@@ -148,6 +163,20 @@ export function Navbar() {
                     <Heart className="w-4 h-4" />
                     Favorites
                   </Link>
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setIsOpen(false)}
+                      className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
+                        isActive('/admin')
+                          ? 'bg-primary/10 text-primary'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                      }`}
+                    >
+                      <Shield className="w-4 h-4" />
+                      Admin
+                    </Link>
+                  )}
                 </>
               )}
               {!loading && !user && (
