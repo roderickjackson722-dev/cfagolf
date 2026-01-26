@@ -25,15 +25,15 @@ export function PricingSection() {
     <section className="section-padding bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-            Annual Consulting
-          </span>
+        <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
+          6-Month Consulting
+        </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Personalized Guidance,{' '}
             <span className="text-primary">Proven Results</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Partner with our expert team for a full year of hands-on recruiting support and industry connections.
+            Partner with our expert team for 6 months of hands-on recruiting support and industry connections.
           </p>
         </div>
 
@@ -48,16 +48,16 @@ export function PricingSection() {
             </div>
 
             <CardHeader className="text-center pb-4 pt-8">
-              <CardTitle className="text-2xl font-display font-bold text-foreground">
-                CFA Annual Consulting
-              </CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Complete hands-on recruiting guidance for junior golfers
-              </CardDescription>
-              <div className="pt-6">
-                <span className="text-5xl font-bold text-foreground">$2,499</span>
-                <p className="text-sm text-muted-foreground mt-2">Annual commitment • Monthly coaching calls included</p>
-              </div>
+            <CardTitle className="text-2xl font-display font-bold text-foreground">
+              CFA 6-Month Consulting
+            </CardTitle>
+            <CardDescription className="text-muted-foreground">
+              Complete hands-on recruiting guidance for junior golfers
+            </CardDescription>
+            <div className="pt-6">
+              <span className="text-5xl font-bold text-foreground">$2,499</span>
+              <p className="text-sm text-muted-foreground mt-2">6-month commitment • Monthly coaching calls included</p>
+            </div>
             </CardHeader>
 
             <CardContent className="space-y-6">
