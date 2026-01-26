@@ -237,34 +237,6 @@ export function CollegeFilters({ filters, onFiltersChange }: CollegeFiltersProps
 
               <div>
                 <Label className="text-sm font-medium mb-3 block">
-                  Min Scholarships: {filters.minScholarships || 'Any'}
-                </Label>
-                <Slider
-                  value={[filters.minScholarships || 0]}
-                  onValueChange={([value]) => onFiltersChange({ ...filters, minScholarships: value === 0 ? null : value })}
-                  max={8}
-                  min={0}
-                  step={1}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label className="text-sm font-medium mb-3 block">
-                  Max Golf Scoring Avg: {filters.maxScoringAvg || 'Any'}
-                </Label>
-                <Slider
-                  value={[filters.maxScoringAvg || 80]}
-                  onValueChange={([value]) => onFiltersChange({ ...filters, maxScoringAvg: value === 80 ? null : value })}
-                  max={80}
-                  min={68}
-                  step={0.5}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label className="text-sm font-medium mb-3 block">
                   Max ACT Score: {filters.maxActScore || 'Any'}
                 </Label>
                 <Slider
