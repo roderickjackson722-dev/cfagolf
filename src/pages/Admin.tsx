@@ -1,0 +1,109 @@
+import { Navigate } from 'react-router-dom';
+import { Shield, Database } from 'lucide-react';
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/landing/Footer';
+import { useAuth } from '@/hooks/useAuth';
+import { useIsAdmin } from '@/hooks/useAdmin';
+import { useColleges } from '@/hooks/useColleges';
+import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CollegeFilters } from '@/types/college';
+
+const defaultFilters: CollegeFilters = {
+  search: '',
+  divisions: [],
+  states: [],
+  schoolSizes: [],
+  teamGenders: [],
+  hbcuOnly: false,
+  maxRanking: null,
+  minScholarships: null,
+  maxScoringAvg: null,
+  maxActScore: null,
+  maxSatScore: null,
+  maxCost: null,
+};
+
+const Admin = () => {
+  const { user, loading: authLoading } = useAuth();
+  const { data: isAdmin, isLoading: adminLoading } = useIsAdmin();
+  const { data: colleges = [], isLoading: collegesLoading } = useColleges(defaultFilters);
+
+  const isLoading = authLoading || adminLoading;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <Navbar />
+        <main className="flex-1 flex items-center justify-center">
+          <Card className="max-w-md">
+            <CardHeader className="text-center">
+              <Shield className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
+              <CardTitle>Access Denied</CardTitle>
+              <CardDescription>
+                You don't have permission to access the admin panel. Please contact an administrator if you believe this is an error.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Navbar />
+      <main className="flex-1 py-8">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-2">
+              <Shield className="w-8 h-8 text-primary" />
+              <h1 className="font-display text-3xl font-bold text-foreground">
+                Admin Panel
+              </h1>
+            </div>
+            <p className="text-muted-foreground">
+              Manage college data, logos, and system settings
+            </p>
+          </div>
+
+          {/* College Management */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <Database className="w-5 h-5 text-primary" />
+                <CardTitle>College Database</CardTitle>
+              </div>
+              <CardDescription>
+                Add, edit, or remove colleges from the database. Upload logos and manage all college information.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <AdminCollegeTable 
+                colleges={colleges} 
+                isLoading={collegesLoading} 
+              />
+            </CardContent>
+          </Card>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+export default Admin;
