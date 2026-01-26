@@ -102,7 +102,7 @@ export function ServicesSection() {
             </Button>
           </Link>
           <p className="text-sm text-muted-foreground mt-3">
-            Sign up free to access your recruiting dashboard
+            Sign up to access your recruiting dashboard
           </p>
         </div>
       </div>
