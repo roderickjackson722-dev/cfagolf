@@ -14,48 +14,61 @@ import {
   FileText,
   TrendingUp,
   CheckCircle2,
-  Lock,
   ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+
+// Import mockup images
+import collegeDatabaseMockup from '@/assets/mockups/college-database-mockup.jpg';
+import targetSchoolsMockup from '@/assets/mockups/target-schools-mockup.jpg';
+import coachTrackerMockup from '@/assets/mockups/coach-tracker-mockup.jpg';
+import campusVisitsMockup from '@/assets/mockups/campus-visits-mockup.jpg';
+import tournamentLogMockup from '@/assets/mockups/tournament-log-mockup.jpg';
+import scholarshipCalculatorMockup from '@/assets/mockups/scholarship-calculator-mockup.jpg';
 
 const features = [
   {
     icon: Database,
     title: 'College Database',
     description: 'Access our comprehensive database of 500+ college golf programs with detailed information on divisions, rankings, and recruiting requirements.',
-    highlights: ['Division I, II, III, NAIA & JUCO', 'Team rankings & statistics', 'Academic requirements', 'Scholarship availability']
+    highlights: ['Division I, II, III, NAIA & JUCO', 'Team rankings & statistics', 'Academic requirements', 'Scholarship availability'],
+    mockup: collegeDatabaseMockup
   },
   {
     icon: Target,
     title: 'Target School Builder',
     description: 'Build and organize your personalized list of target schools across reach, match, and safety categories.',
-    highlights: ['Categorize by fit level', 'Track application progress', 'Priority rankings', 'Notes & reminders']
+    highlights: ['Categorize by fit level', 'Track application progress', 'Priority rankings', 'Notes & reminders'],
+    mockup: targetSchoolsMockup
   },
   {
     icon: Users,
     title: 'Coach Contact Tracker',
     description: 'Keep track of all your coach communications, follow-ups, and relationship building in one organized place.',
-    highlights: ['Contact management', 'Follow-up reminders', 'Response tracking', 'Communication history']
+    highlights: ['Contact management', 'Follow-up reminders', 'Response tracking', 'Communication history'],
+    mockup: coachTrackerMockup
   },
   {
     icon: Calendar,
     title: 'Campus Visit Planner',
     description: 'Document and compare your campus visits with detailed ratings and notes to make informed decisions.',
-    highlights: ['Visit scheduling', 'Rating categories', 'Photo uploads', 'Comparison tools']
+    highlights: ['Visit scheduling', 'Rating categories', 'Photo uploads', 'Comparison tools'],
+    mockup: campusVisitsMockup
   },
   {
     icon: Trophy,
     title: 'Tournament Log',
     description: 'Track your competitive results and build a comprehensive tournament history for coach communications.',
-    highlights: ['Score tracking', 'Performance analytics', 'Position tracking', 'Export for coaches']
+    highlights: ['Score tracking', 'Performance analytics', 'Position tracking', 'Export for coaches'],
+    mockup: tournamentLogMockup
   },
   {
     icon: Calculator,
     title: 'Scholarship Calculator',
     description: 'Compare scholarship offers and calculate the true cost of attendance across different programs.',
-    highlights: ['Financial aid comparison', 'Net cost analysis', 'Offer tracking', 'Decision support']
+    highlights: ['Financial aid comparison', 'Net cost analysis', 'Offer tracking', 'Decision support'],
+    mockup: scholarshipCalculatorMockup
   }
 ];
 
@@ -134,23 +147,32 @@ export default function MemberPreview() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {features.map((feature) => (
-                <Card key={feature.title} className="relative overflow-hidden group hover:shadow-lg transition-shadow">
-                  <div className="absolute top-3 right-3">
-                    <Lock className="w-4 h-4 text-muted-foreground/50" />
+            <div className="grid md:grid-cols-2 gap-8">
+              {features.map((feature, index) => (
+                <Card key={feature.title} className="overflow-hidden group hover:shadow-lg transition-shadow">
+                  {/* Mockup Image */}
+                  <div className="relative overflow-hidden bg-muted">
+                    <img 
+                      src={feature.mockup} 
+                      alt={`${feature.title} preview`}
+                      className="w-full h-48 md:h-56 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                   </div>
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <feature.icon className="w-6 h-6 text-primary" />
+                  
+                  <CardHeader className="pt-4">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <feature.icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <CardTitle className="text-xl">{feature.title}</CardTitle>
                     </div>
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
                     <CardDescription className="text-base">
                       {feature.description}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2">
+                    <ul className="grid grid-cols-2 gap-2">
                       {feature.highlights.map((highlight) => (
                         <li key={highlight} className="flex items-center gap-2 text-sm text-muted-foreground">
                           <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
