@@ -28,7 +28,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={cfaLogo} alt="CFA" className="w-10 h-10 object-contain" />
+            <img src={cfaLogo} alt="CFA" className="w-14 h-14 object-contain" />
             <div className="hidden sm:block">
               <span className="font-display text-lg font-bold text-foreground leading-tight block">
                 College Fairway Advisors
