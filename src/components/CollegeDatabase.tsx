@@ -8,7 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import { GraduationCap, MapPin, Trophy, Users, Search } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { GraduationCap, MapPin, Trophy, Users, Search, X } from 'lucide-react';
 
 const initialFilters: FilterType = {
   search: '',
@@ -61,6 +62,16 @@ export function CollegeDatabase() {
   const handleHbcuChange = (checked: boolean) => {
     setFilters(prev => ({ ...prev, hbcuOnly: checked }));
   };
+
+  const clearAllFilters = () => {
+    setFilters(initialFilters);
+  };
+
+  const hasActiveFilters = filters.search || 
+    filters.divisions.length > 0 || 
+    filters.states.length > 0 || 
+    filters.teamGenders.length > 0 || 
+    filters.hbcuOnly;
 
   return (
     <div className="min-h-screen bg-background">
@@ -165,6 +176,17 @@ export function CollegeDatabase() {
                 HBCU Only
               </Label>
             </div>
+            {hasActiveFilters && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearAllFilters}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <X className="w-4 h-4 mr-1" />
+                Clear Filters
+              </Button>
+            )}
           </div>
 
           {/* Results Header */}
