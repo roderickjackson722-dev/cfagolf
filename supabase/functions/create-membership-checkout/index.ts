@@ -106,13 +106,14 @@ serve(async (req) => {
       ? Math.round(MEMBERSHIP_AMOUNT * (1 - discountPercent / 100))
       : MEMBERSHIP_AMOUNT;
 
-    // Build checkout config
+    // Build checkout config with Klarna payment option
     let checkoutConfig: any = {
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
       mode: "payment",
+      payment_method_types: ["card", "klarna"],
       success_url: `${req.headers.get("origin")}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get("origin")}/login`,
+      cancel_url: `${req.headers.get("origin")}/checkout`,
       metadata: {
         user_id: user.id,
         promo_code: normalizedPromoCode || "none",

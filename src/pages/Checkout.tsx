@@ -508,6 +508,31 @@ const Checkout = () => {
                         </div>
                       </div>
 
+                      {/* Payment Options Info */}
+                      <div className="bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-lg p-4 border border-pink-500/20">
+                        <div className="flex items-start gap-3">
+                          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                            <span className="text-white font-bold text-xs">K</span>
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-foreground flex items-center gap-2">
+                              Pay in 4 with Klarna
+                              <span className="text-xs bg-pink-500/20 text-pink-600 px-2 py-0.5 rounded-full">Interest-free</span>
+                            </h4>
+                            <p className="text-sm text-muted-foreground mt-1">
+                              Split your payment into 4 interest-free installments of{' '}
+                              <span className="font-semibold text-foreground">
+                                ${(getDiscountedPrice() / 4).toFixed(2)}
+                              </span>
+                              {' '}every 2 weeks.
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-2">
+                              Select Klarna at checkout. No credit impact to apply.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
                       {/* Referral Code */}
                       <div className="space-y-2">
                         <Label htmlFor="referralCode" className="flex items-center gap-2">
