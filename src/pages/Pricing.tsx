@@ -1,5 +1,5 @@
 import { Navigate, Link } from 'react-router-dom';
-import { ArrowRight, Check, Star, Calendar } from 'lucide-react';
+import { ArrowRight, Check, Calendar } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -61,14 +61,6 @@ const Pricing = () => {
 
           <div className="max-w-lg mx-auto">
             <Card className="relative overflow-hidden border-2 border-primary shadow-xl">
-              {/* Popular badge */}
-              <div className="absolute top-0 right-0">
-                <div className="bg-primary text-primary-foreground px-4 py-1 text-sm font-semibold rounded-bl-lg flex items-center gap-1">
-                  <Star className="w-4 h-4 fill-current" />
-                  Best Value
-                </div>
-              </div>
-
               <CardHeader className="text-center pb-4 pt-8">
               <CardTitle className="text-2xl font-display font-bold text-foreground">
                 CFA 6-Month Consulting
@@ -100,12 +92,12 @@ const Pricing = () => {
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 ) : (
-                  <Link to="/login" className="block">
-                    <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                      Get Started Today
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </Link>
+                <Link to="/checkout" className="block">
+                  <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
+                    Get Started Today
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
                 )}
 
                 <div className="relative py-2">

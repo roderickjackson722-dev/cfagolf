@@ -1,4 +1,4 @@
-import { Check, Star, ArrowRight, Calendar } from 'lucide-react';
+import { Check, ArrowRight, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,14 +39,6 @@ export function PricingSection() {
 
         <div className="max-w-lg mx-auto">
           <Card className="relative overflow-hidden border-2 border-primary shadow-xl">
-            {/* Popular badge */}
-            <div className="absolute top-0 right-0">
-              <div className="bg-primary text-primary-foreground px-4 py-1 text-sm font-semibold rounded-bl-lg flex items-center gap-1">
-                <Star className="w-4 h-4 fill-current" />
-                Best Value
-              </div>
-            </div>
-
             <CardHeader className="text-center pb-4 pt-8">
             <CardTitle className="text-2xl font-display font-bold text-foreground">
               CFA 6-Month Consulting
@@ -72,7 +64,7 @@ export function PricingSection() {
                 ))}
               </div>
 
-              <Link to="/login" className="block">
+              <Link to="/checkout" className="block">
                 <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
                   Get Started Today
                   <ArrowRight className="ml-2 w-5 h-5" />
