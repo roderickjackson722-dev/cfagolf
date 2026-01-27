@@ -1,5 +1,5 @@
 import { Navigate, Link } from 'react-router-dom';
-import { ArrowRight, Check, Calendar, X, Users, Bot, Phone } from 'lucide-react';
+import { ArrowRight, Check, Calendar, X, Users, Phone } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -28,73 +28,57 @@ const comparisonFeatures = [
   {
     feature: "Personal 1:1 Coaching Calls",
     cfa: true,
-    ncsa: false,
     generic: false,
     cfaNote: "Monthly calls with expert advisor",
-    ncsaNote: "Self-service platform",
     genericNote: "Limited or no support"
   },
   {
     feature: "LPGA/PGA Pro Webinars",
     cfa: true,
-    ncsa: false,
     generic: false,
     cfaNote: "Exclusive partnered sessions",
-    ncsaNote: "Not available",
     genericNote: "Not available"
   },
   {
     feature: "College Coach Sessions",
     cfa: true,
-    ncsa: false,
     generic: false,
     cfaNote: "Direct access to coaches",
-    ncsaNote: "Coach database only",
     genericNote: "Rarely offered"
   },
   {
     feature: "College Database Access",
     cfa: true,
-    ncsa: true,
     generic: true,
     cfaNote: "Golf-specific with rankings",
-    ncsaNote: "Multi-sport database",
     genericNote: "Basic listings"
   },
   {
     feature: "Personalized Strategy",
     cfa: true,
-    ncsa: false,
     generic: false,
     cfaNote: "Custom recruiting plan",
-    ncsaNote: "Templated guidance",
     genericNote: "Generic advice"
   },
   {
     feature: "Scholarship Negotiation Help",
     cfa: true,
-    ncsa: false,
     generic: false,
     cfaNote: "Expert negotiation tips",
-    ncsaNote: "Not included",
     genericNote: "Not included"
   },
   {
     feature: "Highlight Video Review",
     cfa: true,
-    ncsa: false,
     generic: false,
     cfaNote: "Professional feedback",
-    ncsaNote: "DIY tools only",
     genericNote: "Not offered"
   },
   {
     feature: "Priority Support",
     cfa: true,
-    ncsa: false,
     generic: false,
     cfaNote: "Direct email access",
-    ncsaNote: "Ticket-based support",
     genericNote: "Limited availability"
   }
 ];
@@ -217,7 +201,7 @@ const Pricing = () => {
             </div>
 
             {/* Provider Headers */}
-            <div className="grid grid-cols-4 gap-4 mb-6">
+            <div className="grid grid-cols-3 gap-4 mb-6">
               <div></div>
               <Card className="p-4 text-center border-2 border-primary bg-primary/5">
                 <div className="flex items-center justify-center gap-2 mb-2">
@@ -229,18 +213,10 @@ const Pricing = () => {
               </Card>
               <Card className="p-4 text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <Bot className="w-5 h-5 text-muted-foreground" />
-                  <span className="font-bold text-foreground">NCSA</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">$2,000–$6,000</p>
-                <p className="text-xs text-muted-foreground">Annual</p>
-              </Card>
-              <Card className="p-4 text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
                   <Phone className="w-5 h-5 text-muted-foreground" />
-                  <span className="font-bold text-foreground">Other Services</span>
+                  <span className="font-bold text-foreground">Other Companies</span>
                 </div>
-                <p className="text-2xl font-bold text-foreground">$1,200–$5,000</p>
+                <p className="text-2xl font-bold text-foreground">$2,000+</p>
                 <p className="text-xs text-muted-foreground">Varies</p>
               </Card>
             </div>
@@ -252,8 +228,7 @@ const Pricing = () => {
                   <TableRow className="bg-muted/50">
                     <TableHead className="w-[280px] font-semibold">Feature</TableHead>
                     <TableHead className="text-center font-semibold text-primary">CFA Golf</TableHead>
-                    <TableHead className="text-center font-semibold">NCSA</TableHead>
-                    <TableHead className="text-center font-semibold">Other Services</TableHead>
+                    <TableHead className="text-center font-semibold">Other Companies</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -266,20 +241,6 @@ const Pricing = () => {
                             <Check className="w-4 h-4 text-success" />
                           </div>
                           <span className="text-xs text-muted-foreground hidden md:block">{item.cfaNote}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <div className="flex flex-col items-center gap-1">
-                          {item.ncsa ? (
-                            <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center">
-                              <Check className="w-4 h-4 text-success" />
-                            </div>
-                          ) : (
-                            <div className="w-6 h-6 rounded-full bg-destructive/20 flex items-center justify-center">
-                              <X className="w-4 h-4 text-destructive" />
-                            </div>
-                          )}
-                          <span className="text-xs text-muted-foreground hidden md:block">{item.ncsaNote}</span>
                         </div>
                       </TableCell>
                       <TableCell className="text-center">
