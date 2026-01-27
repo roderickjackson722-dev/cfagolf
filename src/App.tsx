@@ -16,6 +16,7 @@ import TournamentLog from "./pages/TournamentLog";
 import ScholarshipCalculator from "./pages/ScholarshipCalculator";
 import Profile from "./pages/Profile";
 import Pricing from "./pages/Pricing";
+import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Favorites from "./pages/Favorites";
 import Admin from "./pages/Admin";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/tools/scholarship-calculator" element={<ScholarshipCalculator />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/admin" element={<Admin />} />
