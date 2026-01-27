@@ -9,6 +9,7 @@ import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
 import { AdminUserTable } from '@/components/admin/AdminUserTable';
 import { AdminMembershipTable } from '@/components/admin/AdminMembershipTable';
 import { ClippdImporter } from '@/components/admin/ClippdImporter';
+import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -164,7 +165,8 @@ const Admin = () => {
             </TabsContent>
 
             {/* Data Import Tab */}
-            <TabsContent value="import">
+            <TabsContent value="import" className="space-y-6">
+              <CollegeBulkImporter />
               <ClippdImporter />
             </TabsContent>
           </Tabs>
