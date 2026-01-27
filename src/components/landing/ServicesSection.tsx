@@ -95,7 +95,7 @@ export function ServicesSection() {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          <Link to="/login">
+          <Link to="/pricing">
             <Button size="lg" className="rounded-full font-semibold px-8">
               Access All Tools
               <ArrowRight className="ml-2 w-5 h-5" />
