@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -8,6 +8,7 @@ import { useColleges } from '@/hooks/useColleges';
 import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
 import { AdminUserTable } from '@/components/admin/AdminUserTable';
 import { AdminMembershipTable } from '@/components/admin/AdminMembershipTable';
+import { ClippdImporter } from '@/components/admin/ClippdImporter';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -99,6 +100,10 @@ const Admin = () => {
                 <CreditCard className="w-4 h-4" />
                 Memberships
               </TabsTrigger>
+              <TabsTrigger value="import" className="flex items-center gap-2">
+                <Download className="w-4 h-4" />
+                Data Import
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
@@ -156,6 +161,11 @@ const Admin = () => {
                   <AdminMembershipTable />
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            {/* Data Import Tab */}
+            <TabsContent value="import">
+              <ClippdImporter />
             </TabsContent>
           </Tabs>
         </div>
