@@ -4,7 +4,6 @@ const corsHeaders = {
 };
 
 interface ClippdTeam {
-  rank: number;
   name: string;
   logoUrl: string | null;
   division: string;
@@ -42,7 +41,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Map division names to URL format
+    // Map division names to URL format - use the teams listing page
     const divisionMap: Record<string, string> = {
       'D1': 'NCAA+Division+I',
       'D2': 'NCAA+Division+II',
@@ -53,12 +52,12 @@ Deno.serve(async (req) => {
     };
 
     const divisionParam = divisionMap[division] || division;
-    // Try the teams listing page which may be more statically rendered
+    // Use the teams listing page which shows all teams with logos
     const url = `https://scoreboard.clippd.com/teams?gender=${gender}&division=${encodeURIComponent(divisionParam)}`;
 
     console.log('Scraping URL:', url);
 
-    // Scrape the page for team data
+    // Scrape the page for team data - focus on getting team names and logos
     const scrapeResponse = await fetch('https://api.firecrawl.dev/v1/scrape', {
       method: 'POST',
       headers: {
@@ -67,9 +66,9 @@ Deno.serve(async (req) => {
       },
       body: JSON.stringify({
         url,
-        formats: ['markdown', 'html', 'rawHtml'],
+        formats: ['markdown', 'html', 'links'],
         onlyMainContent: false,
-        waitFor: 8000, // Wait longer for dynamic content
+        waitFor: 5000,
       }),
     });
 
@@ -85,32 +84,15 @@ Deno.serve(async (req) => {
 
     const markdown = scrapeData.data?.markdown || scrapeData.markdown || '';
     const html = scrapeData.data?.html || scrapeData.html || '';
-    const rawHtml = scrapeData.data?.rawHtml || scrapeData.rawHtml || '';
     
-    // Use the longest content available
-    const content = rawHtml.length > html.length ? rawHtml : html;
+    console.log('Content lengths - markdown:', markdown.length, 'html:', html.length);
     
-    console.log('Content lengths - markdown:', markdown.length, 'html:', html.length, 'rawHtml:', rawHtml.length);
-    
-    // Check if content contains team-related keywords
-    const hasTeamData = content.includes('team') || content.includes('Team') || 
-                        content.includes('University') || content.includes('College');
-    console.log('Has team-related content:', hasTeamData);
-
-    // Parse teams from markdown first (more reliable for table data), fall back to HTML
-    const teams = parseTeamsFromMarkdown(markdown, division, gender).length > 0 
-      ? parseTeamsFromMarkdown(markdown, division, gender)
-      : parseTeamsFromHtml(content, division, gender);
+    // Parse teams - just looking for team names and logos, no rankings needed
+    const teams = parseTeamsFromContent(markdown, html, division, gender);
 
     console.log(`Found ${teams.length} teams for ${gender} ${division}`);
 
     if (dryRun) {
-      // Sample some HTML to see table body structure
-      const tbodyIndex = content.indexOf('<tbody');
-      const htmlSample = tbodyIndex >= 0 
-        ? content.substring(tbodyIndex, tbodyIndex + 3000)
-        : content.substring(0, 2000);
-      
       return new Response(
         JSON.stringify({
           success: true,
@@ -118,13 +100,11 @@ Deno.serve(async (req) => {
           division,
           gender,
           teamsFound: teams.length,
-          teams: teams.slice(0, 20), // Return first 20 for preview
+          teams: teams.slice(0, 30), // Return first 30 for preview
           debug: {
             markdownLength: markdown.length,
             htmlLength: html.length,
-            rawHtmlLength: rawHtml.length,
-            hasTeamData,
-            htmlSample,
+            sampleContent: markdown.substring(0, 1500),
           }
         }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -158,25 +138,21 @@ Deno.serve(async (req) => {
         // Check if college exists by name (fuzzy match)
         const { data: existing } = await supabase
           .from('colleges')
-          .select('id, name, logo_url, golf_national_ranking')
+          .select('id, name, logo_url')
           .ilike('name', `%${team.name}%`)
           .eq('division', dbDivision)
           .limit(1);
 
         if (existing && existing.length > 0) {
-          // Update existing record
+          // Update existing record - only update logo if we have one and they don't
           const updates: Record<string, unknown> = {
-            golf_national_ranking: team.rank,
+            team_gender: teamGender,
             updated_at: new Date().toISOString(),
           };
 
-          // Only update logo if we have one and they don't
           if (team.logoUrl && !existing[0].logo_url) {
             updates.logo_url = team.logoUrl;
           }
-
-          // Update team_gender to the specific gender from the import
-          updates.team_gender = teamGender;
 
           await supabase
             .from('colleges')
@@ -192,7 +168,6 @@ Deno.serve(async (req) => {
               name: team.name,
               division: dbDivision,
               team_gender: teamGender,
-              golf_national_ranking: team.rank,
               logo_url: team.logoUrl,
               state: 'Unknown', // Will need manual update
               school_size: 'Medium', // Default
@@ -218,7 +193,7 @@ Deno.serve(async (req) => {
         teamsFound: teams.length,
         imported,
         updated,
-        errors: errors.slice(0, 10), // Return first 10 errors
+        errors: errors.slice(0, 10),
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
@@ -232,194 +207,92 @@ Deno.serve(async (req) => {
   }
 });
 
-function parseTeamsFromMarkdown(markdown: string, division: string, gender: string): ClippdTeam[] {
+function parseTeamsFromContent(markdown: string, html: string, division: string, gender: string): ClippdTeam[] {
   const teams: ClippdTeam[] = [];
+  const logoMap: Record<string, string> = {};
   
-  // Split by lines and look for rank + team name patterns
-  const lines = markdown.split('\n');
-  
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    
-    // Pattern 1: Table row format "| 1 | Team Name | ..."
-    const tableMatch = line.match(/^\|?\s*(\d{1,3})\s*\|?\s*([A-Z][a-zA-Z\s&'.-]+)/);
-    if (tableMatch) {
-      const rank = parseInt(tableMatch[1], 10);
-      const name = tableMatch[2].trim();
-      if (rank && name && rank <= 300) {
-        teams.push({
-          rank,
-          name: cleanTeamName(name),
-          logoUrl: null,
-          division,
-          gender,
-        });
-        continue;
-      }
-    }
-    
-    // Pattern 2: Simple numbered list "1. Team Name" or "1 Team Name"
-    const listMatch = line.match(/^(\d{1,3})[\.\)\s]+([A-Z][a-zA-Z\s&'.-]+(?:University|College|State|Tech|A&M|Institute)?)/);
-    if (listMatch) {
-      const rank = parseInt(listMatch[1], 10);
-      const name = listMatch[2].trim();
-      if (rank && name && rank <= 300) {
-        teams.push({
-          rank,
-          name: cleanTeamName(name),
-          logoUrl: null,
-          division,
-          gender,
-        });
-        continue;
-      }
-    }
-    
-    // Pattern 3: Look for team name on a line following a rank number
-    if (/^\d{1,3}$/.test(line)) {
-      const rank = parseInt(line, 10);
-      const nextLine = lines[i + 1]?.trim();
-      if (rank <= 300 && nextLine && /^[A-Z]/.test(nextLine)) {
-        // Check if next line looks like a team name (contains University, College, etc. or starts with capital)
-        const nameLine = nextLine.replace(/^\[.*?\]\(.*?\)\s*/, ''); // Remove markdown links
-        if (nameLine.length > 3 && nameLine.length < 100) {
-          teams.push({
-            rank,
-            name: cleanTeamName(nameLine),
-            logoUrl: null,
-            division,
-            gender,
-          });
-          i++; // Skip next line since we used it
-          continue;
-        }
-      }
+  // Extract all logo URLs from markdown images
+  const imgPattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
+  let imgMatch;
+  while ((imgMatch = imgPattern.exec(markdown)) !== null) {
+    const altText = imgMatch[1]?.trim();
+    const logoUrl = imgMatch[2];
+    if (altText && logoUrl && logoUrl.includes('logo')) {
+      logoMap[altText.toLowerCase()] = normalizeLogoUrl(logoUrl);
     }
   }
   
-  // Extract logo URLs from markdown if present
-  const logoPattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
-  let logoMatch;
-  const logoMap: Record<string, string> = {};
-  
-  while ((logoMatch = logoPattern.exec(markdown)) !== null) {
-    const altText = logoMatch[1];
-    const logoUrl = logoMatch[2];
+  // Extract logos from HTML img tags
+  const htmlImgPattern = /<img[^>]*src=["']([^"']+)["'][^>]*alt=["']([^"']*)["']/gi;
+  let htmlImgMatch;
+  while ((htmlImgMatch = htmlImgPattern.exec(html)) !== null) {
+    const logoUrl = htmlImgMatch[1];
+    const altText = htmlImgMatch[2]?.trim();
     if (altText && logoUrl) {
       logoMap[altText.toLowerCase()] = normalizeLogoUrl(logoUrl);
     }
   }
   
-  // Try to match logos to teams
-  for (const team of teams) {
-    const teamLower = team.name.toLowerCase();
-    for (const [alt, url] of Object.entries(logoMap)) {
-      if (teamLower.includes(alt) || alt.includes(teamLower.split(' ')[0])) {
-        team.logoUrl = url;
-        break;
-      }
+  // Also try reversed order (alt before src)
+  const htmlImgPattern2 = /<img[^>]*alt=["']([^"']*)["'][^>]*src=["']([^"']+)["']/gi;
+  while ((htmlImgMatch = htmlImgPattern2.exec(html)) !== null) {
+    const altText = htmlImgMatch[1]?.trim();
+    const logoUrl = htmlImgMatch[2];
+    if (altText && logoUrl) {
+      logoMap[altText.toLowerCase()] = normalizeLogoUrl(logoUrl);
     }
   }
 
-  // Dedupe and sort
-  const seen = new Set<string>();
-  return teams
-    .filter(t => {
-      const key = t.name.toLowerCase();
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .sort((a, b) => a.rank - b.rank);
-}
-
-function parseTeamsFromHtml(html: string, division: string, gender: string): ClippdTeam[] {
-  const teams: ClippdTeam[] = [];
+  console.log('Found logo URLs:', Object.keys(logoMap).length);
   
-  // Pattern for table rows with ranking data
-  // Looking for patterns like: <td>1</td> ... <img src="logo.png"> ... team name
-  
-  // First, try to find all table rows
-  const rowPattern = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-  let rowMatch;
-  
-  while ((rowMatch = rowPattern.exec(html)) !== null) {
-    const row = rowMatch[1];
-    
-    // Extract cells from the row
-    const cellPattern = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-    const cells: string[] = [];
-    let cellMatch;
-    
-    while ((cellMatch = cellPattern.exec(row)) !== null) {
-      cells.push(cellMatch[1]);
-    }
-    
-    if (cells.length >= 2) {
-      // First cell should be rank
-      const rankText = cells[0].replace(/<[^>]*>/g, '').trim();
-      const rank = parseInt(rankText, 10);
-      
-      if (rank && !isNaN(rank) && rank <= 300) {
-        // Find team name - usually in second cell, possibly with link
-        let teamName = '';
-        let logoUrl: string | null = null;
-        
-        for (const cell of cells) {
-          // Look for logo image
-          const imgMatch = cell.match(/<img[^>]*src=["']([^"']+)["']/i);
-          if (imgMatch && !logoUrl) {
-            logoUrl = normalizeLogoUrl(imgMatch[1]);
-          }
-          
-          // Look for team name (in link or plain text)
-          const linkMatch = cell.match(/<a[^>]*>([^<]+)<\/a>/i);
-          if (linkMatch && !teamName) {
-            teamName = linkMatch[1].trim();
-          }
-          
-          // Plain text team name
-          if (!teamName) {
-            const plainText = cell.replace(/<[^>]*>/g, '').trim();
-            if (plainText && plainText.length > 3 && /^[A-Z]/.test(plainText) && !/^\d+$/.test(plainText)) {
-              // Check if this looks like a team name
-              if (plainText.includes('University') || plainText.includes('College') || 
-                  plainText.includes('State') || plainText.includes('Tech') || 
-                  plainText.length > 5) {
-                teamName = plainText;
-              }
-            }
-          }
-        }
-        
-        if (teamName) {
-          teams.push({
-            rank,
-            name: cleanTeamName(teamName),
-            logoUrl,
-            division,
-            gender,
-          });
-        }
-      }
+  // Extract team names from links - teams page should have links to each team
+  const linkPattern = /\[([^\]]+)\]\(\/teams\/([^)]+)\)/g;
+  let linkMatch;
+  while ((linkMatch = linkPattern.exec(markdown)) !== null) {
+    const name = linkMatch[1]?.trim();
+    if (name && isValidTeamName(name)) {
+      const cleanName = cleanTeamName(name);
+      const logoUrl = findLogoForTeam(cleanName, logoMap);
+      teams.push({
+        name: cleanName,
+        logoUrl,
+        division,
+        gender,
+      });
     }
   }
   
-  // If table parsing didn't work, try a more aggressive pattern
-  if (teams.length === 0) {
-    // Match patterns like: >1</td>...<img src="logo">...</a>Team Name</a>
-    const aggressivePattern = />(\d{1,3})<\/(?:td|span|div)>[\s\S]{0,500}?(?:<img[^>]*src=["']([^"']+)["'][^>]*>)?[\s\S]{0,200}?<a[^>]*>([^<]+)<\/a>/gi;
-    let aggressiveMatch;
-    
-    while ((aggressiveMatch = aggressivePattern.exec(html)) !== null) {
-      const rank = parseInt(aggressiveMatch[1], 10);
-      const logoUrl = aggressiveMatch[2] ? normalizeLogoUrl(aggressiveMatch[2]) : null;
-      const name = aggressiveMatch[3]?.trim();
-      
-      if (rank && name && rank <= 300) {
+  // Also look for team names in HTML anchors
+  const htmlLinkPattern = /<a[^>]*href=["'][^"']*\/teams\/[^"']*["'][^>]*>([^<]+)<\/a>/gi;
+  let htmlLinkMatch;
+  while ((htmlLinkMatch = htmlLinkPattern.exec(html)) !== null) {
+    const name = htmlLinkMatch[1]?.trim();
+    if (name && isValidTeamName(name)) {
+      const cleanName = cleanTeamName(name);
+      // Check if we already have this team
+      if (!teams.some(t => t.name.toLowerCase() === cleanName.toLowerCase())) {
+        const logoUrl = findLogoForTeam(cleanName, logoMap);
         teams.push({
-          rank,
-          name: cleanTeamName(name),
+          name: cleanName,
+          logoUrl,
+          division,
+          gender,
+        });
+      }
+    }
+  }
+  
+  // Look for university/college names in content
+  const lines = markdown.split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    // Match lines that look like school names
+    if (isValidTeamName(trimmed) && trimmed.length < 80) {
+      const cleanName = cleanTeamName(trimmed);
+      if (!teams.some(t => t.name.toLowerCase() === cleanName.toLowerCase())) {
+        const logoUrl = findLogoForTeam(cleanName, logoMap);
+        teams.push({
+          name: cleanName,
           logoUrl,
           division,
           gender,
@@ -428,23 +301,60 @@ function parseTeamsFromHtml(html: string, division: string, gender: string): Cli
     }
   }
 
-  // Dedupe and sort by rank
+  // Dedupe by name
   const seen = new Set<string>();
-  return teams
-    .filter(t => {
-      const key = t.name.toLowerCase();
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .sort((a, b) => a.rank - b.rank);
+  return teams.filter(t => {
+    const key = t.name.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function isValidTeamName(name: string): boolean {
+  if (!name || name.length < 3 || name.length > 100) return false;
+  
+  // Must contain University, College, State, Tech, or other school indicators
+  const schoolIndicators = [
+    'university', 'college', 'state', 'tech', 'institute',
+    'a&m', 'polytechnic', 'academy'
+  ];
+  
+  const lower = name.toLowerCase();
+  return schoolIndicators.some(ind => lower.includes(ind));
+}
+
+function findLogoForTeam(teamName: string, logoMap: Record<string, string>): string | null {
+  const teamLower = teamName.toLowerCase();
+  
+  // Try exact match first
+  if (logoMap[teamLower]) {
+    return logoMap[teamLower];
+  }
+  
+  // Try partial matches
+  for (const [alt, url] of Object.entries(logoMap)) {
+    // Check if the alt text contains part of the team name or vice versa
+    const teamWords = teamLower.split(' ').filter(w => w.length > 3);
+    const altWords = alt.split(' ').filter(w => w.length > 3);
+    
+    const hasMatch = teamWords.some(tw => alt.includes(tw)) || 
+                     altWords.some(aw => teamLower.includes(aw));
+    
+    if (hasMatch) {
+      return url;
+    }
+  }
+  
+  return null;
 }
 
 function cleanTeamName(name: string): string {
   return name
     .replace(/\s+/g, ' ')
-    .replace(/^\d+\s*/, '')
+    .replace(/^\d+[\.\)\s]*/g, '') // Remove leading numbers
     .replace(/\[.*?\]\(.*?\)/g, '') // Remove markdown links
+    .replace(/[*_]/g, '') // Remove markdown formatting
     .trim();
 }
 
