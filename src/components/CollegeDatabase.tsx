@@ -27,10 +27,12 @@ const initialFilters: FilterType = {
 };
 
 type SortOption = 'name' | 'state' | 'division';
+const ITEMS_PER_PAGE = 24;
 
 export function CollegeDatabase() {
   const [filters, setFilters] = useState<FilterType>(initialFilters);
   const [sortBy, setSortBy] = useState<SortOption>('name');
+  const [currentPage, setCurrentPage] = useState(1);
   const { data: colleges, isLoading } = useColleges(filters);
   const { data: stats } = useCollegeStats();
 
@@ -52,8 +54,16 @@ export function CollegeDatabase() {
     });
   }, [colleges, sortBy]);
 
+  const totalPages = Math.ceil(sortedColleges.length / ITEMS_PER_PAGE);
+  const paginatedColleges = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return sortedColleges.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [sortedColleges, currentPage]);
+
+  // Reset to page 1 when filters or sorting changes
   const handleSearchChange = (value: string) => {
     setFilters(prev => ({ ...prev, search: value }));
+    setCurrentPage(1);
   };
 
   const handleGenderChange = (value: string) => {
@@ -62,6 +72,7 @@ export function CollegeDatabase() {
     } else {
       setFilters(prev => ({ ...prev, teamGenders: [value as TeamGender] }));
     }
+    setCurrentPage(1);
   };
 
   const handleDivisionChange = (value: string) => {
@@ -70,6 +81,7 @@ export function CollegeDatabase() {
     } else {
       setFilters(prev => ({ ...prev, divisions: [value as Division] }));
     }
+    setCurrentPage(1);
   };
 
   const handleStateChange = (value: string) => {
@@ -78,14 +90,22 @@ export function CollegeDatabase() {
     } else {
       setFilters(prev => ({ ...prev, states: [value] }));
     }
+    setCurrentPage(1);
   };
 
   const handleHbcuChange = (checked: boolean) => {
     setFilters(prev => ({ ...prev, hbcuOnly: checked }));
+    setCurrentPage(1);
   };
 
   const clearAllFilters = () => {
     setFilters(initialFilters);
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (value: string) => {
+    setSortBy(value as SortOption);
+    setCurrentPage(1);
   };
 
   const hasActiveFilters = filters.search || 
@@ -224,7 +244,7 @@ export function CollegeDatabase() {
                   colleges found
                 </span>
               </div>
-              <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
+              <Select value={sortBy} onValueChange={handleSortChange}>
                 <SelectTrigger className="w-40 bg-background">
                   <ArrowUpDown className="w-4 h-4 mr-2" />
                   <SelectValue placeholder="Sort by" />
@@ -270,12 +290,60 @@ export function CollegeDatabase() {
                 <Skeleton key={i} className="h-24 rounded-xl" />
               ))}
             </div>
-          ) : sortedColleges.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {sortedColleges.map((college) => (
-                <CollegeCardSimple key={college.id} college={college} />
-              ))}
-            </div>
+          ) : paginatedColleges.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {paginatedColleges.map((college) => (
+                  <CollegeCardSimple key={college.id} college={college} />
+                ))}
+              </div>
+              
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t">
+                  <p className="text-sm text-muted-foreground">
+                    Showing {((currentPage - 1) * ITEMS_PER_PAGE) + 1} - {Math.min(currentPage * ITEMS_PER_PAGE, sortedColleges.length)} of {sortedColleges.length} colleges
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage(1)}
+                      disabled={currentPage === 1}
+                    >
+                      First
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                      disabled={currentPage === 1}
+                    >
+                      Previous
+                    </Button>
+                    <span className="px-3 py-1 text-sm font-medium">
+                      Page {currentPage} of {totalPages}
+                    </span>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                      disabled={currentPage === totalPages}
+                    >
+                      Next
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentPage(totalPages)}
+                      disabled={currentPage === totalPages}
+                    >
+                      Last
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-16">
               <GraduationCap className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4" />
