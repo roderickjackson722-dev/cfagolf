@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CollegeFilters as FilterType, TeamGender, Division, DIVISIONS } from '@/types/college';
+import { CollegeFilters as FilterType, TeamGender, Division, US_STATES } from '@/types/college';
 import { useColleges, useCollegeStats } from '@/hooks/useColleges';
 import { CollegeCardSimple } from '@/components/CollegeCardSimple';
 import { Badge } from '@/components/ui/badge';
@@ -48,6 +48,14 @@ export function CollegeDatabase() {
     }
   };
 
+  const handleStateChange = (value: string) => {
+    if (value === 'all') {
+      setFilters(prev => ({ ...prev, states: [] }));
+    } else {
+      setFilters(prev => ({ ...prev, states: [value] }));
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section - Reduced padding */}
@@ -85,9 +93,9 @@ export function CollegeDatabase() {
       {/* Main Content */}
       <section className="container py-4 md:py-6">
         <div className="space-y-6">
-          {/* Filters - Search + Division + Team Gender */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
+          {/* Filters - Search + State + Division + Team Gender */}
+          <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
+            <div className="relative flex-1 min-w-[200px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 type="text"
@@ -97,6 +105,20 @@ export function CollegeDatabase() {
                 className="pl-10"
               />
             </div>
+            <Select 
+              value={filters.states.length > 0 ? filters.states[0] : 'all'}
+              onValueChange={handleStateChange}
+            >
+              <SelectTrigger className="w-full sm:w-44 bg-background">
+                <SelectValue placeholder="State" />
+              </SelectTrigger>
+              <SelectContent className="bg-background z-50 max-h-60">
+                <SelectItem value="all">All States</SelectItem>
+                {US_STATES.map(state => (
+                  <SelectItem key={state} value={state}>{state}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <Select 
               value={filters.divisions.length > 0 ? filters.divisions[0] : 'all'}
               onValueChange={handleDivisionChange}
@@ -142,19 +164,26 @@ export function CollegeDatabase() {
                 colleges found
               </span>
             </div>
-            
-            {filters.divisions.length > 0 && (
-              <Badge variant={filters.divisions[0].toLowerCase() as 'd1' | 'd2' | 'd3' | 'naia' | 'juco'}>
-                {filters.divisions[0]}
-              </Badge>
-            )}
-            {filters.teamGenders.length > 0 && (
-              <Badge variant="outline">
-                {filters.teamGenders[0] === 'Men' ? "Men's Teams" : 
-                 filters.teamGenders[0] === 'Women' ? "Women's Teams" : 
-                 "Men's & Women's Teams"}
-              </Badge>
-            )}
+            <div className="flex flex-wrap gap-2">
+              {filters.states.length > 0 && (
+                <Badge variant="outline">
+                  <MapPin className="w-3 h-3 mr-1" />
+                  {filters.states[0]}
+                </Badge>
+              )}
+              {filters.divisions.length > 0 && (
+                <Badge variant={filters.divisions[0].toLowerCase() as 'd1' | 'd2' | 'd3' | 'naia' | 'juco'}>
+                  {filters.divisions[0]}
+                </Badge>
+              )}
+              {filters.teamGenders.length > 0 && (
+                <Badge variant="outline">
+                  {filters.teamGenders[0] === 'Men' ? "Men's Teams" : 
+                   filters.teamGenders[0] === 'Women' ? "Women's Teams" : 
+                   "Men's & Women's Teams"}
+                </Badge>
+              )}
+            </div>
           </div>
 
           {/* College Grid */}
