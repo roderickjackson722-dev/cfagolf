@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import hbcuGolfTeam from '@/assets/about/hbcu-golf-team.jpg';
 import bcgcaGroup from '@/assets/about/bcgca-group.jpg';
 import legendsSign from '@/assets/about/legends-sign.jpg';
-import coachingLesson from '@/assets/about/coaching-lesson.jpg';
+import rodHeadshot from '@/assets/about/rod-headshot.jpg';
 import dortchClassic from '@/assets/about/dortch-classic.jpg';
 import womensTeam from '@/assets/about/womens-team.jpg';
 import coachesMeeting from '@/assets/about/coaches-meeting.jpg';
@@ -130,8 +130,8 @@ export default function About() {
               </div>
               <div className="relative">
                 <img 
-                  src={coachingLesson} 
-                  alt="Golf coaching session" 
+                  src={rodHeadshot} 
+                  alt="Rod Jackson - Founder of College Fairway Advisors" 
                   className="rounded-2xl shadow-xl w-full object-cover aspect-[4/5]"
                 />
                 <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/10 rounded-2xl -z-10" />
