@@ -6,7 +6,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Division mapping
+// Division mapping - more comprehensive
 const divisionMap: Record<string, string> = {
   "NCAA I": "D1",
   "NCAA II": "D2",
@@ -22,17 +22,18 @@ const divisionMap: Record<string, string> = {
 
 // Parse markdown link format: [Name](URL)
 function parseMarkdownLink(text: string): { name: string; url: string | null } {
+  if (!text) return { name: '', url: null };
   const match = text.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
   if (match) {
-    return { name: match[1], url: match[2] };
+    return { name: match[1].trim(), url: match[2].trim() };
   }
-  return { name: text, url: null };
+  return { name: text.trim(), url: null };
 }
 
 // Parse team gender from M/W columns
-function parseTeamGender(teams5: string, teams6: string): string {
-  const hasM = teams5?.trim() === 'M';
-  const hasW = teams6?.trim() === 'W';
+function parseTeamGender(teamsM: string, teamsW: string): string {
+  const hasM = teamsM?.trim() === 'M';
+  const hasW = teamsW?.trim() === 'W';
   
   if (hasM && hasW) return 'Both';
   if (hasM) return 'Men';
@@ -50,8 +51,7 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Parse request body containing the college data
-    const { colleges } = await req.json();
+    const { colleges, dryRun = false } = await req.json();
 
     if (!colleges || !Array.isArray(colleges)) {
       return new Response(
@@ -60,86 +60,109 @@ serve(async (req) => {
       );
     }
 
+    // Get existing colleges to compare
+    const { data: existingColleges } = await supabase
+      .from('colleges')
+      .select('name, state, team_gender');
+    
+    const existingSet = new Set(
+      existingColleges?.map(c => `${c.name.toLowerCase()}|${c.state?.toLowerCase() || ''}|${c.team_gender?.toLowerCase() || ''}`) || []
+    );
+    const existingNameSet = new Set(
+      existingColleges?.map(c => c.name.toLowerCase()) || []
+    );
+
     const results = {
+      total: colleges.length,
+      existing: 0,
+      toInsert: 0,
       inserted: 0,
       updated: 0,
       skipped: 0,
       errors: [] as string[],
+      newColleges: [] as { name: string; state: string; division: string; team_gender: string }[],
     };
 
-    // Process colleges in batches
-    const batchSize = 50;
-    for (let i = 0; i < colleges.length; i += batchSize) {
-      const batch = colleges.slice(i, i + batchSize);
-      
-      for (const college of batch) {
-        try {
-          // Parse the college name and URL
-          const { name, url } = parseMarkdownLink(college.name || '');
-          
-          if (!name || name === 'College/University') {
-            results.skipped++;
-            continue;
-          }
+    const toInsert: {
+      name: string;
+      state: string;
+      division: string;
+      team_gender: string;
+      website_url: string | null;
+      school_size: string;
+      is_hbcu: boolean;
+    }[] = [];
 
-          // Map division
-          const rawDivision = college.division || '';
-          const division = divisionMap[rawDivision] || 'JUCO';
-
-          // Parse team gender
-          const teamGender = parseTeamGender(college.teams5, college.teams6);
-
-          // Prepare college data
-          const collegeData = {
-            name: name.trim(),
-            state: college.state?.trim() || 'Unknown',
-            division,
-            team_gender: teamGender,
-            website_url: url,
-            school_size: 'Medium' as const,
-            is_hbcu: false,
-          };
-
-          // Check if college already exists by name
-          const { data: existing } = await supabase
-            .from('colleges')
-            .select('id')
-            .eq('name', collegeData.name)
-            .maybeSingle();
-
-          if (existing) {
-            // Update existing college
-            const { error } = await supabase
-              .from('colleges')
-              .update({
-                state: collegeData.state,
-                division: collegeData.division,
-                team_gender: collegeData.team_gender,
-                website_url: collegeData.website_url,
-              })
-              .eq('id', existing.id);
-
-            if (error) {
-              results.errors.push(`Update error for ${name}: ${error.message}`);
-            } else {
-              results.updated++;
-            }
-          } else {
-            // Insert new college
-            const { error } = await supabase
-              .from('colleges')
-              .insert(collegeData);
-
-            if (error) {
-              results.errors.push(`Insert error for ${name}: ${error.message}`);
-            } else {
-              results.inserted++;
-            }
-          }
-        } catch (err) {
-          const errorMessage = err instanceof Error ? err.message : String(err);
-          results.errors.push(`Error processing college: ${errorMessage}`);
+    for (const college of colleges) {
+      try {
+        const { name, url } = parseMarkdownLink(college.name || '');
+        
+        if (!name || name === 'College/University' || name.includes('City / Campus')) {
+          results.skipped++;
+          continue;
         }
+
+        const rawDivision = college.division || '';
+        const division = divisionMap[rawDivision] || 'JUCO';
+        const state = college.state?.trim() || 'Unknown';
+        const teamGender = parseTeamGender(college.teamsM, college.teamsW);
+
+        // Check if this exact entry exists (name + state + team_gender)
+        const key = `${name.toLowerCase()}|${state.toLowerCase()}|${teamGender.toLowerCase()}`;
+        
+        if (existingSet.has(key)) {
+          results.existing++;
+          continue;
+        }
+
+        // If name exists but with different gender, we still want to add the new entry
+        const collegeData = {
+          name: name,
+          state: state,
+          division: division,
+          team_gender: teamGender,
+          website_url: url,
+          school_size: 'Medium' as const,
+          is_hbcu: false,
+        };
+
+        toInsert.push(collegeData);
+        results.newColleges.push({
+          name: collegeData.name,
+          state: collegeData.state,
+          division: collegeData.division,
+          team_gender: collegeData.team_gender,
+        });
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        results.errors.push(`Error processing: ${errorMessage}`);
+      }
+    }
+
+    results.toInsert = toInsert.length;
+
+    if (dryRun) {
+      return new Response(
+        JSON.stringify({
+          success: true,
+          dryRun: true,
+          results,
+          message: `Dry run complete. Found ${results.toInsert} new colleges to insert, ${results.existing} already exist, ${results.skipped} skipped.`,
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Insert in batches
+    const batchSize = 50;
+    for (let i = 0; i < toInsert.length; i += batchSize) {
+      const batch = toInsert.slice(i, i + batchSize);
+      const { error } = await supabase.from('colleges').insert(batch);
+      
+      if (error) {
+        results.errors.push(`Batch insert error at ${i}: ${error.message}`);
+      } else {
+        results.inserted += batch.length;
       }
     }
 
@@ -147,7 +170,7 @@ serve(async (req) => {
       JSON.stringify({
         success: true,
         results,
-        message: `Processed ${colleges.length} colleges. Inserted: ${results.inserted}, Updated: ${results.updated}, Skipped: ${results.skipped}`,
+        message: `Processed ${colleges.length} colleges. Inserted: ${results.inserted}, Existing: ${results.existing}, Skipped: ${results.skipped}`,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
