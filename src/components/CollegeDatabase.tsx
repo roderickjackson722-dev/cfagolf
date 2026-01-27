@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CollegeFilters as FilterType, TeamGender, TEAM_GENDERS } from '@/types/college';
+import { CollegeFilters as FilterType, TeamGender, Division, DIVISIONS } from '@/types/college';
 import { useColleges, useCollegeStats } from '@/hooks/useColleges';
 import { CollegeCardSimple } from '@/components/CollegeCardSimple';
 import { Badge } from '@/components/ui/badge';
@@ -40,6 +40,14 @@ export function CollegeDatabase() {
     }
   };
 
+  const handleDivisionChange = (value: string) => {
+    if (value === 'all') {
+      setFilters(prev => ({ ...prev, divisions: [] }));
+    } else {
+      setFilters(prev => ({ ...prev, divisions: [value as Division] }));
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section - Reduced padding */}
@@ -77,7 +85,7 @@ export function CollegeDatabase() {
       {/* Main Content */}
       <section className="container py-4 md:py-6">
         <div className="space-y-6">
-          {/* Simplified Filters - Search + Team Gender */}
+          {/* Filters - Search + Division + Team Gender */}
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -90,13 +98,29 @@ export function CollegeDatabase() {
               />
             </div>
             <Select 
+              value={filters.divisions.length > 0 ? filters.divisions[0] : 'all'}
+              onValueChange={handleDivisionChange}
+            >
+              <SelectTrigger className="w-full sm:w-40 bg-background">
+                <SelectValue placeholder="Division" />
+              </SelectTrigger>
+              <SelectContent className="bg-background z-50">
+                <SelectItem value="all">All Divisions</SelectItem>
+                <SelectItem value="D1">NCAA D1</SelectItem>
+                <SelectItem value="D2">NCAA D2</SelectItem>
+                <SelectItem value="D3">NCAA D3</SelectItem>
+                <SelectItem value="NAIA">NAIA</SelectItem>
+                <SelectItem value="JUCO">JUCO</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select 
               value={filters.teamGenders.length > 0 ? filters.teamGenders[0] : 'all'}
               onValueChange={handleGenderChange}
             >
-              <SelectTrigger className="w-full sm:w-48">
+              <SelectTrigger className="w-full sm:w-48 bg-background">
                 <SelectValue placeholder="Team Gender" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background z-50">
                 <SelectItem value="all">All Teams</SelectItem>
                 <SelectItem value="Men">Men's Teams</SelectItem>
                 <SelectItem value="Women">Women's Teams</SelectItem>
@@ -119,6 +143,11 @@ export function CollegeDatabase() {
               </span>
             </div>
             
+            {filters.divisions.length > 0 && (
+              <Badge variant={filters.divisions[0].toLowerCase() as 'd1' | 'd2' | 'd3' | 'naia' | 'juco'}>
+                {filters.divisions[0]}
+              </Badge>
+            )}
             {filters.teamGenders.length > 0 && (
               <Badge variant="outline">
                 {filters.teamGenders[0] === 'Men' ? "Men's Teams" : 
