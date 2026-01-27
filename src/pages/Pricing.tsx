@@ -122,7 +122,7 @@ const Pricing = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-            6-Month Consulting
+            Annual Consulting
           </span>
             <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Get Personalized{' '}
@@ -130,8 +130,8 @@ const Pricing = () => {
             </h1>
             <p className="text-lg text-muted-foreground">
               {user 
-                ? "Upgrade to our 6-month consulting service for hands-on support."
-                : "Partner with CFA for 6 months of expert recruiting guidance and industry connections."}
+                ? "Upgrade to our annual consulting service for hands-on support."
+                : "Partner with CFA for a full year of expert recruiting guidance and industry connections."}
             </p>
           </div>
 
@@ -139,14 +139,14 @@ const Pricing = () => {
             <Card className="relative overflow-hidden border-2 border-primary shadow-xl">
               <CardHeader className="text-center pb-4 pt-8">
               <CardTitle className="text-2xl font-display font-bold text-foreground">
-                CFA 6-Month Consulting
+                CFA Annual Consulting
               </CardTitle>
               <CardDescription className="text-muted-foreground">
                 Complete hands-on recruiting guidance for junior golfers
               </CardDescription>
               <div className="pt-6">
                 <span className="text-5xl font-bold text-foreground">$1,999</span>
-                <p className="text-sm text-muted-foreground mt-2">6-month commitment • Monthly coaching calls included</p>
+                <p className="text-sm text-muted-foreground mt-2">Annual commitment • Monthly coaching calls included</p>
               </div>
               </CardHeader>
 
@@ -225,7 +225,7 @@ const Pricing = () => {
                   <span className="font-bold text-foreground">CFA Golf</span>
                 </div>
                 <p className="text-2xl font-bold text-primary">$1,999</p>
-                <p className="text-xs text-muted-foreground">6 months</p>
+                <p className="text-xs text-muted-foreground">Annual</p>
               </Card>
               <Card className="p-4 text-center">
                 <div className="flex items-center justify-center gap-2 mb-2">
