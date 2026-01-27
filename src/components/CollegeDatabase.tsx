@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { CollegeFilters as FilterType } from '@/types/college';
+import { CollegeFilters as FilterType, TeamGender, TEAM_GENDERS } from '@/types/college';
 import { useColleges, useCollegeStats } from '@/hooks/useColleges';
-import { CollegeCard } from '@/components/CollegeCard';
-import { CollegeFilters } from '@/components/CollegeFilters';
-import { CompareDrawer } from '@/components/CompareDrawer';
-import { CompareFloatingBar } from '@/components/CompareFloatingBar';
-import { CompareProvider } from '@/hooks/useCompare';
+import { CollegeCardSimple } from '@/components/CollegeCardSimple';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { GraduationCap, MapPin, Trophy, Users } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { GraduationCap, MapPin, Trophy, Users, Search } from 'lucide-react';
 
 const initialFilters: FilterType = {
   search: '',
@@ -25,10 +23,22 @@ const initialFilters: FilterType = {
   maxCost: null,
 };
 
-function CollegeDatabaseContent() {
+export function CollegeDatabase() {
   const [filters, setFilters] = useState<FilterType>(initialFilters);
   const { data: colleges, isLoading } = useColleges(filters);
   const { data: stats } = useCollegeStats();
+
+  const handleSearchChange = (value: string) => {
+    setFilters(prev => ({ ...prev, search: value }));
+  };
+
+  const handleGenderChange = (value: string) => {
+    if (value === 'all') {
+      setFilters(prev => ({ ...prev, teamGenders: [] }));
+    } else {
+      setFilters(prev => ({ ...prev, teamGenders: [value as TeamGender] }));
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -41,7 +51,7 @@ function CollegeDatabaseContent() {
               College Golf Database
             </h1>
             <p className="text-base md:text-lg text-primary-foreground/80 mb-4 animate-fade-in">
-              Find your perfect college golf program. Search by division, academics, cost, and more.
+              Find your perfect college golf program.
             </p>
             
             {stats && (
@@ -64,11 +74,36 @@ function CollegeDatabaseContent() {
         </div>
       </section>
 
-      {/* Main Content - Reduced top padding */}
+      {/* Main Content */}
       <section className="container py-4 md:py-6">
         <div className="space-y-6">
-          {/* Filters */}
-          <CollegeFilters filters={filters} onFiltersChange={setFilters} />
+          {/* Simplified Filters - Search + Team Gender */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search colleges..."
+                value={filters.search}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            <Select 
+              value={filters.teamGenders.length > 0 ? filters.teamGenders[0] : 'all'}
+              onValueChange={handleGenderChange}
+            >
+              <SelectTrigger className="w-full sm:w-48">
+                <SelectValue placeholder="Team Gender" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Teams</SelectItem>
+                <SelectItem value="Men">Men's Teams</SelectItem>
+                <SelectItem value="Women">Women's Teams</SelectItem>
+                <SelectItem value="Both">Both Men & Women</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Results Header */}
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -84,51 +119,37 @@ function CollegeDatabaseContent() {
               </span>
             </div>
             
-            {filters.divisions.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {filters.divisions.map(d => (
-                  <Badge key={d} variant={d.toLowerCase() as 'd1' | 'd2' | 'd3' | 'naia' | 'juco'}>
-                    {d}
-                  </Badge>
-                ))}
-              </div>
+            {filters.teamGenders.length > 0 && (
+              <Badge variant="outline">
+                {filters.teamGenders[0] === 'Men' ? "Men's Teams" : 
+                 filters.teamGenders[0] === 'Women' ? "Women's Teams" : 
+                 "Men's & Women's Teams"}
+              </Badge>
             )}
           </div>
 
           {/* College Grid */}
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(6)].map((_, i) => (
-                <Skeleton key={i} className="h-72 rounded-xl" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {[...Array(8)].map((_, i) => (
+                <Skeleton key={i} className="h-24 rounded-xl" />
               ))}
             </div>
           ) : colleges && colleges.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {colleges.map((college) => (
-                <CollegeCard key={college.id} college={college} />
+                <CollegeCardSimple key={college.id} college={college} />
               ))}
             </div>
           ) : (
             <div className="text-center py-16">
               <GraduationCap className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4" />
               <h3 className="text-xl font-semibold text-foreground mb-2">No colleges found</h3>
-              <p className="text-muted-foreground">Try adjusting your filters to see more results.</p>
+              <p className="text-muted-foreground">Try adjusting your search to see more results.</p>
             </div>
           )}
         </div>
       </section>
-
-      {/* Compare Components */}
-      <CompareFloatingBar />
-      <CompareDrawer />
     </div>
-  );
-}
-
-export function CollegeDatabase() {
-  return (
-    <CompareProvider>
-      <CollegeDatabaseContent />
-    </CompareProvider>
   );
 }
