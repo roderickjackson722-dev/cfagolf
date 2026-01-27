@@ -14,7 +14,7 @@ const PROMO_CODES: Record<string, { discount: number; name: string }> = {
 };
 
 const MEMBERSHIP_PRICE_ID = "price_1StusULXW44Q7xfERL56E0DG";
-const MEMBERSHIP_AMOUNT = 199999; // $1,999.99 in cents
+const MEMBERSHIP_AMOUNT = 199900; // $1,999.00 in cents
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
