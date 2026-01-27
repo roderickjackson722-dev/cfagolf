@@ -1,10 +1,11 @@
 import { Navigate, Link } from 'react-router-dom';
-import { ArrowRight, Check, Calendar } from 'lucide-react';
+import { ArrowRight, Check, Calendar, X, Users, Bot, Phone } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 
@@ -21,6 +22,81 @@ const features = [
   "12-Month Recruiting Timeline (by grade)",
   "Highlight Video Review & Feedback",
   "Priority Email Support"
+];
+
+const comparisonFeatures = [
+  {
+    feature: "Personal 1:1 Coaching Calls",
+    cfa: true,
+    ncsa: false,
+    generic: false,
+    cfaNote: "Monthly calls with expert advisor",
+    ncsaNote: "Self-service platform",
+    genericNote: "Limited or no support"
+  },
+  {
+    feature: "LPGA/PGA Pro Webinars",
+    cfa: true,
+    ncsa: false,
+    generic: false,
+    cfaNote: "Exclusive partnered sessions",
+    ncsaNote: "Not available",
+    genericNote: "Not available"
+  },
+  {
+    feature: "College Coach Sessions",
+    cfa: true,
+    ncsa: false,
+    generic: false,
+    cfaNote: "Direct access to coaches",
+    ncsaNote: "Coach database only",
+    genericNote: "Rarely offered"
+  },
+  {
+    feature: "College Database Access",
+    cfa: true,
+    ncsa: true,
+    generic: true,
+    cfaNote: "Golf-specific with rankings",
+    ncsaNote: "Multi-sport database",
+    genericNote: "Basic listings"
+  },
+  {
+    feature: "Personalized Strategy",
+    cfa: true,
+    ncsa: false,
+    generic: false,
+    cfaNote: "Custom recruiting plan",
+    ncsaNote: "Templated guidance",
+    genericNote: "Generic advice"
+  },
+  {
+    feature: "Scholarship Negotiation Help",
+    cfa: true,
+    ncsa: false,
+    generic: false,
+    cfaNote: "Expert negotiation tips",
+    ncsaNote: "Not included",
+    genericNote: "Not included"
+  },
+  {
+    feature: "Highlight Video Review",
+    cfa: true,
+    ncsa: false,
+    generic: false,
+    cfaNote: "Professional feedback",
+    ncsaNote: "DIY tools only",
+    genericNote: "Not offered"
+  },
+  {
+    feature: "Priority Support",
+    cfa: true,
+    ncsa: false,
+    generic: false,
+    cfaNote: "Direct email access",
+    ncsaNote: "Ticket-based support",
+    genericNote: "Limited availability"
+  }
 ];
 
 const Pricing = () => {
@@ -69,7 +145,7 @@ const Pricing = () => {
                 Complete hands-on recruiting guidance for junior golfers
               </CardDescription>
               <div className="pt-6">
-                <span className="text-5xl font-bold text-foreground">$2,499</span>
+                <span className="text-5xl font-bold text-foreground">$1,999</span>
                 <p className="text-sm text-muted-foreground mt-2">6-month commitment • Monthly coaching calls included</p>
               </div>
               </CardHeader>
@@ -88,7 +164,7 @@ const Pricing = () => {
 
                 {user ? (
                   <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                    Start Consulting - $2,499
+                    Start Consulting - $1,999
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 ) : (
@@ -124,6 +200,120 @@ const Pricing = () => {
                 </p>
               </CardContent>
             </Card>
+          </div>
+
+          {/* Comparison Table Section */}
+          <div className="mt-24 max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
+                Why Choose CFA?
+              </span>
+              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                See How We <span className="text-primary">Compare</span>
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Unlike automated platforms, CFA provides personalized, hands-on coaching from industry experts who know the college golf recruiting landscape.
+              </p>
+            </div>
+
+            {/* Provider Headers */}
+            <div className="grid grid-cols-4 gap-4 mb-6">
+              <div></div>
+              <Card className="p-4 text-center border-2 border-primary bg-primary/5">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Users className="w-5 h-5 text-primary" />
+                  <span className="font-bold text-foreground">CFA Golf</span>
+                </div>
+                <p className="text-2xl font-bold text-primary">$1,999</p>
+                <p className="text-xs text-muted-foreground">6 months</p>
+              </Card>
+              <Card className="p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Bot className="w-5 h-5 text-muted-foreground" />
+                  <span className="font-bold text-foreground">NCSA</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">$2,000–$6,000</p>
+                <p className="text-xs text-muted-foreground">Annual</p>
+              </Card>
+              <Card className="p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <Phone className="w-5 h-5 text-muted-foreground" />
+                  <span className="font-bold text-foreground">Other Services</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">$1,200–$5,000</p>
+                <p className="text-xs text-muted-foreground">Varies</p>
+              </Card>
+            </div>
+
+            {/* Comparison Table */}
+            <Card className="overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50">
+                    <TableHead className="w-[280px] font-semibold">Feature</TableHead>
+                    <TableHead className="text-center font-semibold text-primary">CFA Golf</TableHead>
+                    <TableHead className="text-center font-semibold">NCSA</TableHead>
+                    <TableHead className="text-center font-semibold">Other Services</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {comparisonFeatures.map((item, index) => (
+                    <TableRow key={index} className={index % 2 === 0 ? 'bg-background' : 'bg-muted/30'}>
+                      <TableCell className="font-medium">{item.feature}</TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex flex-col items-center gap-1">
+                          <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center">
+                            <Check className="w-4 h-4 text-success" />
+                          </div>
+                          <span className="text-xs text-muted-foreground hidden md:block">{item.cfaNote}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex flex-col items-center gap-1">
+                          {item.ncsa ? (
+                            <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center">
+                              <Check className="w-4 h-4 text-success" />
+                            </div>
+                          ) : (
+                            <div className="w-6 h-6 rounded-full bg-destructive/20 flex items-center justify-center">
+                              <X className="w-4 h-4 text-destructive" />
+                            </div>
+                          )}
+                          <span className="text-xs text-muted-foreground hidden md:block">{item.ncsaNote}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <div className="flex flex-col items-center gap-1">
+                          {item.generic ? (
+                            <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center">
+                              <Check className="w-4 h-4 text-success" />
+                            </div>
+                          ) : (
+                            <div className="w-6 h-6 rounded-full bg-destructive/20 flex items-center justify-center">
+                              <X className="w-4 h-4 text-destructive" />
+                            </div>
+                          )}
+                          <span className="text-xs text-muted-foreground hidden md:block">{item.genericNote}</span>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Card>
+
+            {/* Bottom CTA */}
+            <div className="text-center mt-12">
+              <p className="text-lg text-muted-foreground mb-6">
+                Ready to get <span className="text-primary font-semibold">personalized guidance</span> instead of generic templates?
+              </p>
+              <Link to="/checkout">
+                <Button size="lg" className="rounded-full font-semibold px-8 cfa-gradient hover:opacity-90 transition-opacity">
+                  Get Started with CFA
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
