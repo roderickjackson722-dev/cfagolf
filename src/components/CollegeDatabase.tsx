@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { CollegeFilters as FilterType, TeamGender, Division, US_STATES } from '@/types/college';
 import { useColleges, useCollegeStats } from '@/hooks/useColleges';
 import { CollegeCardSimple } from '@/components/CollegeCardSimple';
@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { GraduationCap, MapPin, Trophy, Users, Search, X } from 'lucide-react';
+import { GraduationCap, MapPin, Trophy, Users, Search, X, ArrowUpDown } from 'lucide-react';
 
 const initialFilters: FilterType = {
   search: '',
@@ -26,10 +26,31 @@ const initialFilters: FilterType = {
   maxCost: null,
 };
 
+type SortOption = 'name' | 'state' | 'division';
+
 export function CollegeDatabase() {
   const [filters, setFilters] = useState<FilterType>(initialFilters);
+  const [sortBy, setSortBy] = useState<SortOption>('name');
   const { data: colleges, isLoading } = useColleges(filters);
   const { data: stats } = useCollegeStats();
+
+  const sortedColleges = useMemo(() => {
+    if (!colleges) return [];
+    
+    return [...colleges].sort((a, b) => {
+      switch (sortBy) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'state':
+          return a.state.localeCompare(b.state) || a.name.localeCompare(b.name);
+        case 'division':
+          const divisionOrder = ['D1', 'D2', 'D3', 'NAIA', 'JUCO'];
+          return divisionOrder.indexOf(a.division) - divisionOrder.indexOf(b.division) || a.name.localeCompare(b.name);
+        default:
+          return 0;
+      }
+    });
+  }, [colleges, sortBy]);
 
   const handleSearchChange = (value: string) => {
     setFilters(prev => ({ ...prev, search: value }));
@@ -191,16 +212,29 @@ export function CollegeDatabase() {
 
           {/* Results Header */}
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-muted-foreground" />
-              <span className="text-muted-foreground">
-                {isLoading ? (
-                  <Skeleton className="h-5 w-24 inline-block" />
-                ) : (
-                  <span className="font-medium text-foreground">{colleges?.length}</span>
-                )}{' '}
-                colleges found
-              </span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Users className="w-5 h-5 text-muted-foreground" />
+                <span className="text-muted-foreground">
+                  {isLoading ? (
+                    <Skeleton className="h-5 w-24 inline-block" />
+                  ) : (
+                    <span className="font-medium text-foreground">{sortedColleges.length}</span>
+                  )}{' '}
+                  colleges found
+                </span>
+              </div>
+              <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
+                <SelectTrigger className="w-40 bg-background">
+                  <ArrowUpDown className="w-4 h-4 mr-2" />
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent className="bg-background z-50">
+                  <SelectItem value="name">Name</SelectItem>
+                  <SelectItem value="state">State</SelectItem>
+                  <SelectItem value="division">Division</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div className="flex flex-wrap gap-2">
               {filters.hbcuOnly && (
@@ -236,9 +270,9 @@ export function CollegeDatabase() {
                 <Skeleton key={i} className="h-24 rounded-xl" />
               ))}
             </div>
-          ) : colleges && colleges.length > 0 ? (
+          ) : sortedColleges.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {colleges.map((college) => (
+              {sortedColleges.map((college) => (
                 <CollegeCardSimple key={college.id} college={college} />
               ))}
             </div>
