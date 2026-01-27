@@ -47,7 +47,7 @@ export function PricingSection() {
               Complete hands-on recruiting guidance for junior golfers
             </CardDescription>
             <div className="pt-6">
-              <span className="text-5xl font-bold text-foreground">$2,499</span>
+              <span className="text-5xl font-bold text-foreground">$1,999</span>
               <p className="text-sm text-muted-foreground mt-2">6-month commitment • Monthly coaching calls included</p>
             </div>
             </CardHeader>
