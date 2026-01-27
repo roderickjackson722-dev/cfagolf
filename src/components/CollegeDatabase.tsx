@@ -6,6 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { GraduationCap, MapPin, Trophy, Users, Search } from 'lucide-react';
 
 const initialFilters: FilterType = {
@@ -54,6 +56,10 @@ export function CollegeDatabase() {
     } else {
       setFilters(prev => ({ ...prev, states: [value] }));
     }
+  };
+
+  const handleHbcuChange = (checked: boolean) => {
+    setFilters(prev => ({ ...prev, hbcuOnly: checked }));
   };
 
   return (
@@ -149,6 +155,16 @@ export function CollegeDatabase() {
                 <SelectItem value="Both">Both Men & Women</SelectItem>
               </SelectContent>
             </Select>
+            <div className="flex items-center gap-2 px-3 py-2 border rounded-md bg-background">
+              <Switch
+                id="hbcu-filter"
+                checked={filters.hbcuOnly}
+                onCheckedChange={handleHbcuChange}
+              />
+              <Label htmlFor="hbcu-filter" className="text-sm font-medium cursor-pointer">
+                HBCU Only
+              </Label>
+            </div>
           </div>
 
           {/* Results Header */}
@@ -165,6 +181,11 @@ export function CollegeDatabase() {
               </span>
             </div>
             <div className="flex flex-wrap gap-2">
+              {filters.hbcuOnly && (
+                <Badge variant="secondary">
+                  HBCU
+                </Badge>
+              )}
               {filters.states.length > 0 && (
                 <Badge variant="outline">
                   <MapPin className="w-3 h-3 mr-1" />
