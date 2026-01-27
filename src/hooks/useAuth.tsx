@@ -126,6 +126,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     await supabase.auth.signOut();
     setProfile(null);
+    // Redirect to homepage after sign out
+    window.location.href = '/';
   };
 
   const hasPaidAccess = profile?.has_paid_access ?? false;

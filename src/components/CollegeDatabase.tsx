@@ -4,12 +4,12 @@ import { useColleges, useCollegeStats } from '@/hooks/useColleges';
 import { CollegeCardSimple } from '@/components/CollegeCardSimple';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { GraduationCap, MapPin, Trophy, Users, Search, X, ArrowUpDown } from 'lucide-react';
+import { GraduationCap, MapPin, Trophy, Users, X, ArrowUpDown } from 'lucide-react';
+import { CollegeSearchAutocomplete } from '@/components/CollegeSearchAutocomplete';
 
 const initialFilters: FilterType = {
   search: '',
@@ -153,16 +153,11 @@ export function CollegeDatabase() {
         <div className="space-y-6">
           {/* Filters - Search + State + Division + Team Gender */}
           <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
-            <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search colleges..."
-                value={filters.search}
-                onChange={(e) => handleSearchChange(e.target.value)}
-                className="pl-10"
-              />
-            </div>
+            <CollegeSearchAutocomplete
+              value={filters.search}
+              onChange={handleSearchChange}
+              placeholder="Search colleges..."
+            />
             <Select 
               value={filters.states.length > 0 ? filters.states[0] : 'all'}
               onValueChange={handleStateChange}
