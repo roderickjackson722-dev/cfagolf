@@ -10,7 +10,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAllProfiles, useUpdateUserProfile, useDeleteUserProfile, UserProfile } from '@/hooks/useAdminUsers';
+import { MeetingProgressTracker } from '@/components/admin/MeetingProgressTracker';
 import { format } from 'date-fns';
 
 export function AdminUserTable() {
@@ -221,159 +223,173 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
 
   return (
     <Dialog open={!!user} onOpenChange={() => onClose()}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Edit User Profile</DialogTitle>
+          <DialogTitle>Manage User: {user.full_name || user.email}</DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-4">
-          <div className="flex items-center gap-4">
-            <Avatar className="w-16 h-16">
-              <AvatarImage src={user.avatar_url || undefined} />
-              <AvatarFallback>
-                <User className="w-8 h-8" />
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <p className="text-muted-foreground text-sm">{user.email}</p>
-            </div>
-          </div>
+        <Tabs defaultValue="profile" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="profile">Profile</TabsTrigger>
+            <TabsTrigger value="progress">Meeting Progress</TabsTrigger>
+          </TabsList>
 
-          <div className="grid grid-cols-2 gap-4 pt-4 border-t">
-            <div className="col-span-2">
-              <Label htmlFor="full_name">Full Name</Label>
-              <Input
-                id="full_name"
-                value={formData.full_name || ''}
-                onChange={(e) => updateField('full_name', e.target.value)}
-                placeholder="Enter full name"
-              />
-            </div>
-            <div>
-              <Label htmlFor="phone">Phone</Label>
-              <Input
-                id="phone"
-                value={formData.phone || ''}
-                onChange={(e) => updateField('phone', e.target.value)}
-                placeholder="Phone number"
-              />
-            </div>
-            <div>
-              <Label htmlFor="graduation_year">Graduation Year</Label>
-              <Input
-                id="graduation_year"
-                type="number"
-                value={formData.graduation_year || ''}
-                onChange={(e) => updateField('graduation_year', e.target.value ? parseInt(e.target.value) : null)}
-                placeholder="2026"
-              />
-            </div>
-            <div>
-              <Label htmlFor="city">City</Label>
-              <Input
-                id="city"
-                value={formData.city || ''}
-                onChange={(e) => updateField('city', e.target.value)}
-                placeholder="City"
-              />
-            </div>
-            <div>
-              <Label htmlFor="state">State</Label>
-              <Input
-                id="state"
-                value={formData.state || ''}
-                onChange={(e) => updateField('state', e.target.value)}
-                placeholder="State"
-              />
-            </div>
-            <div>
-              <Label htmlFor="handicap">Handicap</Label>
-              <Input
-                id="handicap"
-                type="number"
-                step="0.1"
-                value={formData.handicap ?? ''}
-                onChange={(e) => updateField('handicap', e.target.value ? parseFloat(e.target.value) : null)}
-                placeholder="0.0"
-              />
-            </div>
-            <div>
-              <Label htmlFor="high_school">High School</Label>
-              <Input
-                id="high_school"
-                value={formData.high_school || ''}
-                onChange={(e) => updateField('high_school', e.target.value)}
-                placeholder="High school name"
-              />
-            </div>
-            <div>
-              <Label htmlFor="club_team">Club Team</Label>
-              <Input
-                id="club_team"
-                value={formData.club_team || ''}
-                onChange={(e) => updateField('club_team', e.target.value)}
-                placeholder="Club team name"
-              />
-            </div>
-            <div>
-              <Label htmlFor="home_course">Home Course</Label>
-              <Input
-                id="home_course"
-                value={formData.home_course || ''}
-                onChange={(e) => updateField('home_course', e.target.value)}
-                placeholder="Home course"
-              />
-            </div>
-            <div>
-              <Label htmlFor="goal_division">Goal Division</Label>
-              <Select
-                value={formData.goal_division || ''}
-                onValueChange={(value) => updateField('goal_division', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select division" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="D1">D1</SelectItem>
-                  <SelectItem value="D2">D2</SelectItem>
-                  <SelectItem value="D3">D3</SelectItem>
-                  <SelectItem value="NAIA">NAIA</SelectItem>
-                  <SelectItem value="JUCO">JUCO</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          <div className="pt-4 border-t">
-            <div className="flex items-center justify-between">
-              <div>
-                <Label>Paid Access Status</Label>
-                <p className="text-sm text-muted-foreground">
-                  {formData.has_paid_access ? 'Active Member' : 'Free User'}
-                </p>
+          <TabsContent value="profile" className="space-y-4 mt-4">
+            <div className="flex items-center gap-4">
+              <Avatar className="w-16 h-16">
+                <AvatarImage src={user.avatar_url || undefined} />
+                <AvatarFallback>
+                  <User className="w-8 h-8" />
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1">
+                <p className="text-muted-foreground text-sm">{user.email}</p>
               </div>
-              <Switch
-                checked={formData.has_paid_access || false}
-                onCheckedChange={(checked) => updateField('has_paid_access', checked)}
-              />
             </div>
-          </div>
 
-          <div className="pt-4 border-t text-xs text-muted-foreground">
-            <p>Created: {format(new Date(user.created_at), 'PPpp')}</p>
-            <p>Updated: {format(new Date(user.updated_at), 'PPpp')}</p>
-          </div>
-        </div>
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t">
+              <div className="col-span-2">
+                <Label htmlFor="full_name">Full Name</Label>
+                <Input
+                  id="full_name"
+                  value={formData.full_name || ''}
+                  onChange={(e) => updateField('full_name', e.target.value)}
+                  placeholder="Enter full name"
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  value={formData.phone || ''}
+                  onChange={(e) => updateField('phone', e.target.value)}
+                  placeholder="Phone number"
+                />
+              </div>
+              <div>
+                <Label htmlFor="graduation_year">Graduation Year</Label>
+                <Input
+                  id="graduation_year"
+                  type="number"
+                  value={formData.graduation_year || ''}
+                  onChange={(e) => updateField('graduation_year', e.target.value ? parseInt(e.target.value) : null)}
+                  placeholder="2026"
+                />
+              </div>
+              <div>
+                <Label htmlFor="city">City</Label>
+                <Input
+                  id="city"
+                  value={formData.city || ''}
+                  onChange={(e) => updateField('city', e.target.value)}
+                  placeholder="City"
+                />
+              </div>
+              <div>
+                <Label htmlFor="state">State</Label>
+                <Input
+                  id="state"
+                  value={formData.state || ''}
+                  onChange={(e) => updateField('state', e.target.value)}
+                  placeholder="State"
+                />
+              </div>
+              <div>
+                <Label htmlFor="handicap">Avg 18-Hole Score</Label>
+                <Input
+                  id="handicap"
+                  type="number"
+                  step="1"
+                  value={formData.handicap ?? ''}
+                  onChange={(e) => updateField('handicap', e.target.value ? parseFloat(e.target.value) : null)}
+                  placeholder="72"
+                />
+              </div>
+              <div>
+                <Label htmlFor="high_school">High School</Label>
+                <Input
+                  id="high_school"
+                  value={formData.high_school || ''}
+                  onChange={(e) => updateField('high_school', e.target.value)}
+                  placeholder="High school name"
+                />
+              </div>
+              <div>
+                <Label htmlFor="club_team">Club Team</Label>
+                <Input
+                  id="club_team"
+                  value={formData.club_team || ''}
+                  onChange={(e) => updateField('club_team', e.target.value)}
+                  placeholder="Club team name"
+                />
+              </div>
+              <div>
+                <Label htmlFor="home_course">Home Course</Label>
+                <Input
+                  id="home_course"
+                  value={formData.home_course || ''}
+                  onChange={(e) => updateField('home_course', e.target.value)}
+                  placeholder="Home course"
+                />
+              </div>
+              <div>
+                <Label htmlFor="goal_division">Goal Division</Label>
+                <Select
+                  value={formData.goal_division || ''}
+                  onValueChange={(value) => updateField('goal_division', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select division" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="D1">D1</SelectItem>
+                    <SelectItem value="D2">D2</SelectItem>
+                    <SelectItem value="D3">D3</SelectItem>
+                    <SelectItem value="NAIA">NAIA</SelectItem>
+                    <SelectItem value="JUCO">JUCO</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
-        <DialogFooter>
-          <Button variant="outline" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleSave} disabled={updateProfile.isPending}>
-            <Save className="w-4 h-4 mr-2" />
-            {updateProfile.isPending ? 'Saving...' : 'Save Changes'}
-          </Button>
-        </DialogFooter>
+            <div className="pt-4 border-t">
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label>Paid Access Status</Label>
+                  <p className="text-sm text-muted-foreground">
+                    {formData.has_paid_access ? 'Active Member' : 'Free User'}
+                  </p>
+                </div>
+                <Switch
+                  checked={formData.has_paid_access || false}
+                  onCheckedChange={(checked) => updateField('has_paid_access', checked)}
+                />
+              </div>
+            </div>
+
+            <div className="pt-4 border-t text-xs text-muted-foreground">
+              <p>Created: {format(new Date(user.created_at), 'PPpp')}</p>
+              <p>Updated: {format(new Date(user.updated_at), 'PPpp')}</p>
+            </div>
+
+            <DialogFooter>
+              <Button variant="outline" onClick={onClose}>
+                Cancel
+              </Button>
+              <Button onClick={handleSave} disabled={updateProfile.isPending}>
+                <Save className="w-4 h-4 mr-2" />
+                {updateProfile.isPending ? 'Saving...' : 'Save Changes'}
+              </Button>
+            </DialogFooter>
+          </TabsContent>
+
+          <TabsContent value="progress" className="mt-4">
+            <MeetingProgressTracker 
+              userId={user.user_id} 
+              userName={user.full_name || undefined}
+            />
+          </TabsContent>
+        </Tabs>
       </DialogContent>
     </Dialog>
   );
