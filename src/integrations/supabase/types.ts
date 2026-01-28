@@ -517,29 +517,38 @@ export type Database = {
       }
       site_visitors: {
         Row: {
+          city: string | null
+          country: string | null
           created_at: string
           id: string
           ip_address: string | null
           page_url: string | null
           referrer: string | null
+          region: string | null
           user_agent: string | null
           visitor_id: string
         }
         Insert: {
+          city?: string | null
+          country?: string | null
           created_at?: string
           id?: string
           ip_address?: string | null
           page_url?: string | null
           referrer?: string | null
+          region?: string | null
           user_agent?: string | null
           visitor_id: string
         }
         Update: {
+          city?: string | null
+          country?: string | null
           created_at?: string
           id?: string
           ip_address?: string | null
           page_url?: string | null
           referrer?: string | null
+          region?: string | null
           user_agent?: string | null
           visitor_id?: string
         }

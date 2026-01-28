@@ -16,6 +16,9 @@ interface VisitorNotification {
   visitorId: string;
   pageUrl?: string;
   referrer?: string;
+  country?: string;
+  region?: string;
+  city?: string;
   timestamp: string;
 }
 
@@ -54,16 +57,21 @@ serve(async (req) => {
         timeStyle: "short",
       });
       
+      // Build location string
+      const locationParts = [payload.city, payload.region, payload.country].filter(Boolean);
+      const locationStr = locationParts.length > 0 ? locationParts.join(", ") : "Unknown location";
+      
       htmlContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h2 style="color: #2d5a27; border-bottom: 2px solid #2d5a27; padding-bottom: 10px;">
             New Site Visitor
           </h2>
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 8px 0;"><strong>Visitor ID:</strong> ${payload.visitorId}</p>
-            <p style="margin: 8px 0;"><strong>Page:</strong> ${payload.pageUrl || "Unknown"}</p>
-            <p style="margin: 8px 0;"><strong>Referrer:</strong> ${payload.referrer || "Direct visit"}</p>
-            <p style="margin: 8px 0;"><strong>Time:</strong> ${timestamp}</p>
+            <p style="margin: 8px 0;"><strong>📍 Location:</strong> ${locationStr}</p>
+            <p style="margin: 8px 0;"><strong>🔗 Page:</strong> ${payload.pageUrl || "Home"}</p>
+            <p style="margin: 8px 0;"><strong>↩️ Referrer:</strong> ${payload.referrer || "Direct visit"}</p>
+            <p style="margin: 8px 0;"><strong>⏰ Time:</strong> ${timestamp}</p>
+            <p style="margin: 8px 0; color: #888; font-size: 11px;"><strong>Visitor ID:</strong> ${payload.visitorId}</p>
           </div>
           <p style="color: #666; font-size: 12px; margin-top: 20px;">
             This is an automated notification from CFA Golf.
