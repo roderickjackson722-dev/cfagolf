@@ -94,7 +94,7 @@ const handler = async (req: Request): Promise<Response> => {
 
       try {
         await resend.emails.send({
-          from: "CFA Golf <noreply@cfa.golf>",
+          from: "CFA Golf <contact@cfa.golf>",
           to: [profile.email],
           subject: `Follow-up Reminder: ${contact.coach_name} at ${contact.school_name}`,
           html: `

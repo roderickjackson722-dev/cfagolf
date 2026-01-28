@@ -30,7 +30,7 @@ const handler = async (req: Request): Promise<Response> => {
     const calendlyLink = "https://calendly.com/contact-cfa/30min";
 
     const emailResponse = await resend.emails.send({
-      from: "CFA Golf <noreply@cfa.golf>",
+      from: "CFA Golf <contact@cfa.golf>",
       to: [email],
       subject: "Welcome to CFA Golf - Let's Schedule Your Onboarding Call!",
       html: `
