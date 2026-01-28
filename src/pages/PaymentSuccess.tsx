@@ -5,12 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { OnboardingBookingDialog } from '@/components/OnboardingBookingDialog';
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [verifying, setVerifying] = useState(true);
   const [verified, setVerified] = useState(false);
+  const [showOnboardingDialog, setShowOnboardingDialog] = useState(false);
 
   useEffect(() => {
     const verifyPayment = async () => {
@@ -31,6 +33,7 @@ const PaymentSuccess = () => {
 
         if (data.success && data.paid) {
           setVerified(true);
+          setShowOnboardingDialog(true);
           toast.success('Payment verified! Welcome to CFA Golf!');
         } else {
           toast.error('Payment verification failed');
@@ -92,6 +95,11 @@ const PaymentSuccess = () => {
           )}
         </CardContent>
       </Card>
+      
+      <OnboardingBookingDialog 
+        open={showOnboardingDialog} 
+        onOpenChange={setShowOnboardingDialog} 
+      />
     </div>
   );
 };
