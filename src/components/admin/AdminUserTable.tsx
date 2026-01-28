@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { Search, Edit, User, Check, X, Crown } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, Edit, User, Check, X, Crown, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAllProfiles, useUpdateUserProfile, UserProfile } from '@/hooks/useAdminUsers';
 import { format } from 'date-fns';
 
@@ -141,13 +142,46 @@ export function AdminUserTable() {
 }
 
 function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose: () => void }) {
+  const updateProfile = useUpdateUserProfile();
+  const [formData, setFormData] = useState<Partial<UserProfile>>({});
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        full_name: user.full_name || '',
+        email: user.email || '',
+        phone: user.phone || '',
+        city: user.city || '',
+        state: user.state || '',
+        graduation_year: user.graduation_year,
+        handicap: user.handicap,
+        high_school: user.high_school || '',
+        club_team: user.club_team || '',
+        home_course: user.home_course || '',
+        goal_division: user.goal_division || '',
+        has_paid_access: user.has_paid_access,
+      });
+    }
+  }, [user]);
+
   if (!user) return null;
+
+  const handleSave = () => {
+    updateProfile.mutate(
+      { id: user.id, data: formData },
+      { onSuccess: () => onClose() }
+    );
+  };
+
+  const updateField = (field: keyof UserProfile, value: string | number | boolean | null) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   return (
     <Dialog open={!!user} onOpenChange={() => onClose()}>
-      <DialogContent className="max-w-lg">
+      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>User Profile Details</DialogTitle>
+          <DialogTitle>Edit User Profile</DialogTitle>
         </DialogHeader>
         
         <div className="space-y-4">
@@ -158,65 +192,128 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
                 <User className="w-8 h-8" />
               </AvatarFallback>
             </Avatar>
-            <div>
-              <h3 className="font-semibold text-lg">{user.full_name || 'No name'}</h3>
-              <p className="text-muted-foreground">{user.email}</p>
+            <div className="flex-1">
+              <p className="text-muted-foreground text-sm">{user.email}</p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4 pt-4 border-t">
-            <div>
-              <Label className="text-muted-foreground text-xs">Phone</Label>
-              <p className="font-medium">{user.phone || '—'}</p>
+            <div className="col-span-2">
+              <Label htmlFor="full_name">Full Name</Label>
+              <Input
+                id="full_name"
+                value={formData.full_name || ''}
+                onChange={(e) => updateField('full_name', e.target.value)}
+                placeholder="Enter full name"
+              />
             </div>
             <div>
-              <Label className="text-muted-foreground text-xs">Location</Label>
-              <p className="font-medium">{user.city && user.state ? `${user.city}, ${user.state}` : user.state || '—'}</p>
+              <Label htmlFor="phone">Phone</Label>
+              <Input
+                id="phone"
+                value={formData.phone || ''}
+                onChange={(e) => updateField('phone', e.target.value)}
+                placeholder="Phone number"
+              />
             </div>
             <div>
-              <Label className="text-muted-foreground text-xs">Graduation Year</Label>
-              <p className="font-medium">{user.graduation_year || '—'}</p>
+              <Label htmlFor="graduation_year">Graduation Year</Label>
+              <Input
+                id="graduation_year"
+                type="number"
+                value={formData.graduation_year || ''}
+                onChange={(e) => updateField('graduation_year', e.target.value ? parseInt(e.target.value) : null)}
+                placeholder="2026"
+              />
             </div>
             <div>
-              <Label className="text-muted-foreground text-xs">Handicap</Label>
-              <p className="font-medium">{user.handicap ?? '—'}</p>
+              <Label htmlFor="city">City</Label>
+              <Input
+                id="city"
+                value={formData.city || ''}
+                onChange={(e) => updateField('city', e.target.value)}
+                placeholder="City"
+              />
             </div>
             <div>
-              <Label className="text-muted-foreground text-xs">High School</Label>
-              <p className="font-medium">{user.high_school || '—'}</p>
+              <Label htmlFor="state">State</Label>
+              <Input
+                id="state"
+                value={formData.state || ''}
+                onChange={(e) => updateField('state', e.target.value)}
+                placeholder="State"
+              />
             </div>
             <div>
-              <Label className="text-muted-foreground text-xs">Club Team</Label>
-              <p className="font-medium">{user.club_team || '—'}</p>
+              <Label htmlFor="handicap">Handicap</Label>
+              <Input
+                id="handicap"
+                type="number"
+                step="0.1"
+                value={formData.handicap ?? ''}
+                onChange={(e) => updateField('handicap', e.target.value ? parseFloat(e.target.value) : null)}
+                placeholder="0.0"
+              />
             </div>
             <div>
-              <Label className="text-muted-foreground text-xs">Home Course</Label>
-              <p className="font-medium">{user.home_course || '—'}</p>
+              <Label htmlFor="high_school">High School</Label>
+              <Input
+                id="high_school"
+                value={formData.high_school || ''}
+                onChange={(e) => updateField('high_school', e.target.value)}
+                placeholder="High school name"
+              />
             </div>
             <div>
-              <Label className="text-muted-foreground text-xs">Goal Division</Label>
-              <p className="font-medium">{user.goal_division || '—'}</p>
+              <Label htmlFor="club_team">Club Team</Label>
+              <Input
+                id="club_team"
+                value={formData.club_team || ''}
+                onChange={(e) => updateField('club_team', e.target.value)}
+                placeholder="Club team name"
+              />
+            </div>
+            <div>
+              <Label htmlFor="home_course">Home Course</Label>
+              <Input
+                id="home_course"
+                value={formData.home_course || ''}
+                onChange={(e) => updateField('home_course', e.target.value)}
+                placeholder="Home course"
+              />
+            </div>
+            <div>
+              <Label htmlFor="goal_division">Goal Division</Label>
+              <Select
+                value={formData.goal_division || ''}
+                onValueChange={(value) => updateField('goal_division', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select division" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="D1">D1</SelectItem>
+                  <SelectItem value="D2">D2</SelectItem>
+                  <SelectItem value="D3">D3</SelectItem>
+                  <SelectItem value="NAIA">NAIA</SelectItem>
+                  <SelectItem value="JUCO">JUCO</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
           <div className="pt-4 border-t">
             <div className="flex items-center justify-between">
               <div>
-                <Label className="text-muted-foreground text-xs">Paid Access Status</Label>
-                <p className="font-medium flex items-center gap-2">
-                  {user.has_paid_access ? (
-                    <>
-                      <Check className="w-4 h-4 text-primary" />
-                      Active Member
-                    </>
-                  ) : (
-                    <>
-                      <X className="w-4 h-4 text-muted-foreground" />
-                      Free User
-                    </>
-                  )}
+                <Label>Paid Access Status</Label>
+                <p className="text-sm text-muted-foreground">
+                  {formData.has_paid_access ? 'Active Member' : 'Free User'}
                 </p>
               </div>
+              <Switch
+                checked={formData.has_paid_access || false}
+                onCheckedChange={(checked) => updateField('has_paid_access', checked)}
+              />
             </div>
           </div>
 
@@ -225,6 +322,16 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
             <p>Updated: {format(new Date(user.updated_at), 'PPpp')}</p>
           </div>
         </div>
+
+        <DialogFooter>
+          <Button variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button onClick={handleSave} disabled={updateProfile.isPending}>
+            <Save className="w-4 h-4 mr-2" />
+            {updateProfile.isPending ? 'Saving...' : 'Save Changes'}
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
