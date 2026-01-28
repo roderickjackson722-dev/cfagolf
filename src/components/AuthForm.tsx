@@ -311,12 +311,12 @@ export function AuthForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="signup-handicap">Handicap</Label>
+          <Label htmlFor="signup-handicap">Avg 18-Hole Score</Label>
           <Input
             id="signup-handicap"
             type="number"
-            step="0.1"
-            placeholder="e.g., 5.2"
+            step="1"
+            placeholder="e.g., 75"
             value={handicap}
             onChange={(e) => setHandicap(e.target.value)}
           />

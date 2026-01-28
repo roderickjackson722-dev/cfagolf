@@ -1,22 +1,25 @@
 import { useState, useEffect } from 'react';
-import { Search, Edit, User, Check, X, Crown, Save } from 'lucide-react';
+import { Search, Edit, User, Check, X, Crown, Save, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useAllProfiles, useUpdateUserProfile, UserProfile } from '@/hooks/useAdminUsers';
+import { useAllProfiles, useUpdateUserProfile, useDeleteUserProfile, UserProfile } from '@/hooks/useAdminUsers';
 import { format } from 'date-fns';
 
 export function AdminUserTable() {
   const [searchQuery, setSearchQuery] = useState('');
   const [editingUser, setEditingUser] = useState<UserProfile | null>(null);
+  const [deletingUser, setDeletingUser] = useState<UserProfile | null>(null);
   const { data: profiles = [], isLoading } = useAllProfiles();
   const updateProfile = useUpdateUserProfile();
+  const deleteProfile = useDeleteUserProfile();
 
   const filteredUsers = profiles.filter((profile) =>
     (profile.full_name?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
@@ -117,13 +120,23 @@ export function AdminUserTable() {
                     {format(new Date(profile.created_at), 'MMM d, yyyy')}
                   </TableCell>
                   <TableCell>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => setEditingUser(profile)}
-                    >
-                      <Edit className="w-4 h-4" />
-                    </Button>
+                    <div className="flex items-center gap-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setEditingUser(profile)}
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setDeletingUser(profile)}
+                        className="text-destructive hover:text-destructive"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))
@@ -137,6 +150,35 @@ export function AdminUserTable() {
         user={editingUser}
         onClose={() => setEditingUser(null)}
       />
+
+      {/* Delete Confirmation */}
+      <AlertDialog open={!!deletingUser} onOpenChange={() => setDeletingUser(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete User Account</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete the account for{' '}
+              <span className="font-semibold">{deletingUser?.full_name || deletingUser?.email}</span>?
+              This action cannot be undone and will remove all their data.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (deletingUser) {
+                  deleteProfile.mutate(deletingUser.user_id, {
+                    onSuccess: () => setDeletingUser(null),
+                  });
+                }
+              }}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {deleteProfile.isPending ? 'Deleting...' : 'Delete User'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
