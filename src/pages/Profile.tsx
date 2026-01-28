@@ -29,6 +29,7 @@ import { useTargetSchools } from '@/hooks/useTargetSchools';
 import { useCoachContacts } from '@/hooks/useCoachContacts';
 import { useTournamentResults } from '@/hooks/useTournamentResults';
 import { AvatarUpload } from '@/components/AvatarUpload';
+import { MeetingProgressCard } from '@/components/profile/MeetingProgressCard';
 
 const US_STATES = [
   'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
@@ -426,6 +427,8 @@ const Profile = () => {
 
             {/* Progress Sidebar */}
             <div className="space-y-6">
+              {/* Coaching Progress */}
+              <MeetingProgressCard />
               {/* Profile Completion */}
               <Card>
                 <CardHeader>

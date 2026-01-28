@@ -243,6 +243,42 @@ export type Database = {
           },
         ]
       }
+      meeting_progress: {
+        Row: {
+          admin_notes: string | null
+          completed_date: string | null
+          created_at: string
+          id: string
+          is_completed: boolean | null
+          module_number: number
+          module_title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          completed_date?: string | null
+          created_at?: string
+          id?: string
+          is_completed?: boolean | null
+          module_number: number
+          module_title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_notes?: string | null
+          completed_date?: string | null
+          created_at?: string
+          id?: string
+          is_completed?: boolean | null
+          module_number?: number
+          module_title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
