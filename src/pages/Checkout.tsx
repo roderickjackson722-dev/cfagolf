@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
 import { US_STATES } from '@/types/college';
+import { OnboardingBookingDialog } from '@/components/OnboardingBookingDialog';
 
 const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 const MEMBERSHIP_PRICE = 1999.99;
@@ -62,8 +63,8 @@ const Checkout = () => {
   const [referralCode, setReferralCode] = useState('');
   const [referralApplied, setReferralApplied] = useState<{ discount: number } | null>(null);
   const [isCheckingReferral, setIsCheckingReferral] = useState(false);
-  
   const [isLoading, setIsLoading] = useState(false);
+  const [showOnboardingDialog, setShowOnboardingDialog] = useState(false);
 
   // Check for referral code in URL
   useEffect(() => {
@@ -208,7 +209,16 @@ const Checkout = () => {
 
       if (data.freeAccess) {
         toast.success('Account created with free access!');
-        navigate('/dashboard');
+        // Trigger welcome email for free access
+        try {
+          await supabase.functions.invoke('send-welcome-email', {
+            body: { email, fullName },
+          });
+        } catch (emailErr) {
+          console.error('Welcome email error:', emailErr);
+        }
+        // Show onboarding dialog instead of immediate redirect
+        setShowOnboardingDialog(true);
         return;
       }
 
@@ -674,6 +684,16 @@ const Checkout = () => {
         </div>
       </main>
       <Footer />
+      
+      <OnboardingBookingDialog 
+        open={showOnboardingDialog} 
+        onOpenChange={(open) => {
+          setShowOnboardingDialog(open);
+          if (!open) {
+            navigate('/dashboard');
+          }
+        }} 
+      />
     </div>
   );
 };
