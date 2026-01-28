@@ -515,6 +515,36 @@ export type Database = {
         }
         Relationships: []
       }
+      site_visitors: {
+        Row: {
+          created_at: string
+          id: string
+          ip_address: string | null
+          page_url: string | null
+          referrer: string | null
+          user_agent: string | null
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          page_url?: string | null
+          referrer?: string | null
+          user_agent?: string | null
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_address?: string | null
+          page_url?: string | null
+          referrer?: string | null
+          user_agent?: string | null
+          visitor_id?: string
+        }
+        Relationships: []
+      }
       target_schools: {
         Row: {
           category: string

@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
+import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 
 // Pages
 import Landing from "./pages/Landing";
@@ -27,9 +28,16 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Component to handle visitor tracking
+function VisitorTracker() {
+  useVisitorTracking();
+  return null;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
+      <VisitorTracker />
       <TooltipProvider>
         <Toaster />
         <Sonner />
