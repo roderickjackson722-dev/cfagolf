@@ -65,12 +65,16 @@ const handler = async (req: Request): Promise<Response> => {
           
           <h3 style="color: #166534; margin-top: 25px;">Your CFA Golf Toolkit:</h3>
           <ul style="font-size: 15px; padding-left: 20px;">
-            <li><strong>College Database</strong> - Search 1,500+ programs</li>
+            <li><strong>College Database</strong> - Search 1,300+ programs</li>
             <li><strong>Target School Builder</strong> - Organize your dream schools</li>
             <li><strong>Coach Tracker</strong> - Manage coach communications</li>
             <li><strong>Tournament Log</strong> - Track your competitive results</li>
             <li><strong>Scholarship Calculator</strong> - Compare financial offers</li>
           </ul>
+          
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="https://cfagolf.lovable.app/login" style="display: inline-block; background-color: #166534; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Login to Your Toolkit</a>
+          </div>
           
           <p style="font-size: 16px; margin-top: 25px;">We're excited to help you find your perfect college golf fit!</p>
           
