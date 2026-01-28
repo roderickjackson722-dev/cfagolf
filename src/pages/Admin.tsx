@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -8,6 +8,7 @@ import { useColleges } from '@/hooks/useColleges';
 import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
 import { AdminUserTable } from '@/components/admin/AdminUserTable';
 import { AdminMembershipTable } from '@/components/admin/AdminMembershipTable';
+import { AdminVisitorTable } from '@/components/admin/AdminVisitorTable';
 import { ClippdImporter } from '@/components/admin/ClippdImporter';
 import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -105,6 +106,10 @@ const Admin = () => {
                 <Download className="w-4 h-4" />
                 Data Import
               </TabsTrigger>
+              <TabsTrigger value="visitors" className="flex items-center gap-2">
+                <Eye className="w-4 h-4" />
+                Visitors
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
@@ -168,6 +173,24 @@ const Admin = () => {
             <TabsContent value="import" className="space-y-6">
               <CollegeBulkImporter />
               <ClippdImporter />
+            </TabsContent>
+
+            {/* Site Visitors Tab */}
+            <TabsContent value="visitors">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Eye className="w-5 h-5 text-primary" />
+                    <CardTitle>Site Visitors</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View recent site visitors, their locations, and browsing activity. Emails are sent automatically for each new visitor.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminVisitorTable />
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>

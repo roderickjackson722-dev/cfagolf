@@ -27,6 +27,24 @@ const isNewSession = (): boolean => {
   return false;
 };
 
+// Fetch location data from free IP geolocation API
+const getLocationData = async (): Promise<{ country?: string; region?: string; city?: string }> => {
+  try {
+    const response = await fetch('https://ipapi.co/json/');
+    if (!response.ok) return {};
+    
+    const data = await response.json();
+    return {
+      country: data.country_name,
+      region: data.region,
+      city: data.city,
+    };
+  } catch (err) {
+    console.error('Failed to get location:', err);
+    return {};
+  }
+};
+
 export function useVisitorTracking() {
   useEffect(() => {
     // Only track once per session
@@ -37,6 +55,7 @@ export function useVisitorTracking() {
     const trackVisitor = async () => {
       try {
         const visitorId = getVisitorId();
+        const location = await getLocationData();
         
         // Insert visitor record - this will trigger the admin notification via database trigger
         const { error } = await supabase
@@ -46,6 +65,9 @@ export function useVisitorTracking() {
             page_url: window.location.pathname,
             referrer: document.referrer || null,
             user_agent: navigator.userAgent,
+            country: location.country || null,
+            region: location.region || null,
+            city: location.city || null,
           });
 
         if (error) {
