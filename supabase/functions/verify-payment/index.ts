@@ -79,13 +79,13 @@ serve(async (req) => {
         );
 
         // Idempotency check - verify profile hasn't already been updated
-        const { data: profile } = await supabaseAdmin
+        const { data: existingProfile } = await supabaseAdmin
           .from('profiles')
           .select('has_paid_access')
           .eq('user_id', userId)
           .single();
 
-        if (profile?.has_paid_access) {
+        if (existingProfile?.has_paid_access) {
           // Already processed - return success without re-processing
           return new Response(JSON.stringify({ 
             success: true, 
@@ -97,11 +97,35 @@ serve(async (req) => {
           });
         }
 
-        // Grant access
-        await supabaseAdmin
+        // Grant access and get updated profile for email
+        const { data: updatedProfile } = await supabaseAdmin
           .from('profiles')
           .update({ has_paid_access: true })
-          .eq('user_id', userId);
+          .eq('user_id', userId)
+          .select('email, full_name')
+          .single();
+
+        // Send welcome email
+        try {
+          const welcomeEmailResponse = await fetch(
+            `${Deno.env.get("SUPABASE_URL")}/functions/v1/send-welcome-email`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${Deno.env.get("SUPABASE_ANON_KEY")}`,
+              },
+              body: JSON.stringify({
+                email: updatedProfile?.email,
+                fullName: updatedProfile?.full_name,
+              }),
+            }
+          );
+          console.log("Welcome email triggered:", await welcomeEmailResponse.json());
+        } catch (emailError) {
+          console.error("Failed to send welcome email:", emailError);
+          // Don't fail the payment verification if email fails
+        }
 
         // Track referral usage if applicable
         if (referralId && referralId !== "none") {
