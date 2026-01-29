@@ -13,7 +13,7 @@ const PROMO_CODES: Record<string, { discount: number; name: string }> = {
   "CFAADMIN2025": { discount: 100, name: "Admin Access - Free" },
 };
 
-const MEMBERSHIP_PRICE_ID = "price_1StusULXW44Q7xfERL56E0DG";
+const MEMBERSHIP_PRICE_ID = "price_1SuvOnLXW44Q7xfEtjqK7PLY";
 const MEMBERSHIP_AMOUNT = 119999; // $1,199.99 in cents
 
 serve(async (req) => {
