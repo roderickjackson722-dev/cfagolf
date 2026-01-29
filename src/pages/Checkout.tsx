@@ -16,7 +16,7 @@ import { US_STATES } from '@/types/college';
 import { OnboardingBookingDialog } from '@/components/OnboardingBookingDialog';
 
 const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
-const MEMBERSHIP_PRICE = 1999.99;
+const MEMBERSHIP_PRICE = 1199.99;
 const currentYear = new Date().getFullYear();
 const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1);
 

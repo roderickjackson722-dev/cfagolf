@@ -4,22 +4,22 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const testimonials = [
   {
-    name: "Sarah M.",
-    role: "Parent of D1 Golfer",
-    content: "CFA made the recruiting process so much less stressful. The timeline and coach tracker kept us organized, and the college database helped us find schools we never would have considered.",
-    initials: "SM"
+    name: "Parent",
+    role: "Parent of Division I Signee",
+    content: "Our son would not be on the college golf team without the help of College Fairway Advisors. We can't thank you enough!",
+    initials: "P"
   },
   {
-    name: "James T.",
-    role: "Junior Golfer, Class of 2024",
-    content: "The video specs guide helped me create a highlight reel that coaches actually watched. I got responses from 12 schools within the first week of sending it out!",
-    initials: "JT"
+    name: "Parent",
+    role: "Parent of high school junior",
+    content: "Our daughter is so excited about the opportunity CFA provided for her to meet college coaches and show off her talents for the coaches.",
+    initials: "P"
   },
   {
-    name: "Michael & Linda R.",
-    role: "Parents",
-    content: "Worth every penny. The scholarship calculator alone saved us from making a costly mistake. We now understand the true value of each offer we're considering.",
-    initials: "MR"
+    name: "Parent",
+    role: "Parent of high school senior",
+    content: "As a parent, I had no clue where to start. I thank CFA for guiding our family through the entire process.",
+    initials: "P"
   }
 ];
 
