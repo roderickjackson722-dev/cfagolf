@@ -52,16 +52,18 @@ export function CollegeCardSimple({ college }: CollegeCardSimpleProps) {
                   <ExternalLink className="w-4 h-4 text-muted-foreground shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                 )}
               </div>
-              <Badge 
-                variant="outline" 
-                className="text-sm font-medium"
-              >
-                {college.team_gender === 'Both' 
-                  ? "Men's & Women's" 
-                  : college.team_gender === 'Men' 
-                    ? "Men's Team" 
-                    : "Women's Team"}
-              </Badge>
+              {college.team_gender !== 'None' && (
+                <Badge 
+                  variant="outline" 
+                  className="text-sm font-medium"
+                >
+                  {college.team_gender === 'Both' 
+                    ? "Men's & Women's" 
+                    : college.team_gender === 'Men' 
+                      ? "Men's Team" 
+                      : "Women's Team"}
+                </Badge>
+              )}
             </div>
           </div>
         </CardContent>
