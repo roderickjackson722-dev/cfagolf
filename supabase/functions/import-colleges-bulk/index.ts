@@ -38,7 +38,7 @@ function parseTeamGender(teamsM: string, teamsW: string): string {
   if (hasM && hasW) return 'Both';
   if (hasM) return 'Men';
   if (hasW) return 'Women';
-  return 'Both';
+  return 'None'; // No team specified
 }
 
 serve(async (req) => {

@@ -1,6 +1,6 @@
 export type Division = 'D1' | 'D2' | 'D3' | 'NAIA' | 'JUCO';
 export type SchoolSize = 'Small' | 'Medium' | 'Large' | 'Very Large';
-export type TeamGender = 'Men' | 'Women' | 'Both';
+export type TeamGender = 'Men' | 'Women' | 'Both' | 'None';
 
 export interface College {
   id: string;
@@ -41,7 +41,7 @@ export interface CollegeFilters {
 
 export const DIVISIONS: Division[] = ['D1', 'D2', 'D3', 'NAIA', 'JUCO'];
 export const SCHOOL_SIZES: SchoolSize[] = ['Small', 'Medium', 'Large', 'Very Large'];
-export const TEAM_GENDERS: TeamGender[] = ['Men', 'Women', 'Both'];
+export const TEAM_GENDERS: TeamGender[] = ['Men', 'Women', 'Both', 'None'];
 
 export const US_STATES = [
   'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
