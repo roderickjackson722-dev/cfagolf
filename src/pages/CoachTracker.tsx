@@ -27,6 +27,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import { SchoolSelectAutocomplete } from '@/components/SchoolSelectAutocomplete';
 import {
   Dialog,
   DialogContent,
@@ -297,12 +298,12 @@ const CoachTracker = () => {
                   <div className="space-y-4 py-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="school_name">School Name *</Label>
-                        <Input
-                          id="school_name"
+                        <SchoolSelectAutocomplete
                           value={formData.school_name}
-                          onChange={(e) => setFormData({ ...formData, school_name: e.target.value })}
-                          placeholder="University name"
+                          onChange={(value) => setFormData({ ...formData, school_name: value })}
+                          placeholder="Search for a school..."
+                          label="School Name *"
+                          allowCustom={false}
                         />
                       </div>
                       <div>

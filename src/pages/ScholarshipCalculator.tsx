@@ -33,6 +33,7 @@ import { Progress } from '@/components/ui/progress';
 import { format } from 'date-fns';
 import { pdfGenerators } from '@/lib/pdfTemplates';
 import { toast } from '@/hooks/use-toast';
+import { SchoolSelectAutocomplete } from '@/components/SchoolSelectAutocomplete';
 
 const divisions = ['D1', 'D2', 'D3', 'NAIA', 'JUCO'];
 const statuses = [
@@ -238,13 +239,12 @@ const ScholarshipCalculator = () => {
                     {/* School Info */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="md:col-span-2">
-                        <Label htmlFor="school_name">School Name *</Label>
-                        <Input
-                          id="school_name"
+                        <SchoolSelectAutocomplete
                           value={formData.school_name}
-                          onChange={(e) => setFormData({ ...formData, school_name: e.target.value })}
-                          placeholder="e.g., University of Texas"
-                          required
+                          onChange={(value) => setFormData({ ...formData, school_name: value })}
+                          placeholder="Search for a school..."
+                          label="School Name *"
+                          allowCustom={false}
                         />
                       </div>
                       

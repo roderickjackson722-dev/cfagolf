@@ -20,6 +20,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useCampusVisits, CampusVisit } from '@/hooks/useCampusVisits';
 import { useAllColleges } from '@/hooks/useColleges';
+import { SchoolSelectAutocomplete } from '@/components/SchoolSelectAutocomplete';
 
 const VISIT_TYPES = ['in-person', 'virtual', 'unofficial', 'official'];
 
@@ -269,47 +270,40 @@ function VisitForm({
         </TabsList>
 
         <TabsContent value="details" className="space-y-4 mt-4">
-          <div className="space-y-2">
-            <Label>School</Label>
-            <Input
-              placeholder="Search colleges..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            {searchQuery && (
-              <div className="max-h-40 overflow-y-auto border rounded-md">
-                {filteredColleges.map(college => (
-                  <button
-                    key={college.id}
-                    type="button"
-                    className={`w-full text-left px-3 py-2 hover:bg-muted flex items-center gap-2 ${
-                      formData.college_id === college.id ? 'bg-muted' : ''
-                    }`}
-                    onClick={() => {
-                      setFormData(prev => ({ ...prev, college_id: college.id, custom_school_name: '' }));
-                      setSearchQuery(college.name);
-                    }}
-                  >
-                    {college.logo_url && (
-                      <img src={college.logo_url} alt="" className="h-6 w-6 object-contain" />
-                    )}
-                    <span>{college.name}</span>
-                    <Badge variant="outline" className="ml-auto">{college.division}</Badge>
-                  </button>
-                ))}
-              </div>
-            )}
-            <div className="text-sm text-muted-foreground">Or enter custom school name:</div>
-            <Input
-              placeholder="Custom school name"
-              value={formData.custom_school_name}
-              onChange={(e) => setFormData(prev => ({ 
+          <SchoolSelectAutocomplete
+            value={searchQuery}
+            onChange={(value) => {
+              setSearchQuery(value);
+              if (!value) {
+                setFormData(prev => ({ ...prev, college_id: '' }));
+              }
+            }}
+            onCollegeSelect={(collegeId, collegeName) => {
+              setFormData(prev => ({ 
                 ...prev, 
-                custom_school_name: e.target.value,
+                college_id: collegeId || '', 
+                custom_school_name: '' 
+              }));
+              if (collegeId) {
+                setSearchQuery(collegeName);
+              }
+            }}
+            selectedCollegeId={formData.college_id || null}
+            placeholder="Search colleges..."
+            label="School"
+            allowCustom={true}
+            customValue={formData.custom_school_name}
+            onCustomChange={(value) => {
+              setFormData(prev => ({ 
+                ...prev, 
+                custom_school_name: value,
                 college_id: ''
-              }))}
-            />
-          </div>
+              }));
+              if (value) {
+                setSearchQuery('');
+              }
+            }}
+          />
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
