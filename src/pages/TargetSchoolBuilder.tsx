@@ -7,7 +7,6 @@ import {
   Star, 
   ChevronLeft,
   GripVertical,
-  Search,
   Download,
   StickyNote,
   GraduationCap
@@ -22,6 +21,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { SchoolSelectAutocomplete } from '@/components/SchoolSelectAutocomplete';
 import {
   Dialog,
   DialogContent,
@@ -38,7 +38,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { generateTargetSchoolList } from '@/lib/pdfTemplates';
 
 const categoryConfig = {
@@ -290,69 +289,32 @@ const TargetSchoolBuilder = () => {
                       </Select>
                     </div>
 
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Search Database</label>
-                      <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                        <Input
-                          placeholder="Search by school name or state..."
-                          value={searchQuery}
-                          onChange={(e) => {
-                            setSearchQuery(e.target.value);
-                            setSelectedCollegeId(null);
-                          }}
-                          className="pl-9"
-                        />
-                      </div>
-                      {searchQuery && filteredColleges.length > 0 && (
-                        <ScrollArea className="h-40 mt-2 border rounded-md">
-                          <div className="p-2 space-y-1">
-                            {filteredColleges.map((college) => (
-                              <button
-                                key={college.id}
-                                onClick={() => {
-                                  setSelectedCollegeId(college.id);
-                                  setSearchQuery(college.name);
-                                }}
-                                className={`w-full text-left px-3 py-2 rounded-md text-sm hover:bg-muted transition-colors ${
-                                  selectedCollegeId === college.id ? 'bg-primary/10 text-primary' : ''
-                                }`}
-                              >
-                                <p className="font-medium">{college.name}</p>
-                                <p className="text-xs text-muted-foreground">
-                                  {college.state} • {college.division}
-                                </p>
-                              </button>
-                            ))}
-                          </div>
-                        </ScrollArea>
-                      )}
-                    </div>
-
-                    <div className="relative">
-                      <div className="absolute inset-0 flex items-center">
-                        <span className="w-full border-t" />
-                      </div>
-                      <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-background px-2 text-muted-foreground">
-                          Or add custom
-                        </span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Custom School Name</label>
-                      <Input
-                        placeholder="Enter school name..."
-                        value={customSchoolName}
-                        onChange={(e) => {
-                          setCustomSchoolName(e.target.value);
+                    <SchoolSelectAutocomplete
+                      value={searchQuery}
+                      onChange={(value) => {
+                        setSearchQuery(value);
+                        if (!value) setSelectedCollegeId(null);
+                      }}
+                      onCollegeSelect={(collegeId, collegeName) => {
+                        setSelectedCollegeId(collegeId);
+                        if (collegeId) {
+                          setCustomSchoolName('');
+                          setSearchQuery(collegeName);
+                        }
+                      }}
+                      selectedCollegeId={selectedCollegeId}
+                      placeholder="Search by school name or state..."
+                      label="Search Database"
+                      allowCustom={true}
+                      customValue={customSchoolName}
+                      onCustomChange={(value) => {
+                        setCustomSchoolName(value);
+                        if (value) {
                           setSelectedCollegeId(null);
                           setSearchQuery('');
-                        }}
-                        disabled={!!selectedCollegeId}
-                      />
-                    </div>
+                        }
+                      }}
+                    />
 
                     <div>
                       <label className="text-sm font-medium mb-2 block">Notes (optional)</label>
