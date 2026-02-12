@@ -17,7 +17,7 @@ const services = [
   {
     icon: Users,
     title: "Monthly Coaching Calls",
-    description: "One-on-one consultation calls guiding you step-by-step through every phase of the recruiting process."
+    description: "One-on-one consultation (12 calls) guiding you step-by-step through every phase of the recruiting process."
   },
   {
     icon: Video,
