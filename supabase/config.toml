@@ -1,1 +1,4 @@
 project_id = "hmycumiukfdbfhplgbri"
+
+[functions.submit-testimonial]
+verify_jwt = false
