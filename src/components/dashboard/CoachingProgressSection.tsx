@@ -249,11 +249,6 @@ export function CoachingProgressSection() {
                         ✓ {format(new Date(progress.completed_date), 'MMM d, yyyy')}
                       </span>
                     )}
-                    {module.pageNumber && (
-                      <Badge variant="outline" className="text-xs hidden sm:inline-flex">
-                        {module.pageNumber}
-                      </Badge>
-                    )}
                     {isOpen ? (
                       <ChevronDown className="w-4 h-4 text-muted-foreground" />
                     ) : (
@@ -286,9 +281,15 @@ export function CoachingProgressSection() {
                       </h4>
                       <ul className="space-y-1.5">
                         {materials.resources.map((resource, i) => (
-                          <li key={i} className="text-sm text-muted-foreground flex items-center gap-2">
+                          <li key={i} className="text-sm flex items-center gap-2">
                             <span className="text-primary">📄</span>
-                            {resource}
+                            <a
+                              href="#"
+                              className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              {resource}
+                            </a>
                           </li>
                         ))}
                       </ul>
