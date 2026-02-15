@@ -6,6 +6,8 @@ import { Progress } from '@/components/ui/progress';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { MEETING_MODULES, useMyMeetingProgress } from '@/hooks/useMeetingProgress';
 import { format } from 'date-fns';
+import { RecruitingTimelineWorksheet } from '@/components/worksheets/RecruitingTimelineWorksheet';
+import { ProgramFitQuestionnaire } from '@/components/worksheets/ProgramFitQuestionnaire';
 
 const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }> = {
   0: {
@@ -280,18 +282,45 @@ export function CoachingProgressSection() {
                         Materials & Resources
                       </h4>
                       <ul className="space-y-1.5">
-                        {materials.resources.map((resource, i) => (
-                          <li key={i} className="text-sm flex items-center gap-2">
-                            <span className="text-primary">📄</span>
-                            <a
-                              href="#"
-                              className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              {resource}
-                            </a>
-                          </li>
-                        ))}
+                        {materials.resources.map((resource, i) => {
+                          // Module 1 interactive worksheets
+                          if (module.moduleNumber === 1 && resource === 'Recruiting Timeline Calendar') {
+                            return (
+                              <li key={i} className="text-sm flex items-center gap-2">
+                                <span className="text-primary">📄</span>
+                                <RecruitingTimelineWorksheet>
+                                  <button className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer text-left">
+                                    {resource}
+                                  </button>
+                                </RecruitingTimelineWorksheet>
+                              </li>
+                            );
+                          }
+                          if (module.moduleNumber === 1 && resource === 'Program Fit Questionnaire') {
+                            return (
+                              <li key={i} className="text-sm flex items-center gap-2">
+                                <span className="text-primary">📄</span>
+                                <ProgramFitQuestionnaire>
+                                  <button className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer text-left">
+                                    {resource}
+                                  </button>
+                                </ProgramFitQuestionnaire>
+                              </li>
+                            );
+                          }
+                          return (
+                            <li key={i} className="text-sm flex items-center gap-2">
+                              <span className="text-primary">📄</span>
+                              <a
+                                href="#"
+                                className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                {resource}
+                              </a>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                     {progress?.admin_notes && (
