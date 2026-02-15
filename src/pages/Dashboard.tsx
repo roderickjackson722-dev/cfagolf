@@ -26,6 +26,7 @@ import { Link } from 'react-router-dom';
 import { pdfGenerators } from '@/lib/pdfTemplates';
 import { toast } from '@/hooks/use-toast';
 import { ReferralCard } from '@/components/ReferralCard';
+import { CoachingProgressSection } from '@/components/dashboard/CoachingProgressSection';
 
 const tools = [
   {
@@ -156,6 +157,9 @@ const Dashboard = () => {
               Your recruiting toolkit is ready. Let's make progress today.
             </p>
           </div>
+
+          {/* Coaching Progress - Top of Dashboard */}
+          {hasPaidAccess && <CoachingProgressSection />}
 
           {/* Quick Stats */}
           <div className="grid md:grid-cols-4 gap-4 mb-8">
