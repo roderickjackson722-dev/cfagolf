@@ -8,6 +8,9 @@ import { MEETING_MODULES, useMyMeetingProgress } from '@/hooks/useMeetingProgres
 import { format } from 'date-fns';
 import { RecruitingTimelineWorksheet } from '@/components/worksheets/RecruitingTimelineWorksheet';
 import { ProgramFitQuestionnaire } from '@/components/worksheets/ProgramFitQuestionnaire';
+import { EligibilityChecklist } from '@/components/worksheets/EligibilityChecklist';
+import { CoreCourseTracker } from '@/components/worksheets/CoreCourseTracker';
+import { TestPrepWorksheet } from '@/components/worksheets/TestPrepWorksheet';
 
 const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }> = {
   0: {
@@ -305,6 +308,42 @@ export function CoachingProgressSection() {
                                     {resource}
                                   </button>
                                 </ProgramFitQuestionnaire>
+                              </li>
+                            );
+                          }
+                          if (module.moduleNumber === 2 && resource === 'Eligibility Checklist') {
+                            return (
+                              <li key={i} className="text-sm flex items-center gap-2">
+                                <span className="text-primary">📄</span>
+                                <EligibilityChecklist>
+                                  <button className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer text-left">
+                                    {resource}
+                                  </button>
+                                </EligibilityChecklist>
+                              </li>
+                            );
+                          }
+                          if (module.moduleNumber === 2 && resource === 'Core Course Tracker') {
+                            return (
+                              <li key={i} className="text-sm flex items-center gap-2">
+                                <span className="text-primary">📄</span>
+                                <CoreCourseTracker>
+                                  <button className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer text-left">
+                                    {resource}
+                                  </button>
+                                </CoreCourseTracker>
+                              </li>
+                            );
+                          }
+                          if (module.moduleNumber === 2 && resource === 'Test Prep Resource List') {
+                            return (
+                              <li key={i} className="text-sm flex items-center gap-2">
+                                <span className="text-primary">📄</span>
+                                <TestPrepWorksheet>
+                                  <button className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer text-left">
+                                    {resource}
+                                  </button>
+                                </TestPrepWorksheet>
                               </li>
                             );
                           }
