@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Download, FileText } from 'lucide-react';
+import { Download } from 'lucide-react';
 import jsPDF from 'jspdf';
+import { useWorksheetData } from '@/hooks/useWorksheetData';
 
 interface TimelineTask {
   id: string;
@@ -190,21 +191,14 @@ const DEFAULT_DATA: YearData[] = [
   },
 ];
 
-const STORAGE_KEY = 'cfa-recruiting-timeline';
+
 
 export function RecruitingTimelineWorksheet({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState<YearData[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : DEFAULT_DATA;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  }, [data]);
+  const { data, updateData, isLoading } = useWorksheetData<YearData[]>('recruiting-timeline', DEFAULT_DATA);
 
   const toggleTask = (yearIdx: number, seasonIdx: number, taskIdx: number) => {
-    setData(prev => {
+    updateData(prev => {
       const next = structuredClone(prev);
       next[yearIdx].seasons[seasonIdx].tasks[taskIdx].done = !next[yearIdx].seasons[seasonIdx].tasks[taskIdx].done;
       return next;
@@ -212,7 +206,7 @@ export function RecruitingTimelineWorksheet({ children }: { children: React.Reac
   };
 
   const setTargetDate = (yearIdx: number, seasonIdx: number, taskIdx: number, value: string) => {
-    setData(prev => {
+    updateData(prev => {
       const next = structuredClone(prev);
       next[yearIdx].seasons[seasonIdx].tasks[taskIdx].targetDate = value;
       return next;
@@ -220,7 +214,7 @@ export function RecruitingTimelineWorksheet({ children }: { children: React.Reac
   };
 
   const setNotes = (yearIdx: number, value: string) => {
-    setData(prev => {
+    updateData(prev => {
       const next = structuredClone(prev);
       next[yearIdx].notes = value;
       return next;

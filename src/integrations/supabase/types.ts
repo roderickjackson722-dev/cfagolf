@@ -712,6 +712,33 @@ export type Database = {
         }
         Relationships: []
       }
+      worksheet_data: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          updated_at: string
+          user_id: string
+          worksheet_key: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          id?: string
+          updated_at?: string
+          user_id: string
+          worksheet_key: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          updated_at?: string
+          user_id?: string
+          worksheet_key?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

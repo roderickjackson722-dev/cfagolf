@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Download } from 'lucide-react';
 import jsPDF from 'jspdf';
+import { useWorksheetData } from '@/hooks/useWorksheetData';
 
 interface TaskItem {
   id: string;
@@ -113,8 +114,6 @@ const DEFAULT_DATA: EligibilityData = {
   notes: '',
 };
 
-const STORAGE_KEY = 'cfa-eligibility-checklist';
-
 function TaskSection({ title, tasks, onToggle, onUpdate }: {
   title: string;
   tasks: TaskItem[];
@@ -139,14 +138,7 @@ function TaskSection({ title, tasks, onToggle, onUpdate }: {
 
 export function EligibilityChecklist({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState<EligibilityData>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : DEFAULT_DATA;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  }, [data]);
+  const { data, updateData: setData } = useWorksheetData<EligibilityData>('eligibility-checklist', DEFAULT_DATA);
 
   const updateField = <K extends keyof EligibilityData>(key: K, value: EligibilityData[K]) => {
     setData(prev => ({ ...prev, [key]: value }));

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Textarea } from '@/components/ui/textarea';
 import { Download } from 'lucide-react';
 import jsPDF from 'jspdf';
+import { useWorksheetData } from '@/hooks/useWorksheetData';
 
 const GRADE_POINTS: Record<string, number> = {
   'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7,
@@ -67,18 +68,9 @@ const DEFAULT_DATA: CoreCourseData = {
   notes: '',
 };
 
-const STORAGE_KEY = 'cfa-core-course-tracker';
-
 export function CoreCourseTracker({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState<CoreCourseData>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : DEFAULT_DATA;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  }, [data]);
+  const { data, updateData: setData } = useWorksheetData<CoreCourseData>('core-course-tracker', DEFAULT_DATA);
 
   const updateField = <K extends keyof CoreCourseData>(key: K, value: CoreCourseData[K]) => {
     setData(prev => ({ ...prev, [key]: value }));

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,6 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Download } from 'lucide-react';
 import jsPDF from 'jspdf';
+import { useWorksheetData } from '@/hooks/useWorksheetData';
 
 interface Question {
   id: number;
@@ -110,34 +111,36 @@ const REFLECTION_QUESTIONS = [
   'If I received an offer today, would I say yes? Why or why not?',
 ];
 
-const STORAGE_KEY = 'cfa-program-fit-questionnaire';
+interface ProgramFitData {
+  sections: Section[];
+  schoolName: string;
+  reflection: ReflectionData;
+}
+
+const DEFAULT_PF_DATA: ProgramFitData = {
+  sections: DEFAULT_SECTIONS,
+  schoolName: '',
+  reflection: { answers: REFLECTION_QUESTIONS.map(() => ''), recommendation: '', finalNotes: '' },
+};
 
 export function ProgramFitQuestionnaire({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const [sections, setSections] = useState<Section[]>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      return parsed.sections || DEFAULT_SECTIONS;
-    }
-    return DEFAULT_SECTIONS;
-  });
-  const [schoolName, setSchoolName] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved).schoolName || '' : '';
-  });
-  const [reflection, setReflection] = useState<ReflectionData>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      return parsed.reflection || { answers: REFLECTION_QUESTIONS.map(() => ''), recommendation: '', finalNotes: '' };
-    }
-    return { answers: REFLECTION_QUESTIONS.map(() => ''), recommendation: '', finalNotes: '' };
-  });
+  const { data: pfData, updateData } = useWorksheetData<ProgramFitData>('program-fit-questionnaire', DEFAULT_PF_DATA);
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ sections, schoolName, reflection }));
-  }, [sections, schoolName, reflection]);
+  const { sections, schoolName, reflection } = pfData;
+
+  const setSections = (updater: (prev: Section[]) => Section[]) => {
+    updateData(prev => ({ ...prev, sections: updater(prev.sections) }));
+  };
+  const setSchoolName = (value: string) => {
+    updateData(prev => ({ ...prev, schoolName: value }));
+  };
+  const setReflection = (updater: ReflectionData | ((prev: ReflectionData) => ReflectionData)) => {
+    updateData(prev => ({
+      ...prev,
+      reflection: typeof updater === 'function' ? updater(prev.reflection) : updater,
+    }));
+  };
 
   const updateAnswer = (sectionIdx: number, questionIdx: number, value: string) => {
     setSections(prev => {
