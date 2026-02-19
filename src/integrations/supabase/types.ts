@@ -634,6 +634,36 @@ export type Database = {
           },
         ]
       }
+      testimonials: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          name: string
+          role: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          name: string
+          role?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          name?: string
+          role?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       tournament_results: {
         Row: {
           course_name: string | null
