@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -10,6 +10,7 @@ import { AdminUserTable } from '@/components/admin/AdminUserTable';
 import { AdminMembershipTable } from '@/components/admin/AdminMembershipTable';
 import { AdminVisitorTable } from '@/components/admin/AdminVisitorTable';
 import { ClippdImporter } from '@/components/admin/ClippdImporter';
+import { AdminTestimonialTable } from '@/components/admin/AdminTestimonialTable';
 import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -110,6 +111,10 @@ const Admin = () => {
                 <Eye className="w-4 h-4" />
                 Visitors
               </TabsTrigger>
+              <TabsTrigger value="testimonials" className="flex items-center gap-2">
+                <MessageSquare className="w-4 h-4" />
+                Reviews
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
@@ -189,6 +194,24 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminVisitorTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Testimonials Management Tab */}
+            <TabsContent value="testimonials">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <MessageSquare className="w-5 h-5 text-primary" />
+                    <CardTitle>Customer Reviews</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Review submitted testimonials and approve them to display on the website.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminTestimonialTable />
                 </CardContent>
               </Card>
             </TabsContent>

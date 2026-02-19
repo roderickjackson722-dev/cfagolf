@@ -1,29 +1,43 @@
 import { Star, Quote } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
-const testimonials = [
+const fallbackTestimonials = [
   {
     name: "Parent",
     role: "Parent of Division I Signee",
     content: "Our son would not be on the college golf team without the help of College Fairway Advisors. We can't thank you enough!",
-    initials: "P"
   },
   {
     name: "Parent",
     role: "Parent of high school junior",
     content: "Our daughter is so excited about the opportunity CFA provided for her to meet college coaches and show off her talents for the coaches.",
-    initials: "P"
   },
   {
     name: "Parent",
     role: "Parent of high school senior",
     content: "As a parent, I had no clue where to start. I thank CFA for guiding our family through the entire process.",
-    initials: "P"
   }
 ];
 
 export function TestimonialsSection() {
+  const { data: dbTestimonials } = useQuery({
+    queryKey: ['approved-testimonials'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('name, role, content')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const testimonials = dbTestimonials && dbTestimonials.length > 0 ? dbTestimonials : fallbackTestimonials;
+
   return (
     <section className="section-padding bg-background">
       <div className="container mx-auto px-4">
@@ -59,7 +73,7 @@ export function TestimonialsSection() {
                 <div className="flex items-center gap-3">
                   <Avatar className="w-12 h-12 bg-primary">
                     <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
-                      {testimonial.initials}
+                      {testimonial.name.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
                   <div>

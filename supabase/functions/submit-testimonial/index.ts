@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -21,6 +22,21 @@ serve(async (req) => {
       );
     }
 
+    // Save to database
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
+    const { error: dbError } = await supabaseAdmin
+      .from("testimonials")
+      .insert({ name, role: role || null, content: testimonial, status: "pending" });
+
+    if (dbError) {
+      console.error("DB insert error:", dbError);
+    }
+
+    // Send email notification
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     if (!RESEND_API_KEY) {
       throw new Error("RESEND_API_KEY is not configured");
@@ -48,6 +64,9 @@ serve(async (req) => {
         <p style="margin-top: 20px; font-size: 12px; color: #999;">
           Submitted on ${new Date().toLocaleString("en-US", { timeZone: "America/New_York" })}
         </p>
+        <p style="margin-top: 8px; font-size: 12px; color: #2d5a3d;">
+          Log in to the Admin Panel to approve or reject this testimonial.
+        </p>
       </div>
     `;
 
@@ -68,7 +87,6 @@ serve(async (req) => {
     if (!res.ok) {
       const errorText = await res.text();
       console.error("Resend error:", errorText);
-      throw new Error("Failed to send email");
     }
 
     return new Response(
