@@ -20,10 +20,7 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Setting your recruiting goals and timeline",
       "How to get the most out of your coaching sessions",
     ],
-    resources: [
-      "CFA Program Guide",
-      "Goal Setting Worksheet",
-    ],
+    resources: [],
   },
   1: {
     topics: [
@@ -34,7 +31,6 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Key differences between scholarship levels",
     ],
     resources: [
-      "Division Comparison Chart",
       "Recruiting Timeline Calendar",
       "Program Fit Questionnaire",
     ],
