@@ -1,15 +1,42 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Check, X, Trash2, Star, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { Check, X, Trash2, Star, Clock, CheckCircle, XCircle, Plus } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 
 export function AdminTestimonialTable() {
   const queryClient = useQueryClient();
+  const [showForm, setShowForm] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [newRole, setNewRole] = useState('');
+  const [newContent, setNewContent] = useState('');
+  const [newStatus, setNewStatus] = useState<'pending' | 'approved'>('approved');
+
+  const addTestimonial = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase.from('testimonials').insert({
+        name: newName.trim(),
+        role: newRole.trim() || null,
+        content: newContent.trim(),
+        status: newStatus,
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-testimonials'] });
+      toast.success('Testimonial added successfully');
+      setNewName(''); setNewRole(''); setNewContent(''); setShowForm(false);
+    },
+    onError: () => toast.error('Failed to add testimonial'),
+  });
 
   const { data: testimonials = [], isLoading } = useQuery({
     queryKey: ['admin-testimonials'],
@@ -71,12 +98,53 @@ export function AdminTestimonialTable() {
 
   return (
     <div className="space-y-6">
-      <div className="flex gap-4 text-sm">
-        <span className="text-muted-foreground">Total: <strong>{testimonials.length}</strong></span>
-        <span className="text-muted-foreground">Pending: <strong className="text-yellow-600">{pending.length}</strong></span>
-        <span className="text-muted-foreground">Approved: <strong className="text-success">{approved.length}</strong></span>
-        <span className="text-muted-foreground">Rejected: <strong className="text-destructive">{rejected.length}</strong></span>
+      <div className="flex items-center justify-between">
+        <div className="flex gap-4 text-sm">
+          <span className="text-muted-foreground">Total: <strong>{testimonials.length}</strong></span>
+          <span className="text-muted-foreground">Pending: <strong className="text-yellow-600">{pending.length}</strong></span>
+          <span className="text-muted-foreground">Approved: <strong className="text-success">{approved.length}</strong></span>
+          <span className="text-muted-foreground">Rejected: <strong className="text-destructive">{rejected.length}</strong></span>
+        </div>
+        <Button size="sm" onClick={() => setShowForm(!showForm)}>
+          <Plus className="w-4 h-4 mr-1" /> Add Review
+        </Button>
       </div>
+
+      {showForm && (
+        <Card>
+          <CardHeader className="pb-3"><CardTitle className="text-base">Add a Customer Review</CardTitle></CardHeader>
+          <CardContent>
+            <form onSubmit={(e) => { e.preventDefault(); if (newName.trim() && newContent.trim()) addTestimonial.mutate(); else toast.error('Name and content are required.'); }} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <Label htmlFor="admin-name">Customer Name *</Label>
+                  <Input id="admin-name" value={newName} onChange={e => setNewName(e.target.value)} placeholder="e.g., John Smith" maxLength={100} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="admin-role">Role / Title</Label>
+                  <Input id="admin-role" value={newRole} onChange={e => setNewRole(e.target.value)} placeholder="e.g., Parent of D1 signee" maxLength={100} />
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="admin-content">Review Content *</Label>
+                <Textarea id="admin-content" value={newContent} onChange={e => setNewContent(e.target.value)} placeholder="Enter the customer's testimonial..." rows={4} maxLength={2000} className="resize-none" />
+              </div>
+              <div className="flex items-center gap-4">
+                <label className="flex items-center gap-2 text-sm cursor-pointer">
+                  <input type="radio" name="status" checked={newStatus === 'approved'} onChange={() => setNewStatus('approved')} /> Publish immediately
+                </label>
+                <label className="flex items-center gap-2 text-sm cursor-pointer">
+                  <input type="radio" name="status" checked={newStatus === 'pending'} onChange={() => setNewStatus('pending')} /> Save as pending
+                </label>
+              </div>
+              <div className="flex gap-2">
+                <Button type="submit" size="sm" disabled={addTestimonial.isPending}>{addTestimonial.isPending ? 'Adding...' : 'Add Review'}</Button>
+                <Button type="button" size="sm" variant="outline" onClick={() => setShowForm(false)}>Cancel</Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      )}
 
       {testimonials.length === 0 ? (
         <p className="text-center text-muted-foreground py-8">No testimonials submitted yet.</p>
