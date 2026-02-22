@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -12,6 +12,7 @@ import { AdminVisitorTable } from '@/components/admin/AdminVisitorTable';
 import { ClippdImporter } from '@/components/admin/ClippdImporter';
 import { AdminTestimonialTable } from '@/components/admin/AdminTestimonialTable';
 import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
+import AdminFlyerEditor from '@/components/admin/AdminFlyerEditor';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -115,6 +116,10 @@ const Admin = () => {
                 <MessageSquare className="w-4 h-4" />
                 Reviews
               </TabsTrigger>
+              <TabsTrigger value="flyer" className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                Flyer
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
@@ -214,6 +219,10 @@ const Admin = () => {
                   <AdminTestimonialTable />
                 </CardContent>
               </Card>
+            </TabsContent>
+            {/* Flyer Editor Tab */}
+            <TabsContent value="flyer">
+              <AdminFlyerEditor />
             </TabsContent>
           </Tabs>
         </div>
