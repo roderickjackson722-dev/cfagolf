@@ -243,6 +243,27 @@ export type Database = {
           },
         ]
       }
+      flyer_content: {
+        Row: {
+          id: string
+          key: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          id?: string
+          key: string
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          id?: string
+          key?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
       meeting_progress: {
         Row: {
           admin_notes: string | null

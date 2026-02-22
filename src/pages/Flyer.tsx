@@ -1,27 +1,28 @@
 import { Button } from '@/components/ui/button';
-import { Download, Printer, CheckCircle, Star, Users, Trophy, Phone, Mail, Globe } from 'lucide-react';
+import { Download, Printer, CheckCircle, Star, Users, Trophy, Globe, Mail } from 'lucide-react';
 import { generateMarketingFlyer } from '@/lib/pdfTemplates';
+import { useFlyerContent } from '@/hooks/useFlyerContent';
 import cfaLogo from '@/assets/cfa-watermark.png';
 
-const services = [
-  { title: 'Monthly Coaching Calls', desc: 'One-on-one guidance through every phase of recruiting (12 calls)' },
-  { title: 'LPGA & PGA Pro Webinars', desc: 'Exclusive sessions with touring professionals' },
-  { title: 'College Coach Sessions', desc: 'Learn what coaches look for in recruits' },
-  { title: 'Target School List Builder', desc: 'Strategic school matching based on your profile' },
-  { title: 'Tournament Result Log', desc: 'Track competitive results for your recruiting resume' },
-  { title: 'Coach Contact Tracker', desc: 'Organize all coach communications in one place' },
-  { title: 'Scholarship Calculator', desc: 'Analyze and compare financial aid offers' },
-  { title: '12-Month Recruiting Timeline', desc: 'Grade-specific action plans to stay on track' },
-];
-
-const pillars = [
-  { title: 'Clarity', desc: 'We simplify the recruiting process so families know exactly what to do and when.' },
-  { title: 'Advocacy', desc: 'We connect you directly with college coaches and advocate for your student-athlete.' },
-  { title: 'Strategy', desc: 'Every plan is customized to your academic profile, golf skills, and goals.' },
-];
+interface ServiceItem { title: string; desc: string; }
+interface PillarItem { title: string; desc: string; }
 
 const Flyer = () => {
+  const { data: content, isLoading } = useFlyerContent();
   const handlePrint = () => window.print();
+
+  if (isLoading || !content) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      </div>
+    );
+  }
+
+  let services: ServiceItem[] = [];
+  let pillars: PillarItem[] = [];
+  try { services = JSON.parse(content.services || '[]'); } catch {}
+  try { pillars = JSON.parse(content.pillars || '[]'); } catch {}
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,7 +39,7 @@ const Flyer = () => {
         </div>
       </div>
 
-      {/* Flyer Content — optimized for print */}
+      {/* Flyer Content */}
       <div className="max-w-[8.5in] mx-auto bg-card shadow-xl print:shadow-none print:max-w-none">
         {/* Header Banner */}
         <div className="bg-primary px-8 py-8 print:py-6">
@@ -46,24 +47,20 @@ const Flyer = () => {
             <img src={cfaLogo} alt="CFA Logo" className="w-16 h-12 object-contain brightness-0 invert" />
             <div>
               <h1 className="text-2xl md:text-3xl font-display font-bold text-primary-foreground">
-                College Fairway Advisors
+                {content.headline}
               </h1>
               <p className="text-primary-foreground/80 text-sm md:text-base mt-1">
-                Your Strategic Recruiting Partner for College Golf
+                {content.subheadline}
               </p>
             </div>
           </div>
           <div className="h-0.5 bg-cfa-gold mt-5" />
-          <p className="text-primary-foreground/70 text-xs mt-2 text-right">www.cfa.golf</p>
+          <p className="text-primary-foreground/70 text-xs mt-2 text-right">{content.website}</p>
         </div>
 
         {/* Body */}
         <div className="px-8 py-6 space-y-6 print:py-4 print:space-y-4">
-          {/* Intro */}
-          <p className="text-foreground text-sm leading-relaxed">
-            Expert guidance for junior golfers and their families navigating the college golf recruiting process. 
-            We provide personalized consulting, professional tools, and direct access to college coaches and LPGA/PGA professionals.
-          </p>
+          <p className="text-foreground text-sm leading-relaxed">{content.intro}</p>
 
           {/* Services */}
           <div>
@@ -87,10 +84,8 @@ const Flyer = () => {
 
           {/* Pricing CTA */}
           <div className="bg-primary rounded-xl px-6 py-5 text-center">
-            <p className="text-cfa-gold font-display text-2xl font-bold">$2,499 / Year</p>
-            <p className="text-primary-foreground/80 text-sm mt-1">
-              Annual Consulting Membership — Personalized College Golf Recruiting
-            </p>
+            <p className="text-cfa-gold font-display text-2xl font-bold">{content.price}</p>
+            <p className="text-primary-foreground/80 text-sm mt-1">{content.price_subtitle}</p>
           </div>
 
           {/* Pillars */}
@@ -115,31 +110,31 @@ const Flyer = () => {
             <div className="text-center">
               <div className="flex items-center justify-center gap-1.5">
                 <Users className="w-4 h-4 text-primary" />
-                <span className="font-bold text-foreground text-lg">1,300+</span>
+                <span className="font-bold text-foreground text-lg">{content.stat_1_value}</span>
               </div>
-              <span className="text-muted-foreground text-xs">College Programs</span>
+              <span className="text-muted-foreground text-xs">{content.stat_1_label}</span>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center gap-1.5">
                 <Trophy className="w-4 h-4 text-primary" />
-                <span className="font-bold text-foreground text-lg">D1–NAIA</span>
+                <span className="font-bold text-foreground text-lg">{content.stat_2_value}</span>
               </div>
-              <span className="text-muted-foreground text-xs">All Divisions</span>
+              <span className="text-muted-foreground text-xs">{content.stat_2_label}</span>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center gap-1.5">
                 <Star className="w-4 h-4 text-cfa-gold" />
-                <span className="font-bold text-foreground text-lg">500+</span>
+                <span className="font-bold text-foreground text-lg">{content.stat_3_value}</span>
               </div>
-              <span className="text-muted-foreground text-xs">Families Served</span>
+              <span className="text-muted-foreground text-xs">{content.stat_3_label}</span>
             </div>
           </div>
 
           {/* Footer / Contact */}
           <div className="border-t border-border pt-4 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1"><Globe className="w-3.5 h-3.5" /> www.cfa.golf</span>
-            <span className="flex items-center gap-1"><Mail className="w-3.5 h-3.5" /> info@cfa.golf</span>
-            <span className="flex items-center gap-1"><Star className="w-3.5 h-3.5" /> @collegefairwayadvisors</span>
+            <span className="flex items-center gap-1"><Globe className="w-3.5 h-3.5" /> {content.website}</span>
+            <span className="flex items-center gap-1"><Mail className="w-3.5 h-3.5" /> {content.email}</span>
+            <span className="flex items-center gap-1"><Star className="w-3.5 h-3.5" /> {content.social}</span>
           </div>
         </div>
       </div>
