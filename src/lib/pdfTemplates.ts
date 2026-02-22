@@ -685,6 +685,149 @@ export const generateTimeline = (): void => {
   doc.save('CFA_12_Month_Timeline.pdf');
 };
 
+// 9. Marketing One-Pager Flyer
+export const generateMarketingFlyer = (): void => {
+  const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+
+  // Full page green header banner
+  doc.setFillColor(26, 46, 37);
+  doc.rect(0, 0, pageWidth, 60, 'F');
+
+  // Logo
+  doc.addImage(cfaWatermark, 'PNG', 14, 8, 40, 30);
+
+  // Brand name
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(26);
+  doc.setFont('helvetica', 'bold');
+  doc.text('College Fairway Advisors', 60, 25);
+
+  doc.setFontSize(13);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Your Strategic Recruiting Partner for College Golf', 60, 35);
+
+  // Gold accent line
+  doc.setFillColor(220, 180, 50);
+  doc.rect(14, 48, pageWidth - 28, 2, 'F');
+
+  // Tagline
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(10);
+  doc.text('www.cfa.golf', pageWidth - 14, 56, { align: 'right' });
+
+  let y = 70;
+
+  // Intro paragraph
+  doc.setTextColor(30, 50, 40);
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+  const intro = 'Expert guidance for junior golfers and their families navigating the college golf recruiting process. We provide personalized consulting, professional tools, and direct access to college coaches and LPGA/PGA professionals.';
+  const introLines = doc.splitTextToSize(intro, pageWidth - 28);
+  doc.text(introLines, 14, y);
+  y += introLines.length * 6 + 8;
+
+  // What's Included section
+  doc.setFillColor(102, 140, 115);
+  doc.rect(14, y, pageWidth - 28, 9, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'bold');
+  doc.text("WHAT'S INCLUDED IN YOUR ANNUAL MEMBERSHIP", 18, y + 6.5);
+  y += 14;
+
+  const services = [
+    ['12 Monthly Coaching Calls', 'One-on-one guidance through every phase of recruiting'],
+    ['LPGA & PGA Pro Webinars', 'Exclusive sessions with touring professionals'],
+    ['College Coach Sessions', 'Learn what coaches look for in recruits'],
+    ['Target School List Builder', 'Strategic school matching based on your profile'],
+    ['Tournament Result Log', 'Track competitive results for your recruiting resume'],
+    ['Coach Contact Tracker', 'Organize all coach communications in one place'],
+    ['Scholarship Calculator', 'Analyze and compare financial aid offers'],
+    ['12-Month Recruiting Timeline', 'Grade-specific action plans to stay on track'],
+  ];
+
+  doc.setTextColor(30, 50, 40);
+  services.forEach((s, i) => {
+    if (i % 2 === 0) {
+      doc.setFillColor(245, 243, 239);
+      doc.rect(14, y - 1, pageWidth - 28, 9, 'F');
+    }
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`✓  ${s[0]}`, 18, y + 5);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(100, 100, 100);
+    doc.text(s[1], 90, y + 5);
+    doc.setTextColor(30, 50, 40);
+    y += 9;
+  });
+
+  y += 8;
+
+  // Pricing box
+  doc.setFillColor(26, 46, 37);
+  doc.roundedRect(14, y, pageWidth - 28, 30, 4, 4, 'F');
+  doc.setTextColor(220, 180, 50);
+  doc.setFontSize(22);
+  doc.setFont('helvetica', 'bold');
+  doc.text('$2,499 / Year', pageWidth / 2, y + 14, { align: 'center' });
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Annual Consulting Membership — Personalized College Golf Recruiting', pageWidth / 2, y + 23, { align: 'center' });
+  y += 38;
+
+  // Why CFA section
+  doc.setFillColor(102, 140, 115);
+  doc.rect(14, y, pageWidth - 28, 9, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'bold');
+  doc.text('WHY COLLEGE FAIRWAY ADVISORS?', 18, y + 6.5);
+  y += 14;
+
+  const pillars = [
+    ['Clarity', 'We simplify the recruiting process so families know exactly what to do and when.'],
+    ['Advocacy', 'We connect you directly with college coaches and advocate for your student-athlete.'],
+    ['Strategy', 'Every plan is customized to your academic profile, golf skills, and goals.'],
+  ];
+
+  doc.setTextColor(30, 50, 40);
+  pillars.forEach((p) => {
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text(`${p[0]}:`, 18, y + 5);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.text(p[1], 50, y + 5);
+    y += 9;
+  });
+
+  y += 5;
+
+  // Stats bar
+  doc.setFillColor(245, 243, 239);
+  doc.rect(14, y, pageWidth - 28, 14, 'F');
+  doc.setTextColor(26, 46, 37);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'bold');
+  doc.text('1,300+ College Programs', 30, y + 9);
+  doc.text('D1 — NAIA All Divisions', pageWidth / 2 - 10, y + 9);
+  doc.text('500+ Families Served', pageWidth - 55, y + 9);
+
+  // Footer
+  doc.setFontSize(9);
+  doc.setTextColor(120, 120, 120);
+  doc.text('College Fairway Advisors  |  www.cfa.golf  |  info@cfa.golf', pageWidth / 2, pageHeight - 12, { align: 'center' });
+  doc.text('Follow us on Instagram @collegefairwayadvisors', pageWidth / 2, pageHeight - 7, { align: 'center' });
+
+  addWatermark(doc);
+  doc.save('CFA_Marketing_Flyer.pdf');
+};
+
 // Export all generators in a map for easy access
 export const pdfGenerators: Record<string, () => void> = {
   'target-schools': generateTargetSchoolList,
@@ -694,5 +837,6 @@ export const pdfGenerators: Record<string, () => void> = {
   'pre-call-prep': generatePreCallPrep,
   'campus-visit': generateCampusVisit,
   'scholarship-calc': generateScholarshipCalc,
-  'timeline': generateTimeline
+  'timeline': generateTimeline,
+  'marketing-flyer': generateMarketingFlyer
 };
