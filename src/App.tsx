@@ -25,6 +25,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import MemberPreview from "./pages/MemberPreview";
 import About from "./pages/About";
 import SubmitTestimonial from "./pages/SubmitTestimonial";
+import Flyer from "./pages/Flyer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,6 +63,7 @@ const App = () => (
             <Route path="/member-preview" element={<MemberPreview />} />
             <Route path="/about" element={<About />} />
             <Route path="/share-your-experience" element={<SubmitTestimonial />} />
+            <Route path="/flyer" element={<Flyer />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
