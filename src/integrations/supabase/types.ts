@@ -360,6 +360,45 @@ export type Database = {
         }
         Relationships: []
       }
+      promo_codes: {
+        Row: {
+          code: string
+          created_at: string
+          discount_percent: number
+          expires_at: string | null
+          id: string
+          is_active: boolean
+          max_uses: number | null
+          name: string
+          updated_at: string
+          uses_count: number
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          discount_percent?: number
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean
+          max_uses?: number | null
+          name: string
+          updated_at?: string
+          uses_count?: number
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          discount_percent?: number
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean
+          max_uses?: number | null
+          name?: string
+          updated_at?: string
+          uses_count?: number
+        }
+        Relationships: []
+      }
       recruiting_milestones: {
         Row: {
           category: string
@@ -802,6 +841,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_promo_uses: { Args: { promo_id: string }; Returns: undefined }
       increment_referral_uses: {
         Args: { referral_id: string }
         Returns: undefined
