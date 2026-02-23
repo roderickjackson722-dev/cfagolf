@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -13,6 +13,7 @@ import { ClippdImporter } from '@/components/admin/ClippdImporter';
 import { AdminTestimonialTable } from '@/components/admin/AdminTestimonialTable';
 import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
 import AdminFlyerEditor from '@/components/admin/AdminFlyerEditor';
+import { AdminPromoCodeTable } from '@/components/admin/AdminPromoCodeTable';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -120,6 +121,10 @@ const Admin = () => {
                 <FileText className="w-4 h-4" />
                 Flyer
               </TabsTrigger>
+              <TabsTrigger value="promos" className="flex items-center gap-2">
+                <Tag className="w-4 h-4" />
+                Promo Codes
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
@@ -223,6 +228,24 @@ const Admin = () => {
             {/* Flyer Editor Tab */}
             <TabsContent value="flyer">
               <AdminFlyerEditor />
+            </TabsContent>
+
+            {/* Promo Codes Tab */}
+            <TabsContent value="promos">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Tag className="w-5 h-5 text-primary" />
+                    <CardTitle>Promo Codes</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Create and manage discount promo codes for the checkout process.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminPromoCodeTable />
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>

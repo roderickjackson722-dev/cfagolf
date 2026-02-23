@@ -7,11 +7,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Promo codes configuration
-const PROMO_CODES: Record<string, { discount: number; name: string }> = {
-  "FOUNDERS50": { discount: 50, name: "Founders Fee - 50% Off" },
-  "CFAADMIN2025": { discount: 100, name: "Admin Access - Free" },
-};
+// Promo codes are now stored in the promo_codes database table
 
 const MEMBERSHIP_PRICE_ID = "price_1SuvOnLXW44Q7xfEtjqK7PLY";
 const MEMBERSHIP_AMOUNT = 249900; // $2,499 in cents
@@ -44,9 +40,26 @@ serve(async (req) => {
       apiVersion: "2025-08-27.basil",
     });
 
-    // Check for promo code
+    // Check for promo code from database
     const normalizedPromoCode = promoCode?.toUpperCase()?.trim();
-    const promoConfig = normalizedPromoCode ? PROMO_CODES[normalizedPromoCode] : null;
+    let promoConfig: { discount: number; name: string } | null = null;
+    let promoId: string | null = null;
+    if (normalizedPromoCode) {
+      const { data: promoData } = await supabaseAdmin
+        .from('promo_codes')
+        .select('id, discount_percent, name, max_uses, uses_count')
+        .eq('code', normalizedPromoCode)
+        .eq('is_active', true)
+        .maybeSingle();
+      
+      if (promoData) {
+        // Check if max uses reached
+        if (!promoData.max_uses || promoData.uses_count < promoData.max_uses) {
+          promoConfig = { discount: promoData.discount_percent, name: promoData.name };
+          promoId = promoData.id;
+        }
+      }
+    }
 
     // Check for referral code
     let referralData: { id: string; discount_percent: number; referrer_user_id: string } | null = null;
@@ -148,6 +161,11 @@ serve(async (req) => {
     }
 
     const session = await stripe.checkout.sessions.create(checkoutConfig);
+
+    // Increment promo code usage count
+    if (promoId) {
+      await supabaseAdmin.rpc('increment_promo_uses' as any, { promo_id: promoId });
+    }
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
