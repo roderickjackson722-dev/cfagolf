@@ -214,6 +214,36 @@ export type Database = {
         }
         Relationships: []
       }
+      email_templates: {
+        Row: {
+          body: string
+          category: string
+          created_at: string
+          id: string
+          name: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          category?: string
+          created_at?: string
+          id?: string
+          name: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          category?: string
+          created_at?: string
+          id?: string
+          name?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       favorites: {
         Row: {
           college_id: string
@@ -274,13 +304,16 @@ export type Database = {
           coach_email: string | null
           coach_name: string | null
           coach_phone: string | null
+          contact_status: string | null
           created_at: string
           has_boys_team: boolean | null
           has_girls_team: boolean | null
           id: string
+          last_contacted_at: string | null
           name: string
           notes: string | null
           state: string
+          total_emails_sent: number | null
           updated_at: string
           website_url: string | null
         }
@@ -293,13 +326,16 @@ export type Database = {
           coach_email?: string | null
           coach_name?: string | null
           coach_phone?: string | null
+          contact_status?: string | null
           created_at?: string
           has_boys_team?: boolean | null
           has_girls_team?: boolean | null
           id?: string
+          last_contacted_at?: string | null
           name: string
           notes?: string | null
           state?: string
+          total_emails_sent?: number | null
           updated_at?: string
           website_url?: string | null
         }
@@ -312,17 +348,67 @@ export type Database = {
           coach_email?: string | null
           coach_name?: string | null
           coach_phone?: string | null
+          contact_status?: string | null
           created_at?: string
           has_boys_team?: boolean | null
           has_girls_team?: boolean | null
           id?: string
+          last_contacted_at?: string | null
           name?: string
           notes?: string | null
           state?: string
+          total_emails_sent?: number | null
           updated_at?: string
           website_url?: string | null
         }
         Relationships: []
+      }
+      hs_coach_outreach: {
+        Row: {
+          body: string | null
+          created_at: string
+          high_school_id: string
+          id: string
+          notes: string | null
+          opened_at: string | null
+          outreach_type: string
+          sent_at: string
+          status: string
+          subject: string | null
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          high_school_id: string
+          id?: string
+          notes?: string | null
+          opened_at?: string | null
+          outreach_type?: string
+          sent_at?: string
+          status?: string
+          subject?: string | null
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          high_school_id?: string
+          id?: string
+          notes?: string | null
+          opened_at?: string | null
+          outreach_type?: string
+          sent_at?: string
+          status?: string
+          subject?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hs_coach_outreach_high_school_id_fkey"
+            columns: ["high_school_id"]
+            isOneToOne: false
+            referencedRelation: "high_schools"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       meeting_progress: {
         Row: {
