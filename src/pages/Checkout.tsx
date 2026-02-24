@@ -96,25 +96,36 @@ const Checkout = () => {
     setStep(3);
   };
 
-  const checkPromoCode = () => {
+  const checkPromoCode = async () => {
     const code = promoCode.toUpperCase().trim();
+    if (!code) return;
     setIsCheckingPromo(true);
     
-    setTimeout(() => {
-      if (code === 'FOUNDERS50') {
-        setPromoApplied({ discount: 50, name: 'Founders Fee - 50% Off' });
+    try {
+      const { data, error } = await supabase
+        .from('promo_codes')
+        .select('discount_percent, name, max_uses, uses_count')
+        .eq('code', code)
+        .eq('is_active', true)
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (data && (!data.max_uses || data.uses_count < data.max_uses)) {
+        setPromoApplied({ discount: data.discount_percent, name: data.name });
         setReferralApplied(null);
-        toast.success('Promo code applied! 50% off');
-      } else if (code === 'CFAADMIN2025') {
-        setPromoApplied({ discount: 100, name: 'Admin Access - Free' });
-        setReferralApplied(null);
-        toast.success('Promo code applied! Free access');
-      } else if (code) {
+        toast.success(`Promo code applied! ${data.discount_percent}% off`);
+      } else {
         setPromoApplied(null);
-        toast.error('Invalid promo code');
+        toast.error('Invalid or expired promo code');
       }
+    } catch (err) {
+      console.error('Error checking promo code:', err);
+      setPromoApplied(null);
+      toast.error('Failed to verify promo code');
+    } finally {
       setIsCheckingPromo(false);
-    }, 500);
+    }
   };
 
   const checkReferralCode = async (code?: string) => {
