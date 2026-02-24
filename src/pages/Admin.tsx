@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -15,6 +15,7 @@ import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
 import AdminFlyerEditor from '@/components/admin/AdminFlyerEditor';
 import { AdminPromoCodeTable } from '@/components/admin/AdminPromoCodeTable';
 import { AdminHighSchoolTable } from '@/components/admin/AdminHighSchoolTable';
+import { CoachCRM } from '@/components/admin/CoachCRM';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -129,6 +130,10 @@ const Admin = () => {
               <TabsTrigger value="highschools" className="flex items-center gap-2">
                 <GraduationCap className="w-4 h-4" />
                 High Schools
+              </TabsTrigger>
+              <TabsTrigger value="crm" className="flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                Coach CRM
               </TabsTrigger>
             </TabsList>
 
@@ -267,6 +272,24 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminHighSchoolTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Coach CRM Tab */}
+            <TabsContent value="crm">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-5 h-5 text-primary" />
+                    <CardTitle>Coach Outreach CRM</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Manage relationships with high school golf coaches. Send personalized email campaigns to promote CFA to their golf families.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <CoachCRM />
                 </CardContent>
               </Card>
             </TabsContent>
