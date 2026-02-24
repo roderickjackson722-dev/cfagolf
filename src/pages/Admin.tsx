@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -14,6 +14,7 @@ import { AdminTestimonialTable } from '@/components/admin/AdminTestimonialTable'
 import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
 import AdminFlyerEditor from '@/components/admin/AdminFlyerEditor';
 import { AdminPromoCodeTable } from '@/components/admin/AdminPromoCodeTable';
+import { AdminHighSchoolTable } from '@/components/admin/AdminHighSchoolTable';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -124,6 +125,10 @@ const Admin = () => {
               <TabsTrigger value="promos" className="flex items-center gap-2">
                 <Tag className="w-4 h-4" />
                 Promo Codes
+              </TabsTrigger>
+              <TabsTrigger value="highschools" className="flex items-center gap-2">
+                <GraduationCap className="w-4 h-4" />
+                High Schools
               </TabsTrigger>
             </TabsList>
 
@@ -244,6 +249,24 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminPromoCodeTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* High Schools Tab */}
+            <TabsContent value="highschools">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <GraduationCap className="w-5 h-5 text-primary" />
+                    <CardTitle>Georgia High School Golf Teams</CardTitle>
+                  </div>
+                  <CardDescription>
+                    452 GHSA member schools with golf programs. Add coach contact info as you discover it.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminHighSchoolTable />
                 </CardContent>
               </Card>
             </TabsContent>
