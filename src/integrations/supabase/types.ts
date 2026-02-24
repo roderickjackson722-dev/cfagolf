@@ -264,6 +264,66 @@ export type Database = {
         }
         Relationships: []
       }
+      high_schools: {
+        Row: {
+          area_coordinator_name: string | null
+          area_coordinator_school: string | null
+          area_number: number | null
+          city: string | null
+          classification: string
+          coach_email: string | null
+          coach_name: string | null
+          coach_phone: string | null
+          created_at: string
+          has_boys_team: boolean | null
+          has_girls_team: boolean | null
+          id: string
+          name: string
+          notes: string | null
+          state: string
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          area_coordinator_name?: string | null
+          area_coordinator_school?: string | null
+          area_number?: number | null
+          city?: string | null
+          classification: string
+          coach_email?: string | null
+          coach_name?: string | null
+          coach_phone?: string | null
+          created_at?: string
+          has_boys_team?: boolean | null
+          has_girls_team?: boolean | null
+          id?: string
+          name: string
+          notes?: string | null
+          state?: string
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          area_coordinator_name?: string | null
+          area_coordinator_school?: string | null
+          area_number?: number | null
+          city?: string | null
+          classification?: string
+          coach_email?: string | null
+          coach_name?: string | null
+          coach_phone?: string | null
+          created_at?: string
+          has_boys_team?: boolean | null
+          has_girls_team?: boolean | null
+          id?: string
+          name?: string
+          notes?: string | null
+          state?: string
+          updated_at?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       meeting_progress: {
         Row: {
           admin_notes: string | null
