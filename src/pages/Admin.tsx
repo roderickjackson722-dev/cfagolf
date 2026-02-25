@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -16,6 +16,7 @@ import AdminFlyerEditor from '@/components/admin/AdminFlyerEditor';
 import { AdminPromoCodeTable } from '@/components/admin/AdminPromoCodeTable';
 import { AdminHighSchoolTable } from '@/components/admin/AdminHighSchoolTable';
 import { CoachCRM } from '@/components/admin/CoachCRM';
+import { ModuleAgenda } from '@/components/admin/ModuleAgenda';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -134,6 +135,10 @@ const Admin = () => {
               <TabsTrigger value="crm" className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 Coach CRM
+              </TabsTrigger>
+              <TabsTrigger value="agenda" className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4" />
+                Module Agenda
               </TabsTrigger>
             </TabsList>
 
@@ -290,6 +295,23 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <CoachCRM />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            {/* Module Agenda Tab */}
+            <TabsContent value="agenda">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-5 h-5 text-primary" />
+                    <CardTitle>Module Agenda</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Session-by-session agenda for each coaching module. Use this as your guide during client meetings.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ModuleAgenda />
                 </CardContent>
               </Card>
             </TabsContent>
