@@ -82,15 +82,16 @@ const Welcome = () => {
                     Your Next Step: Book Your Onboarding Call
                   </h2>
                   <p className="text-muted-foreground max-w-lg mx-auto">
-                    Schedule a 30-minute call with your advisor to get a personalized walkthrough of all your tools and create your recruiting game plan.
+                    Schedule a 1-hour call with your advisor to kick off Module 1 and lay the foundation for your recruiting journey.
                   </p>
                 </div>
 
                 <div className="space-y-2 text-left max-w-sm mx-auto">
                   {[
-                    'Personalized tool walkthrough',
-                    'Recruiting strategy session',
-                    'Goal-setting & timeline planning',
+                    'Welcome to College Fairway Advisors',
+                    'Program overview & what to expect',
+                    'Setting your recruiting goals and timeline',
+                    'How to get the most out of your coaching sessions',
                   ].map((item) => (
                     <div key={item} className="flex items-center gap-2.5">
                       <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
@@ -110,7 +111,7 @@ const Welcome = () => {
                 </Button>
 
                 <p className="text-xs text-muted-foreground">
-                  Free 30-minute call · No obligation · Get started right away
+                  1-hour call · No preparation needed · Get started right away
                 </p>
               </CardContent>
             </Card>
