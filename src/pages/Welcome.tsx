@@ -111,7 +111,7 @@ const Welcome = () => {
                 </Button>
 
                 <p className="text-xs text-muted-foreground">
-                  1-hour call · No preparation needed · Get started right away
+                  1-hour call · No preparation needed · Parents &amp; guardians are encouraged to join
                 </p>
               </CardContent>
             </Card>
