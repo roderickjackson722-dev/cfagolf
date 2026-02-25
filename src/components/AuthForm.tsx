@@ -230,11 +230,13 @@ export function AuthForm() {
 
       if (data.freeAccess) {
         toast.success('Account created with free access!');
-        navigate('/dashboard');
+        navigate('/welcome');
         return;
       }
 
       if (data.url) {
+        // Store flag so after payment success we redirect to welcome
+        sessionStorage.setItem('cfa_new_signup', 'true');
         window.location.href = data.url;
       } else {
         throw new Error('No checkout URL returned');

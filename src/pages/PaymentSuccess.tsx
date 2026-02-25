@@ -33,7 +33,12 @@ const PaymentSuccess = () => {
 
         if (data.success && data.paid) {
           setVerified(true);
-          setShowOnboardingDialog(true);
+          // Check if this is a new signup
+          const isNewSignup = sessionStorage.getItem('cfa_new_signup');
+          if (isNewSignup) {
+            sessionStorage.removeItem('cfa_new_signup');
+          }
+          setShowOnboardingDialog(!isNewSignup); // Only show old dialog if not new signup
           toast.success('Payment verified! Welcome to CFA Golf!');
         } else {
           toast.error('Payment verification failed');
@@ -73,10 +78,14 @@ const PaymentSuccess = () => {
                 Your membership is now active! You have full access to all CFA Golf recruiting tools and resources.
               </p>
               <Button 
-                onClick={() => navigate('/dashboard')} 
+                onClick={() => {
+                  const isNew = sessionStorage.getItem('cfa_new_signup');
+                  navigate(isNew ? '/welcome' : '/dashboard');
+                  sessionStorage.removeItem('cfa_new_signup');
+                }} 
                 className="w-full"
               >
-                Go to Dashboard
+                {sessionStorage.getItem('cfa_new_signup') ? 'Continue to Welcome' : 'Go to Dashboard'}
               </Button>
             </>
           ) : (
