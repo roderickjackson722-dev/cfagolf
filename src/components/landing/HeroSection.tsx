@@ -20,7 +20,7 @@ export function HeroSection() {
           <div className="text-center lg:text-left space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm">
               <Star className="w-4 h-4 fill-cfa-gold text-cfa-gold" />
-              Trusted by 500+ Golf Families
+              Where swing coaches build your game, CFA builds your path to a roster spot.
             </div>
             
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
