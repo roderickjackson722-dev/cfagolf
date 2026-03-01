@@ -51,6 +51,7 @@ export default function SocialLanding() {
             muted
             loop
             playsInline
+            ref={(el) => { if (el) el.playbackRate = 0.5; }}
             className="w-full h-full object-cover opacity-40"
           >
             <source src="/videos/cfa-promo-clip.mp4" type="video/mp4" />
