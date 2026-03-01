@@ -180,9 +180,6 @@ export default function SocialLanding() {
               </Button>
             </a>
           </div>
-          <p className="text-white/60 text-sm">
-            No long-term contract • Cancel anytime • 15-minute free consultation available
-          </p>
         </div>
       </section>
 
