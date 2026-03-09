@@ -141,6 +141,10 @@ const Admin = () => {
                 <BookOpen className="w-4 h-4" />
                 Module Agenda
               </TabsTrigger>
+              <TabsTrigger value="wagr" className="flex items-center gap-2">
+                <Trophy className="w-4 h-4" />
+                WAGR
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
