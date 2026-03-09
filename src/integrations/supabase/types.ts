@@ -948,6 +948,44 @@ export type Database = {
         }
         Relationships: []
       }
+      wagr_attendance: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          status: string
+          tournament_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          status?: string
+          tournament_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          status?: string
+          tournament_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wagr_attendance_tournament_id_fkey"
+            columns: ["tournament_id"]
+            isOneToOne: false
+            referencedRelation: "wagr_tournaments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       wagr_tournaments: {
         Row: {
           city: string | null

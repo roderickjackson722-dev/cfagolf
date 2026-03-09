@@ -29,6 +29,7 @@ import Flyer from "./pages/Flyer";
 import Welcome from "./pages/Welcome";
 import SocialLanding from "./pages/SocialLanding";
 import SocialKit from "./pages/SocialKit";
+import WagrTournaments from "./pages/WagrTournaments";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -70,6 +71,7 @@ const App = () => (
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/go" element={<SocialLanding />} />
             <Route path="/social-kit" element={<SocialKit />} />
+            <Route path="/tools/wagr-tournaments" element={<WagrTournaments />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
