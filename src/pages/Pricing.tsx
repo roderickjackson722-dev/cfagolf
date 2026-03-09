@@ -149,7 +149,7 @@ const Pricing = () => {
 
                 {user ? (
                   <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                    Start Consulting - $2,499
+                    Start Consulting - $899
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 ) : (
