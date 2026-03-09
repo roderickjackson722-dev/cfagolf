@@ -129,7 +129,7 @@ const Pricing = () => {
                 Complete hands-on recruiting guidance for junior golfers
               </CardDescription>
               <div className="pt-6">
-                <span className="text-5xl font-bold text-foreground">$2,499</span><span className="text-primary">*</span>
+                <span className="text-5xl font-bold text-foreground">$899</span><span className="text-primary">*</span>
                 <p className="text-sm text-muted-foreground mt-2">Annual commitment • Monthly coaching calls included</p>
                 <p className="text-xs text-muted-foreground mt-1">*Payment plans available</p>
               </div>
@@ -149,7 +149,7 @@ const Pricing = () => {
 
                 {user ? (
                   <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                    Start Consulting - $2,499
+                    Start Consulting - $899
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 ) : (
@@ -209,7 +209,7 @@ const Pricing = () => {
                   <Users className="w-5 h-5 text-primary" />
                   <span className="font-bold text-foreground">CFA Golf</span>
                 </div>
-                <p className="text-2xl font-bold text-primary">$2,499</p>
+                <p className="text-2xl font-bold text-primary">$899</p>
                 <p className="text-xs text-muted-foreground">Annual</p>
               </Card>
               <Card className="p-4 text-center">
