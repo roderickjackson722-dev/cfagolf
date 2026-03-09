@@ -129,7 +129,7 @@ const Pricing = () => {
                 Complete hands-on recruiting guidance for junior golfers
               </CardDescription>
               <div className="pt-6">
-                <span className="text-5xl font-bold text-foreground">$2,499</span><span className="text-primary">*</span>
+                <span className="text-5xl font-bold text-foreground">$899</span><span className="text-primary">*</span>
                 <p className="text-sm text-muted-foreground mt-2">Annual commitment • Monthly coaching calls included</p>
                 <p className="text-xs text-muted-foreground mt-1">*Payment plans available</p>
               </div>
