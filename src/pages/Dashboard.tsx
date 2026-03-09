@@ -13,7 +13,8 @@ import {
   Heart,
   Download,
   ChevronRight,
-  Loader2
+  Loader2,
+  Trophy
 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
@@ -103,7 +104,16 @@ const tools = [
     description: "Stay on track with your timeline",
     status: 'available',
     downloadable: true
-  }
+  },
+  {
+    id: 'wagr-tournaments',
+    icon: Trophy,
+    title: "WAGR Tournament Finder",
+    description: "Find WAGR-ranked events near you",
+    status: 'available',
+    interactive: true,
+    path: '/tools/wagr-tournaments'
+  },
 ];
 
 const Dashboard = () => {
