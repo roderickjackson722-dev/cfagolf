@@ -165,7 +165,7 @@ export default function SocialLanding() {
             <span className="text-cfa-gold">Perfect Program?</span>
           </h2>
           <p className="text-lg md:text-xl text-white/85 max-w-2xl mx-auto">
-            Join CFA and get personalized, year-round recruiting support for just $2,499/year — less than a single tournament entry per month.
+            Join CFA and get personalized, year-round recruiting support for just $899/year — less than a single tournament entry per month.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
             <Link to="/checkout">

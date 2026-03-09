@@ -209,7 +209,7 @@ const Pricing = () => {
                   <Users className="w-5 h-5 text-primary" />
                   <span className="font-bold text-foreground">CFA Golf</span>
                 </div>
-                <p className="text-2xl font-bold text-primary">$2,499</p>
+                <p className="text-2xl font-bold text-primary">$899</p>
                 <p className="text-xs text-muted-foreground">Annual</p>
               </Card>
               <Card className="p-4 text-center">
