@@ -103,7 +103,16 @@ const tools = [
     description: "Stay on track with your timeline",
     status: 'available',
     downloadable: true
-  }
+  },
+  {
+    id: 'wagr-tournaments',
+    icon: Trophy,
+    title: "WAGR Tournament Finder",
+    description: "Find WAGR-ranked events near you",
+    status: 'available',
+    interactive: true,
+    path: '/tools/wagr-tournaments'
+  },
 ];
 
 const Dashboard = () => {
