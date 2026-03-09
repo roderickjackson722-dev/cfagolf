@@ -69,6 +69,7 @@ const App = () => (
             <Route path="/flyer" element={<Flyer />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/go" element={<SocialLanding />} />
+            <Route path="/social-kit" element={<SocialKit />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
