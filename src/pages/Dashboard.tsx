@@ -287,6 +287,11 @@ const Dashboard = () => {
             </div>
           </div>
 
+          {/* WAGR Tournament Finder */}
+          <div className="mb-8">
+            <WagrTournamentBrowser />
+          </div>
+
           {/* Two Column Layout for Progress and Referral */}
           <div className="grid lg:grid-cols-2 gap-6">
             {/* Progress Section */}
