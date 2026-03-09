@@ -28,6 +28,7 @@ import SubmitTestimonial from "./pages/SubmitTestimonial";
 import Flyer from "./pages/Flyer";
 import Welcome from "./pages/Welcome";
 import SocialLanding from "./pages/SocialLanding";
+import SocialKit from "./pages/SocialKit";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -68,6 +69,7 @@ const App = () => (
             <Route path="/flyer" element={<Flyer />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/go" element={<SocialLanding />} />
+            <Route path="/social-kit" element={<SocialKit />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
