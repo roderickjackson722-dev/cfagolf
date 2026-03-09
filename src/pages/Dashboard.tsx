@@ -13,7 +13,8 @@ import {
   Heart,
   Download,
   ChevronRight,
-  Loader2
+  Loader2,
+  Trophy
 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
