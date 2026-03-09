@@ -74,6 +74,17 @@ export function Navbar() {
                   <Heart className="w-4 h-4" />
                   Favorites
                 </Link>
+                <Link
+                  to="/tools/wagr-tournaments"
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                    isActive('/tools/wagr-tournaments')
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  }`}
+                >
+                  <Trophy className="w-4 h-4" />
+                  WAGR
+                </Link>
                 {isAdmin && (
                   <Link
                     to="/admin"
