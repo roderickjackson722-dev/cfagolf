@@ -9,8 +9,8 @@ const corsHeaders = {
 
 // Promo codes are now stored in the promo_codes database table
 
-const MEMBERSHIP_PRICE_ID = "price_1SuvOnLXW44Q7xfEtjqK7PLY";
-const MEMBERSHIP_AMOUNT = 249900; // $2,499 in cents
+const MEMBERSHIP_PRICE_ID = "price_1T9CdgLXW44Q7xfEBgxrYzCW";
+const MEMBERSHIP_AMOUNT = 89900; // $899 in cents
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
