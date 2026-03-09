@@ -27,6 +27,7 @@ import { pdfGenerators } from '@/lib/pdfTemplates';
 import { toast } from '@/hooks/use-toast';
 import { ReferralCard } from '@/components/ReferralCard';
 import { CoachingProgressSection } from '@/components/dashboard/CoachingProgressSection';
+import { WagrTournamentBrowser } from '@/components/dashboard/WagrTournamentBrowser';
 
 const tools = [
   {
