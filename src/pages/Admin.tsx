@@ -320,6 +320,23 @@ const Admin = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+            {/* WAGR Tournaments Tab */}
+            <TabsContent value="wagr">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Trophy className="w-5 h-5 text-primary" />
+                    <CardTitle>WAGR Tournaments</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Manage World Amateur Golf Ranking tournament database. Add events manually or import from wagr.com.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminWagrTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
           </Tabs>
         </div>
       </main>
