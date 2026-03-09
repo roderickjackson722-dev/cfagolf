@@ -17,6 +17,7 @@ import { AdminPromoCodeTable } from '@/components/admin/AdminPromoCodeTable';
 import { AdminHighSchoolTable } from '@/components/admin/AdminHighSchoolTable';
 import { CoachCRM } from '@/components/admin/CoachCRM';
 import { ModuleAgenda } from '@/components/admin/ModuleAgenda';
+import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
