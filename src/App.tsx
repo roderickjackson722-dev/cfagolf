@@ -71,6 +71,7 @@ const App = () => (
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/go" element={<SocialLanding />} />
             <Route path="/social-kit" element={<SocialKit />} />
+            <Route path="/tools/wagr-tournaments" element={<WagrTournaments />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

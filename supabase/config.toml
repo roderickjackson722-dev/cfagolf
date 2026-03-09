@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.send-coach-campaign]
 verify_jwt = false
+
+[functions.scrape-wagr-tournaments]
+verify_jwt = false
