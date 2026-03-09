@@ -291,6 +291,110 @@ export default function SocialKit() {
                 </Button>
               </CardContent>
             </Card>
+
+            {/* TikTok Square */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <Video className="w-4 h-4" />
+                  TikTok Post (1080×1080)
+                </CardTitle>
+                <CardDescription>Square format for TikTok feed</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <img 
+                  src="/flyers/cfa-social-flyer-tiktok.jpg" 
+                  alt="CFA TikTok Flyer" 
+                  className="w-full aspect-square object-cover rounded-lg border"
+                />
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => downloadImage('/flyers/cfa-social-flyer-tiktok.jpg', 'cfa-tiktok-flyer.jpg')}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Facebook Square */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <Facebook className="w-4 h-4" />
+                  Facebook Post (1080×1080)
+                </CardTitle>
+                <CardDescription>Square format for Facebook feed</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <img 
+                  src="/flyers/cfa-social-flyer-facebook.jpg" 
+                  alt="CFA Facebook Flyer" 
+                  className="w-full aspect-square object-cover rounded-lg border"
+                />
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => downloadImage('/flyers/cfa-social-flyer-facebook.jpg', 'cfa-facebook-flyer.jpg')}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* LinkedIn Square */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <Linkedin className="w-4 h-4" />
+                  LinkedIn Post (1080×1080)
+                </CardTitle>
+                <CardDescription>Square format for LinkedIn feed</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <img 
+                  src="/flyers/cfa-social-flyer-linkedin-square.jpg" 
+                  alt="CFA LinkedIn Flyer" 
+                  className="w-full aspect-square object-cover rounded-lg border"
+                />
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => downloadImage('/flyers/cfa-social-flyer-linkedin-square.jpg', 'cfa-linkedin-square-flyer.jpg')}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Pinterest Square */}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <Image className="w-4 h-4" />
+                  Pinterest Pin (1000×1000)
+                </CardTitle>
+                <CardDescription>Square format for Pinterest</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <img 
+                  src="/flyers/cfa-social-flyer-pinterest-square.jpg" 
+                  alt="CFA Pinterest Flyer" 
+                  className="w-full aspect-square object-cover rounded-lg border"
+                />
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => downloadImage('/flyers/cfa-social-flyer-pinterest-square.jpg', 'cfa-pinterest-square-flyer.jpg')}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
