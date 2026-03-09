@@ -27,6 +27,7 @@ import { pdfGenerators } from '@/lib/pdfTemplates';
 import { toast } from '@/hooks/use-toast';
 import { ReferralCard } from '@/components/ReferralCard';
 import { CoachingProgressSection } from '@/components/dashboard/CoachingProgressSection';
+import { WagrTournamentBrowser } from '@/components/dashboard/WagrTournamentBrowser';
 
 const tools = [
   {
@@ -284,6 +285,11 @@ const Dashboard = () => {
                 </Card>
               ))}
             </div>
+          </div>
+
+          {/* WAGR Tournament Finder */}
+          <div className="mb-8">
+            <WagrTournamentBrowser />
           </div>
 
           {/* Two Column Layout for Progress and Referral */}

@@ -948,6 +948,66 @@ export type Database = {
         }
         Relationships: []
       }
+      wagr_tournaments: {
+        Row: {
+          city: string | null
+          country: string | null
+          course_name: string | null
+          created_at: string
+          end_date: string | null
+          event_type: string | null
+          external_url: string | null
+          gender: string | null
+          id: string
+          notes: string | null
+          power_rating: number | null
+          start_date: string
+          state: string | null
+          tournament_name: string
+          updated_at: string
+          wagr_url: string | null
+          winner_name: string | null
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          course_name?: string | null
+          created_at?: string
+          end_date?: string | null
+          event_type?: string | null
+          external_url?: string | null
+          gender?: string | null
+          id?: string
+          notes?: string | null
+          power_rating?: number | null
+          start_date: string
+          state?: string | null
+          tournament_name: string
+          updated_at?: string
+          wagr_url?: string | null
+          winner_name?: string | null
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          course_name?: string | null
+          created_at?: string
+          end_date?: string | null
+          event_type?: string | null
+          external_url?: string | null
+          gender?: string | null
+          id?: string
+          notes?: string | null
+          power_rating?: number | null
+          start_date?: string
+          state?: string | null
+          tournament_name?: string
+          updated_at?: string
+          wagr_url?: string | null
+          winner_name?: string | null
+        }
+        Relationships: []
+      }
       worksheet_data: {
         Row: {
           created_at: string

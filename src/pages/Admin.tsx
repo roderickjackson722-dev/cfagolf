@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -17,6 +17,7 @@ import { AdminPromoCodeTable } from '@/components/admin/AdminPromoCodeTable';
 import { AdminHighSchoolTable } from '@/components/admin/AdminHighSchoolTable';
 import { CoachCRM } from '@/components/admin/CoachCRM';
 import { ModuleAgenda } from '@/components/admin/ModuleAgenda';
+import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -139,6 +140,10 @@ const Admin = () => {
               <TabsTrigger value="agenda" className="flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
                 Module Agenda
+              </TabsTrigger>
+              <TabsTrigger value="wagr" className="flex items-center gap-2">
+                <Trophy className="w-4 h-4" />
+                WAGR
               </TabsTrigger>
             </TabsList>
 
@@ -312,6 +317,23 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <ModuleAgenda />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            {/* WAGR Tournaments Tab */}
+            <TabsContent value="wagr">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Trophy className="w-5 h-5 text-primary" />
+                    <CardTitle>WAGR Tournaments</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Manage World Amateur Golf Ranking tournament database. Add events manually or import from wagr.com.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminWagrTable />
                 </CardContent>
               </Card>
             </TabsContent>
