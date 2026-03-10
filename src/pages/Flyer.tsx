@@ -106,7 +106,7 @@ const Flyer = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 bg-secondary/50 rounded-lg px-4 py-3">
+          <div className="grid grid-cols-2 gap-4 bg-secondary/50 rounded-lg px-4 py-3">
             <div className="text-center">
               <div className="flex items-center justify-center gap-1.5">
                 <Users className="w-4 h-4 text-primary" />
@@ -120,13 +120,6 @@ const Flyer = () => {
                 <span className="font-bold text-foreground text-lg">{content.stat_2_value}</span>
               </div>
               <span className="text-muted-foreground text-xs">{content.stat_2_label}</span>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1.5">
-                <Star className="w-4 h-4 text-cfa-gold" />
-                <span className="font-bold text-foreground text-lg">{content.stat_3_value}</span>
-              </div>
-              <span className="text-muted-foreground text-xs">{content.stat_3_label}</span>
             </div>
           </div>
 

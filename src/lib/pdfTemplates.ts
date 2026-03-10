@@ -814,9 +814,8 @@ export const generateMarketingFlyer = (): void => {
   doc.setTextColor(26, 46, 37);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
-  doc.text('1,300+ College Programs', 30, y + 9);
-  doc.text('D1 — NAIA All Divisions', pageWidth / 2 - 10, y + 9);
-  doc.text('500+ Families Served', pageWidth - 55, y + 9);
+  doc.text('1,300+ College Programs', pageWidth / 4, y + 9, { align: 'center' });
+  doc.text('D1 — NAIA All Divisions', (pageWidth / 4) * 3, y + 9, { align: 'center' });
 
   // Footer
   doc.setFontSize(9);
