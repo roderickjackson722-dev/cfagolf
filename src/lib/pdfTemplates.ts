@@ -690,13 +690,15 @@ export const generateMarketingFlyer = (): void => {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 14;
+  const contentWidth = pageWidth - margin * 2;
 
   // Full page green header banner
   doc.setFillColor(26, 46, 37);
   doc.rect(0, 0, pageWidth, 60, 'F');
 
   // Logo
-  doc.addImage(cfaWatermark, 'PNG', 14, 8, 40, 30);
+  doc.addImage(cfaWatermark, 'PNG', margin, 8, 40, 30);
 
   // Brand name
   doc.setTextColor(255, 255, 255);
@@ -710,32 +712,32 @@ export const generateMarketingFlyer = (): void => {
 
   // Gold accent line
   doc.setFillColor(220, 180, 50);
-  doc.rect(14, 48, pageWidth - 28, 2, 'F');
+  doc.rect(margin, 48, contentWidth, 2, 'F');
 
   // Tagline
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
-  doc.text('www.cfa.golf', pageWidth - 14, 56, { align: 'right' });
+  doc.text('www.cfa.golf', pageWidth - margin, 56, { align: 'right' });
 
-  let y = 70;
+  let y = 68;
 
   // Intro paragraph
   doc.setTextColor(30, 50, 40);
   doc.setFontSize(11);
   doc.setFont('helvetica', 'normal');
   const intro = 'Expert guidance for junior golfers and their families navigating the college golf recruiting process. We provide personalized consulting, professional tools, and direct access to college coaches and LPGA/PGA professionals.';
-  const introLines = doc.splitTextToSize(intro, pageWidth - 28);
-  doc.text(introLines, 14, y);
-  y += introLines.length * 6 + 8;
+  const introLines = doc.splitTextToSize(intro, contentWidth);
+  doc.text(introLines, margin, y);
+  y += introLines.length * 5.5 + 6;
 
   // What's Included section
   doc.setFillColor(102, 140, 115);
-  doc.rect(14, y, pageWidth - 28, 9, 'F');
+  doc.rect(margin, y, contentWidth, 9, 'F');
   doc.setTextColor(255, 255, 255);
-  doc.setFontSize(12);
+  doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
-  doc.text("WHAT'S INCLUDED IN YOUR ANNUAL MEMBERSHIP", 18, y + 6.5);
-  y += 14;
+  doc.text("WHAT'S INCLUDED IN YOUR ANNUAL MEMBERSHIP", margin + 4, y + 6.5);
+  y += 12;
 
   const services = [
     ['12 Monthly Coaching Calls', 'One-on-one guidance through every phase of recruiting'],
@@ -748,46 +750,48 @@ export const generateMarketingFlyer = (): void => {
     ['12-Month Recruiting Timeline', 'Grade-specific action plans to stay on track'],
   ];
 
+  const descX = 95;
   doc.setTextColor(30, 50, 40);
   services.forEach((s, i) => {
+    const rowH = 8;
     if (i % 2 === 0) {
       doc.setFillColor(245, 243, 239);
-      doc.rect(14, y - 1, pageWidth - 28, 9, 'F');
+      doc.rect(margin, y, contentWidth, rowH, 'F');
     }
-    doc.setFontSize(10);
+    doc.setFontSize(9.5);
     doc.setFont('helvetica', 'bold');
-    doc.text(`✓  ${s[0]}`, 18, y + 5);
+    doc.text(`✓  ${s[0]}`, margin + 4, y + 5.5);
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
+    doc.setFontSize(8.5);
     doc.setTextColor(100, 100, 100);
-    doc.text(s[1], 90, y + 5);
+    doc.text(`— ${s[1]}`, descX, y + 5.5);
     doc.setTextColor(30, 50, 40);
-    y += 9;
+    y += rowH;
   });
 
-  y += 8;
+  y += 6;
 
   // Pricing box
   doc.setFillColor(26, 46, 37);
-  doc.roundedRect(14, y, pageWidth - 28, 30, 4, 4, 'F');
+  doc.roundedRect(margin, y, contentWidth, 28, 4, 4, 'F');
   doc.setTextColor(220, 180, 50);
   doc.setFontSize(22);
   doc.setFont('helvetica', 'bold');
-  doc.text('$899 / Year', pageWidth / 2, y + 14, { align: 'center' });
+  doc.text('$899 / Year', pageWidth / 2, y + 13, { align: 'center' });
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
-  doc.text('Annual Consulting Membership — Personalized College Golf Recruiting', pageWidth / 2, y + 23, { align: 'center' });
-  y += 38;
+  doc.text('Annual Consulting Membership — Personalized College Golf Recruiting', pageWidth / 2, y + 22, { align: 'center' });
+  y += 34;
 
   // Why CFA section
   doc.setFillColor(102, 140, 115);
-  doc.rect(14, y, pageWidth - 28, 9, 'F');
+  doc.rect(margin, y, contentWidth, 9, 'F');
   doc.setTextColor(255, 255, 255);
-  doc.setFontSize(12);
+  doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
-  doc.text('WHY COLLEGE FAIRWAY ADVISORS?', 18, y + 6.5);
-  y += 14;
+  doc.text('WHY COLLEGE FAIRWAY ADVISORS?', margin + 4, y + 6.5);
+  y += 12;
 
   const pillars = [
     ['Clarity', 'We simplify the recruiting process so families know exactly what to do and when.'],
@@ -797,25 +801,27 @@ export const generateMarketingFlyer = (): void => {
 
   doc.setTextColor(30, 50, 40);
   pillars.forEach((p) => {
-    doc.setFontSize(10);
+    doc.setFontSize(9.5);
     doc.setFont('helvetica', 'bold');
-    doc.text(`${p[0]}:`, 18, y + 5);
+    const titleText = `${p[0]}: `;
+    doc.text(titleText, margin + 4, y + 5);
+    const titleWidth = doc.getTextWidth(titleText);
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.text(p[1], 50, y + 5);
-    y += 9;
+    doc.text(p[1], margin + 4 + titleWidth, y + 5);
+    y += 8;
   });
 
-  y += 5;
+  y += 4;
 
   // Stats bar
   doc.setFillColor(245, 243, 239);
-  doc.rect(14, y, pageWidth - 28, 14, 'F');
+  doc.rect(margin, y, contentWidth, 14, 'F');
   doc.setTextColor(26, 46, 37);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
-  doc.text('1,300+ College Programs', pageWidth / 4, y + 9, { align: 'center' });
-  doc.text('D1 — NAIA All Divisions', (pageWidth / 4) * 3, y + 9, { align: 'center' });
+  doc.text('1,300+ College Programs', pageWidth / 3, y + 9, { align: 'center' });
+  doc.text('D1 — NAIA All Divisions', (pageWidth / 3) * 2, y + 9, { align: 'center' });
 
   // Footer
   doc.setFontSize(9);
