@@ -235,6 +235,7 @@ const Checkout = () => {
         body: { 
           promoCode: promoApplied ? promoCode : null,
           referralCode: referralApplied && !promoApplied ? referralCode : null,
+          programType: program.programType,
         },
       });
 
