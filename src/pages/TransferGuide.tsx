@@ -13,8 +13,34 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Checkbox } from '@/components/ui/checkbox';
 
+const CHECKLIST_ITEMS = [
+  "Confirm transfer window dates for your sport",
+  "Research target schools (academics + athletics)",
+  "Talk to current coach about decision",
+  "Understand scholarship implications",
+  "Prepare written notice for compliance office",
+  "Enter portal during correct window",
+  "Update recruiting profile and swing video",
+  "Prepare questions for coaches",
+  "Schedule campus visits",
+  "Apply to new school",
+  "Verify credit transfer",
+  "Complete FAFSA",
+  "Confirm eligibility with new school",
+];
+
+const FAQ_ITEMS = [
+  { q: "Can you talk to coaches before entering the portal?", a: "No. That's tampering and can result in penalties for both the coach and the athlete." },
+  { q: "Can your coach see you're in the portal?", a: "Yes. They're notified immediately when you enter." },
+  { q: "Can you enter any time?", a: "No. Must enter during sport-specific windows. Golf windows for 2026: Men's May 13–Jun 11, Women's May 6–Jun 4." },
+  { q: "Can you play immediately after transferring?", a: "Yes, as of 2026, if you're academically eligible and entered during the official window." },
+  { q: "What if you miss the window?", a: "Must wait until the next window — this could significantly affect your recruiting timing." },
+  { q: "Can multiple transfers happen?", a: "Yes. The 2026 rule change allows unlimited transfers with immediate eligibility, as long as academic requirements are met." },
+];
+
 const TransferGuide = () => {
   const { user, loading, hasPaidAccess } = useAuth();
+  const { data: checklistData, updateData: updateChecklist } = useWorksheetData<Record<string, boolean>>('transfer_checklist', {});
 
   if (loading) {
     return (
@@ -37,6 +63,15 @@ const TransferGuide = () => {
       </div>
     );
   }
+
+  const toggleCheckItem = (idx: number) => {
+    updateChecklist((prev: Record<string, boolean>) => ({
+      ...prev,
+      [String(idx)]: !prev[String(idx)],
+    }));
+  };
+
+  const completedCount = CHECKLIST_ITEMS.filter((_, i) => checklistData[String(i)]).length;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
