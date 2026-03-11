@@ -150,6 +150,48 @@ const TransferPortalTracker = () => {
             </CardContent></Card>
           </div>
 
+          {/* NCAA Transfer Portal Info */}
+          <Collapsible className="mb-6">
+            <Card className="border-primary/30 bg-primary/5">
+              <CollapsibleTrigger className="w-full">
+                <CardContent className="pt-4 pb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Info className="w-5 h-5 text-primary" />
+                    <span className="font-semibold text-foreground text-sm">NCAA Transfer Portal — Key Rules & 2026 Updates</span>
+                  </div>
+                  <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                </CardContent>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <CardContent className="pt-0 pb-4 space-y-4">
+                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-2">What is the Transfer Portal?</h4>
+                      <ul className="space-y-1 text-muted-foreground">
+                        <li>• Online database where athletes declare intent to transfer</li>
+                        <li>• Once entered, coaches from other schools can legally contact you</li>
+                        <li>• Athletes must enter during sport-specific windows</li>
+                        <li>• Entering does <strong>not</strong> guarantee a scholarship elsewhere</li>
+                        <li>• Launched in 2018 to streamline the transfer process</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-2">🔹 2026 Rule Changes</h4>
+                      <ul className="space-y-1 text-muted-foreground">
+                        <li>• <strong>Immediate eligibility</strong> — athletes can play right away regardless of transfer count</li>
+                        <li>• Must be academically eligible at previous school</li>
+                        <li>• Cannot be under disciplinary suspension or dismissal</li>
+                        <li>• Must meet progress-toward-degree requirements</li>
+                        <li>• Transfer windows still apply for undergraduates</li>
+                        <li>• Graduate students can transfer and enter outside windows</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </CollapsibleContent>
+            </Card>
+          </Collapsible>
+
           {/* Add / Edit Form */}
           <div className="mb-6">
             {!showForm ? (
