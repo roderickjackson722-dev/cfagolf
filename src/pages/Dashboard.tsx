@@ -114,6 +114,24 @@ const tools = [
     interactive: true,
     path: '/tools/wagr-tournaments'
   },
+  {
+    id: 'transfer-portal',
+    icon: ArrowRightLeft,
+    title: "Transfer Portal Tracker",
+    description: "Track transfer schools and opportunities",
+    status: 'available',
+    interactive: true,
+    path: '/tools/transfer-portal'
+  },
+  {
+    id: 'transfer-guide',
+    icon: BookOpen,
+    title: "Transfer Guide & Checklist",
+    description: "NCAA transfer rules and step-by-step process",
+    status: 'available',
+    interactive: true,
+    path: '/tools/transfer-guide'
+  },
 ];
 
 const Dashboard = () => {
