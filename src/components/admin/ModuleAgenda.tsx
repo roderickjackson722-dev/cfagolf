@@ -335,6 +335,74 @@ export function ModuleAgenda() {
           </AccordionItem>
         ))}
       </Accordion>
+      </div>
+
+      {/* Transfer Program */}
+      <div className="mt-8">
+        <h3 className="font-display text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+          <Badge className="bg-primary/10 text-primary">6 Modules</Badge>
+          Transfer Student Program
+        </h3>
+        <Accordion type="single" collapsible className="space-y-4">
+          {TRANSFER_MODULE_AGENDAS.map((module) => (
+            <AccordionItem key={module.moduleNumber} value={`transfer-${module.moduleNumber}`} className="border rounded-lg px-4">
+              <AccordionTrigger className="hover:no-underline py-4">
+                <div className="flex items-center gap-3 text-left">
+                  <Badge variant="outline" className="shrink-0 font-mono">
+                    T{module.moduleNumber}
+                  </Badge>
+                  <div>
+                    <p className="font-semibold text-sm">{module.title}</p>
+                    <p className="text-xs text-muted-foreground flex items-center gap-2 mt-0.5">
+                      <Clock className="w-3 h-3" /> {module.totalDuration}
+                    </p>
+                  </div>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="pb-4 space-y-4">
+                <p className="text-sm font-medium text-primary">{module.objective}</p>
+                <div className="space-y-3">
+                  {module.agenda.map((item, idx) => (
+                    <Card key={idx} className="shadow-none">
+                      <CardHeader className="p-3 pb-1">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-sm font-medium">{item.topic}</CardTitle>
+                          <Badge variant="secondary" className="text-xs shrink-0">{item.duration}</Badge>
+                        </div>
+                      </CardHeader>
+                      {item.details && (
+                        <CardContent className="p-3 pt-1">
+                          <ul className="text-xs text-muted-foreground space-y-1">
+                            {item.details.map((d, i) => (
+                              <li key={i} className="flex items-start gap-2">
+                                <span className="text-primary mt-0.5">•</span>
+                                {d}
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      )}
+                    </Card>
+                  ))}
+                </div>
+                <div className="border-t pt-3">
+                  <p className="text-xs font-semibold flex items-center gap-1.5 mb-2">
+                    <ListChecks className="w-3.5 h-3.5 text-primary" /> Session Deliverables
+                  </p>
+                  <ul className="text-xs text-muted-foreground space-y-1">
+                    {module.deliverables.map((d, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3 h-3 text-green-500 shrink-0" />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
     </div>
   );
 }
