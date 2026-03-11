@@ -1,0 +1,1 @@
+UPDATE flyer_content SET value = 'contact@cfa.golf', updated_at = now() WHERE key = 'email';
