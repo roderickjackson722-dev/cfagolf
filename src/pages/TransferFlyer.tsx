@@ -60,7 +60,7 @@ const TransferFlyer = () => {
               </div>
             </div>
             <div className="h-0.5 bg-cfa-gold mt-3" />
-            <p className="text-primary-foreground/60 text-[10px] mt-1 text-right">collegefairwayadvisors.com</p>
+            <p className="text-primary-foreground/60 text-[10px] mt-1 text-right">www.cfa.golf</p>
           </div>
         </div>
 
