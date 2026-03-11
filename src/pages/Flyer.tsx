@@ -92,8 +92,8 @@ const Flyer = () => {
                 <div key={i} className={`flex items-start gap-2 px-3 py-1.5 ${i % 2 === 0 ? 'bg-secondary/40' : ''}`}>
                   <CheckCircle className="w-3 h-3 text-primary mt-0.5 flex-shrink-0" />
                   <div className="flex flex-col sm:flex-row sm:gap-1.5">
-                    <span className="font-semibold text-foreground text-[11px]">{s.title}</span>
-                    <span className="text-muted-foreground text-[10px] sm:text-[11px]">— {s.desc}</span>
+                    <span className="font-bold text-foreground text-[11px]">{s.title}</span>
+                    <span className="text-foreground/80 font-medium text-[10px] sm:text-[11px]">— {s.desc}</span>
                   </div>
                 </div>
               ))}
