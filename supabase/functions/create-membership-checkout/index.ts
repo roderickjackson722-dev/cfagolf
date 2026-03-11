@@ -158,8 +158,8 @@ serve(async (req) => {
           price_data: {
             currency: "usd",
             product_data: {
-              name: `CFA Golf Annual Consulting Membership (${discountPercent}% Off)`,
-              description: `Annual college golf recruiting consulting - ${discountName}`,
+              name: `${PROGRAM_NAME} (${discountPercent}% Off)`,
+              description: `${discountName}`,
             },
             unit_amount: discountedAmount,
           },
