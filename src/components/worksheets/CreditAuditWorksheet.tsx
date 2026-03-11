@@ -44,17 +44,18 @@ const defaultData: CreditAuditData = {
 const GRADE_OPTIONS = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'F', 'W', 'P'];
 
 export function CreditAuditWorksheet() {
-  const { data: savedData, saveData, isSaving } = useWorksheetData('credit_audit');
-  const [formData, setFormData] = useState<CreditAuditData>(defaultData);
+  const { data: formData, updateData, isLoading: isSaving } = useWorksheetData<CreditAuditData>('credit_audit', defaultData);
 
-  useEffect(() => {
-    if (savedData) {
-      setFormData({ ...defaultData, ...savedData as unknown as CreditAuditData });
+  const setFormData = (updater: CreditAuditData | ((prev: CreditAuditData) => CreditAuditData)) => {
+    if (typeof updater === 'function') {
+      updateData(updater as any);
+    } else {
+      updateData(() => updater as any);
     }
-  }, [savedData]);
+  };
 
   const handleSave = () => {
-    saveData(formData as any);
+    // Data is auto-saved via updateData
   };
 
   const addCourse = () => {

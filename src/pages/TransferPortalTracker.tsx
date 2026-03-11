@@ -60,7 +60,7 @@ const TransferPortalTracker = () => {
         <Navbar />
         <main className="flex-1 py-8">
           <div className="container mx-auto px-4">
-            <PaywallGate featureName="Transfer Portal Tracker" />
+            <PaywallGate />
           </div>
         </main>
         <Footer />
