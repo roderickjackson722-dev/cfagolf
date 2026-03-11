@@ -15,7 +15,7 @@ const features = [
   "Coach Contact Strategy & Follow-up Support",
   "Campus Visit Preparation & Comparison",
   "Scholarship Offer Analysis & Negotiation Tips",
-  "12-Month Recruiting Timeline (by grade)",
+  "Recruiting Timeline & Action Plans (by grade)",
   "Highlight Video Review & Feedback",
   "Priority Email Support"
 ];
