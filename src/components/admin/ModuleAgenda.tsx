@@ -169,15 +169,108 @@ const MODULE_AGENDAS: ModuleAgenda[] = [
   },
 ];
 
+const TRANSFER_MODULE_AGENDAS: ModuleAgenda[] = [
+  {
+    moduleNumber: 1,
+    title: "Transfer Assessment & Portal Orientation",
+    totalDuration: "60 min",
+    objective: "Understand the NCAA Transfer Portal, 2026 rule changes, and assess the student-athlete's transfer readiness.",
+    agenda: [
+      { topic: "Why Transfer? Self-Assessment", duration: "15 min", details: ["Identify reasons for transferring (playing time, coaching, academics, location)", "Evaluate what didn't work at current school", "Set clear expectations for the transfer process"] },
+      { topic: "NCAA Transfer Portal Overview", duration: "15 min", details: ["What the portal is and how it works (launched 2018)", "Sport-by-sport transfer windows — entering doesn't guarantee a scholarship", "Once in portal, coaches from other schools can legally initiate contact", "Graduate transfer flexibility vs. undergraduate windows"] },
+      { topic: "2026 Rule Changes: Immediate Eligibility", duration: "15 min", details: ["As of Feb 2026: athletes are immediately eligible regardless of transfer count", "Requirements: academically eligible at previous school, no disciplinary suspension/dismissal, must meet progress-toward-degree", "Transfer windows still apply for undergraduates", "Graduate students can transfer multiple times and enter outside windows"] },
+      { topic: "Transfer Timeline & Action Plan", duration: "10 min", details: ["Key dates and deadlines for your sport", "When to enter the portal strategically", "Building your 6-module plan"] },
+      { topic: "Wrap-Up & Action Items", duration: "5 min", details: ["Complete transfer readiness self-assessment", "Research your sport's transfer window dates", "Preview Module 2 topics"] },
+    ],
+    deliverables: ["Transfer readiness assessment completed", "Transfer timeline drafted", "Portal window dates identified"],
+  },
+  {
+    moduleNumber: 2,
+    title: "Academic & Eligibility Audit",
+    totalDuration: "60 min",
+    objective: "Map current coursework to target schools and verify eligibility requirements.",
+    agenda: [
+      { topic: "Credit Transfer Analysis", duration: "20 min", details: ["Using the Credit Audit Worksheet tool", "Course-by-course mapping to target schools", "Identifying credits that may not transfer", "Understanding how credit loss affects graduation timeline"] },
+      { topic: "Eligibility Clock & Requirements", duration: "15 min", details: ["Years of eligibility used vs. remaining", "Progress-toward-degree requirements at new school", "Academic eligibility verification process", "2026 rule: must be academically eligible at previous school"] },
+      { topic: "GPA & Academic Standing", duration: "15 min", details: ["How GPA transfers (or doesn't)", "Minimum GPA requirements by division", "Academic support resources at target schools"] },
+      { topic: "Red Flags & Waivers", duration: "5 min", details: ["Disciplinary issues that block immediate eligibility", "Waiver process overview", "Documentation to gather from current school"] },
+      { topic: "Wrap-Up & Action Items", duration: "5 min", details: ["Complete Credit Audit Worksheet", "Request unofficial transcripts", "Preview Module 3 topics"] },
+    ],
+    deliverables: ["Credit Audit Worksheet completed", "Eligibility years documented", "Transcript request initiated"],
+  },
+  {
+    moduleNumber: 3,
+    title: "College Golf Resume 2.0 — Leveraging Collegiate Experience",
+    totalDuration: "60 min",
+    objective: "Build a compelling transfer resume using collegiate stats, film, and experience.",
+    agenda: [
+      { topic: "Collegiate Stats Resume", duration: "20 min", details: ["Translating college tournament results into a recruiting resume", "Using the Tournament Log to showcase collegiate performance", "Comparing your stats to target programs' team averages", "What transfer coaches value vs. what HS coaches value"] },
+      { topic: "Video & Film Portfolio for Transfers", duration: "15 min", details: ["College-level swing video expectations", "Game film from collegiate events", "Creating a highlight reel with context"] },
+      { topic: "Positioning Your Transfer Story", duration: "15 min", details: ["Crafting a positive narrative (why transferring, not why leaving)", "Addressing the 'why' question coaches will ask", "Demonstrating maturity and self-awareness"] },
+      { topic: "Online Presence Refresh", duration: "5 min", details: ["Updating profiles to reflect transfer status", "Social media considerations during the portal process"] },
+      { topic: "Wrap-Up & Action Items", duration: "5 min", details: ["Finalize transfer resume", "Gather collegiate film clips", "Preview Module 4 topics"] },
+    ],
+    deliverables: ["Transfer-specific resume completed", "Video highlights compiled", "Transfer narrative drafted"],
+  },
+  {
+    moduleNumber: 4,
+    title: "Portal Strategy & Coach Outreach",
+    totalDuration: "60 min",
+    objective: "Develop a strategic portal entry plan and effective coach communication approach.",
+    agenda: [
+      { topic: "Portal Entry Strategy", duration: "15 min", details: ["When to enter the portal (timing matters)", "Using the Transfer Portal Tracker tool", "Understanding that entering doesn't guarantee offers", "Having a backup plan if portal doesn't yield results"] },
+      { topic: "Coach Outreach for Transfers", duration: "20 min", details: ["Different approach than high school recruiting", "Coaches want proven, ready-to-play athletes", "Initial outreach email templates for transfers", "Using the Coach Tracker tool for transfer contacts", "What coaches check before responding to transfers"] },
+      { topic: "Campus Visit Strategy", duration: "15 min", details: ["What to evaluate differently as a transfer", "Questions specific to transfer situations", "Using Campus Visits tool to compare programs", "Meeting the team — cultural fit assessment"] },
+      { topic: "Managing Current School Relationships", duration: "5 min", details: ["Notifying current coaching staff", "Maintaining professionalism", "NCAA compliance during the process"] },
+      { topic: "Wrap-Up & Action Items", duration: "5 min", details: ["Populate Transfer Portal Tracker with targets", "Draft first outreach emails", "Preview Module 5 topics"] },
+    ],
+    deliverables: ["Transfer Portal Tracker populated", "Coach outreach emails drafted", "Campus visit priorities identified"],
+  },
+  {
+    moduleNumber: 5,
+    title: "Scholarship Negotiation & NIL Considerations",
+    totalDuration: "60 min",
+    objective: "Maximize scholarship value and understand the NIL landscape for transfers.",
+    agenda: [
+      { topic: "Transfer Scholarship Dynamics", duration: "15 min", details: ["Transfers often have leverage — use it wisely", "How offers differ for transfers vs. incoming freshmen", "Using the Scholarship Calculator to compare packages", "Understanding what's negotiable"] },
+      { topic: "Negotiation Strategies", duration: "15 min", details: ["Leveraging multiple transfer offers", "Academic merit + athletic aid combination", "Timing your decisions strategically", "When to walk away from an offer"] },
+      { topic: "NIL Landscape for Transfers", duration: "15 min", details: ["How NIL plays into transfer decisions", "School-specific NIL collectives and policies", "Questions to ask about NIL opportunities", "NIL shouldn't be the sole deciding factor"] },
+      { topic: "Financial Package Comparison", duration: "10 min", details: ["Total cost of attendance comparison", "Factor in credits lost and extra semesters", "Log offers in Scholarship Calculator"] },
+      { topic: "Wrap-Up & Action Items", duration: "5 min", details: ["Update scholarship offers in calculator", "Prepare negotiation talking points", "Preview Module 6 topics"] },
+    ],
+    deliverables: ["Scholarship offers logged and compared", "Negotiation strategy documented", "NIL questions prepared"],
+  },
+  {
+    moduleNumber: 6,
+    title: "Decision & Transition Planning",
+    totalDuration: "60 min",
+    objective: "Make the final transfer decision and plan a smooth transition.",
+    agenda: [
+      { topic: "Decision Framework", duration: "15 min", details: ["Weighing all factors: academics, athletics, finances, culture", "Using Campus Visit comparisons", "Family involvement in the decision", "Setting a decision deadline"] },
+      { topic: "Commitment & Portal Exit", duration: "15 min", details: ["How to formally commit and exit the portal", "Transfer paperwork and release requirements", "Timeline from commitment to enrollment"] },
+      { topic: "Academic Transition Planning", duration: "15 min", details: ["Course registration at new school", "Meeting with academic advisor", "Ensuring credits are properly transferred", "Graduation timeline at new institution"] },
+      { topic: "Athletic & Social Transition", duration: "10 min", details: ["Connecting with new teammates and coaches", "Summer training expectations", "Navigating being 'the transfer' — cultural integration", "Setting goals for your first season"] },
+      { topic: "Program Wrap-Up & Celebration", duration: "5 min", details: ["Review all progress and decisions made", "Ongoing CFA support availability", "Congratulations on your new chapter!"] },
+    ],
+    deliverables: ["Final decision documented", "Transition checklist completed", "Academic plan at new school drafted"],
+  },
+];
+
 export function ModuleAgenda() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <BookOpen className="w-4 h-4" />
-        <span>Consultant reference — session-by-session agenda for the 10-module curriculum</span>
+        <span>Consultant reference — session-by-session agendas for both programs</span>
       </div>
 
-      <Accordion type="single" collapsible className="space-y-4">
+      {/* High School Program */}
+      <div>
+        <h3 className="font-display text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+          <Badge className="bg-primary/10 text-primary">12 Modules</Badge>
+          High School Recruiting Program
+        </h3>
+        <Accordion type="single" collapsible className="space-y-4">
         {MODULE_AGENDAS.map((module) => (
           <AccordionItem key={module.moduleNumber} value={`module-${module.moduleNumber}`} className="border rounded-lg px-4">
             <AccordionTrigger className="hover:no-underline py-4">
@@ -242,6 +335,74 @@ export function ModuleAgenda() {
           </AccordionItem>
         ))}
       </Accordion>
+      </div>
+
+      {/* Transfer Program */}
+      <div className="mt-8">
+        <h3 className="font-display text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+          <Badge className="bg-primary/10 text-primary">6 Modules</Badge>
+          Transfer Student Program
+        </h3>
+        <Accordion type="single" collapsible className="space-y-4">
+          {TRANSFER_MODULE_AGENDAS.map((module) => (
+            <AccordionItem key={module.moduleNumber} value={`transfer-${module.moduleNumber}`} className="border rounded-lg px-4">
+              <AccordionTrigger className="hover:no-underline py-4">
+                <div className="flex items-center gap-3 text-left">
+                  <Badge variant="outline" className="shrink-0 font-mono">
+                    T{module.moduleNumber}
+                  </Badge>
+                  <div>
+                    <p className="font-semibold text-sm">{module.title}</p>
+                    <p className="text-xs text-muted-foreground flex items-center gap-2 mt-0.5">
+                      <Clock className="w-3 h-3" /> {module.totalDuration}
+                    </p>
+                  </div>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="pb-4 space-y-4">
+                <p className="text-sm font-medium text-primary">{module.objective}</p>
+                <div className="space-y-3">
+                  {module.agenda.map((item, idx) => (
+                    <Card key={idx} className="shadow-none">
+                      <CardHeader className="p-3 pb-1">
+                        <div className="flex items-center justify-between">
+                          <CardTitle className="text-sm font-medium">{item.topic}</CardTitle>
+                          <Badge variant="secondary" className="text-xs shrink-0">{item.duration}</Badge>
+                        </div>
+                      </CardHeader>
+                      {item.details && (
+                        <CardContent className="p-3 pt-1">
+                          <ul className="text-xs text-muted-foreground space-y-1">
+                            {item.details.map((d, i) => (
+                              <li key={i} className="flex items-start gap-2">
+                                <span className="text-primary mt-0.5">•</span>
+                                {d}
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      )}
+                    </Card>
+                  ))}
+                </div>
+                <div className="border-t pt-3">
+                  <p className="text-xs font-semibold flex items-center gap-1.5 mb-2">
+                    <ListChecks className="w-3.5 h-3.5 text-primary" /> Session Deliverables
+                  </p>
+                  <ul className="text-xs text-muted-foreground space-y-1">
+                    {module.deliverables.map((d, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <CheckCircle2 className="w-3 h-3 text-green-500 shrink-0" />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
     </div>
   );
 }
