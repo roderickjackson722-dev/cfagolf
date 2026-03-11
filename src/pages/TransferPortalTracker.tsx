@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { 
   ArrowLeftRight, Plus, Trash2, ChevronLeft, Edit, GraduationCap,
-  Clock, Building, Mail, Star
+  Clock, Building, Mail, Star, Info, ChevronDown
 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useAuth } from '@/hooks/useAuth';
 import { useTransferPortal, PortalStatus, InterestLevel, TransferPortalInput } from '@/hooks/useTransferPortal';
 import { Button } from '@/components/ui/button';
