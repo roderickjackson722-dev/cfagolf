@@ -78,7 +78,7 @@ const Flyer = () => {
 
         {/* Body — compact */}
         <div className="px-6 py-3 space-y-3 print:py-2 print:space-y-2">
-          <p className="text-foreground text-xs leading-relaxed">{content.intro}</p>
+          <p className="text-foreground font-medium text-xs leading-relaxed">{content.intro}</p>
 
           {/* Services — compact table */}
           <div>
