@@ -141,7 +141,7 @@ const Flyer = () => {
                     <Trophy className="w-3.5 h-3.5 text-primary" />
                     <span className="font-bold text-foreground text-sm">{content.stat_2_value}</span>
                   </div>
-                  <span className="text-muted-foreground text-[10px]">{content.stat_2_label}</span>
+                  <span className="text-foreground/70 font-medium text-[10px]">{content.stat_2_label}</span>
                 </div>
               </div>
             </div>
