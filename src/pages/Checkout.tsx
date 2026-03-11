@@ -529,7 +529,7 @@ const Checkout = () => {
                       <div className="bg-muted/50 rounded-lg p-4 border">
                         <div className="flex items-center gap-2 mb-2">
                           <CreditCard className="w-5 h-5 text-primary" />
-                          <span className="font-semibold">CFA 12-Module Consulting Program</span>
+                          <span className="font-semibold">{program.shortLabel}</span>
                         </div>
                         <p className="text-sm text-muted-foreground mb-3">
                           Full access to recruiting tools, monthly coaching calls, and expert guidance.
