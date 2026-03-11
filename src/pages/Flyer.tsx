@@ -78,7 +78,7 @@ const Flyer = () => {
 
         {/* Body — compact */}
         <div className="px-6 py-3 space-y-3 print:py-2 print:space-y-2">
-          <p className="text-foreground text-xs leading-relaxed">{content.intro}</p>
+          <p className="text-foreground font-medium text-xs leading-relaxed">{content.intro}</p>
 
           {/* Services — compact table */}
           <div>
@@ -92,8 +92,8 @@ const Flyer = () => {
                 <div key={i} className={`flex items-start gap-2 px-3 py-1.5 ${i % 2 === 0 ? 'bg-secondary/40' : ''}`}>
                   <CheckCircle className="w-3 h-3 text-primary mt-0.5 flex-shrink-0" />
                   <div className="flex flex-col sm:flex-row sm:gap-1.5">
-                    <span className="font-semibold text-foreground text-[11px]">{s.title}</span>
-                    <span className="text-muted-foreground text-[10px] sm:text-[11px]">— {s.desc}</span>
+                    <span className="font-bold text-foreground text-[11px]">{s.title}</span>
+                    <span className="text-foreground/80 font-medium text-[10px] sm:text-[11px]">— {s.desc}</span>
                   </div>
                 </div>
               ))}
@@ -112,8 +112,8 @@ const Flyer = () => {
               <div className="border border-border rounded-b-md divide-y divide-border">
                 {pillars.map((p, i) => (
                   <div key={i} className="px-3 py-1.5">
-                    <span className="font-semibold text-foreground text-[11px]">{p.title}: </span>
-                    <span className="text-muted-foreground text-[10px]">{p.desc}</span>
+                    <span className="font-bold text-foreground text-[11px]">{p.title}: </span>
+                    <span className="text-foreground/80 font-medium text-[10px]">{p.desc}</span>
                   </div>
                 ))}
               </div>
@@ -134,21 +134,21 @@ const Flyer = () => {
                     <Users className="w-3.5 h-3.5 text-primary" />
                     <span className="font-bold text-foreground text-sm">{content.stat_1_value}</span>
                   </div>
-                  <span className="text-muted-foreground text-[10px]">{content.stat_1_label}</span>
+                  <span className="text-foreground/70 font-medium text-[10px]">{content.stat_1_label}</span>
                 </div>
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-1.5">
                     <Trophy className="w-3.5 h-3.5 text-primary" />
                     <span className="font-bold text-foreground text-sm">{content.stat_2_value}</span>
                   </div>
-                  <span className="text-muted-foreground text-[10px]">{content.stat_2_label}</span>
+                  <span className="text-foreground/70 font-medium text-[10px]">{content.stat_2_label}</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Footer / Contact */}
-          <div className="border-t border-border pt-2 flex flex-wrap items-center justify-center gap-5 text-[10px] text-muted-foreground">
+          <div className="border-t border-border pt-2 flex flex-wrap items-center justify-center gap-5 text-[10px] text-foreground/70 font-medium">
             <span className="flex items-center gap-1"><Globe className="w-3 h-3" /> {content.website}</span>
             <span className="flex items-center gap-1"><Mail className="w-3 h-3" /> {content.email}</span>
             <span className="flex items-center gap-1"><Star className="w-3 h-3" /> {content.social}</span>
