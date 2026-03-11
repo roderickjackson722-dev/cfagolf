@@ -112,8 +112,8 @@ const Flyer = () => {
               <div className="border border-border rounded-b-md divide-y divide-border">
                 {pillars.map((p, i) => (
                   <div key={i} className="px-3 py-1.5">
-                    <span className="font-semibold text-foreground text-[11px]">{p.title}: </span>
-                    <span className="text-muted-foreground text-[10px]">{p.desc}</span>
+                    <span className="font-bold text-foreground text-[11px]">{p.title}: </span>
+                    <span className="text-foreground/80 font-medium text-[10px]">{p.desc}</span>
                   </div>
                 ))}
               </div>
