@@ -32,6 +32,7 @@ import SocialKit from "./pages/SocialKit";
 import WagrTournaments from "./pages/WagrTournaments";
 import TransferPortalTracker from "./pages/TransferPortalTracker";
 import TransferGuide from "./pages/TransferGuide";
+import TransferFlyer from "./pages/TransferFlyer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -76,6 +77,7 @@ const App = () => (
             <Route path="/tools/wagr-tournaments" element={<WagrTournaments />} />
             <Route path="/tools/transfer-portal" element={<TransferPortalTracker />} />
             <Route path="/tools/transfer-guide" element={<TransferGuide />} />
+            <Route path="/flyer/transfer" element={<TransferFlyer />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
