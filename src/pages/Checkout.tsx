@@ -16,11 +16,28 @@ import { US_STATES } from '@/types/college';
 import { OnboardingBookingDialog } from '@/components/OnboardingBookingDialog';
 
 const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
-const MEMBERSHIP_PRICE = 899;
+
+const PROGRAMS = {
+  high_school: {
+    price: 899,
+    label: '12-Module Consulting Program',
+    shortLabel: 'CFA 12-Module Program',
+    description: 'Complete hands-on recruiting guidance for junior golfers',
+    programType: 'high_school',
+  },
+  transfer: {
+    price: 499,
+    label: '6-Module Transfer Program',
+    shortLabel: 'CFA Transfer Program',
+    description: 'NCAA Transfer Portal guidance for college athletes',
+    programType: 'transfer',
+  },
+} as const;
+
 const currentYear = new Date().getFullYear();
 const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1);
 
-const membershipFeatures = [
+const hsFeatures = [
   { icon: Phone, title: "Monthly One-on-One Coaching Calls", description: "Personal guidance tailored to your recruiting journey" },
   { icon: Video, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
   { icon: Award, title: "Sessions with Current & Former College Coaches", description: "Get insider perspectives on what coaches look for" },
@@ -35,10 +52,28 @@ const membershipFeatures = [
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers to your questions within 24 hours" },
 ];
 
+const transferFeatures = [
+  { icon: Target, title: "Transfer Portal Strategy & Timing", description: "Navigate NCAA transfer windows and rules" },
+  { icon: Award, title: "Credit Audit & Transfer Planning", description: "Map your credits for a smooth transition" },
+  { icon: Clock, title: "NCAA Eligibility Verification", description: "Ensure you meet all eligibility requirements" },
+  { icon: Trophy, title: "Collegiate Resume 2.0 Building", description: "Showcase your college-level experience" },
+  { icon: DollarSign, title: "Scholarship Negotiation & NIL Guidance", description: "Maximize your financial package" },
+  { icon: MessageCircle, title: "Coach Contact Strategy for Transfers", description: "Approach new programs effectively" },
+  { icon: MapPin, title: "Campus Visit Preparation", description: "Evaluate your next school with confidence" },
+  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,300+ programs" },
+  { icon: Phone, title: "Interactive Transfer Checklist", description: "Step-by-step guidance through the process" },
+  { icon: MessageCircle, title: "Priority Email Support", description: "Get answers within 24 hours" },
+];
+
 const Checkout = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { user, loading, hasPaidAccess, signIn, signUp } = useAuth();
+
+  // Determine which program based on URL param
+  const planParam = searchParams.get('plan');
+  const program = planParam === 'transfer' ? PROGRAMS.transfer : PROGRAMS.high_school;
+  const MEMBERSHIP_PRICE = program.price;
 
   // Step tracking
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -193,6 +228,7 @@ const Checkout = () => {
         city: city || undefined,
         phone: phone || undefined,
         handicap: handicap ? parseFloat(handicap) : undefined,
+        program_type: program.programType,
       };
 
       const { error: signUpError } = await signUp(email, password, profileData);
@@ -213,6 +249,7 @@ const Checkout = () => {
         body: { 
           promoCode: promoApplied ? promoCode : null,
           referralCode: referralApplied && !promoApplied ? referralCode : null,
+          programType: program.programType,
         },
       });
 
@@ -262,7 +299,7 @@ const Checkout = () => {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-              12-Module Consulting Program
+              {program.label}
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
               Start Your College Golf Journey
@@ -283,7 +320,7 @@ const Checkout = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {membershipFeatures.map((feature, index) => (
+                  {(program.programType === 'transfer' ? transferFeatures : hsFeatures).map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                         <feature.icon className="w-4 h-4 text-primary" />
@@ -309,7 +346,7 @@ const Checkout = () => {
                       </span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
-                      12-module program
+                      {program.programType === 'transfer' ? '6-module program' : '12-module program'}
                     </p>
                     {getActiveDiscount() > 0 && (
                       <p className="text-sm text-primary font-medium mt-1">
@@ -506,7 +543,7 @@ const Checkout = () => {
                       <div className="bg-muted/50 rounded-lg p-4 border">
                         <div className="flex items-center gap-2 mb-2">
                           <CreditCard className="w-5 h-5 text-primary" />
-                          <span className="font-semibold">CFA 12-Module Consulting Program</span>
+                          <span className="font-semibold">{program.shortLabel}</span>
                         </div>
                         <p className="text-sm text-muted-foreground mb-3">
                           Full access to recruiting tools, monthly coaching calls, and expert guidance.

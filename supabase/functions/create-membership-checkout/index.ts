@@ -9,8 +9,18 @@ const corsHeaders = {
 
 // Promo codes are now stored in the promo_codes database table
 
-const MEMBERSHIP_PRICE_ID = "price_1T9CdgLXW44Q7xfEBgxrYzCW";
-const MEMBERSHIP_AMOUNT = 89900; // $899 in cents
+const PROGRAMS: Record<string, { priceId: string; amount: number; name: string }> = {
+  high_school: {
+    priceId: "price_1T9CdgLXW44Q7xfEBgxrYzCW",
+    amount: 89900, // $899
+    name: "CFA Golf 12-Module Consulting Program",
+  },
+  transfer: {
+    priceId: "price_1T9o1DLXW44Q7xfEg8vXaeGa",
+    amount: 49900, // $499
+    name: "CFA Golf 6-Module Transfer Program",
+  },
+};
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -28,7 +38,13 @@ serve(async (req) => {
   );
 
   try {
-    const { promoCode, referralCode } = await req.json();
+    const { promoCode, referralCode, programType } = await req.json();
+    
+    // Select program (default to high_school)
+    const selectedProgram = PROGRAMS[programType as keyof typeof PROGRAMS] || PROGRAMS.high_school;
+    const MEMBERSHIP_PRICE_ID = selectedProgram.priceId;
+    const MEMBERSHIP_AMOUNT = selectedProgram.amount;
+    const PROGRAM_NAME = selectedProgram.name;
     
     const authHeader = req.headers.get("Authorization")!;
     const token = authHeader.replace("Bearer ", "");
@@ -142,8 +158,8 @@ serve(async (req) => {
           price_data: {
             currency: "usd",
             product_data: {
-              name: `CFA Golf Annual Consulting Membership (${discountPercent}% Off)`,
-              description: `Annual college golf recruiting consulting - ${discountName}`,
+              name: `${PROGRAM_NAME} (${discountPercent}% Off)`,
+              description: `${discountName}`,
             },
             unit_amount: discountedAmount,
           },

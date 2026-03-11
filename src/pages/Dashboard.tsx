@@ -14,7 +14,9 @@ import {
   Download,
   ChevronRight,
   Loader2,
-  Trophy
+  Trophy,
+  ArrowRightLeft,
+  BookOpen
 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
@@ -113,6 +115,24 @@ const tools = [
     status: 'available',
     interactive: true,
     path: '/tools/wagr-tournaments'
+  },
+  {
+    id: 'transfer-portal',
+    icon: ArrowRightLeft,
+    title: "Transfer Portal Tracker",
+    description: "Track transfer schools and opportunities",
+    status: 'available',
+    interactive: true,
+    path: '/tools/transfer-portal'
+  },
+  {
+    id: 'transfer-guide',
+    icon: BookOpen,
+    title: "Transfer Guide & Checklist",
+    description: "NCAA transfer rules and step-by-step process",
+    status: 'available',
+    interactive: true,
+    path: '/tools/transfer-guide'
   },
 ];
 
