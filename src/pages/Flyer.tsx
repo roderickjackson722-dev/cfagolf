@@ -58,13 +58,7 @@ const Flyer = () => {
         
         {/* Header with background image */}
         <div className="relative overflow-hidden px-6 py-6 print:py-4">
-          <img
-            src={rodAdvising}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ opacity: 0.15 }}
-          />
-          <div className="absolute inset-0 bg-primary/85" />
+          <div className="absolute inset-0 bg-primary/90" />
           <div className="relative z-10">
             <div className="flex items-center gap-4">
               <img src={cfaLogo} alt="CFA Logo" className="w-14 h-10 object-contain brightness-0 invert" />
