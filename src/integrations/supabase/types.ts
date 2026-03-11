@@ -462,6 +462,7 @@ export type Database = {
           home_course: string | null
           id: string
           phone: string | null
+          program_type: string
           state: string | null
           updated_at: string
           user_id: string
@@ -481,6 +482,7 @@ export type Database = {
           home_course?: string | null
           id?: string
           phone?: string | null
+          program_type?: string
           state?: string | null
           updated_at?: string
           user_id: string
@@ -500,6 +502,7 @@ export type Database = {
           home_course?: string | null
           id?: string
           phone?: string | null
+          program_type?: string
           state?: string | null
           updated_at?: string
           user_id?: string
@@ -922,6 +925,72 @@ export type Database = {
           tournament_date?: string
           tournament_name?: string
           tournament_type?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      transfer_portal_entries: {
+        Row: {
+          academic_fit_rating: number | null
+          athletic_fit_rating: number | null
+          coach_email: string | null
+          coach_name: string | null
+          created_at: string
+          credits_accepted: number | null
+          current_school: string | null
+          division: string | null
+          eligibility_years_remaining: number | null
+          id: string
+          notes: string | null
+          overall_interest: string | null
+          portal_entry_date: string | null
+          scholarship_offer: number | null
+          school_name: string
+          status: string
+          total_credits: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          academic_fit_rating?: number | null
+          athletic_fit_rating?: number | null
+          coach_email?: string | null
+          coach_name?: string | null
+          created_at?: string
+          credits_accepted?: number | null
+          current_school?: string | null
+          division?: string | null
+          eligibility_years_remaining?: number | null
+          id?: string
+          notes?: string | null
+          overall_interest?: string | null
+          portal_entry_date?: string | null
+          scholarship_offer?: number | null
+          school_name: string
+          status?: string
+          total_credits?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          academic_fit_rating?: number | null
+          athletic_fit_rating?: number | null
+          coach_email?: string | null
+          coach_name?: string | null
+          created_at?: string
+          credits_accepted?: number | null
+          current_school?: string | null
+          division?: string | null
+          eligibility_years_remaining?: number | null
+          id?: string
+          notes?: string | null
+          overall_interest?: string | null
+          portal_entry_date?: string | null
+          scholarship_offer?: number | null
+          school_name?: string
+          status?: string
+          total_credits?: number | null
           updated_at?: string
           user_id?: string
         }
