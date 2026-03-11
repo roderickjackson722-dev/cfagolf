@@ -747,7 +747,7 @@ export const generateMarketingFlyer = (): void => {
     ['Tournament Result Log', 'Track competitive results for your recruiting resume'],
     ['Coach Contact Tracker', 'Organize all coach communications in one place'],
     ['Scholarship Calculator', 'Analyze and compare financial aid offers'],
-    ['12-Month Recruiting Timeline', 'Grade-specific action plans to stay on track'],
+    ['Recruiting Timeline & Action Plans', 'Grade-specific action plans to stay on track'],
   ];
 
   const descX = 95;
