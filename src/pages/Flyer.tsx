@@ -47,7 +47,14 @@ const Flyer = () => {
       </div>
 
       {/* Single-page flyer */}
-      <div className="max-w-[8.5in] mx-auto bg-card shadow-xl print:shadow-none print:max-w-none" style={{ maxHeight: '11in', overflow: 'hidden' }}>
+      <div className="max-w-[8.5in] mx-auto bg-card shadow-xl print:shadow-none print:max-w-none relative" style={{ maxHeight: '11in', overflow: 'hidden' }}>
+        {/* Full-page background image */}
+        <img
+          src={rodAdvising}
+          alt=""
+          className="absolute inset-0 w-full object-cover pointer-events-none"
+          style={{ opacity: 0.08, height: '65%' }}
+        />
         
         {/* Header with background image */}
         <div className="relative overflow-hidden px-6 py-6 print:py-4">
