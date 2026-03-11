@@ -38,7 +38,13 @@ serve(async (req) => {
   );
 
   try {
-    const { promoCode, referralCode } = await req.json();
+    const { promoCode, referralCode, programType } = await req.json();
+    
+    // Select program (default to high_school)
+    const selectedProgram = PROGRAMS[programType as keyof typeof PROGRAMS] || PROGRAMS.high_school;
+    const MEMBERSHIP_PRICE_ID = selectedProgram.priceId;
+    const MEMBERSHIP_AMOUNT = selectedProgram.amount;
+    const PROGRAM_NAME = selectedProgram.name;
     
     const authHeader = req.headers.get("Authorization")!;
     const token = authHeader.replace("Bearer ", "");
