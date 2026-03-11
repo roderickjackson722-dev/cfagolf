@@ -262,7 +262,7 @@ const Checkout = () => {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-              Annual Consulting Membership
+              12-Module Consulting Program
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
               Start Your College Golf Journey
