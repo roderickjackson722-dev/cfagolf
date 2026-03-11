@@ -41,7 +41,7 @@ export function PricingSection() {
           <Card className="relative overflow-hidden border-2 border-primary shadow-xl">
             <CardHeader className="text-center pb-4 pt-8">
             <CardTitle className="text-2xl font-display font-bold text-foreground">
-              CFA Annual Consulting
+              CFA 12-Module Program
             </CardTitle>
             <CardDescription className="text-muted-foreground">
               Complete hands-on recruiting guidance for junior golfers
