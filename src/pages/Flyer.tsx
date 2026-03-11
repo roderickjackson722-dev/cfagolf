@@ -134,7 +134,7 @@ const Flyer = () => {
                     <Users className="w-3.5 h-3.5 text-primary" />
                     <span className="font-bold text-foreground text-sm">{content.stat_1_value}</span>
                   </div>
-                  <span className="text-muted-foreground text-[10px]">{content.stat_1_label}</span>
+                  <span className="text-foreground/70 font-medium text-[10px]">{content.stat_1_label}</span>
                 </div>
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-1.5">
