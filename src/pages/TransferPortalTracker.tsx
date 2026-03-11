@@ -170,23 +170,30 @@ const TransferPortalTracker = () => {
                       <ul className="space-y-1 text-muted-foreground">
                         <li>• Online database where athletes declare intent to transfer</li>
                         <li>• Once entered, coaches from other schools can legally contact you</li>
-                        <li>• Athletes must enter during sport-specific windows</li>
                         <li>• Entering does <strong>not</strong> guarantee a scholarship elsewhere</li>
-                        <li>• Launched in 2018 to streamline the transfer process</li>
                       </ul>
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground mb-2">🔹 2026 Rule Changes</h4>
                       <ul className="space-y-1 text-muted-foreground">
-                        <li>• <strong>Immediate eligibility</strong> — athletes can play right away regardless of transfer count</li>
+                        <li>• <strong>Immediate eligibility</strong> regardless of transfer count</li>
                         <li>• Must be academically eligible at previous school</li>
-                        <li>• Cannot be under disciplinary suspension or dismissal</li>
-                        <li>• Must meet progress-toward-degree requirements</li>
                         <li>• Transfer windows still apply for undergraduates</li>
-                        <li>• Graduate students can transfer and enter outside windows</li>
                       </ul>
                     </div>
                   </div>
+                  <div className="text-sm">
+                    <h4 className="font-semibold text-foreground mb-2">⛳ 2025-2026 Golf Transfer Windows</h4>
+                    <div className="flex flex-wrap gap-4 text-muted-foreground">
+                      <span><strong className="text-foreground">Men's Golf:</strong> May 13 – Jun 11, 2026</span>
+                      <span><strong className="text-foreground">Women's Golf:</strong> May 6 – Jun 4, 2026</span>
+                    </div>
+                  </div>
+                  <Link to="/tools/transfer-guide">
+                    <Button variant="outline" size="sm" className="rounded-full mt-2">
+                      <BookOpen className="w-4 h-4 mr-1" /> View Full Transfer Guide →
+                    </Button>
+                  </Link>
                 </CardContent>
               </CollapsibleContent>
             </Card>
