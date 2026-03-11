@@ -228,6 +228,7 @@ const Checkout = () => {
         city: city || undefined,
         phone: phone || undefined,
         handicap: handicap ? parseFloat(handicap) : undefined,
+        program_type: program.programType,
       };
 
       const { error: signUpError } = await signUp(email, password, profileData);
