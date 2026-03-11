@@ -137,9 +137,6 @@ export function PricingSection() {
               Schedule Free Consultation
             </Button>
           </a>
-          <p className="text-sm text-muted-foreground mt-3">
-            Not sure which program is right? Book a free 15-minute call with our team
-          </p>
         </div>
       </div>
     </section>
