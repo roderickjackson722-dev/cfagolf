@@ -16,7 +16,24 @@ import { US_STATES } from '@/types/college';
 import { OnboardingBookingDialog } from '@/components/OnboardingBookingDialog';
 
 const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
-const MEMBERSHIP_PRICE = 899;
+
+const PROGRAMS = {
+  high_school: {
+    price: 899,
+    label: '12-Module Consulting Program',
+    shortLabel: 'CFA 12-Module Program',
+    description: 'Complete hands-on recruiting guidance for junior golfers',
+    programType: 'high_school',
+  },
+  transfer: {
+    price: 499,
+    label: '6-Module Transfer Program',
+    shortLabel: 'CFA Transfer Program',
+    description: 'NCAA Transfer Portal guidance for college athletes',
+    programType: 'transfer',
+  },
+} as const;
+
 const currentYear = new Date().getFullYear();
 const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1);
 

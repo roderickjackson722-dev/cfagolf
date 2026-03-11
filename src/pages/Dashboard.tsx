@@ -14,7 +14,9 @@ import {
   Download,
   ChevronRight,
   Loader2,
-  Trophy
+  Trophy,
+  ArrowRightLeft,
+  BookOpen
 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';

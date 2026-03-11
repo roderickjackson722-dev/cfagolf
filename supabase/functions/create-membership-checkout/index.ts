@@ -9,8 +9,18 @@ const corsHeaders = {
 
 // Promo codes are now stored in the promo_codes database table
 
-const MEMBERSHIP_PRICE_ID = "price_1T9CdgLXW44Q7xfEBgxrYzCW";
-const MEMBERSHIP_AMOUNT = 89900; // $899 in cents
+const PROGRAMS: Record<string, { priceId: string; amount: number; name: string }> = {
+  high_school: {
+    priceId: "price_1T9CdgLXW44Q7xfEBgxrYzCW",
+    amount: 89900, // $899
+    name: "CFA Golf 12-Module Consulting Program",
+  },
+  transfer: {
+    priceId: "price_1T9o1DLXW44Q7xfEg8vXaeGa",
+    amount: 49900, // $499
+    name: "CFA Golf 6-Module Transfer Program",
+  },
+};
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
