@@ -33,7 +33,7 @@ export function PricingSection() {
             <span className="text-primary">Proven Results</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Partner with our expert team for a full year of hands-on recruiting support and industry connections.
+            Partner with our expert team for 12 modules of hands-on recruiting support and industry connections.
           </p>
         </div>
 
