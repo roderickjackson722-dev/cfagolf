@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { 
   ArrowLeftRight, Plus, Trash2, ChevronLeft, Edit, GraduationCap,
-  Clock, Building, Mail, Star, Info, ChevronDown
+  Clock, Building, Mail, Star, Info, ChevronDown, BookOpen
 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
