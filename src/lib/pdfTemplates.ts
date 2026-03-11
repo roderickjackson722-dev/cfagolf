@@ -736,7 +736,7 @@ export const generateMarketingFlyer = (): void => {
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
-  doc.text("WHAT'S INCLUDED IN YOUR ANNUAL MEMBERSHIP", margin + 4, y + 6.5);
+  doc.text("WHAT'S INCLUDED IN YOUR 12-MODULE PROGRAM", margin + 4, y + 6.5);
   y += 12;
 
   const services = [
@@ -747,7 +747,7 @@ export const generateMarketingFlyer = (): void => {
     ['Tournament Result Log', 'Track competitive results for your recruiting resume'],
     ['Coach Contact Tracker', 'Organize all coach communications in one place'],
     ['Scholarship Calculator', 'Analyze and compare financial aid offers'],
-    ['12-Month Recruiting Timeline', 'Grade-specific action plans to stay on track'],
+    ['Recruiting Timeline & Action Plans', 'Grade-specific action plans to stay on track'],
   ];
 
   const descX = 95;
@@ -777,11 +777,11 @@ export const generateMarketingFlyer = (): void => {
   doc.setTextColor(220, 180, 50);
   doc.setFontSize(22);
   doc.setFont('helvetica', 'bold');
-  doc.text('$899 / Year', pageWidth / 2, y + 13, { align: 'center' });
+  doc.text('$899', pageWidth / 2, y + 13, { align: 'center' });
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
-  doc.text('Annual Consulting Membership — Personalized College Golf Recruiting', pageWidth / 2, y + 22, { align: 'center' });
+  doc.text('12-Module Consulting Program — Personalized College Golf Recruiting', pageWidth / 2, y + 22, { align: 'center' });
   y += 34;
 
   // Why CFA section

@@ -30,7 +30,7 @@ const membershipFeatures = [
   { icon: MessageCircle, title: "Coach Contact Strategy & Follow-up Support", description: "Learn how to communicate effectively with coaches" },
   { icon: MapPin, title: "Campus Visit Preparation & Comparison", description: "Make the most of your official and unofficial visits" },
   { icon: DollarSign, title: "Scholarship Offer Analysis & Negotiation Tips", description: "Understand and compare financial aid packages" },
-  { icon: Clock, title: "12-Month Recruiting Timeline (by grade)", description: "Know exactly what to do and when" },
+  { icon: Clock, title: "Recruiting Timeline & Action Plans (by grade)", description: "Know exactly what to do and when" },
   { icon: Video, title: "Highlight Video Review & Feedback", description: "Create videos that get coaches' attention" },
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers to your questions within 24 hours" },
 ];
@@ -262,7 +262,7 @@ const Checkout = () => {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-              Annual Consulting Membership
+              12-Module Consulting Program
             </span>
             <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
               Start Your College Golf Journey
@@ -309,7 +309,7 @@ const Checkout = () => {
                       </span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Annual commitment
+                      12-module program
                     </p>
                     {getActiveDiscount() > 0 && (
                       <p className="text-sm text-primary font-medium mt-1">
@@ -506,7 +506,7 @@ const Checkout = () => {
                       <div className="bg-muted/50 rounded-lg p-4 border">
                         <div className="flex items-center gap-2 mb-2">
                           <CreditCard className="w-5 h-5 text-primary" />
-                          <span className="font-semibold">CFA Annual Consulting Membership</span>
+                          <span className="font-semibold">CFA 12-Module Consulting Program</span>
                         </div>
                         <p className="text-sm text-muted-foreground mb-3">
                           Full access to recruiting tools, monthly coaching calls, and expert guidance.
