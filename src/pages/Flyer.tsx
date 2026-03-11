@@ -53,7 +53,7 @@ const Flyer = () => {
           src={rodAdvising}
           alt=""
           className="absolute inset-0 w-full object-cover pointer-events-none"
-          style={{ opacity: 0.08, height: '65%' }}
+          style={{ opacity: 0.17, height: '65%' }}
         />
         
         {/* Header with background image */}
