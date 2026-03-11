@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
-import { ChevronLeft, BookOpen, AlertTriangle, Calendar, GraduationCap, ClipboardList, Building, MessageSquare } from 'lucide-react';
+import { ChevronLeft, BookOpen, AlertTriangle, Calendar, GraduationCap, ClipboardList, Building, MessageSquare, ExternalLink, HelpCircle, CheckSquare } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
+import { useWorksheetData } from '@/hooks/useWorksheetData';
 import { PaywallGate } from '@/components/PaywallGate';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const TransferGuide = () => {
   const { user, loading, hasPaidAccess } = useAuth();
