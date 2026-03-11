@@ -73,6 +73,7 @@ const App = () => (
             <Route path="/go" element={<SocialLanding />} />
             <Route path="/social-kit" element={<SocialKit />} />
             <Route path="/tools/wagr-tournaments" element={<WagrTournaments />} />
+            <Route path="/tools/transfer-portal" element={<TransferPortalTracker />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
