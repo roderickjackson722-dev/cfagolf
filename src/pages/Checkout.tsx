@@ -345,7 +345,7 @@ const Checkout = () => {
                       </span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
-                      12-module program
+                      {program.programType === 'transfer' ? '6-module program' : '12-module program'}
                     </p>
                     {getActiveDiscount() > 0 && (
                       <p className="text-sm text-primary font-medium mt-1">
