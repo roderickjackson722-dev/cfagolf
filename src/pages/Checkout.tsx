@@ -37,7 +37,7 @@ const PROGRAMS = {
 const currentYear = new Date().getFullYear();
 const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1);
 
-const membershipFeatures = [
+const hsFeatures = [
   { icon: Phone, title: "Monthly One-on-One Coaching Calls", description: "Personal guidance tailored to your recruiting journey" },
   { icon: Video, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
   { icon: Award, title: "Sessions with Current & Former College Coaches", description: "Get insider perspectives on what coaches look for" },
@@ -50,6 +50,19 @@ const membershipFeatures = [
   { icon: Clock, title: "Recruiting Timeline & Action Plans (by grade)", description: "Know exactly what to do and when" },
   { icon: Video, title: "Highlight Video Review & Feedback", description: "Create videos that get coaches' attention" },
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers to your questions within 24 hours" },
+];
+
+const transferFeatures = [
+  { icon: Target, title: "Transfer Portal Strategy & Timing", description: "Navigate NCAA transfer windows and rules" },
+  { icon: Award, title: "Credit Audit & Transfer Planning", description: "Map your credits for a smooth transition" },
+  { icon: Clock, title: "NCAA Eligibility Verification", description: "Ensure you meet all eligibility requirements" },
+  { icon: Trophy, title: "Collegiate Resume 2.0 Building", description: "Showcase your college-level experience" },
+  { icon: DollarSign, title: "Scholarship Negotiation & NIL Guidance", description: "Maximize your financial package" },
+  { icon: MessageCircle, title: "Coach Contact Strategy for Transfers", description: "Approach new programs effectively" },
+  { icon: MapPin, title: "Campus Visit Preparation", description: "Evaluate your next school with confidence" },
+  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,300+ programs" },
+  { icon: Phone, title: "Interactive Transfer Checklist", description: "Step-by-step guidance through the process" },
+  { icon: MessageCircle, title: "Priority Email Support", description: "Get answers within 24 hours" },
 ];
 
 const Checkout = () => {
