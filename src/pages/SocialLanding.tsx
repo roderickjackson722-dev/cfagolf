@@ -149,8 +149,8 @@ export default function SocialLanding() {
               <p className="text-sm text-muted-foreground">Pro Recruiting Tools</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-bold text-foreground">12 mo</p>
-              <p className="text-sm text-muted-foreground">Of Expert Coaching</p>
+              <p className="text-3xl font-bold text-foreground">12</p>
+              <p className="text-sm text-muted-foreground">Coaching Modules</p>
             </div>
           </div>
         </div>

@@ -48,7 +48,7 @@ export function PricingSection() {
             </CardDescription>
             <div className="pt-6">
               <span className="text-5xl font-bold text-foreground">$899</span>
-              <p className="text-sm text-muted-foreground mt-2">Annual commitment • Monthly coaching calls included</p>
+              <p className="text-sm text-muted-foreground mt-2">12 modules • One-on-one coaching calls included</p>
             </div>
             </CardHeader>
 

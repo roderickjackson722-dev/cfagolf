@@ -777,11 +777,11 @@ export const generateMarketingFlyer = (): void => {
   doc.setTextColor(220, 180, 50);
   doc.setFontSize(22);
   doc.setFont('helvetica', 'bold');
-  doc.text('$899 / Year', pageWidth / 2, y + 13, { align: 'center' });
+  doc.text('$899', pageWidth / 2, y + 13, { align: 'center' });
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
-  doc.text('Annual Consulting Membership — Personalized College Golf Recruiting', pageWidth / 2, y + 22, { align: 'center' });
+  doc.text('12-Module Consulting Program — Personalized College Golf Recruiting', pageWidth / 2, y + 22, { align: 'center' });
   y += 34;
 
   // Why CFA section
