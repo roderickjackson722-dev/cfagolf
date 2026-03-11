@@ -57,6 +57,11 @@ const Checkout = () => {
   const [searchParams] = useSearchParams();
   const { user, loading, hasPaidAccess, signIn, signUp } = useAuth();
 
+  // Determine which program based on URL param
+  const planParam = searchParams.get('plan');
+  const program = planParam === 'transfer' ? PROGRAMS.transfer : PROGRAMS.high_school;
+  const MEMBERSHIP_PRICE = program.price;
+
   // Step tracking
   const [step, setStep] = useState<1 | 2 | 3>(1);
   
