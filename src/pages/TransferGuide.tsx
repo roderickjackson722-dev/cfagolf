@@ -410,10 +410,91 @@ const TransferGuide = () => {
               </AccordionContent>
             </AccordionItem>
 
+          {/* PART 9: FAQ */}
+            <AccordionItem value="faq" className="border rounded-lg px-4">
+              <AccordionTrigger className="hover:no-underline py-4">
+                <div className="flex items-center gap-3">
+                  <Badge variant="outline" className="shrink-0 font-mono">9</Badge>
+                  <span className="font-semibold text-left">Frequently Asked Questions</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                <div className="space-y-4 text-sm">
+                  {FAQ_ITEMS.map((faq, idx) => (
+                    <div key={idx} className="border-b border-border/50 pb-3 last:border-0 last:pb-0">
+                      <p className="font-semibold text-foreground mb-1 flex items-start gap-2">
+                        <HelpCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                        {faq.q}
+                      </p>
+                      <p className="text-muted-foreground ml-6">{faq.a}</p>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
+            {/* PART 10: Checklist */}
+            <AccordionItem value="checklist" className="border rounded-lg px-4">
+              <AccordionTrigger className="hover:no-underline py-4">
+                <div className="flex items-center gap-3">
+                  <Badge variant="outline" className="shrink-0 font-mono">10</Badge>
+                  <span className="font-semibold text-left">Transfer Portal Checklist</span>
+                  <Badge variant="secondary" className="ml-auto mr-2 text-xs">
+                    {completedCount}/{CHECKLIST_ITEMS.length}
+                  </Badge>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="pb-4">
+                <p className="text-sm text-muted-foreground mb-4">Track your progress through each step. Your checklist is saved automatically.</p>
+                <div className="space-y-3">
+                  {CHECKLIST_ITEMS.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 cursor-pointer group"
+                      onClick={() => toggleCheckItem(idx)}
+                    >
+                      <Checkbox
+                        checked={!!checklistData[String(idx)]}
+                        onCheckedChange={() => toggleCheckItem(idx)}
+                        className="shrink-0"
+                      />
+                      <span className={`text-sm ${checklistData[String(idx)] ? 'line-through text-muted-foreground' : 'text-foreground'}`}>
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+
           </Accordion>
 
+          {/* Resources */}
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                📌 Resources
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <a href="https://www.transferportal.us" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <ExternalLink className="w-4 h-4" /> NCAA Transfer Portal — transferportal.us
+              </a>
+              <a href="https://www.eligibilitycenter.org" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <ExternalLink className="w-4 h-4" /> NCAA Eligibility Center — eligibilitycenter.org
+              </a>
+              <a href="https://www.playnaia.org" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <ExternalLink className="w-4 h-4" /> NAIA Eligibility Center — playnaia.org
+              </a>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2 border-t">
+                <span>Your CFA Advisor: </span>
+                <a href="mailto:contact@cfa.golf" className="text-primary hover:underline">contact@cfa.golf</a>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Quick Links */}
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3">
             <Link to="/tools/transfer-portal">
               <Button variant="outline" className="rounded-full">Transfer Portal Tracker →</Button>
             </Link>
