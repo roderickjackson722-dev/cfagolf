@@ -736,7 +736,7 @@ export const generateMarketingFlyer = (): void => {
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
-  doc.text("WHAT'S INCLUDED IN YOUR ANNUAL MEMBERSHIP", margin + 4, y + 6.5);
+  doc.text("WHAT'S INCLUDED IN YOUR 12-MODULE PROGRAM", margin + 4, y + 6.5);
   y += 12;
 
   const services = [
