@@ -30,7 +30,7 @@ const membershipFeatures = [
   { icon: MessageCircle, title: "Coach Contact Strategy & Follow-up Support", description: "Learn how to communicate effectively with coaches" },
   { icon: MapPin, title: "Campus Visit Preparation & Comparison", description: "Make the most of your official and unofficial visits" },
   { icon: DollarSign, title: "Scholarship Offer Analysis & Negotiation Tips", description: "Understand and compare financial aid packages" },
-  { icon: Clock, title: "12-Month Recruiting Timeline (by grade)", description: "Know exactly what to do and when" },
+  { icon: Clock, title: "Recruiting Timeline & Action Plans (by grade)", description: "Know exactly what to do and when" },
   { icon: Video, title: "Highlight Video Review & Feedback", description: "Create videos that get coaches' attention" },
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers to your questions within 24 hours" },
 ];
