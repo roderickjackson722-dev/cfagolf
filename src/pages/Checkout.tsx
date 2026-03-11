@@ -319,7 +319,7 @@ const Checkout = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {membershipFeatures.map((feature, index) => (
+                  {(program.programType === 'transfer' ? transferFeatures : hsFeatures).map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                         <feature.icon className="w-4 h-4 text-primary" />
