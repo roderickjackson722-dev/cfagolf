@@ -31,6 +31,7 @@ import SocialLanding from "./pages/SocialLanding";
 import SocialKit from "./pages/SocialKit";
 import WagrTournaments from "./pages/WagrTournaments";
 import TransferPortalTracker from "./pages/TransferPortalTracker";
+import TransferGuide from "./pages/TransferGuide";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
