@@ -18,19 +18,21 @@ import { OnboardingBookingDialog } from '@/components/OnboardingBookingDialog';
 const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 
 const PROGRAMS = {
-  high_school: {
-    price: 899,
-    label: '12-Module Consulting Program',
-    shortLabel: 'CFA 12-Module Program',
-    description: 'Complete hands-on recruiting guidance for junior golfers',
-    programType: 'high_school',
+  consulting: {
+    price: 2499,
+    label: '1-on-1 Consulting Program',
+    shortLabel: 'CFA 1-on-1 Consulting',
+    description: 'Full-service personalized recruiting guidance with monthly coaching',
+    programType: 'consulting',
+    isSubscription: false,
   },
-  transfer: {
-    price: 499,
-    label: '6-Module Transfer Program',
-    shortLabel: 'CFA Transfer Program',
-    description: 'NCAA Transfer Portal guidance for college athletes',
-    programType: 'transfer',
+  digital: {
+    price: 24.99,
+    label: 'Digital Membership',
+    shortLabel: 'CFA Digital Member',
+    description: 'Self-service recruiting tools & resources',
+    programType: 'digital',
+    isSubscription: true,
   },
 } as const;
 
@@ -72,7 +74,7 @@ const Checkout = () => {
 
   // Determine which program based on URL param
   const planParam = searchParams.get('plan');
-  const program = planParam === 'transfer' ? PROGRAMS.transfer : PROGRAMS.high_school;
+  const program = planParam === 'digital' ? PROGRAMS.digital : PROGRAMS.consulting;
   const MEMBERSHIP_PRICE = program.price;
 
   // Step tracking
@@ -320,7 +322,7 @@ const Checkout = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {(program.programType === 'transfer' ? transferFeatures : hsFeatures).map((feature, index) => (
+                  {(program.programType === 'consulting' ? hsFeatures : hsFeatures.slice(0, 7)).map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                         <feature.icon className="w-4 h-4 text-primary" />
@@ -346,7 +348,7 @@ const Checkout = () => {
                       </span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
-                      {program.programType === 'transfer' ? '6-module program' : '12-module program'}
+                      {program.isSubscription ? 'Monthly subscription' : '12 coaching sessions included'}
                     </p>
                     {getActiveDiscount() > 0 && (
                       <p className="text-sm text-primary font-medium mt-1">
@@ -546,7 +548,9 @@ const Checkout = () => {
                           <span className="font-semibold">{program.shortLabel}</span>
                         </div>
                         <p className="text-sm text-muted-foreground mb-3">
-                          Full access to recruiting tools, monthly coaching calls, and expert guidance.
+                          {program.isSubscription
+                            ? 'Monthly access to digital recruiting tools and resources.'
+                            : 'Full access to recruiting tools, monthly coaching calls, and expert guidance.'}
                         </p>
                         
                         <div className="flex items-baseline gap-2">
