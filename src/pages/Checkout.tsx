@@ -62,7 +62,7 @@ const transferFeatures = [
   { icon: DollarSign, title: "Scholarship Negotiation & NIL Guidance", description: "Maximize your financial package" },
   { icon: MessageCircle, title: "Coach Contact Strategy for Transfers", description: "Approach new programs effectively" },
   { icon: MapPin, title: "Campus Visit Preparation", description: "Evaluate your next school with confidence" },
-  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,300+ programs" },
+  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,200+ programs" },
   { icon: Phone, title: "Interactive Transfer Checklist", description: "Step-by-step guidance through the process" },
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers within 24 hours" },
 ];

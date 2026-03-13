@@ -141,7 +141,7 @@ Learn more: cfagolf.com`,
       title: 'Hook for Video',
       text: `POV: You're a golf parent trying to figure out college recruiting 😵‍💫
 
-There are 1,300+ programs. Hundreds of coaches to contact. Scholarships to compare.
+There are 1,200+ programs. Hundreds of coaches to contact. Scholarships to compare.
 
 Where do you even start?
 
