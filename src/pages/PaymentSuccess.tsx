@@ -35,12 +35,13 @@ const PaymentSuccess = () => {
 
         if (data.success && data.paid) {
           setVerified(true);
-          // Check if this is a new signup
+          // Refresh auth context so hasPaidAccess updates immediately
+          await refreshSubscription();
           const isNewSignup = sessionStorage.getItem('cfa_new_signup');
           if (isNewSignup) {
             sessionStorage.removeItem('cfa_new_signup');
           }
-          setShowOnboardingDialog(!isNewSignup); // Only show old dialog if not new signup
+          setShowOnboardingDialog(!isNewSignup);
           toast.success('Payment verified! Welcome to CFA Golf!');
         } else {
           toast.error('Payment verification failed');
