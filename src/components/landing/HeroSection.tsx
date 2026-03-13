@@ -52,7 +52,7 @@ export function HeroSection() {
               <div className="text-center lg:text-left">
                 <div className="flex items-center gap-2 justify-center lg:justify-start">
                   <Users className="w-5 h-5 text-cfa-gold" />
-                  <span className="text-2xl font-bold text-white">1,300+</span>
+                  <span className="text-2xl font-bold text-white">1,200+</span>
                 </div>
                 <span className="text-white/70 text-sm">College Programs</span>
               </div>
