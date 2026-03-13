@@ -4,21 +4,21 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// Promo codes are now stored in the promo_codes database table
-
-const PROGRAMS: Record<string, { priceId: string; amount: number; name: string }> = {
-  high_school: {
-    priceId: "price_1T9CdgLXW44Q7xfEBgxrYzCW",
-    amount: 89900, // $899
-    name: "CFA Golf 12-Module Consulting Program",
+const PROGRAMS: Record<string, { priceId: string; amount: number; name: string; mode: "payment" | "subscription" }> = {
+  consulting: {
+    priceId: "price_1TAf5QLXW44Q7xfEt31BZ91E",
+    amount: 249900, // $2,499
+    name: "CFA Golf 1-on-1 Consulting Program",
+    mode: "payment",
   },
-  transfer: {
-    priceId: "price_1T9o1DLXW44Q7xfEg8vXaeGa",
-    amount: 49900, // $499
-    name: "CFA Golf 6-Module Transfer Program",
+  digital: {
+    priceId: "price_1TAf5QLXW44Q7xfEdizOawqg",
+    amount: 2499, // $24.99/mo
+    name: "CFA Golf Digital Membership",
+    mode: "subscription",
   },
 };
 
@@ -40,11 +40,12 @@ serve(async (req) => {
   try {
     const { promoCode, referralCode, programType } = await req.json();
     
-    // Select program (default to high_school)
-    const selectedProgram = PROGRAMS[programType as keyof typeof PROGRAMS] || PROGRAMS.high_school;
+    // Select program (default to consulting)
+    const selectedProgram = PROGRAMS[programType as keyof typeof PROGRAMS] || PROGRAMS.consulting;
     const MEMBERSHIP_PRICE_ID = selectedProgram.priceId;
     const MEMBERSHIP_AMOUNT = selectedProgram.amount;
     const PROGRAM_NAME = selectedProgram.name;
+    const CHECKOUT_MODE = selectedProgram.mode;
     
     const authHeader = req.headers.get("Authorization")!;
     const token = authHeader.replace("Bearer ", "");
@@ -69,7 +70,6 @@ serve(async (req) => {
         .maybeSingle();
       
       if (promoData) {
-        // Check if max uses reached
         if (!promoData.max_uses || promoData.uses_count < promoData.max_uses) {
           promoConfig = { discount: promoData.discount_percent, name: promoData.name };
           promoId = promoData.id;
@@ -88,7 +88,6 @@ serve(async (req) => {
         .eq('is_active', true)
         .maybeSingle();
       
-      // Don't allow self-referral
       if (data && data.referrer_user_id !== user.id) {
         referralData = data;
       }
@@ -135,37 +134,58 @@ serve(async (req) => {
       ? Math.round(MEMBERSHIP_AMOUNT * (1 - discountPercent / 100))
       : MEMBERSHIP_AMOUNT;
 
-    // Build checkout config with Klarna payment option
-    let checkoutConfig: any = {
+    // Build checkout config
+    const checkoutConfig: any = {
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
-      mode: "payment",
-      payment_method_types: ["card", "klarna"],
+      mode: CHECKOUT_MODE,
       success_url: `${req.headers.get("origin")}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get("origin")}/checkout`,
+      cancel_url: `${req.headers.get("origin")}/checkout?plan=${programType}`,
       metadata: {
         user_id: user.id,
+        program_type: programType || "consulting",
         promo_code: normalizedPromoCode || "none",
         referral_id: referralData?.id || "none",
         discount_applied: discountedAmount < MEMBERSHIP_AMOUNT ? (MEMBERSHIP_AMOUNT - discountedAmount).toString() : "0",
       },
     };
 
+    // Only add Klarna for one-time payments (not subscriptions)
+    if (CHECKOUT_MODE === "payment") {
+      checkoutConfig.payment_method_types = ["card", "klarna"];
+    }
+
     if (discountPercent > 0) {
-      // Use line_items with custom price for discount
-      checkoutConfig.line_items = [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: `${PROGRAM_NAME} (${discountPercent}% Off)`,
-              description: `${discountName}`,
-            },
-            unit_amount: discountedAmount,
+      if (CHECKOUT_MODE === "subscription") {
+        // For subscriptions with discount, create a Stripe coupon
+        const coupon = await stripe.coupons.create({
+          percent_off: discountPercent,
+          duration: "once",
+          name: discountName,
+        });
+        checkoutConfig.discounts = [{ coupon: coupon.id }];
+        checkoutConfig.line_items = [
+          {
+            price: MEMBERSHIP_PRICE_ID,
+            quantity: 1,
           },
-          quantity: 1,
-        },
-      ];
+        ];
+      } else {
+        // For one-time payments with discount, use custom price_data
+        checkoutConfig.line_items = [
+          {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: `${PROGRAM_NAME} (${discountPercent}% Off)`,
+                description: discountName,
+              },
+              unit_amount: discountedAmount,
+            },
+            quantity: 1,
+          },
+        ];
+      }
     } else {
       // Full price
       checkoutConfig.line_items = [
