@@ -22,8 +22,10 @@ const digitalHighlights = [
   "Target School List Builder",
   "Tournament Result Tracker",
   "Coach Contact Tracker",
+  "Campus Visit Planner",
   "Scholarship Calculator",
   "LPGA & PGA Pro Webinars",
+  "College Coach Q&A Sessions",
   "Recruiting Timeline & Worksheets"
 ];
 
