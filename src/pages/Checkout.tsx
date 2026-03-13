@@ -74,7 +74,7 @@ const Checkout = () => {
 
   // Determine which program based on URL param
   const planParam = searchParams.get('plan');
-  const program = planParam === 'transfer' ? PROGRAMS.transfer : PROGRAMS.high_school;
+  const program = planParam === 'digital' ? PROGRAMS.digital : PROGRAMS.consulting;
   const MEMBERSHIP_PRICE = program.price;
 
   // Step tracking
