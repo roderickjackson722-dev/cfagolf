@@ -48,6 +48,13 @@ export function PricingTierCards() {
         </CardContent>
       </Card>
 
+      {/* Mobile divider */}
+      <div className="flex items-center justify-center md:hidden -my-2">
+        <div className="flex-1 h-px bg-border" />
+        <span className="px-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider">or</span>
+        <div className="flex-1 h-px bg-border" />
+      </div>
+
       {/* Digital Membership */}
       <Card className="relative overflow-hidden border-2 border-border shadow-xl">
         <div className="absolute top-0 right-0">
