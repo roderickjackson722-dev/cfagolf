@@ -91,7 +91,7 @@ Get started: cfagolf.com/go`,
 
 College Fairway Advisors: The only all-in-one college golf recruiting platform.
 
-1,300+ programs. Expert guidance. One platform.
+1,200+ programs. Expert guidance. One platform.
 
 cfagolf.com/go`,
     },
