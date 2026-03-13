@@ -8,9 +8,12 @@ const consultingHighlights = [
   "Everything in Digital Member",
   "Monthly 1-on-1 Coaching Calls (12 Sessions)",
   "Personalized Recruiting Roadmap",
+  "Academic & Eligibility Evaluation",
   "Coach Communication Management",
   "Highlight Video Review & Feedback",
   "Scholarship Negotiation Strategy",
+  "Campus Visit Preparation & Coaching",
+  "Transfer Portal Guidance",
   "Priority Email Support"
 ];
 
@@ -19,8 +22,10 @@ const digitalHighlights = [
   "Target School List Builder",
   "Tournament Result Tracker",
   "Coach Contact Tracker",
+  "Campus Visit Planner",
   "Scholarship Calculator",
   "LPGA & PGA Pro Webinars",
+  "College Coach Q&A Sessions",
   "Recruiting Timeline & Worksheets"
 ];
 
@@ -41,7 +46,7 @@ export function PricingSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto relative">
           {/* 1-on-1 Consulting */}
           <Card className="relative overflow-hidden border-2 border-primary shadow-xl">
             <div className="absolute top-0 right-0">
@@ -79,6 +84,13 @@ export function PricingSection() {
               </Link>
             </CardContent>
           </Card>
+
+          {/* Mobile divider */}
+          <div className="flex items-center justify-center md:hidden -my-2">
+            <div className="flex-1 h-px bg-border" />
+            <span className="px-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider">or</span>
+            <div className="flex-1 h-px bg-border" />
+          </div>
 
           {/* Digital Member */}
           <Card className="relative overflow-hidden border-2 border-border shadow-xl">
