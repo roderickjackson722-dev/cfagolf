@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { OnboardingBookingDialog } from '@/components/OnboardingBookingDialog';
+import { useAuth } from '@/hooks/useAuth';
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
