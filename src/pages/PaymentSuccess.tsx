@@ -11,6 +11,7 @@ import { useAuth } from '@/hooks/useAuth';
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { refreshSubscription } = useAuth();
   const [verifying, setVerifying] = useState(true);
   const [verified, setVerified] = useState(false);
   const [showOnboardingDialog, setShowOnboardingDialog] = useState(false);
