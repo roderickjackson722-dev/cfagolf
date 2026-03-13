@@ -548,7 +548,9 @@ const Checkout = () => {
                           <span className="font-semibold">{program.shortLabel}</span>
                         </div>
                         <p className="text-sm text-muted-foreground mb-3">
-                          Full access to recruiting tools, monthly coaching calls, and expert guidance.
+                          {program.isSubscription
+                            ? 'Monthly access to digital recruiting tools and resources.'
+                            : 'Full access to recruiting tools, monthly coaching calls, and expert guidance.'}
                         </p>
                         
                         <div className="flex items-baseline gap-2">
