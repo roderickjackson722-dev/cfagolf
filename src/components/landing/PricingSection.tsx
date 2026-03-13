@@ -8,9 +8,12 @@ const consultingHighlights = [
   "Everything in Digital Member",
   "Monthly 1-on-1 Coaching Calls (12 Sessions)",
   "Personalized Recruiting Roadmap",
+  "Academic & Eligibility Evaluation",
   "Coach Communication Management",
   "Highlight Video Review & Feedback",
   "Scholarship Negotiation Strategy",
+  "Campus Visit Preparation & Coaching",
+  "Transfer Portal Guidance",
   "Priority Email Support"
 ];
 
