@@ -121,7 +121,7 @@ cfagolf.com/go`,
       title: 'Professional Announcement',
       text: `Excited to share College Fairway Advisors — the recruiting platform we wish existed when navigating the college golf landscape.
 
-For junior golfers and their families, the recruiting process can be overwhelming. There are 1,300+ programs across D1, D2, D3, NAIA, and JUCO. Finding the right fit academically, athletically, and financially requires organization, strategy, and expert guidance.
+For junior golfers and their families, the recruiting process can be overwhelming. There are 1,200+ programs across D1, D2, D3, NAIA, and JUCO. Finding the right fit academically, athletically, and financially requires organization, strategy, and expert guidance.
 
 That's exactly what CFA provides:
 • Comprehensive college program database
