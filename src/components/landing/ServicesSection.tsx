@@ -84,7 +84,7 @@ export function ServicesSection() {
                 Everything in Digital, plus:
               </p>
               <div className="space-y-2">
-                {consultingExtras.slice(0, 6).map((feature, index) => (
+                {consultingExtras.map((feature, index) => (
                   <div key={index} className="flex items-start gap-2">
                     <div className="flex-shrink-0 w-4 h-4 rounded-full bg-success/20 flex items-center justify-center mt-0.5">
                       <Check className="w-2.5 h-2.5 text-success" />
@@ -92,7 +92,6 @@ export function ServicesSection() {
                     <span className="text-foreground text-sm">{feature}</span>
                   </div>
                 ))}
-                <p className="text-xs text-primary font-medium pl-6">+ 3 more included</p>
               </div>
               <Link to="/checkout?plan=consulting" className="block">
                 <Button size="lg" className="w-full h-12 font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
