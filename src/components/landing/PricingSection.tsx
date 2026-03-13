@@ -46,7 +46,7 @@ export function PricingSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto relative">
           {/* 1-on-1 Consulting */}
           <Card className="relative overflow-hidden border-2 border-primary shadow-xl">
             <div className="absolute top-0 right-0">
