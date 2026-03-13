@@ -1,37 +1,27 @@
-import { Check, ArrowRight, Calendar } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
-const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
-
-const hsFeatures = [
-  "Monthly One-on-One Coaching Calls",
-  "Partnered Webinars with LPGA and PGA Pros",
-  "Sessions with Current & Former College Coaches",
-  "Full College Golf Database Access",
-  "Personalized Target School List Building",
-  "Tournament Result Tracking & Resume Building",
-  "Coach Contact Strategy & Follow-up Support",
-  "Campus Visit Preparation & Comparison",
-  "Scholarship Offer Analysis & Negotiation Tips",
-  "Recruiting Timeline & Action Plans (by grade)",
+const consultingHighlights = [
+  "Everything in Digital Member",
+  "Monthly 1-on-1 Coaching Calls (12 Sessions)",
+  "Personalized Recruiting Roadmap",
+  "Coach Communication Management",
   "Highlight Video Review & Feedback",
+  "Scholarship Negotiation Strategy",
   "Priority Email Support"
 ];
 
-const transferFeatures = [
-  "Transfer Portal Strategy & Timing",
-  "Credit Audit & Transfer Planning",
-  "NCAA Eligibility Verification",
-  "Collegiate Resume 2.0 Building",
-  "Scholarship Negotiation & NIL Guidance",
-  "Coach Contact Strategy for Transfers",
-  "Campus Visit Preparation",
+const digitalHighlights = [
   "Full College Golf Database Access",
-  "Interactive Transfer Checklist",
-  "Priority Email Support"
+  "Target School List Builder",
+  "Tournament Result Tracker",
+  "Coach Contact Tracker",
+  "Scholarship Calculator",
+  "LPGA & PGA Pro Webinars",
+  "Recruiting Timeline & Worksheets"
 ];
 
 export function PricingSection() {
@@ -40,39 +30,39 @@ export function PricingSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-            Consulting Programs
+            Pricing
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Personalized Guidance,{' '}
             <span className="text-primary">Proven Results</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Choose the program that fits your recruiting journey — whether you're a high school prospect or a college transfer.
+            Choose the plan that fits your recruiting journey.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* High School Program */}
+          {/* 1-on-1 Consulting */}
           <Card className="relative overflow-hidden border-2 border-primary shadow-xl">
             <div className="absolute top-0 right-0">
-              <Badge className="rounded-none rounded-bl-lg bg-primary text-primary-foreground">Most Popular</Badge>
+              <Badge className="rounded-none rounded-bl-lg bg-primary text-primary-foreground">Most Comprehensive</Badge>
             </div>
             <CardHeader className="text-center pb-4 pt-8">
               <CardTitle className="text-2xl font-display font-bold text-foreground">
-                12-Module Program
+                1-on-1 Consulting
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                For high school junior golfers
+                Full-service personalized recruiting guidance
               </CardDescription>
               <div className="pt-6">
-                <span className="text-5xl font-bold text-foreground">$899</span>
-                <p className="text-sm text-muted-foreground mt-2">12 modules • One-on-one coaching calls included</p>
-                <p className="text-xs text-muted-foreground mt-1">*Payment plans available</p>
+                <span className="text-5xl font-bold text-foreground">$2,499</span>
+                <p className="text-sm text-muted-foreground mt-2">One-time • 12 monthly coaching sessions</p>
+                <p className="text-xs text-muted-foreground mt-1">Payment plans available</p>
               </div>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-3">
-                {hsFeatures.map((feature, index) => (
+                {consultingHighlights.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-success/20 flex items-center justify-center mt-0.5">
                       <Check className="w-3 h-3 text-success" />
@@ -81,7 +71,7 @@ export function PricingSection() {
                   </div>
                 ))}
               </div>
-              <Link to="/checkout" className="block">
+              <Link to="/checkout?plan=consulting" className="block">
                 <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
                   Get Started
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -90,27 +80,27 @@ export function PricingSection() {
             </CardContent>
           </Card>
 
-          {/* Transfer Program */}
+          {/* Digital Member */}
           <Card className="relative overflow-hidden border-2 border-border shadow-xl">
             <div className="absolute top-0 right-0">
-              <Badge variant="secondary" className="rounded-none rounded-bl-lg">Transfer Students</Badge>
+              <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Service</Badge>
             </div>
             <CardHeader className="text-center pb-4 pt-8">
               <CardTitle className="text-2xl font-display font-bold text-foreground">
-                6-Module Transfer Program
+                Digital Member
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                For college athletes in the transfer portal
+                DIY recruiting tools & resources
               </CardDescription>
               <div className="pt-6">
-                <span className="text-5xl font-bold text-foreground">$499</span>
-                <p className="text-sm text-muted-foreground mt-2">6 modules • Transfer-specific coaching</p>
-                <p className="text-xs text-muted-foreground mt-1">*Payment plans available</p>
+                <span className="text-5xl font-bold text-foreground">$24.99</span>
+                <span className="text-lg text-muted-foreground">/mo</span>
+                <p className="text-sm text-muted-foreground mt-2">Monthly subscription • Cancel anytime</p>
               </div>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-3">
-                {transferFeatures.map((feature, index) => (
+                {digitalHighlights.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-success/20 flex items-center justify-center mt-0.5">
                       <Check className="w-3 h-3 text-success" />
@@ -119,9 +109,9 @@ export function PricingSection() {
                   </div>
                 ))}
               </div>
-              <Link to="/checkout?plan=transfer" className="block">
+              <Link to="/checkout?plan=digital" className="block">
                 <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                  Get Started
+                  Subscribe Now
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
@@ -129,14 +119,14 @@ export function PricingSection() {
           </Card>
         </div>
 
-        {/* Consultation CTA */}
+        {/* Link to full comparison */}
         <div className="text-center mt-10">
-          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="lg" className="rounded-full font-semibold">
-              <Calendar className="mr-2 w-5 h-5" />
-              Schedule Free Consultation
+          <Link to="/pricing">
+            <Button variant="ghost" size="lg" className="rounded-full font-semibold text-primary">
+              See Full Feature Comparison
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

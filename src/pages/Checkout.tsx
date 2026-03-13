@@ -18,19 +18,21 @@ import { OnboardingBookingDialog } from '@/components/OnboardingBookingDialog';
 const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 
 const PROGRAMS = {
-  high_school: {
-    price: 899,
-    label: '12-Module Consulting Program',
-    shortLabel: 'CFA 12-Module Program',
-    description: 'Complete hands-on recruiting guidance for junior golfers',
-    programType: 'high_school',
+  consulting: {
+    price: 2499,
+    label: '1-on-1 Consulting Program',
+    shortLabel: 'CFA 1-on-1 Consulting',
+    description: 'Full-service personalized recruiting guidance with monthly coaching',
+    programType: 'consulting',
+    isSubscription: false,
   },
-  transfer: {
-    price: 499,
-    label: '6-Module Transfer Program',
-    shortLabel: 'CFA Transfer Program',
-    description: 'NCAA Transfer Portal guidance for college athletes',
-    programType: 'transfer',
+  digital: {
+    price: 24.99,
+    label: 'Digital Membership',
+    shortLabel: 'CFA Digital Member',
+    description: 'Self-service recruiting tools & resources',
+    programType: 'digital',
+    isSubscription: true,
   },
 } as const;
 

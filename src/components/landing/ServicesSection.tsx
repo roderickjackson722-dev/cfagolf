@@ -7,53 +7,38 @@ import {
   FileText, 
   Calculator,
   ClipboardList,
-  ArrowRight
+  ArrowRight,
+  Check,
+  Monitor,
+  Handshake
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
-const services = [
-  {
-    icon: Users,
-    title: "Monthly Coaching Calls",
-    description: "One-on-one consultation (12 calls) guiding you step-by-step through every phase of the recruiting process."
-  },
-  {
-    icon: Video,
-    title: "LPGA and PGA Pro Webinars",
-    description: "Exclusive partnered webinars featuring LPGA professionals sharing insights on collegiate golf and beyond."
-  },
-  {
-    icon: GraduationCap,
-    title: "College Coach Sessions",
-    description: "Learn directly from current and former college golf coaches about what they look for in recruits."
-  },
-  {
-    icon: Target,
-    title: "Target School List Builder",
-    description: "Create a strategic list of colleges that match your academic profile, golf skills, and personal preferences."
-  },
-  {
-    icon: ClipboardList,
-    title: "Tournament Result Log",
-    description: "Track your competitive results and build a comprehensive playing resume for college coaches."
-  },
-  {
-    icon: FileText,
-    title: "Coach Contact Tracker",
-    description: "Organize all your coach communications, follow-ups, and relationship building in one place."
-  },
-  {
-    icon: Calculator,
-    title: "Scholarship Calculator",
-    description: "Analyze and compare scholarship offers to understand the true value of each opportunity."
-  },
-  {
-    icon: Calendar,
-    title: "12-Month Recruiting Timeline",
-    description: "Grade-specific action plans that keep you on track throughout the recruiting process."
-  }
+const digitalFeatures = [
+  "Full College Golf Database Access",
+  "Target School List Builder",
+  "Tournament Result Tracker",
+  "Coach Contact Tracker",
+  "Campus Visit Planner",
+  "Scholarship Calculator",
+  "Recruiting Timeline & Worksheets",
+  "LPGA & PGA Pro Webinars",
+  "College Coach Q&A Sessions",
+];
+
+const consultingExtras = [
+  "Monthly 1-on-1 Coaching Calls (12 Sessions)",
+  "Personalized Recruiting Roadmap",
+  "Academic & Eligibility Evaluation",
+  "Coach Communication Management",
+  "Highlight Video Review & Feedback",
+  "Scholarship Negotiation Strategy",
+  "Campus Visit Preparation & Coaching",
+  "Transfer Portal Guidance",
+  "Priority Email Support",
 ];
 
 export function ServicesSection() {
@@ -62,48 +47,116 @@ export function ServicesSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
-            Consulting Services
+            Service Packages
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Expert Guidance{' '}
-            <span className="text-primary">Every Step of the Way</span>
+            Two Ways to{' '}
+            <span className="text-primary">Get Recruited</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Our personalized consulting service pairs you with experienced advisors, LPGA pros, and college coaches who guide you through every phase of the recruiting journey.
+            Whether you want hands-on consulting or self-guided digital tools, CFA Golf has a plan for your recruiting journey.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
-            <Card key={index} className="group card-hover border-border/50 bg-card">
-              <CardHeader className="pb-3">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <service.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
-                </div>
-                <CardTitle className="text-lg font-semibold text-foreground">
-                  {service.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-muted-foreground leading-relaxed">
-                  {service.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* 1-on-1 Consulting */}
+          <Card className="relative overflow-hidden border-2 border-primary shadow-xl group card-hover">
+            <div className="absolute top-0 right-0">
+              <Badge className="rounded-none rounded-bl-lg bg-primary text-primary-foreground">Most Comprehensive</Badge>
+            </div>
+            <CardHeader className="text-center pb-4 pt-8">
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary transition-colors">
+                <Handshake className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
+              </div>
+              <CardTitle className="text-2xl font-display font-bold text-foreground">
+                1-on-1 Consulting
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Full-service personalized recruiting guidance
+              </CardDescription>
+              <div className="pt-4">
+                <span className="text-4xl font-bold text-foreground">$2,499</span>
+                <p className="text-sm text-muted-foreground mt-1">One-time • 12 monthly sessions</p>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-xs text-muted-foreground text-center font-medium uppercase tracking-wide">
+                Everything in Digital, plus:
+              </p>
+              <div className="space-y-2">
+                {consultingExtras.slice(0, 6).map((feature, index) => (
+                  <div key={index} className="flex items-start gap-2">
+                    <div className="flex-shrink-0 w-4 h-4 rounded-full bg-success/20 flex items-center justify-center mt-0.5">
+                      <Check className="w-2.5 h-2.5 text-success" />
+                    </div>
+                    <span className="text-foreground text-sm">{feature}</span>
+                  </div>
+                ))}
+                <p className="text-xs text-primary font-medium pl-6">+ 3 more included</p>
+              </div>
+              <Link to="/checkout?plan=consulting" className="block">
+                <Button size="lg" className="w-full h-12 font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
+                  Get Started
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          {/* Digital Member */}
+          <Card className="relative overflow-hidden border-2 border-border shadow-xl group card-hover">
+            <div className="absolute top-0 right-0">
+              <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Service</Badge>
+            </div>
+            <CardHeader className="text-center pb-4 pt-8">
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary transition-colors">
+                <Monitor className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
+              </div>
+              <CardTitle className="text-2xl font-display font-bold text-foreground">
+                Digital Member
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                DIY recruiting tools & resources
+              </CardDescription>
+              <div className="pt-4">
+                <span className="text-4xl font-bold text-foreground">$24.99</span>
+                <span className="text-lg text-muted-foreground">/mo</span>
+                <p className="text-sm text-muted-foreground mt-1">Cancel anytime</p>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-xs text-muted-foreground text-center font-medium uppercase tracking-wide">
+                Includes:
+              </p>
+              <div className="space-y-2">
+                {digitalFeatures.slice(0, 6).map((feature, index) => (
+                  <div key={index} className="flex items-start gap-2">
+                    <div className="flex-shrink-0 w-4 h-4 rounded-full bg-success/20 flex items-center justify-center mt-0.5">
+                      <Check className="w-2.5 h-2.5 text-success" />
+                    </div>
+                    <span className="text-foreground text-sm">{feature}</span>
+                  </div>
+                ))}
+                <p className="text-xs text-primary font-medium pl-6">+ 3 more included</p>
+              </div>
+              <Link to="/checkout?plan=digital" className="block">
+                <Button size="lg" variant="outline" className="w-full h-12 font-semibold rounded-full">
+                  Subscribe Now
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
         </div>
 
         {/* CTA */}
         <div className="text-center mt-12">
           <Link to="/pricing">
-            <Button size="lg" className="rounded-full font-semibold px-8">
-              Access All Tools
+            <Button variant="ghost" size="lg" className="rounded-full font-semibold text-primary">
+              Compare All Features
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-          <p className="text-sm text-muted-foreground mt-3">
-            Sign up to access your recruiting dashboard
-          </p>
         </div>
       </div>
     </section>
