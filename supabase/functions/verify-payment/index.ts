@@ -4,7 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 serve(async (req) => {
@@ -13,7 +13,7 @@ serve(async (req) => {
   }
 
   try {
-    // Authentication check - verify the user is authenticated
+    // Authentication check
     const authHeader = req.headers.get("Authorization");
     if (!authHeader?.startsWith("Bearer ")) {
       return new Response(
@@ -28,7 +28,6 @@ serve(async (req) => {
       { global: { headers: { Authorization: authHeader } } }
     );
 
-    // Verify the JWT and get user claims
     const token = authHeader.replace("Bearer ", "");
     const { data: claimsData, error: claimsError } = await supabaseClient.auth.getClaims(token);
     
@@ -67,7 +66,15 @@ serve(async (req) => {
       );
     }
 
-    if (session.payment_status === "paid") {
+    const programType = session.metadata?.program_type || "consulting";
+    const isSubscription = session.mode === "subscription";
+
+    // For subscriptions, check subscription status; for one-time, check payment_status
+    const isPaid = isSubscription
+      ? session.subscription != null // subscription was created
+      : session.payment_status === "paid";
+
+    if (isPaid) {
       const userId = session.metadata?.user_id;
       const referralId = session.metadata?.referral_id;
       const discountApplied = session.metadata?.discount_applied;
@@ -78,7 +85,7 @@ serve(async (req) => {
           Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
         );
 
-        // Idempotency check - verify profile hasn't already been updated
+        // Idempotency check
         const { data: existingProfile } = await supabaseAdmin
           .from('profiles')
           .select('has_paid_access')
@@ -86,10 +93,10 @@ serve(async (req) => {
           .single();
 
         if (existingProfile?.has_paid_access) {
-          // Already processed - return success without re-processing
           return new Response(JSON.stringify({ 
             success: true, 
             paid: true,
+            program_type: programType,
             message: "Payment already verified and access granted!" 
           }), {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -97,10 +104,13 @@ serve(async (req) => {
           });
         }
 
-        // Grant access and get updated profile for email
+        // Grant access and set program_type
         const { data: updatedProfile } = await supabaseAdmin
           .from('profiles')
-          .update({ has_paid_access: true })
+          .update({ 
+            has_paid_access: true,
+            program_type: programType,
+          })
           .eq('user_id', userId)
           .select('email, full_name')
           .single();
@@ -124,12 +134,10 @@ serve(async (req) => {
           console.log("Welcome email triggered:", await welcomeEmailResponse.json());
         } catch (emailError) {
           console.error("Failed to send welcome email:", emailError);
-          // Don't fail the payment verification if email fails
         }
 
         // Track referral usage if applicable
         if (referralId && referralId !== "none") {
-          // Check if referral use already recorded (idempotency)
           const { data: existingUse } = await supabaseAdmin
             .from('referral_uses')
             .select('id')
@@ -138,7 +146,6 @@ serve(async (req) => {
             .single();
 
           if (!existingUse) {
-            // Record the referral use
             await supabaseAdmin
               .from('referral_uses')
               .insert({
@@ -148,7 +155,6 @@ serve(async (req) => {
                 discount_applied: parseInt(discountApplied || "0"),
               });
 
-            // Increment the uses count
             await supabaseAdmin.rpc('increment_referral_uses', { referral_id: referralId });
           }
         }
@@ -156,7 +162,10 @@ serve(async (req) => {
         return new Response(JSON.stringify({ 
           success: true, 
           paid: true,
-          message: "Payment verified and access granted!" 
+          program_type: programType,
+          message: isSubscription 
+            ? "Subscription activated and access granted!" 
+            : "Payment verified and access granted!"
         }), {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 200,
