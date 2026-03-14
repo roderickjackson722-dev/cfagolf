@@ -43,7 +43,7 @@ const consultingFeatures = [
   { icon: Phone, title: "Monthly One-on-One Coaching Calls", description: "Personal guidance tailored to your recruiting journey" },
   { icon: Video, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
   { icon: Award, title: "Sessions with Current & Former College Coaches", description: "Get insider perspectives on what coaches look for" },
-  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,200+ college golf programs" },
+  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,000+ college golf programs" },
   { icon: Target, title: "Personalized Target School List Building", description: "Build your dream list with expert guidance" },
   { icon: Trophy, title: "Tournament Result Tracking & Resume Building", description: "Showcase your competitive accomplishments" },
   { icon: MessageCircle, title: "Coach Contact Strategy & Follow-up Support", description: "Learn how to communicate effectively with coaches" },
@@ -55,7 +55,7 @@ const consultingFeatures = [
 ];
 
 const digitalFeatures = [
-  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,200+ college golf programs" },
+  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,000+ college golf programs" },
   { icon: Target, title: "Target School List Builder", description: "Build and organize your dream school list" },
   { icon: Trophy, title: "Tournament Result Tracker", description: "Log and showcase your competitive results" },
   { icon: MessageCircle, title: "Coach Contact Tracker", description: "Manage outreach to college coaches" },
@@ -74,7 +74,7 @@ const transferFeatures = [
   { icon: DollarSign, title: "Scholarship Negotiation & NIL Guidance", description: "Maximize your financial package" },
   { icon: MessageCircle, title: "Coach Contact Strategy for Transfers", description: "Approach new programs effectively" },
   { icon: MapPin, title: "Campus Visit Preparation", description: "Evaluate your next school with confidence" },
-  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,200+ programs" },
+  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,000+ programs" },
   { icon: Phone, title: "Interactive Transfer Checklist", description: "Step-by-step guidance through the process" },
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers within 24 hours" },
 ];

@@ -9,7 +9,7 @@ const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 const features = [
   {
     icon: GraduationCap,
-    title: '1,200+ College Programs',
+    title: '1,000+ College Programs',
     description: 'Search and filter every college golf program across D1, D2, D3, NAIA & JUCO.',
   },
   {
@@ -137,7 +137,7 @@ export default function SocialLanding() {
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-10 md:gap-16">
             <div className="text-center">
-              <p className="text-3xl font-bold text-foreground">1,200+</p>
+              <p className="text-3xl font-bold text-foreground">1,000+</p>
               <p className="text-sm text-muted-foreground">College Programs</p>
             </div>
             <div className="text-center">
