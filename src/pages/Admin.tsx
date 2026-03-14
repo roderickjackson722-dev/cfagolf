@@ -359,6 +359,21 @@ const Admin = () => {
                   <AdminToolkitTable />
                 </CardContent>
               </Card>
+
+              <Card className="mt-6">
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Video className="w-5 h-5 text-primary" />
+                    <CardTitle>Course Videos</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Add YouTube or Vimeo URLs for each lesson in The Recruiting Huddle video course.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminCourseVideos />
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
