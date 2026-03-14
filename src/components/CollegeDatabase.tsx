@@ -8,8 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { GraduationCap, MapPin, Trophy, Users, X, ArrowUpDown } from 'lucide-react';
+import { GraduationCap, MapPin, Trophy, Users, X, ArrowUpDown, Lock, CreditCard, Calendar, ArrowRight } from 'lucide-react';
 import { CollegeSearchAutocomplete } from '@/components/CollegeSearchAutocomplete';
+import { useAuth } from '@/hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const initialFilters: FilterType = {
   search: '',
