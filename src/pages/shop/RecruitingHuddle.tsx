@@ -72,6 +72,7 @@ const MODULES: Module[] = [
 
 const RecruitingHuddle = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
+  const { videoMap } = useCourseVideos();
   const [activeLesson, setActiveLesson] = useState<string | null>(null);
 
   if (loading) {
