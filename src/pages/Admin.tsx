@@ -342,6 +342,23 @@ const Admin = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+            {/* Toolkit Tab */}
+            <TabsContent value="toolkit">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <ShoppingBag className="w-5 h-5 text-primary" />
+                    <CardTitle>Recruiting Toolkit</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View toolkit sales, purchase history, and product links. Products are sold as a $99 bundle.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminToolkitTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
           </Tabs>
         </div>
       </main>
