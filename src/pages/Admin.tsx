@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -18,6 +18,7 @@ import { AdminHighSchoolTable } from '@/components/admin/AdminHighSchoolTable';
 import { CoachCRM } from '@/components/admin/CoachCRM';
 import { ModuleAgenda } from '@/components/admin/ModuleAgenda';
 import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
+import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -144,6 +145,10 @@ const Admin = () => {
               <TabsTrigger value="wagr" className="flex items-center gap-2">
                 <Trophy className="w-4 h-4" />
                 WAGR
+              </TabsTrigger>
+              <TabsTrigger value="toolkit" className="flex items-center gap-2">
+                <ShoppingBag className="w-4 h-4" />
+                Toolkit
               </TabsTrigger>
             </TabsList>
 
@@ -334,6 +339,23 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminWagrTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            {/* Toolkit Tab */}
+            <TabsContent value="toolkit">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <ShoppingBag className="w-5 h-5 text-primary" />
+                    <CardTitle>Recruiting Toolkit</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View toolkit sales, purchase history, and product links. Products are sold as a $99 bundle.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminToolkitTable />
                 </CardContent>
               </Card>
             </TabsContent>
