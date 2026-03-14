@@ -79,6 +79,29 @@ const Shop = () => {
         {/* Hero */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/10">
           <div className="container mx-auto px-4 text-center max-w-3xl">
+        {/* Guest purchase success banner */}
+        {guestPurchaseSuccess && (
+          <div className="mb-8 mx-auto max-w-xl rounded-2xl border border-emerald-200 bg-emerald-50 dark:bg-emerald-950/30 dark:border-emerald-800 p-6 text-center space-y-3">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900 mx-auto">
+              <CheckCircle className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <h2 className="text-xl font-bold text-foreground">Purchase Successful!</h2>
+            <p className="text-muted-foreground">
+              Your access links have been sent to your email. Check your inbox (and spam folder) for the download links.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Want to save your progress? <Link to="/login" className="text-primary font-semibold underline underline-offset-2">Create a free account</Link> to unlock in-app access.
+            </p>
+          </div>
+        )}
+
+        {verifying && (
+          <div className="mb-8 flex items-center justify-center gap-2 text-muted-foreground">
+            <Loader2 className="w-5 h-5 animate-spin" />
+            <span>Verifying your purchase…</span>
+          </div>
+        )}
+
             <Badge variant="secondary" className="mb-4">Digital Products</Badge>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
               The CFA Recruiting Toolkit
