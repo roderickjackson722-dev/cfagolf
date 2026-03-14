@@ -1,5 +1,5 @@
 import jsPDF from 'jspdf';
-import cfaWatermark from '@/assets/cfa-watermark.png';
+import cfaWatermark from '@/assets/cfa-logo-watermark.jpg';
 import { MODULES, LessonContent } from '@/data/huddleLessons';
 
 const addWatermark = (doc: jsPDF) => {
@@ -8,7 +8,7 @@ const addWatermark = (doc: jsPDF) => {
   doc.saveGraphicsState();
   // @ts-ignore
   doc.setGState(new doc.GState({ opacity: 0.08 }));
-  doc.addImage(cfaWatermark, 'PNG', (pw - 120) / 2, (ph - 80) / 2, 120, 80);
+  doc.addImage(cfaWatermark, 'JPEG', (pw - 120) / 2, (ph - 80) / 2, 120, 80);
   doc.restoreGraphicsState();
 };
 
@@ -30,7 +30,7 @@ const addFooter = (doc: jsPDF) => {
   const ph = doc.internal.pageSize.getHeight();
   doc.setFontSize(7);
   doc.setTextColor(150, 150, 150);
-  doc.text('© College Fairway Advisors. For personal use only.', pw / 2, ph - 8, { align: 'center' });
+  doc.text('© College Fairway Advisors  |  www.cfa.golf', pw / 2, ph - 8, { align: 'center' });
 };
 
 const renderLesson = (doc: jsPDF, lesson: LessonContent, startY: number): number => {

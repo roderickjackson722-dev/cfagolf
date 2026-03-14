@@ -1,5 +1,5 @@
 import jsPDF from 'jspdf';
-import cfaWatermark from '@/assets/cfa-watermark.png';
+import cfaWatermark from '@/assets/cfa-logo-watermark.jpg';
 
 // Helper to add watermark to each page
 const addWatermark = (doc: jsPDF) => {
@@ -17,7 +17,7 @@ const addWatermark = (doc: jsPDF) => {
   const x = (pageWidth - watermarkWidth) / 2;
   const y = (pageHeight - watermarkHeight) / 2;
   
-  doc.addImage(cfaWatermark, 'PNG', x, y, watermarkWidth, watermarkHeight);
+  doc.addImage(cfaWatermark, 'JPEG', x, y, watermarkWidth, watermarkHeight);
   doc.restoreGraphicsState();
 };
 
@@ -30,7 +30,7 @@ const addHeader = (doc: jsPDF, title: string) => {
   doc.rect(0, 0, pageWidth, 35, 'F');
   
   // Logo
-  doc.addImage(cfaWatermark, 'PNG', 10, 5, 30, 25);
+  doc.addImage(cfaWatermark, 'JPEG', 10, 5, 30, 25);
   
   // Title
   doc.setTextColor(255, 255, 255);
@@ -244,7 +244,7 @@ export const generateTournamentLog = (): void => {
   const pageWidth = doc.internal.pageSize.getWidth();
   doc.setFillColor(26, 46, 37);
   doc.rect(0, 0, pageWidth, 25, 'F');
-  doc.addImage(cfaWatermark, 'PNG', 10, 3, 25, 19);
+  doc.addImage(cfaWatermark, 'JPEG', 10, 3, 25, 19);
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
@@ -440,7 +440,7 @@ export const generateCampusVisit = (): void => {
   const pageWidth = doc.internal.pageSize.getWidth();
   doc.setFillColor(26, 46, 37);
   doc.rect(0, 0, pageWidth, 25, 'F');
-  doc.addImage(cfaWatermark, 'PNG', 10, 3, 25, 19);
+  doc.addImage(cfaWatermark, 'JPEG', 10, 3, 25, 19);
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
@@ -698,7 +698,7 @@ export const generateMarketingFlyer = (): void => {
   doc.rect(0, 0, pageWidth, 60, 'F');
 
   // Logo
-  doc.addImage(cfaWatermark, 'PNG', margin, 8, 40, 30);
+  doc.addImage(cfaWatermark, 'JPEG', margin, 8, 40, 30);
 
   // Brand name
   doc.setTextColor(255, 255, 255);
