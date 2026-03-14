@@ -158,11 +158,25 @@ const RecruitingHuddle = () => {
                           
                           {isActive && (
                             <div className="mt-2 ml-11 p-4 bg-muted/30 rounded-lg">
-                              {hasVideo ? (
-                                <div className="aspect-video bg-black rounded-lg flex items-center justify-center">
-                                  <p className="text-white">Video Player</p>
-                                </div>
-                              ) : (
+                              {hasVideo ? (() => {
+                                const embedUrl = getEmbedUrl(videoMap[lesson.id]);
+                                return embedUrl ? (
+                                  <AspectRatio ratio={16 / 9}>
+                                    <iframe
+                                      src={embedUrl}
+                                      className="w-full h-full rounded-lg"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowFullScreen
+                                      title={lesson.title}
+                                    />
+                                  </AspectRatio>
+                                ) : (
+                                  <div className="flex items-center gap-3 text-muted-foreground">
+                                    <Clock className="w-5 h-5" />
+                                    <p className="text-sm">Invalid video URL — please contact support.</p>
+                                  </div>
+                                );
+                              })() : (
                                 <div className="flex items-center gap-3 text-muted-foreground">
                                   <Clock className="w-5 h-5" />
                                   <p className="text-sm">Video coming soon — check back for updates!</p>
