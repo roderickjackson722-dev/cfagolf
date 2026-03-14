@@ -2,6 +2,7 @@ import { Mail, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import cfaLogo from '@/assets/cfa-logo.png';
+import { FooterEmailOptIn } from '@/components/FooterEmailOptIn';
 
 export function Footer() {
   const { user } = useAuth();
