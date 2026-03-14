@@ -7,8 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { UserCircle, ArrowLeft, Loader2, Download } from 'lucide-react';
+import { UserCircle, ArrowLeft, Loader2, Download, FileDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { generateAthleteResumePDF } from '@/lib/pdfTemplates';
 
 const AthleteResume = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
