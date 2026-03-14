@@ -97,7 +97,7 @@ cfagolf.com/go`,
     },
     {
       title: 'Stats Thread Starter',
-      text: `There are 1,200+ college golf programs in the US.
+      text: `There are 1,000+ college golf programs in the US.
 
 Finding the right fit is overwhelming.
 
