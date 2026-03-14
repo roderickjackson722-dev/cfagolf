@@ -4,6 +4,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useDigitalProducts } from '@/hooks/useDigitalProducts';
+import { useDigitalProductsList, getProductIcon } from '@/hooks/useDigitalProductsList';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -13,49 +14,6 @@ import {
   FileText, Mail, UserCircle, Video, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const PRODUCTS = [
-  {
-    id: 'roadmap',
-    title: 'The Recruiting Roadmap',
-    subtitle: 'Automated Recruiting Plan',
-    description: 'A comprehensive step-by-step PDF guide covering how to build a highlight reel, write emails to coaches, and build a target school list.',
-    icon: FileText,
-    route: '/shop/roadmap',
-    color: 'text-emerald-700',
-    bgColor: 'bg-emerald-50',
-  },
-  {
-    id: 'templates',
-    title: '15 Email Templates for Golf Coaches',
-    subtitle: 'Templates & Swipe Files',
-    description: 'Ready-to-use email templates for initial outreach, follow-ups, video submission emails, and more. Copy, customize, and send.',
-    icon: Mail,
-    route: '/shop/templates',
-    color: 'text-blue-700',
-    bgColor: 'bg-blue-50',
-  },
-  {
-    id: 'resume',
-    title: 'The Athlete Resume Template',
-    subtitle: 'Golf-Specific Resume',
-    description: 'A professionally designed resume template built specifically for junior golfers pursuing college programs.',
-    icon: UserCircle,
-    route: '/shop/resume',
-    color: 'text-amber-700',
-    bgColor: 'bg-amber-50',
-  },
-  {
-    id: 'course',
-    title: 'The Recruiting Huddle',
-    subtitle: 'Video Masterclass',
-    description: 'A pre-recorded video course covering the complete recruiting timeline from Freshman to Senior year.',
-    icon: Video,
-    route: '/shop/course',
-    color: 'text-purple-700',
-    bgColor: 'bg-purple-50',
-  },
-];
 
 const Shop = () => {
   const { user } = useAuth();
