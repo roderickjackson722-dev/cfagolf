@@ -157,6 +157,10 @@ const Admin = () => {
                 <MailPlus className="w-4 h-4" />
                 Subscribers
               </TabsTrigger>
+              <TabsTrigger value="newsletter" className="flex items-center gap-2">
+                <Newspaper className="w-4 h-4" />
+                Newsletter
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
