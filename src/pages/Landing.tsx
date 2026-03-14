@@ -1,9 +1,7 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { HeroSection } from '@/components/landing/HeroSection';
-import { ServicesSection } from '@/components/landing/ServicesSection';
-import { PricingSection } from '@/components/landing/PricingSection';
+import { PricingComparisonSection } from '@/components/landing/PricingComparisonSection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
-import { ToolkitPromoSection } from '@/components/landing/ToolkitPromoSection';
 import { CTASection } from '@/components/landing/CTASection';
 import { Footer } from '@/components/landing/Footer';
 
@@ -13,10 +11,8 @@ const Landing = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <ToolkitPromoSection />
-        <ServicesSection />
+        <PricingComparisonSection />
         <TestimonialsSection />
-        <PricingSection />
         <CTASection />
       </main>
       <Footer />
