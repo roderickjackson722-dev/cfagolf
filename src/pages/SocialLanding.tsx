@@ -9,7 +9,7 @@ const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 const features = [
   {
     icon: GraduationCap,
-    title: '1,200+ College Programs',
+    title: '1,000+ College Programs',
     description: 'Search and filter every college golf program across D1, D2, D3, NAIA & JUCO.',
   },
   {
