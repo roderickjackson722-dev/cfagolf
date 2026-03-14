@@ -86,6 +86,7 @@ export const AdminToolkitTable = () => {
           description: product.description.trim(),
           price_cents: product.price_cents,
           is_active: product.is_active,
+          file_url: product.file_url,
           updated_at: new Date().toISOString(),
         })
         .eq('id', product.id);
