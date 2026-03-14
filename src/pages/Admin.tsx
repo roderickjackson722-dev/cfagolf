@@ -366,6 +366,23 @@ const Admin = () => {
               </Card>
 
             </TabsContent>
+            {/* Email Subscribers Tab */}
+            <TabsContent value="subscribers">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <MailPlus className="w-5 h-5 text-primary" />
+                    <CardTitle>Email Subscribers</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View and manage email list subscribers. Export to CSV or remove inactive subscribers.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminSubscriberTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
           </Tabs>
         </div>
       </main>
