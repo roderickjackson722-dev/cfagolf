@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -20,6 +20,7 @@ import { ModuleAgenda } from '@/components/admin/ModuleAgenda';
 import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
 import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
+import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -155,6 +156,10 @@ const Admin = () => {
               <TabsTrigger value="subscribers" className="flex items-center gap-2">
                 <MailPlus className="w-4 h-4" />
                 Subscribers
+              </TabsTrigger>
+              <TabsTrigger value="newsletter" className="flex items-center gap-2">
+                <Newspaper className="w-4 h-4" />
+                Newsletter
               </TabsTrigger>
             </TabsList>
 
@@ -380,6 +385,23 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminSubscriberTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            {/* Newsletter Editor Tab */}
+            <TabsContent value="newsletter">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Newspaper className="w-5 h-5 text-primary" />
+                    <CardTitle>Monthly Newsletter</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View and edit the monthly recruiting tip emails sent to all active subscribers on the 1st of each month.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminNewsletterTable />
                 </CardContent>
               </Card>
             </TabsContent>
