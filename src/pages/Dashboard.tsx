@@ -211,7 +211,7 @@ const Dashboard = () => {
                   <Database className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-foreground">1,500+</p>
+                  <p className="text-2xl font-bold text-foreground">1,000+</p>
                   <p className="text-sm text-muted-foreground">Colleges</p>
                 </div>
               </CardContent>

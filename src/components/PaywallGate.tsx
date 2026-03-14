@@ -29,7 +29,7 @@ export function PaywallGate() {
               <div className="w-2 h-2 rounded-full bg-primary mt-2" />
               <div>
                 <p className="font-medium">Full College Database Access</p>
-                <p className="text-sm text-muted-foreground">Search and filter 1,500+ golf programs</p>
+                <p className="text-sm text-muted-foreground">Search and filter 1,000+ golf programs</p>
               </div>
             </div>
             <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">

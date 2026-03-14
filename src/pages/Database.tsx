@@ -13,7 +13,7 @@ const Database = () => {
               College Golf Database
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore 1,200+ college golf programs across all divisions. Filter by state, division, and more.
+              Explore 1,000+ college golf programs across all divisions. Filter by state, division, and more.
             </p>
           </div>
         </div>

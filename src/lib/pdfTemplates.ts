@@ -820,7 +820,7 @@ export const generateMarketingFlyer = (): void => {
   doc.setTextColor(26, 46, 37);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
-  doc.text('1,200+ College Programs', pageWidth / 3, y + 9, { align: 'center' });
+  doc.text('1,000+ College Programs', pageWidth / 3, y + 9, { align: 'center' });
   doc.text('D1 — NAIA All Divisions', (pageWidth / 3) * 2, y + 9, { align: 'center' });
 
   // Footer

@@ -125,7 +125,7 @@ export function CollegeDatabase() {
               College Golf Database
             </h1>
             <p className="text-base md:text-lg text-primary-foreground/80 mb-4 animate-fade-in">
-              Explore 1,200+ college golf programs across all divisions.
+              Explore 1,000+ college golf programs across all divisions.
             </p>
             
             {stats && (
