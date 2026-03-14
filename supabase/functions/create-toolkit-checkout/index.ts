@@ -15,42 +15,62 @@ serve(async (req) => {
   }
 
   try {
-    const supabaseClient = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
-    );
+    const { email: bodyEmail } = await req.json().catch(() => ({}));
 
-    const authHeader = req.headers.get("Authorization")!;
-    const token = authHeader.replace("Bearer ", "");
-    const { data } = await supabaseClient.auth.getUser(token);
-    const user = data.user;
-    if (!user?.email) throw new Error("User not authenticated");
+    // Try to get authenticated user (optional)
+    let userId: string | null = null;
+    let userEmail: string | null = null;
 
-    // Check if already purchased
-    const supabaseAdmin = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
-    );
+    const authHeader = req.headers.get("Authorization");
+    if (authHeader?.startsWith("Bearer ")) {
+      const supabaseClient = createClient(
+        Deno.env.get("SUPABASE_URL") ?? "",
+        Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+      );
+      const token = authHeader.replace("Bearer ", "");
+      const { data } = await supabaseClient.auth.getUser(token);
+      if (data.user) {
+        userId = data.user.id;
+        userEmail = data.user.email || null;
+      }
+    }
 
-    const { data: existing } = await supabaseAdmin
-      .from("digital_product_purchases")
-      .select("id")
-      .eq("user_id", user.id)
-      .eq("product_key", "recruiting_toolkit")
-      .maybeSingle();
-
-    if (existing) {
+    // Use body email for guests, auth email for logged-in users
+    const email = userEmail || bodyEmail;
+    if (!email) {
       return new Response(
-        JSON.stringify({ error: "You already own this product" }),
+        JSON.stringify({ error: "Email is required" }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
       );
+    }
+
+    // If logged in, check if already purchased
+    if (userId) {
+      const supabaseAdmin = createClient(
+        Deno.env.get("SUPABASE_URL") ?? "",
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+      );
+
+      const { data: existing } = await supabaseAdmin
+        .from("digital_product_purchases")
+        .select("id")
+        .eq("user_id", userId)
+        .eq("product_key", "recruiting_toolkit")
+        .maybeSingle();
+
+      if (existing) {
+        return new Response(
+          JSON.stringify({ error: "You already own this product" }),
+          { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
+        );
+      }
     }
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2025-08-27.basil",
     });
 
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 });
+    const customers = await stripe.customers.list({ email, limit: 1 });
     let customerId;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
@@ -58,14 +78,15 @@ serve(async (req) => {
 
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
-      customer_email: customerId ? undefined : user.email,
+      customer_email: customerId ? undefined : email,
       line_items: [{ price: TOOLKIT_PRICE_ID, quantity: 1 }],
       mode: "payment",
       success_url: `${req.headers.get("origin")}/shop?purchased=true&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.headers.get("origin")}/shop`,
       metadata: {
-        user_id: user.id,
+        user_id: userId || "guest",
         product_key: "recruiting_toolkit",
+        buyer_email: email,
       },
     });
 
