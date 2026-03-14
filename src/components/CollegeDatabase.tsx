@@ -31,12 +31,16 @@ const initialFilters: FilterType = {
 type SortOption = 'name' | 'state' | 'division';
 const ITEMS_PER_PAGE = 24;
 
+const FREE_PREVIEW_LIMIT = 12;
+const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
+
 export function CollegeDatabase() {
   const [filters, setFilters] = useState<FilterType>(initialFilters);
   const [sortBy, setSortBy] = useState<SortOption>('name');
   const [currentPage, setCurrentPage] = useState(1);
   const { data: colleges, isLoading } = useColleges(filters);
   const { data: stats } = useCollegeStats();
+  const { hasPaidAccess, user } = useAuth();
 
   const sortedColleges = useMemo(() => {
     if (!colleges) return [];
