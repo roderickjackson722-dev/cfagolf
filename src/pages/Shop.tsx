@@ -5,6 +5,7 @@ import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useDigitalProducts } from '@/hooks/useDigitalProducts';
 import { useDigitalProductsList, getProductIcon } from '@/hooks/useDigitalProductsList';
+import { ProductPreview } from '@/components/shop/ProductPreview';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
