@@ -3,6 +3,7 @@ import { Footer } from '@/components/landing/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
+import { usePlayerRelease } from '@/hooks/usePlayerRelease';
 import { Navigate } from 'react-router-dom';
 import { Calendar, ExternalLink, CheckCircle2, GraduationCap, Users, Target, BarChart3 } from 'lucide-react';
 import cfaLogo from '@/assets/cfa-logo.png';
