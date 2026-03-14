@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 
 const AthleteResume = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
+  const fileUrl = useToolkitFileUrl('resume');
 
   if (loading) {
     return (
