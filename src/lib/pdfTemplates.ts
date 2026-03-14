@@ -845,3 +845,212 @@ export const pdfGenerators: Record<string, () => void> = {
   'timeline': generateTimeline,
   'marketing-flyer': generateMarketingFlyer
 };
+
+// Recruiting Roadmap PDF
+export const generateRecruitingRoadmapPDF = (): void => {
+  const doc = new jsPDF();
+
+  addWatermark(doc);
+  addHeader(doc, 'The Recruiting Roadmap');
+
+  let y = 45;
+
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(80, 80, 80);
+  const introLines = doc.splitTextToSize(
+    'Your complete step-by-step guide to navigating the college golf recruiting process from start to finish.',
+    170
+  );
+  doc.text(introLines, 14, y);
+  y += introLines.length * 6 + 6;
+
+  const phases = [
+    {
+      title: 'Phase 1: Self-Assessment & Research',
+      items: [
+        'Evaluate your current skill level honestly (handicap, scoring average, tournament results)',
+        'Research NCAA divisions and understand the differences (D1, D2, D3, NAIA, JUCO)',
+        'Create a list of 20-30 potential schools based on academics, location, and golf program strength',
+        'Understand NCAA eligibility requirements and the Eligibility Center registration process',
+      ],
+    },
+    {
+      title: 'Phase 2: Build Your Recruiting Profile',
+      items: [
+        'Create a comprehensive athlete resume (use the included template)',
+        'Film and edit a highlight reel showcasing your swing, short game, and on-course management',
+        'Set up a recruiting profile on platforms coaches actually use',
+        'Gather your academic transcripts, test scores, and letters of recommendation',
+      ],
+    },
+    {
+      title: 'Phase 3: Coach Outreach Strategy',
+      items: [
+        'Draft personalized emails to coaches (use the included 15 email templates)',
+        'Follow up strategically — timing matters more than frequency',
+        'Attend college camps and showcases to get face time with coaches',
+        'Leverage your high school or club coach for introductions',
+      ],
+    },
+    {
+      title: 'Phase 4: Campus Visits & Evaluation',
+      items: [
+        'Schedule unofficial and official visits to your top schools',
+        'Prepare questions to ask coaches, players, and academic advisors',
+        'Evaluate team culture, facilities, practice schedules, and academic support',
+        'Compare financial aid packages and scholarship offers',
+      ],
+    },
+    {
+      title: 'Phase 5: Decision & Commitment',
+      items: [
+        'Narrow your list to 3-5 serious contenders',
+        'Negotiate scholarship offers and understand the full cost of attendance',
+        'Make your verbal commitment and sign your National Letter of Intent',
+        'Prepare for the transition to college golf with a training plan',
+      ],
+    },
+  ];
+
+  phases.forEach((phase, idx) => {
+    // Check if we need a new page
+    const estimatedHeight = 12 + phase.items.length * 8;
+    if (y + estimatedHeight > 270) {
+      doc.addPage();
+      addWatermark(doc);
+      addFooter(doc);
+      y = 20;
+    }
+
+    y = addSectionHeader(doc, `${idx + 1}. ${phase.title}`, y);
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(40, 40, 40);
+    phase.items.forEach((item) => {
+      const lines = doc.splitTextToSize(`• ${item}`, 170);
+      if (y + lines.length * 5 > 270) {
+        doc.addPage();
+        addWatermark(doc);
+        addFooter(doc);
+        y = 20;
+      }
+      doc.text(lines, 16, y);
+      y += lines.length * 5 + 2;
+    });
+    y += 4;
+  });
+
+  addFooter(doc);
+  doc.save('CFA-Recruiting-Roadmap.pdf');
+};
+
+// Athlete Resume Template PDF
+export const generateAthleteResumePDF = (): void => {
+  const doc = new jsPDF();
+
+  addWatermark(doc);
+  addHeader(doc, 'Athlete Resume Template');
+
+  let y = 45;
+
+  // Name header
+  doc.setFontSize(18);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(26, 46, 37);
+  doc.text('[YOUR FULL NAME]', doc.internal.pageSize.getWidth() / 2, y, { align: 'center' });
+  y += 7;
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(100, 100, 100);
+  doc.text('Class of [Graduation Year]', doc.internal.pageSize.getWidth() / 2, y, { align: 'center' });
+  y += 5;
+  doc.text('[City, State] • [Phone Number] • [Email Address]', doc.internal.pageSize.getWidth() / 2, y, { align: 'center' });
+  y += 10;
+
+  doc.setDrawColor(200, 200, 200);
+  doc.line(14, y, doc.internal.pageSize.getWidth() - 14, y);
+  y += 8;
+
+  const sections = [
+    {
+      title: 'PERSONAL INFORMATION',
+      rows: [
+        'Date of Birth: [MM/DD/YYYY]',
+        'Height: [X\'X"]     Weight: [XXX lbs]',
+        'Dominant Hand: [Right/Left]',
+        'High School: [School Name]',
+        'Club/Travel Team: [Team Name]',
+      ],
+    },
+    {
+      title: 'ACADEMIC PROFILE',
+      rows: [
+        'GPA: [X.XX] (Weighted/Unweighted)',
+        'SAT: [Score]  |  ACT: [Score]',
+        'Intended Major: [Major]',
+        'Honors/AP Courses: [List courses]',
+      ],
+    },
+    {
+      title: 'GOLF STATISTICS',
+      rows: [
+        'Current Handicap: [X.X]',
+        '18-Hole Avg: [XX.X]     Low 18: [Score]',
+        'Low 9: [Score]',
+        'Avg. Driving Distance: [XXX yds]',
+        'Avg. Putts/Round: [XX]',
+      ],
+    },
+    {
+      title: 'NOTABLE TOURNAMENT RESULTS',
+      rows: [
+        '[Tournament Name — Date]     Score: [Score]     Finish: [T-Xth / XXX players]',
+        '[Tournament Name — Date]     Score: [Score]     Finish: [T-Xth / XXX players]',
+        '[Tournament Name — Date]     Score: [Score]     Finish: [T-Xth / XXX players]',
+        '[Tournament Name — Date]     Score: [Score]     Finish: [T-Xth / XXX players]',
+        '[Tournament Name — Date]     Score: [Score]     Finish: [T-Xth / XXX players]',
+      ],
+    },
+    {
+      title: 'AWARDS & ACHIEVEMENTS',
+      rows: [
+        '[All-Region / All-State / All-Conference honors]',
+        '[Junior Tour rankings or titles]',
+        '[Academic awards: Honor Roll, NHS, etc.]',
+        '[Community service or leadership roles]',
+      ],
+    },
+    {
+      title: 'REFERENCES',
+      rows: [
+        '[Coach/Instructor Name] — [Title] — [Organization] | [Phone] | [Email]',
+        '[Teacher/Counselor Name] — [Title] — [School] | [Phone] | [Email]',
+      ],
+    },
+  ];
+
+  sections.forEach((section) => {
+    const sectionHeight = 12 + section.rows.length * 8;
+    if (y + sectionHeight > 270) {
+      doc.addPage();
+      addWatermark(doc);
+      addFooter(doc);
+      y = 20;
+    }
+
+    y = addSectionHeader(doc, section.title, y);
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(40, 40, 40);
+    section.rows.forEach((row, i) => {
+      y = addTableRow(doc, row, y, i % 2 === 0);
+    });
+    y += 4;
+  });
+
+  addFooter(doc);
+  doc.save('CFA-Athlete-Resume-Template.pdf');
+};

@@ -7,8 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { UserCircle, ArrowLeft, Loader2, Download } from 'lucide-react';
+import { UserCircle, ArrowLeft, Loader2, Download, FileDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { generateAthleteResumePDF } from '@/lib/pdfTemplates';
 
 const AthleteResume = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
@@ -49,13 +50,18 @@ const AthleteResume = () => {
             Follow this structure to create a professional athlete resume that college golf coaches want to see. Fill in each section with your information.
           </p>
 
-          {fileUrl && (
-            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="inline-block mb-8">
-              <Button className="cfa-gradient hover:opacity-90">
-                <Download className="w-4 h-4 mr-2" /> Download Template
-              </Button>
-            </a>
-          )}
+          <div className="flex flex-wrap gap-3 mb-8">
+            {fileUrl && (
+              <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+                <Button className="cfa-gradient hover:opacity-90">
+                  <Download className="w-4 h-4 mr-2" /> Download Template
+                </Button>
+              </a>
+            )}
+            <Button variant="outline" onClick={() => generateAthleteResumePDF()}>
+              <FileDown className="w-4 h-4 mr-2" /> Save as PDF
+            </Button>
+          </div>
 
           {/* Resume Template */}
           <Card className="border-2 border-primary/20">

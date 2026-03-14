@@ -7,8 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { FileText, Download, CheckCircle, ArrowLeft, Loader2 } from 'lucide-react';
+import { FileText, Download, CheckCircle, ArrowLeft, Loader2, FileDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { generateRecruitingRoadmapPDF } from '@/lib/pdfTemplates';
 
 const ROADMAP_SECTIONS = [
   {
@@ -97,13 +98,18 @@ const RecruitingRoadmap = () => {
             Your complete step-by-step guide to navigating the college golf recruiting process from start to finish.
           </p>
 
-          {fileUrl && (
-            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="inline-block mb-8">
-              <Button className="cfa-gradient hover:opacity-90">
-                <Download className="w-4 h-4 mr-2" /> Download PDF
-              </Button>
-            </a>
-          )}
+          <div className="flex flex-wrap gap-3 mb-8">
+            {fileUrl && (
+              <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+                <Button className="cfa-gradient hover:opacity-90">
+                  <Download className="w-4 h-4 mr-2" /> Download PDF
+                </Button>
+              </a>
+            )}
+            <Button variant="outline" onClick={() => generateRecruitingRoadmapPDF()}>
+              <FileDown className="w-4 h-4 mr-2" /> Save as PDF
+            </Button>
+          </div>
 
           <div className="space-y-6">
             {ROADMAP_SECTIONS.map((section, idx) => (
