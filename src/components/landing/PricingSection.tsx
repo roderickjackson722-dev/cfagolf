@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 
 const consultingHighlights = [
   "Everything in Digital Member",
-  "Monthly 1-on-1 Coaching Calls (12 Sessions)",
+  "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
   "Academic & Eligibility Evaluation",
   "Coach Communication Management",
