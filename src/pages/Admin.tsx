@@ -152,6 +152,10 @@ const Admin = () => {
                 <ShoppingBag className="w-4 h-4" />
                 Toolkit
               </TabsTrigger>
+              <TabsTrigger value="subscribers" className="flex items-center gap-2">
+                <MailPlus className="w-4 h-4" />
+                Subscribers
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
