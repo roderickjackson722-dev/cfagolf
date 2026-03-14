@@ -214,6 +214,33 @@ export type Database = {
         }
         Relationships: []
       }
+      course_lesson_videos: {
+        Row: {
+          created_at: string
+          id: string
+          lesson_id: string
+          updated_at: string
+          video_type: string
+          video_url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lesson_id: string
+          updated_at?: string
+          video_type?: string
+          video_url?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lesson_id?: string
+          updated_at?: string
+          video_type?: string
+          video_url?: string
+        }
+        Relationships: []
+      }
       digital_product_purchases: {
         Row: {
           amount_paid: number | null
