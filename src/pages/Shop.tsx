@@ -24,6 +24,8 @@ const Shop = () => {
   const [searchParams] = useSearchParams();
   const [isPurchasing, setIsPurchasing] = useState(false);
   const [guestEmail, setGuestEmail] = useState('');
+  const [guestPurchaseSuccess, setGuestPurchaseSuccess] = useState(false);
+  const [verifying, setVerifying] = useState(false);
 
   const bundlePrice = products.length > 0 ? products[0].price_cents : 9900;
 
@@ -32,13 +34,19 @@ const Shop = () => {
     const sessionId = searchParams.get('session_id');
     const purchased = searchParams.get('purchased');
     if (sessionId && purchased === 'true') {
+      setVerifying(true);
       verifyPurchase(sessionId)
         .then((result) => {
           if (result?.paid) {
-            toast.success('Purchase successful! Check your email for access links.');
+            if (user) {
+              toast.success('Purchase successful! You now have full access to the Recruiting Toolkit.');
+            } else {
+              setGuestPurchaseSuccess(true);
+            }
           }
         })
-        .catch(() => toast.error('Failed to verify purchase. Please contact support.'));
+        .catch(() => toast.error('Failed to verify purchase. Please contact support.'))
+        .finally(() => setVerifying(false));
     }
   }, [searchParams]);
 
