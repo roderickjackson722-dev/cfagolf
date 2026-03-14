@@ -218,7 +218,7 @@ export const AdminToolkitTable = () => {
 
       {/* Edit Dialog */}
       <Dialog open={!!editingProduct} onOpenChange={(open) => !open && setEditingProduct(null)}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Edit Product</DialogTitle>
           </DialogHeader>
@@ -258,6 +258,65 @@ export const AdminToolkitTable = () => {
                   onChange={(e) => setEditingProduct({ ...editingProduct, price_cents: Math.round(Number(e.target.value) * 100) })}
                 />
               </div>
+
+              {/* File Upload */}
+              <div className="space-y-2">
+                <Label>Downloadable File (PDF)</Label>
+                {editingProduct.file_url ? (
+                  <div className="flex items-center gap-2 p-2 bg-muted rounded-lg">
+                    <FileText className="w-4 h-4 text-primary flex-shrink-0" />
+                    <a href={editingProduct.file_url} target="_blank" rel="noopener noreferrer" className="text-sm text-primary underline truncate flex-1">
+                      {editingProduct.file_url.split('/').pop()}
+                    </a>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setEditingProduct({ ...editingProduct, file_url: null })}
+                    >
+                      <Trash2 className="w-3.5 h-3.5 text-destructive" />
+                    </Button>
+                  </div>
+                ) : (
+                  <p className="text-xs text-muted-foreground">No file uploaded</p>
+                )}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  className="hidden"
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file || !editingProduct) return;
+                    setUploading(true);
+                    try {
+                      const ext = file.name.split('.').pop();
+                      const path = `${editingProduct.product_key}/file.${ext}`;
+                      const { error: uploadError } = await supabase.storage
+                        .from('toolkit-files')
+                        .upload(path, file, { upsert: true });
+                      if (uploadError) throw uploadError;
+                      const { data: urlData } = supabase.storage.from('toolkit-files').getPublicUrl(path);
+                      setEditingProduct({ ...editingProduct, file_url: urlData.publicUrl });
+                      toast.success('File uploaded');
+                    } catch (err: any) {
+                      toast.error(err.message || 'Upload failed');
+                    } finally {
+                      setUploading(false);
+                      if (fileInputRef.current) fileInputRef.current.value = '';
+                    }
+                  }}
+                />
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                >
+                  {uploading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Upload className="w-4 h-4 mr-2" />}
+                  {uploading ? 'Uploading...' : 'Upload File'}
+                </Button>
+              </div>
+
               <div className="flex items-center gap-3">
                 <Switch
                   checked={editingProduct.is_active}
