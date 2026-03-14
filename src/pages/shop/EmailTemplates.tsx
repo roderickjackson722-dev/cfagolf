@@ -278,6 +278,7 @@ Sincerely,
 
 const EmailTemplates = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
+  const fileUrl = useToolkitFileUrl('templates');
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
 
   if (loading) {
