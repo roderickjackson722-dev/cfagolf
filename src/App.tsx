@@ -34,6 +34,11 @@ import TransferPortalTracker from "./pages/TransferPortalTracker";
 import TransferGuide from "./pages/TransferGuide";
 import TransferFlyer from "./pages/TransferFlyer";
 import PlayerRelease from "./pages/PlayerRelease";
+import Shop from "./pages/Shop";
+import RecruitingRoadmap from "./pages/shop/RecruitingRoadmap";
+import EmailTemplates from "./pages/shop/EmailTemplates";
+import AthleteResume from "./pages/shop/AthleteResume";
+import RecruitingHuddle from "./pages/shop/RecruitingHuddle";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
