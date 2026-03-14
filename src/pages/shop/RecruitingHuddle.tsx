@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useDigitalProducts } from '@/hooks/useDigitalProducts';
+import { useCourseVideos, getEmbedUrl } from '@/hooks/useCourseVideos';
 import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Progress } from '@/components/ui/progress';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Video, Play, Clock, ArrowLeft, Lock, CheckCircle, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -70,6 +72,7 @@ const MODULES: Module[] = [
 
 const RecruitingHuddle = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
+  const { videoMap } = useCourseVideos();
   const [activeLesson, setActiveLesson] = useState<string | null>(null);
 
   if (loading) {
@@ -130,7 +133,7 @@ const RecruitingHuddle = () => {
                   <div className="space-y-2">
                     {module.lessons.map((lesson, lesIdx) => {
                       const isActive = activeLesson === lesson.id;
-                      const hasVideo = !!lesson.videoUrl;
+                      const hasVideo = !!videoMap[lesson.id]?.video_url;
                       return (
                         <div key={lesson.id}>
                           <button
@@ -155,11 +158,25 @@ const RecruitingHuddle = () => {
                           
                           {isActive && (
                             <div className="mt-2 ml-11 p-4 bg-muted/30 rounded-lg">
-                              {hasVideo ? (
-                                <div className="aspect-video bg-black rounded-lg flex items-center justify-center">
-                                  <p className="text-white">Video Player</p>
-                                </div>
-                              ) : (
+                              {hasVideo ? (() => {
+                                const embedUrl = getEmbedUrl(videoMap[lesson.id]);
+                                return embedUrl ? (
+                                  <AspectRatio ratio={16 / 9}>
+                                    <iframe
+                                      src={embedUrl}
+                                      className="w-full h-full rounded-lg"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      allowFullScreen
+                                      title={lesson.title}
+                                    />
+                                  </AspectRatio>
+                                ) : (
+                                  <div className="flex items-center gap-3 text-muted-foreground">
+                                    <Clock className="w-5 h-5" />
+                                    <p className="text-sm">Invalid video URL — please contact support.</p>
+                                  </div>
+                                );
+                              })() : (
                                 <div className="flex items-center gap-3 text-muted-foreground">
                                   <Clock className="w-5 h-5" />
                                   <p className="text-sm">Video coming soon — check back for updates!</p>

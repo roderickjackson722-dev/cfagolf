@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, Video } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,6 +19,7 @@ import { CoachCRM } from '@/components/admin/CoachCRM';
 import { ModuleAgenda } from '@/components/admin/ModuleAgenda';
 import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
+import { AdminCourseVideos } from '@/components/admin/AdminCourseVideos';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CollegeFilters } from '@/types/college';
@@ -356,6 +357,21 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminToolkitTable />
+                </CardContent>
+              </Card>
+
+              <Card className="mt-6">
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Video className="w-5 h-5 text-primary" />
+                    <CardTitle>Course Videos</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Add YouTube or Vimeo URLs for each lesson in The Recruiting Huddle video course.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminCourseVideos />
                 </CardContent>
               </Card>
             </TabsContent>
