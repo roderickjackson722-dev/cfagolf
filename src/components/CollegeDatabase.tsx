@@ -294,53 +294,69 @@ export function CollegeDatabase() {
           ) : paginatedColleges.length > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {paginatedColleges.map((college) => (
+                {(hasPaidAccess ? paginatedColleges : paginatedColleges.slice(0, FREE_PREVIEW_LIMIT)).map((college) => (
                   <CollegeCardSimple key={college.id} college={college} />
                 ))}
               </div>
+
+              {/* Paywall overlay for non-paying users */}
+              {!hasPaidAccess && sortedColleges.length > FREE_PREVIEW_LIMIT && (
+                <div className="relative mt-4">
+                  {/* Faded preview cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 opacity-30 blur-[2px] pointer-events-none select-none" aria-hidden="true">
+                    {sortedColleges.slice(FREE_PREVIEW_LIMIT, FREE_PREVIEW_LIMIT + 8).map((college) => (
+                      <CollegeCardSimple key={college.id} college={college} />
+                    ))}
+                  </div>
+                  {/* Gradient overlay + CTA */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background flex items-end justify-center pb-8">
+                    <div className="text-center space-y-4 max-w-lg mx-auto px-4">
+                      <div className="mx-auto w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Lock className="w-7 h-7 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-display font-bold text-foreground">
+                        Unlock All {sortedColleges.length} Programs
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        You're seeing a preview of {FREE_PREVIEW_LIMIT} colleges. Join CFA to access the full database with advanced filters and recruiting tools.
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <Link to="/pricing">
+                          <Button className="rounded-full cfa-gradient hover:opacity-90 gap-2">
+                            <CreditCard className="w-4 h-4" />
+                            View Membership Options
+                            <ArrowRight className="w-4 h-4" />
+                          </Button>
+                        </Link>
+                        <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                          <Button variant="outline" className="rounded-full gap-2">
+                            <Calendar className="w-4 h-4" />
+                            Free Consultation
+                          </Button>
+                        </a>
+                      </div>
+                      {!user && (
+                        <p className="text-xs text-muted-foreground">
+                          Already a member? <Link to="/login" className="text-primary hover:underline font-medium">Sign in</Link>
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
               
-              {/* Pagination Controls */}
-              {totalPages > 1 && (
+              {/* Pagination Controls - only for paying members */}
+              {hasPaidAccess && totalPages > 1 && (
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t">
                   <p className="text-sm text-muted-foreground">
                     Showing {((currentPage - 1) * ITEMS_PER_PAGE) + 1} - {Math.min(currentPage * ITEMS_PER_PAGE, sortedColleges.length)} of {sortedColleges.length} colleges
                   </p>
                   <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentPage(1)}
-                      disabled={currentPage === 1}
-                    >
-                      First
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                      disabled={currentPage === 1}
-                    >
-                      Previous
-                    </Button>
-                    <span className="px-3 py-1 text-sm font-medium">
-                      Page {currentPage} of {totalPages}
-                    </span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                      disabled={currentPage === totalPages}
-                    >
-                      Next
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setCurrentPage(totalPages)}
-                      disabled={currentPage === totalPages}
-                    >
-                      Last
-                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>First</Button>
+                    <Button variant="outline" size="sm" onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))} disabled={currentPage === 1}>Previous</Button>
+                    <span className="px-3 py-1 text-sm font-medium">Page {currentPage} of {totalPages}</span>
+                    <Button variant="outline" size="sm" onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))} disabled={currentPage === totalPages}>Next</Button>
+                    <Button variant="outline" size="sm" onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages}>Last</Button>
                   </div>
                 </div>
               )}
