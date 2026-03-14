@@ -28,7 +28,7 @@ const Welcome = () => {
   };
 
   const benefits = [
-    { icon: GraduationCap, title: 'College Database', description: 'Search 800+ golf programs across all divisions' },
+    { icon: GraduationCap, title: 'College Database', description: 'Search 1,000+ golf programs across all divisions' },
     { icon: Target, title: 'Recruiting Tools', description: 'Target school builder, coach tracker, and campus visit logs' },
     { icon: BarChart3, title: 'Scholarship Calculator', description: 'Compare financial aid offers side by side' },
     { icon: Users, title: 'Expert Coaching', description: 'Monthly strategy calls and personalized guidance' },
