@@ -40,6 +40,7 @@ import EmailTemplates from "./pages/shop/EmailTemplates";
 import AthleteResume from "./pages/shop/AthleteResume";
 import RecruitingHuddle from "./pages/shop/RecruitingHuddle";
 import NotFound from "./pages/NotFound";
+import { LeadMagnetPopup } from "./components/LeadMagnetPopup";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <VisitorTracker />
+      <LeadMagnetPopup />
       <TooltipProvider>
         <Toaster />
         <Sonner />
