@@ -7,8 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { FileText, Download, CheckCircle, ArrowLeft, Loader2 } from 'lucide-react';
+import { FileText, Download, CheckCircle, ArrowLeft, Loader2, FileDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { generateRecruitingRoadmapPDF } from '@/lib/pdfTemplates';
 
 const ROADMAP_SECTIONS = [
   {
