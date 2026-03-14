@@ -56,7 +56,6 @@ const AthleteResume = () => {
               </Button>
             </a>
           )}
-          </p>
 
           {/* Resume Template */}
           <Card className="border-2 border-primary/20">
