@@ -8,7 +8,7 @@ const addWatermark = (doc: jsPDF) => {
   doc.saveGraphicsState();
   // @ts-ignore
   doc.setGState(new doc.GState({ opacity: 0.08 }));
-  doc.addImage(cfaWatermark, 'PNG', (pw - 120) / 2, (ph - 80) / 2, 120, 80);
+  doc.addImage(cfaWatermark, 'JPEG', (pw - 120) / 2, (ph - 80) / 2, 120, 80);
   doc.restoreGraphicsState();
 };
 
