@@ -40,6 +40,7 @@ import EmailTemplates from "./pages/shop/EmailTemplates";
 import AthleteResume from "./pages/shop/AthleteResume";
 import RecruitingHuddle from "./pages/shop/RecruitingHuddle";
 import NotFound from "./pages/NotFound";
+import Unsubscribe from "./pages/Unsubscribe";
 import { LeadMagnetPopup } from "./components/LeadMagnetPopup";
 
 const queryClient = new QueryClient();
