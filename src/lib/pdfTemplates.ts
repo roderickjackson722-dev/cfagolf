@@ -698,7 +698,7 @@ export const generateMarketingFlyer = (): void => {
   doc.rect(0, 0, pageWidth, 60, 'F');
 
   // Logo
-  doc.addImage(cfaWatermark, 'PNG', margin, 8, 40, 30);
+  doc.addImage(cfaWatermark, 'JPEG', margin, 8, 40, 30);
 
   // Brand name
   doc.setTextColor(255, 255, 255);
