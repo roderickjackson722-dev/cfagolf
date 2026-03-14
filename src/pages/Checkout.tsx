@@ -39,7 +39,7 @@ const PROGRAMS = {
 const currentYear = new Date().getFullYear();
 const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1);
 
-const hsFeatures = [
+const consultingFeatures = [
   { icon: Phone, title: "Monthly One-on-One Coaching Calls", description: "Personal guidance tailored to your recruiting journey" },
   { icon: Video, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
   { icon: Award, title: "Sessions with Current & Former College Coaches", description: "Get insider perspectives on what coaches look for" },
@@ -52,6 +52,18 @@ const hsFeatures = [
   { icon: Clock, title: "Recruiting Timeline & Action Plans (by grade)", description: "Know exactly what to do and when" },
   { icon: Video, title: "Highlight Video Review & Feedback", description: "Create videos that get coaches' attention" },
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers to your questions within 24 hours" },
+];
+
+const digitalFeatures = [
+  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,200+ college golf programs" },
+  { icon: Target, title: "Target School List Builder", description: "Build and organize your dream school list" },
+  { icon: Trophy, title: "Tournament Result Tracker", description: "Log and showcase your competitive results" },
+  { icon: MessageCircle, title: "Coach Contact Tracker", description: "Manage outreach to college coaches" },
+  { icon: MapPin, title: "Campus Visit Planner", description: "Plan and compare your campus visits" },
+  { icon: DollarSign, title: "Scholarship Calculator", description: "Compare financial aid packages side by side" },
+  { icon: Video, title: "LPGA & PGA Pro Webinars", description: "Learn from industry professionals" },
+  { icon: Award, title: "College Coach Q&A Sessions", description: "Hear directly from college coaches" },
+  { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
 ];
 
 const transferFeatures = [
@@ -322,7 +334,7 @@ const Checkout = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {(program.programType === 'consulting' ? hsFeatures : hsFeatures.slice(0, 7)).map((feature, index) => (
+                  {(program.programType === 'consulting' ? consultingFeatures : digitalFeatures).map((feature, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                         <feature.icon className="w-4 h-4 text-primary" />
