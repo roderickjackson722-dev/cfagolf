@@ -149,9 +149,12 @@ const Shop = () => {
                           </Button>
                         </Link>
                       ) : (
-                        <Button variant="outline" disabled className="w-full">
-                          <Lock className="w-4 h-4 mr-2" /> Purchase to Unlock
-                        </Button>
+                        <>
+                          <Button variant="outline" disabled className="w-full">
+                            <Lock className="w-4 h-4 mr-2" /> Purchase to Unlock
+                          </Button>
+                          <ProductPreview productKey={product.product_key} />
+                        </>
                       )}
                     </CardContent>
                   </Card>
