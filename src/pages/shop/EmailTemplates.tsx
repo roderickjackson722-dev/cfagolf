@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Mail, Copy, ArrowLeft, Check, Loader2 } from 'lucide-react';
+import { Mail, Copy, ArrowLeft, Check, Loader2, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
