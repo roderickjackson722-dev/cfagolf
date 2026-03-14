@@ -125,7 +125,7 @@ export function generateEligibilityChecklistPdf() {
   // Footer
   doc.setFontSize(9);
   doc.setTextColor(120, 120, 120);
-  doc.text('© College Fairway Advisors  |  contact@cfa.golf  |  cfagolf.com', pageWidth / 2, 288, { align: 'center' });
+  doc.text('© College Fairway Advisors  |  www.cfa.golf', pageWidth / 2, 288, { align: 'center' });
 
   doc.save('College-Golf-Eligibility-Checklist.pdf');
 }

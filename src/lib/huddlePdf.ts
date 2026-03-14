@@ -30,7 +30,7 @@ const addFooter = (doc: jsPDF) => {
   const ph = doc.internal.pageSize.getHeight();
   doc.setFontSize(7);
   doc.setTextColor(150, 150, 150);
-  doc.text('© College Fairway Advisors. For personal use only.', pw / 2, ph - 8, { align: 'center' });
+  doc.text('© College Fairway Advisors  |  www.cfa.golf', pw / 2, ph - 8, { align: 'center' });
 };
 
 const renderLesson = (doc: jsPDF, lesson: LessonContent, startY: number): number => {
