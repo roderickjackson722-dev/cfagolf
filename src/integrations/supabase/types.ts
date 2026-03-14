@@ -250,6 +250,7 @@ export type Database = {
           color: string
           created_at: string
           description: string
+          file_url: string | null
           icon_name: string
           id: string
           is_active: boolean
@@ -266,6 +267,7 @@ export type Database = {
           color?: string
           created_at?: string
           description?: string
+          file_url?: string | null
           icon_name?: string
           id?: string
           is_active?: boolean
@@ -282,6 +284,7 @@ export type Database = {
           color?: string
           created_at?: string
           description?: string
+          file_url?: string | null
           icon_name?: string
           id?: string
           is_active?: boolean

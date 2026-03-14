@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
+import { useIsAdmin } from '@/hooks/useAdmin';
 
 export function useDigitalProducts() {
   const { user, profile } = useAuth();
+  const { data: isAdmin } = useIsAdmin();
   const [hasToolkitAccess, setHasToolkitAccess] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -14,12 +16,19 @@ export function useDigitalProducts() {
       return;
     }
     checkAccess();
-  }, [user, profile]);
+  }, [user, profile, isAdmin]);
 
   const checkAccess = async () => {
     if (!user) return;
     setLoading(true);
     try {
+      // Admins always have access for testing
+      if (isAdmin) {
+        setHasToolkitAccess(true);
+        setLoading(false);
+        return;
+      }
+
       // Check direct purchase
       const { data: purchase } = await supabase
         .from('digital_product_purchases' as any)

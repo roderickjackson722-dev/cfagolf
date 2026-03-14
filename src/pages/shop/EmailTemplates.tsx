@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useDigitalProducts } from '@/hooks/useDigitalProducts';
+import { useToolkitFileUrl } from '@/hooks/useToolkitFileUrl';
 import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Mail, Copy, ArrowLeft, Check, Loader2 } from 'lucide-react';
+import { Mail, Copy, ArrowLeft, Check, Loader2, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -277,6 +278,7 @@ Sincerely,
 
 const EmailTemplates = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
+  const fileUrl = useToolkitFileUrl('templates');
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
 
   if (loading) {
@@ -317,9 +319,17 @@ const EmailTemplates = () => {
             </div>
           </div>
 
-          <p className="text-muted-foreground mb-8">
+          <p className="text-muted-foreground mb-4">
             Copy, customize with your details, and send. Each template is designed for a specific stage of the recruiting outreach process.
           </p>
+
+          {fileUrl && (
+            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="inline-block mb-8">
+              <Button className="cfa-gradient hover:opacity-90">
+                <Download className="w-4 h-4 mr-2" /> Download All Templates
+              </Button>
+            </a>
+          )}
 
           <div className="space-y-10">
             {TEMPLATES.map((category, catIdx) => (

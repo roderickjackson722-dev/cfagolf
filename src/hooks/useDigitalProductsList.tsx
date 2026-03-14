@@ -16,6 +16,7 @@ export type DigitalProduct = {
   route: string;
   sort_order: number;
   is_active: boolean;
+  file_url: string | null;
 };
 
 const ICON_MAP: Record<string, LucideIcon> = {
