@@ -13,8 +13,8 @@ const Landing = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <ServicesSection />
         <ToolkitPromoSection />
+        <ServicesSection />
         <TestimonialsSection />
         <PricingSection />
         <CTASection />
