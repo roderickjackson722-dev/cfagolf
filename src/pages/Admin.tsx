@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,6 +19,7 @@ import { CoachCRM } from '@/components/admin/CoachCRM';
 import { ModuleAgenda } from '@/components/admin/ModuleAgenda';
 import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
+import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -150,6 +151,10 @@ const Admin = () => {
               <TabsTrigger value="toolkit" className="flex items-center gap-2">
                 <ShoppingBag className="w-4 h-4" />
                 Toolkit
+              </TabsTrigger>
+              <TabsTrigger value="subscribers" className="flex items-center gap-2">
+                <MailPlus className="w-4 h-4" />
+                Subscribers
               </TabsTrigger>
             </TabsList>
 
@@ -360,6 +365,23 @@ const Admin = () => {
                 </CardContent>
               </Card>
 
+            </TabsContent>
+            {/* Email Subscribers Tab */}
+            <TabsContent value="subscribers">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <MailPlus className="w-5 h-5 text-primary" />
+                    <CardTitle>Email Subscribers</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View and manage email list subscribers. Export to CSV or remove inactive subscribers.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminSubscriberTable />
+                </CardContent>
+              </Card>
             </TabsContent>
           </Tabs>
         </div>
