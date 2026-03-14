@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -11,7 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { DollarSign, Users, ShoppingCart, TrendingUp, Pencil, Save, Loader2 } from 'lucide-react';
+import { DollarSign, Users, ShoppingCart, TrendingUp, Pencil, Save, Loader2, Upload, FileText, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
 
@@ -28,6 +28,7 @@ type DigitalProduct = {
   route: string;
   sort_order: number;
   is_active: boolean;
+  file_url: string | null;
 };
 
 export const AdminToolkitTable = () => {
