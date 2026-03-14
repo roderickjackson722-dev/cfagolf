@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/landing/HeroSection';
 import { ServicesSection } from '@/components/landing/ServicesSection';
 import { PricingSection } from '@/components/landing/PricingSection';
 import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
+import { ToolkitPromoSection } from '@/components/landing/ToolkitPromoSection';
 import { CTASection } from '@/components/landing/CTASection';
 import { Footer } from '@/components/landing/Footer';
 
@@ -13,6 +14,7 @@ const Landing = () => {
       <main>
         <HeroSection />
         <ServicesSection />
+        <ToolkitPromoSection />
         <TestimonialsSection />
         <PricingSection />
         <CTASection />
