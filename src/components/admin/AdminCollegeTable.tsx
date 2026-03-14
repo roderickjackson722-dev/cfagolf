@@ -141,10 +141,31 @@ export function AdminCollegeTable({ colleges, isLoading }: AdminCollegeTableProp
             className="pl-10"
           />
         </div>
-        <Button onClick={handleAddNew}>
-          <Plus className="w-4 h-4 mr-2" />
-          Add College
-        </Button>
+        <div className="flex gap-2">
+          {missingLogoCount > 0 && (
+            <Button
+              variant="outline"
+              onClick={handleFetchLogos}
+              disabled={isFetchingLogos}
+            >
+              {isFetchingLogos ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  {logoFetchStatus || 'Fetching...'}
+                </>
+              ) : (
+                <>
+                  <ImageDown className="w-4 h-4 mr-2" />
+                  Fetch Logos ({missingLogoCount})
+                </>
+              )}
+            </Button>
+          )}
+          <Button onClick={handleAddNew}>
+            <Plus className="w-4 h-4 mr-2" />
+            Add College
+          </Button>
+        </div>
       </div>
 
       {/* Stats */}
