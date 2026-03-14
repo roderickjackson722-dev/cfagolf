@@ -1,5 +1,5 @@
 import jsPDF from 'jspdf';
-import cfaWatermark from '@/assets/cfa-watermark.png';
+import cfaWatermark from '@/assets/cfa-logo-watermark.jpg';
 
 // Helper to add watermark to each page
 const addWatermark = (doc: jsPDF) => {
