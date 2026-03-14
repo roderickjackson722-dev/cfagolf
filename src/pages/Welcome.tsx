@@ -11,10 +11,16 @@ import cfaLogo from '@/assets/cfa-logo.png';
 const CALENDLY_LINK = "https://calendly.com/contact-cfa/30min";
 
 const Welcome = () => {
-  const { user, loading, hasPaidAccess } = useAuth();
+  const { user, loading, hasPaidAccess, profile } = useAuth();
+  const { hasSubmittedRelease, isLoading: releaseLoading } = usePlayerRelease();
 
   if (!loading && !user) {
     return <Navigate to="/login" replace />;
+  }
+
+  // Consulting members must complete the release form first
+  if (!loading && !releaseLoading && profile?.program_type === 'consulting' && !hasSubmittedRelease) {
+    return <Navigate to="/player-release" replace />;
   }
 
   const handleScheduleClick = () => {

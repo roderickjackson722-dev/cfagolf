@@ -79,6 +79,7 @@ const App = () => (
             <Route path="/tools/transfer-portal" element={<TransferPortalTracker />} />
             <Route path="/tools/transfer-guide" element={<TransferGuide />} />
             <Route path="/flyer/transfer" element={<TransferFlyer />} />
+            <Route path="/player-release" element={<PlayerRelease />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
