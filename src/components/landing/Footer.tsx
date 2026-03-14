@@ -50,36 +50,10 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* External Links - Only for registered members */}
-          {user && (
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Resources</h4>
-              <ul className="space-y-2">
-                <li>
-                  <a 
-                    href="https://www.ncaa.org/sports/golf" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
-                  >
-                    NCAA Golf
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://www.naia.org/sports/golf" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-white/70 hover:text-white transition-colors"
-                  >
-                    NAIA Golf
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          )}
+          {/* Email Opt-In */}
+          <div>
+            <FooterEmailOptIn />
+          </div>
         </div>
 
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
