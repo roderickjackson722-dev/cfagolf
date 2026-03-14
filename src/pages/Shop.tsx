@@ -18,7 +18,11 @@ import { Link } from 'react-router-dom';
 const Shop = () => {
   const { user } = useAuth();
   const { hasToolkitAccess, loading, purchaseToolkit, verifyPurchase } = useDigitalProducts();
+  const { data: products = [], isLoading: productsLoading } = useDigitalProductsList();
   const [searchParams] = useSearchParams();
+  const [isPurchasing, setIsPurchasing] = useState(false);
+
+  const bundlePrice = products.length > 0 ? products[0].price_cents : 9900;
   const [isPurchasing, setIsPurchasing] = useState(false);
 
   // Handle purchase verification on return
