@@ -98,13 +98,18 @@ const RecruitingRoadmap = () => {
             Your complete step-by-step guide to navigating the college golf recruiting process from start to finish.
           </p>
 
-          {fileUrl && (
-            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="inline-block mb-8">
-              <Button className="cfa-gradient hover:opacity-90">
-                <Download className="w-4 h-4 mr-2" /> Download PDF
-              </Button>
-            </a>
-          )}
+          <div className="flex flex-wrap gap-3 mb-8">
+            {fileUrl && (
+              <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+                <Button className="cfa-gradient hover:opacity-90">
+                  <Download className="w-4 h-4 mr-2" /> Download PDF
+                </Button>
+              </a>
+            )}
+            <Button variant="outline" onClick={() => generateRecruitingRoadmapPDF()}>
+              <FileDown className="w-4 h-4 mr-2" /> Save as PDF
+            </Button>
+          </div>
 
           <div className="space-y-6">
             {ROADMAP_SECTIONS.map((section, idx) => (
