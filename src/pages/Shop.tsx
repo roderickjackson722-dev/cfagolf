@@ -121,13 +121,13 @@ const Shop = () => {
               What's Inside the Toolkit
             </h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {PRODUCTS.map((product) => {
-                const Icon = product.icon;
+              {products.map((product) => {
+                const Icon = getProductIcon(product.icon_name);
                 return (
                   <Card key={product.id} className="hover:shadow-lg transition-shadow border-border/50">
                     <CardHeader className="pb-3">
                       <div className="flex items-start gap-4">
-                        <div className={`w-12 h-12 rounded-xl ${product.bgColor} flex items-center justify-center flex-shrink-0`}>
+                        <div className={`w-12 h-12 rounded-xl ${product.bg_color} flex items-center justify-center flex-shrink-0`}>
                           <Icon className={`w-6 h-6 ${product.color}`} />
                         </div>
                         <div>
@@ -141,7 +141,7 @@ const Shop = () => {
                       {hasToolkitAccess ? (
                         <Link to={product.route}>
                           <Button variant="outline" className="w-full">
-                            {product.id === 'course' ? (
+                            {product.product_key === 'course' ? (
                               <><Play className="w-4 h-4 mr-2" /> Watch Now</>
                             ) : (
                               <><Download className="w-4 h-4 mr-2" /> Access Now</>
