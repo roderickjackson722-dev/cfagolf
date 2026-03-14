@@ -40,6 +40,7 @@ import EmailTemplates from "./pages/shop/EmailTemplates";
 import AthleteResume from "./pages/shop/AthleteResume";
 import RecruitingHuddle from "./pages/shop/RecruitingHuddle";
 import NotFound from "./pages/NotFound";
+import Unsubscribe from "./pages/Unsubscribe";
 import { LeadMagnetPopup } from "./components/LeadMagnetPopup";
 
 const queryClient = new QueryClient();
@@ -92,6 +93,7 @@ const App = () => (
             <Route path="/shop/templates" element={<EmailTemplates />} />
             <Route path="/shop/resume" element={<AthleteResume />} />
             <Route path="/shop/course" element={<RecruitingHuddle />} />
+            <Route path="/unsubscribe" element={<Unsubscribe />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
