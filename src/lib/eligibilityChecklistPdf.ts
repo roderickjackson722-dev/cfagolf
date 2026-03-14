@@ -1,10 +1,26 @@
 import jsPDF from 'jspdf';
+import cfaLogo from '@/assets/cfa-logo-watermark.jpg';
+
+const addWatermark = (doc: jsPDF) => {
+  const pw = doc.internal.pageSize.getWidth();
+  const ph = doc.internal.pageSize.getHeight();
+  doc.saveGraphicsState();
+  // @ts-ignore
+  doc.setGState(new doc.GState({ opacity: 0.06 }));
+  const ww = 100;
+  const wh = 60;
+  doc.addImage(cfaLogo, 'JPEG', (pw - ww) / 2, (ph - wh) / 2, ww, wh);
+  doc.restoreGraphicsState();
+};
 
 export function generateEligibilityChecklistPdf() {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
   const margin = 20;
   let y = 20;
+
+  // Watermark on first page
+  addWatermark(doc);
 
   // Header
   doc.setFillColor(26, 55, 46); // cfa-dark-green
