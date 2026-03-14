@@ -319,9 +319,17 @@ const EmailTemplates = () => {
             </div>
           </div>
 
-          <p className="text-muted-foreground mb-8">
+          <p className="text-muted-foreground mb-4">
             Copy, customize with your details, and send. Each template is designed for a specific stage of the recruiting outreach process.
           </p>
+
+          {fileUrl && (
+            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="inline-block mb-8">
+              <Button className="cfa-gradient hover:opacity-90">
+                <Download className="w-4 h-4 mr-2" /> Download All Templates
+              </Button>
+            </a>
+          )}
 
           <div className="space-y-10">
             {TEMPLATES.map((category, catIdx) => (

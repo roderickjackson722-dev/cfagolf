@@ -45,8 +45,17 @@ const AthleteResume = () => {
             </div>
           </div>
 
-          <p className="text-muted-foreground mb-8">
+          <p className="text-muted-foreground mb-4">
             Follow this structure to create a professional athlete resume that college golf coaches want to see. Fill in each section with your information.
+          </p>
+
+          {fileUrl && (
+            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="inline-block mb-8">
+              <Button className="cfa-gradient hover:opacity-90">
+                <Download className="w-4 h-4 mr-2" /> Download Template
+              </Button>
+            </a>
+          )}
           </p>
 
           {/* Resume Template */}

@@ -93,9 +93,17 @@ const RecruitingRoadmap = () => {
             </div>
           </div>
 
-          <p className="text-muted-foreground mb-8">
+          <p className="text-muted-foreground mb-4">
             Your complete step-by-step guide to navigating the college golf recruiting process from start to finish.
           </p>
+
+          {fileUrl && (
+            <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="inline-block mb-8">
+              <Button className="cfa-gradient hover:opacity-90">
+                <Download className="w-4 h-4 mr-2" /> Download PDF
+              </Button>
+            </a>
+          )}
 
           <div className="space-y-6">
             {ROADMAP_SECTIONS.map((section, idx) => (
