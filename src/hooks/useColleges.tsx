@@ -68,7 +68,8 @@ export function useColleges(filters: CollegeFilters) {
         query = query.lte('out_of_state_cost', filters.maxCost);
       }
 
-      const { data, error } = await query.order('golf_national_ranking', { ascending: true, nullsFirst: false });
+      // Fetch all results (default limit is 1000)
+      const { data, error } = await query.order('name', { ascending: true }).limit(2000);
 
       if (error) throw error;
       return data as College[];
