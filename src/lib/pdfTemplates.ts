@@ -30,7 +30,7 @@ const addHeader = (doc: jsPDF, title: string) => {
   doc.rect(0, 0, pageWidth, 35, 'F');
   
   // Logo
-  doc.addImage(cfaWatermark, 'PNG', 10, 5, 30, 25);
+  doc.addImage(cfaWatermark, 'JPEG', 10, 5, 30, 25);
   
   // Title
   doc.setTextColor(255, 255, 255);
