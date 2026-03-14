@@ -146,6 +146,10 @@ const Admin = () => {
                 <Trophy className="w-4 h-4" />
                 WAGR
               </TabsTrigger>
+              <TabsTrigger value="toolkit" className="flex items-center gap-2">
+                <ShoppingBag className="w-4 h-4" />
+                Toolkit
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
