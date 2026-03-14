@@ -1,5 +1,5 @@
 import jsPDF from 'jspdf';
-import cfaWatermark from '@/assets/cfa-watermark.png';
+import cfaWatermark from '@/assets/cfa-logo-watermark.jpg';
 import { MODULES, LessonContent } from '@/data/huddleLessons';
 
 const addWatermark = (doc: jsPDF) => {
