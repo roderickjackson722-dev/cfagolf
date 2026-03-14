@@ -446,6 +446,123 @@ export type Database = {
         }
         Relationships: []
       }
+      player_profile_releases: {
+        Row: {
+          ack_can_withdraw: boolean
+          ack_flat_fee: boolean
+          ack_no_control_third_party: boolean
+          ack_no_guarantees: boolean
+          ack_not_agency: boolean
+          act_score: string | null
+          auth_academic_info: boolean
+          auth_athletic_profile: boolean
+          auth_direct_coach_contact: boolean
+          auth_personal_info: boolean
+          created_at: string
+          current_school: string
+          date_of_birth: string
+          full_name: string
+          golf_achievements: string
+          gpa: string
+          graduation_year: number
+          id: string
+          parent_email: string | null
+          parent_name: string | null
+          parent_phone: string | null
+          parent_relationship: string | null
+          parent_signature: string | null
+          parent_signature_date: string | null
+          player_email: string
+          player_phone: string
+          player_signature: string
+          player_signature_date: string
+          release_marketing: boolean | null
+          release_name_achievements: boolean | null
+          release_success_story: boolean | null
+          release_website_social: boolean | null
+          sat_score: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ack_can_withdraw?: boolean
+          ack_flat_fee?: boolean
+          ack_no_control_third_party?: boolean
+          ack_no_guarantees?: boolean
+          ack_not_agency?: boolean
+          act_score?: string | null
+          auth_academic_info?: boolean
+          auth_athletic_profile?: boolean
+          auth_direct_coach_contact?: boolean
+          auth_personal_info?: boolean
+          created_at?: string
+          current_school: string
+          date_of_birth: string
+          full_name: string
+          golf_achievements: string
+          gpa: string
+          graduation_year: number
+          id?: string
+          parent_email?: string | null
+          parent_name?: string | null
+          parent_phone?: string | null
+          parent_relationship?: string | null
+          parent_signature?: string | null
+          parent_signature_date?: string | null
+          player_email: string
+          player_phone: string
+          player_signature: string
+          player_signature_date: string
+          release_marketing?: boolean | null
+          release_name_achievements?: boolean | null
+          release_success_story?: boolean | null
+          release_website_social?: boolean | null
+          sat_score?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ack_can_withdraw?: boolean
+          ack_flat_fee?: boolean
+          ack_no_control_third_party?: boolean
+          ack_no_guarantees?: boolean
+          ack_not_agency?: boolean
+          act_score?: string | null
+          auth_academic_info?: boolean
+          auth_athletic_profile?: boolean
+          auth_direct_coach_contact?: boolean
+          auth_personal_info?: boolean
+          created_at?: string
+          current_school?: string
+          date_of_birth?: string
+          full_name?: string
+          golf_achievements?: string
+          gpa?: string
+          graduation_year?: number
+          id?: string
+          parent_email?: string | null
+          parent_name?: string | null
+          parent_phone?: string | null
+          parent_relationship?: string | null
+          parent_signature?: string | null
+          parent_signature_date?: string | null
+          player_email?: string
+          player_phone?: string
+          player_signature?: string
+          player_signature_date?: string
+          release_marketing?: boolean | null
+          release_name_achievements?: boolean | null
+          release_success_story?: boolean | null
+          release_website_social?: boolean | null
+          sat_score?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null

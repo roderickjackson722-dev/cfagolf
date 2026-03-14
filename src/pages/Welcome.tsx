@@ -3,6 +3,7 @@ import { Footer } from '@/components/landing/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
+import { usePlayerRelease } from '@/hooks/usePlayerRelease';
 import { Navigate } from 'react-router-dom';
 import { Calendar, ExternalLink, CheckCircle2, GraduationCap, Users, Target, BarChart3 } from 'lucide-react';
 import cfaLogo from '@/assets/cfa-logo.png';
@@ -10,10 +11,16 @@ import cfaLogo from '@/assets/cfa-logo.png';
 const CALENDLY_LINK = "https://calendly.com/contact-cfa/30min";
 
 const Welcome = () => {
-  const { user, loading, hasPaidAccess } = useAuth();
+  const { user, loading, hasPaidAccess, profile } = useAuth();
+  const { hasSubmittedRelease, isLoading: releaseLoading } = usePlayerRelease();
 
   if (!loading && !user) {
     return <Navigate to="/login" replace />;
+  }
+
+  // Consulting members must complete the release form first
+  if (!loading && !releaseLoading && profile?.program_type === 'consulting' && !hasSubmittedRelease) {
+    return <Navigate to="/player-release" replace />;
   }
 
   const handleScheduleClick = () => {
@@ -21,7 +28,7 @@ const Welcome = () => {
   };
 
   const benefits = [
-    { icon: GraduationCap, title: 'College Database', description: 'Search 800+ golf programs across all divisions' },
+    { icon: GraduationCap, title: 'College Database', description: 'Search 1,000+ golf programs across all divisions' },
     { icon: Target, title: 'Recruiting Tools', description: 'Target school builder, coach tracker, and campus visit logs' },
     { icon: BarChart3, title: 'Scholarship Calculator', description: 'Compare financial aid offers side by side' },
     { icon: Users, title: 'Expert Coaching', description: 'Monthly strategy calls and personalized guidance' },
