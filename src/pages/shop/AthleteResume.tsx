@@ -5,8 +5,9 @@ import { useToolkitFileUrl } from '@/hooks/useToolkitFileUrl';
 import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { UserCircle, ArrowLeft, Loader2 } from 'lucide-react';
+import { UserCircle, ArrowLeft, Loader2, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AthleteResume = () => {
