@@ -79,9 +79,11 @@ export function useDigitalProducts() {
     }
   };
 
-  const purchaseToolkit = async () => {
+  const purchaseToolkit = async (guestEmail?: string) => {
     try {
-      const { data, error } = await supabase.functions.invoke('create-toolkit-checkout');
+      const { data, error } = await supabase.functions.invoke('create-toolkit-checkout', {
+        body: { email: guestEmail },
+      });
       if (error) throw error;
       if (data?.url) {
         window.location.href = data.url;

@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import {
   FileText, Mail, UserCircle, Video, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play
@@ -22,6 +23,7 @@ const Shop = () => {
   const { data: products = [], isLoading: productsLoading } = useDigitalProductsList();
   const [searchParams] = useSearchParams();
   const [isPurchasing, setIsPurchasing] = useState(false);
+  const [guestEmail, setGuestEmail] = useState('');
 
   const bundlePrice = products.length > 0 ? products[0].price_cents : 9900;
 
@@ -33,7 +35,7 @@ const Shop = () => {
       verifyPurchase(sessionId)
         .then((result) => {
           if (result?.paid) {
-            toast.success('Purchase successful! You now have full access to the Recruiting Toolkit.');
+            toast.success('Purchase successful! Check your email for access links.');
           }
         })
         .catch(() => toast.error('Failed to verify purchase. Please contact support.'));
@@ -41,13 +43,20 @@ const Shop = () => {
   }, [searchParams]);
 
   const handlePurchase = async () => {
-    if (!user) {
-      toast.error('Please sign in to purchase');
+    if (!user && !guestEmail) {
+      toast.error('Please enter your email address');
       return;
+    }
+    if (!user && guestEmail) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(guestEmail)) {
+        toast.error('Please enter a valid email address');
+        return;
+      }
     }
     setIsPurchasing(true);
     try {
-      await purchaseToolkit();
+      await purchaseToolkit(user ? undefined : guestEmail);
     } catch (err: any) {
       toast.error(err.message || 'Failed to start checkout');
     } finally {
@@ -67,7 +76,7 @@ const Shop = () => {
               The CFA Recruiting Toolkit
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Everything you need to navigate the college golf recruiting process — templates, guides, and a full video course. One purchase, lifetime access.
+              Everything you need to navigate the college golf recruiting process — templates, guides, and a full written course. One purchase, lifetime access.
             </p>
 
             {!loading && (
@@ -77,34 +86,41 @@ const Shop = () => {
                   You have full access
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="text-center">
                     <span className="text-4xl font-bold text-foreground">${(bundlePrice / 100).toFixed(0)}</span>
                     <span className="text-muted-foreground ml-2">one-time</span>
                   </div>
-                  {user ? (
-                    <Button
-                      onClick={handlePurchase}
-                      disabled={isPurchasing}
-                      size="lg"
-                      className="h-14 px-10 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90"
-                    >
-                      {isPurchasing ? (
-                        <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Processing...</>
-                      ) : (
-                        <><ShoppingCart className="w-5 h-5 mr-2" /> Buy the Toolkit</>
-                      )}
-                    </Button>
-                  ) : (
-                    <Link to="/login">
-                      <Button size="lg" className="h-14 px-10 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90">
-                        Sign In to Purchase
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
-                    </Link>
+
+                  {!user && (
+                    <div className="max-w-sm mx-auto">
+                      <Input
+                        type="email"
+                        placeholder="Enter your email to purchase"
+                        value={guestEmail}
+                        onChange={(e) => setGuestEmail(e.target.value)}
+                        className="text-center h-12"
+                      />
+                    </div>
                   )}
+
+                  <Button
+                    onClick={handlePurchase}
+                    disabled={isPurchasing}
+                    size="lg"
+                    className="h-14 px-10 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90"
+                  >
+                    {isPurchasing ? (
+                      <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Processing...</>
+                    ) : (
+                      <><ShoppingCart className="w-5 h-5 mr-2" /> Buy the Toolkit</>
+                    )}
+                  </Button>
+
                   <p className="text-sm text-muted-foreground">
-                    Also included free for Digital Members after 6 months & all Consulting members
+                    {user
+                      ? 'Also included free for Digital Members after 6 months & all Consulting members'
+                      : 'No account required — download links sent to your email'}
                   </p>
                 </div>
               )
