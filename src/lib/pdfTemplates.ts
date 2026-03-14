@@ -17,7 +17,7 @@ const addWatermark = (doc: jsPDF) => {
   const x = (pageWidth - watermarkWidth) / 2;
   const y = (pageHeight - watermarkHeight) / 2;
   
-  doc.addImage(cfaWatermark, 'PNG', x, y, watermarkWidth, watermarkHeight);
+  doc.addImage(cfaWatermark, 'JPEG', x, y, watermarkWidth, watermarkHeight);
   doc.restoreGraphicsState();
 };
 
