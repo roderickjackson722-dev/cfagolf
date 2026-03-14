@@ -34,6 +34,11 @@ import TransferPortalTracker from "./pages/TransferPortalTracker";
 import TransferGuide from "./pages/TransferGuide";
 import TransferFlyer from "./pages/TransferFlyer";
 import PlayerRelease from "./pages/PlayerRelease";
+import Shop from "./pages/Shop";
+import RecruitingRoadmap from "./pages/shop/RecruitingRoadmap";
+import EmailTemplates from "./pages/shop/EmailTemplates";
+import AthleteResume from "./pages/shop/AthleteResume";
+import RecruitingHuddle from "./pages/shop/RecruitingHuddle";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -80,6 +85,11 @@ const App = () => (
             <Route path="/tools/transfer-guide" element={<TransferGuide />} />
             <Route path="/flyer/transfer" element={<TransferFlyer />} />
             <Route path="/player-release" element={<PlayerRelease />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/roadmap" element={<RecruitingRoadmap />} />
+            <Route path="/shop/templates" element={<EmailTemplates />} />
+            <Route path="/shop/resume" element={<AthleteResume />} />
+            <Route path="/shop/course" element={<RecruitingHuddle />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

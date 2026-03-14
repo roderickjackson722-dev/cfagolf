@@ -214,6 +214,36 @@ export type Database = {
         }
         Relationships: []
       }
+      digital_product_purchases: {
+        Row: {
+          amount_paid: number | null
+          created_at: string
+          id: string
+          product_key: string
+          purchase_type: string
+          stripe_session_id: string | null
+          user_id: string
+        }
+        Insert: {
+          amount_paid?: number | null
+          created_at?: string
+          id?: string
+          product_key?: string
+          purchase_type?: string
+          stripe_session_id?: string | null
+          user_id: string
+        }
+        Update: {
+          amount_paid?: number | null
+          created_at?: string
+          id?: string
+          product_key?: string
+          purchase_type?: string
+          stripe_session_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       email_templates: {
         Row: {
           body: string
