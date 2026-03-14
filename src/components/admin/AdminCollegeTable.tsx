@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Edit, Trash2, Plus, Search, GraduationCap } from 'lucide-react';
+import { Edit, Trash2, Plus, Search, GraduationCap, ImageDown, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -8,7 +8,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { College } from '@/types/college';
 import { CollegeFormDialog, CollegeFormData } from './CollegeFormDialog';
 import { useCreateCollege, useUpdateCollege, useDeleteCollege } from '@/hooks/useAdminColleges';
-
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import { useQueryClient } from '@tanstack/react-query';
 interface AdminCollegeTableProps {
   colleges: College[];
   isLoading: boolean;
