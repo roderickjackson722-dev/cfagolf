@@ -133,7 +133,7 @@ const RecruitingHuddle = () => {
                   <div className="space-y-2">
                     {module.lessons.map((lesson, lesIdx) => {
                       const isActive = activeLesson === lesson.id;
-                      const hasVideo = !!lesson.videoUrl;
+                      const hasVideo = !!videoMap[lesson.id]?.video_url;
                       return (
                         <div key={lesson.id}>
                           <button
