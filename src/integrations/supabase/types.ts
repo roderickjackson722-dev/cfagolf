@@ -590,6 +590,42 @@ export type Database = {
         }
         Relationships: []
       }
+      newsletter_tips: {
+        Row: {
+          action_items: Json
+          created_at: string
+          id: string
+          month_index: number
+          month_name: string
+          subject: string
+          tip: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          action_items?: Json
+          created_at?: string
+          id?: string
+          month_index: number
+          month_name: string
+          subject: string
+          tip: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          action_items?: Json
+          created_at?: string
+          id?: string
+          month_index?: number
+          month_name?: string
+          subject?: string
+          tip?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       player_profile_releases: {
         Row: {
           ack_can_withdraw: boolean
