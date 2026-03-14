@@ -61,11 +61,7 @@ const faqs = [
   },
   {
     question: 'What is the investment for your services?',
-    answer: 'Our flagship service is the "All-Access Recruiting Blueprint," a year-long, comprehensive partnership. We encourage you to book a free 30-minute consultation to discuss the investment and how it is tailored to your specific needs. This allows us to ensure we are the right fit for your family before any financial commitment.',
-  },
-  {
-    question: 'Why is your service an annual fee? Shouldn\'t it be a one-time payment?',
-    answer: 'The college recruiting process is not a one-time event; it\'s a 12-18 month journey. Our annual model ensures we are with you every step of the way—from building your initial profile and making first contact, to navigating official visits and evaluating scholarship offers. This ongoing support provides continuous value and accountability, which is critical for a successful outcome.',
+    answer: 'Our 1-on-1 Consulting package is a one-time $2,499 investment that includes 12 consulting calls and full platform access. We also offer a Digital Membership at $24.99/mo for self-guided recruiting tools. Book a free 30-minute consultation to discuss which option is the best fit for your family.',
   },
   {
     question: 'Do you guarantee a scholarship?',

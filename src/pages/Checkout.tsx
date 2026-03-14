@@ -562,7 +562,7 @@ const Checkout = () => {
                         <p className="text-sm text-muted-foreground mb-3">
                           {program.isSubscription
                             ? 'Monthly access to digital recruiting tools and resources.'
-                            : 'Full access to recruiting tools, monthly coaching calls, and expert guidance.'}
+                            : 'Full access to recruiting tools, 12 consulting calls, and expert guidance.'}
                         </p>
                         
                         <div className="flex items-baseline gap-2">

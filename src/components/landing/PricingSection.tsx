@@ -61,7 +61,7 @@ export function PricingSection() {
               </CardDescription>
               <div className="pt-6">
                 <span className="text-5xl font-bold text-foreground">$2,499</span>
-                <p className="text-sm text-muted-foreground mt-2">One-time • 12 monthly coaching sessions</p>
+                <p className="text-sm text-muted-foreground mt-2">One-time • 12 consulting calls included</p>
                 <p className="text-xs text-muted-foreground mt-1">Payment plans available</p>
               </div>
             </CardHeader>

@@ -76,7 +76,7 @@ export function ServicesSection() {
               </CardDescription>
               <div className="pt-4">
                 <span className="text-4xl font-bold text-foreground">$2,499</span>
-                <p className="text-sm text-muted-foreground mt-1">One-time • 12 monthly sessions</p>
+                <p className="text-sm text-muted-foreground mt-1">One-time • 12 consulting calls included</p>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">

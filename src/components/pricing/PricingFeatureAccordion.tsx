@@ -94,7 +94,7 @@ const featureCategories: FeatureCategory[] = [
     category: "Personalized 1-on-1 Consulting",
     features: [
       {
-        title: "Monthly 1-on-1 Coaching Calls (12 Sessions)",
+        title: "12 One-on-One Consulting Calls",
         description: "Personal consultation with an experienced advisor guiding you step-by-step through every phase of the recruiting process.",
         consulting: true,
         digital: false,
