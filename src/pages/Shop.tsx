@@ -23,7 +23,6 @@ const Shop = () => {
   const [isPurchasing, setIsPurchasing] = useState(false);
 
   const bundlePrice = products.length > 0 ? products[0].price_cents : 9900;
-  const [isPurchasing, setIsPurchasing] = useState(false);
 
   // Handle purchase verification on return
   useEffect(() => {
