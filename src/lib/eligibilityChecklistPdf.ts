@@ -109,6 +109,7 @@ export function generateEligibilityChecklistPdf() {
     for (const item of section.items) {
       if (y > 275) {
         doc.addPage();
+        addWatermark(doc);
         y = 20;
       }
       // Checkbox
