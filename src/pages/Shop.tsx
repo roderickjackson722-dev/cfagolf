@@ -79,7 +79,7 @@ const Shop = () => {
               ) : (
                 <div className="space-y-3">
                   <div className="text-center">
-                    <span className="text-4xl font-bold text-foreground">$99</span>
+                    <span className="text-4xl font-bold text-foreground">${(bundlePrice / 100).toFixed(0)}</span>
                     <span className="text-muted-foreground ml-2">one-time</span>
                   </div>
                   {user ? (
