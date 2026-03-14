@@ -60,7 +60,7 @@ Start your search today ➡️ Link in bio
 
 College Fairway Advisors is the only all-in-one recruiting platform built specifically for junior golfers and their families.
 
-🎯 Search 1,200+ college golf programs
+🎯 Search 1,000+ college golf programs
 📋 Build target school lists with expert guidance
 📧 Track coach outreach and follow-ups
 💰 Compare scholarship offers side-by-side
