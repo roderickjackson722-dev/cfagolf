@@ -18,7 +18,7 @@ That's where College Fairway Advisors comes in.
 
 We give junior golfers and their families the tools, strategy, and expert guidance to navigate the college golf recruiting process with confidence.
 
-✅ 1,200+ college programs searchable
+✅ 1,000+ college programs searchable
 ✅ Target school builder
 ✅ Coach contact tracker
 ✅ Scholarship calculator
