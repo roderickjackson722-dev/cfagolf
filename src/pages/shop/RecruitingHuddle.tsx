@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useDigitalProducts } from '@/hooks/useDigitalProducts';
+import { useCourseVideos, getEmbedUrl } from '@/hooks/useCourseVideos';
 import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Progress } from '@/components/ui/progress';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Video, Play, Clock, ArrowLeft, Lock, CheckCircle, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
