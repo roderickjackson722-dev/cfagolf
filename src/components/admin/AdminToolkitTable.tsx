@@ -34,6 +34,8 @@ type DigitalProduct = {
 export const AdminToolkitTable = () => {
   const queryClient = useQueryClient();
   const [editingProduct, setEditingProduct] = useState<DigitalProduct | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { data: products = [], isLoading: productsLoading } = useQuery({
     queryKey: ['admin-digital-products'],
