@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Edit, Trash2, Plus, Search, GraduationCap } from 'lucide-react';
+import { Edit, Trash2, Plus, Search, GraduationCap, ImageDown, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -8,7 +8,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { College } from '@/types/college';
 import { CollegeFormDialog, CollegeFormData } from './CollegeFormDialog';
 import { useCreateCollege, useUpdateCollege, useDeleteCollege } from '@/hooks/useAdminColleges';
-
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import { useQueryClient } from '@tanstack/react-query';
 interface AdminCollegeTableProps {
   colleges: College[];
   isLoading: boolean;
@@ -19,10 +21,61 @@ export function AdminCollegeTable({ colleges, isLoading }: AdminCollegeTableProp
   const [editingCollege, setEditingCollege] = useState<College | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [deletingCollege, setDeletingCollege] = useState<College | null>(null);
+  const [isFetchingLogos, setIsFetchingLogos] = useState(false);
+  const [logoFetchStatus, setLogoFetchStatus] = useState('');
 
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
   const createCollege = useCreateCollege();
   const updateCollege = useUpdateCollege();
   const deleteCollege = useDeleteCollege();
+
+  const missingLogoCount = colleges.filter(c => !c.logo_url && c.website_url).length;
+
+  const handleFetchLogos = async () => {
+    setIsFetchingLogos(true);
+    setLogoFetchStatus('Starting...');
+    let totalSucceeded = 0;
+    let offset = 0;
+
+    try {
+      while (true) {
+        setLogoFetchStatus(`Processing batch (offset ${offset})...`);
+        const { data, error } = await supabase.functions.invoke('fetch-college-logos', {
+          body: { batchSize: 30, offset: 0 }, // always 0 since processed ones get logos
+        });
+
+        if (error) throw error;
+        if (!data.success) throw new Error(data.error);
+
+        totalSucceeded += data.succeeded;
+        setLogoFetchStatus(`Fetched ${totalSucceeded} logos so far... (${data.remaining} remaining)`);
+
+        if (data.processed === 0 || data.remaining === 0) break;
+        offset += 30;
+
+        // Refresh data between batches
+        queryClient.invalidateQueries({ queryKey: ['admin-colleges'] });
+        queryClient.invalidateQueries({ queryKey: ['colleges'] });
+      }
+
+      toast({
+        title: 'Logo Fetch Complete',
+        description: `Successfully fetched ${totalSucceeded} logos.`,
+      });
+    } catch (err) {
+      toast({
+        title: 'Error',
+        description: err instanceof Error ? err.message : 'Failed to fetch logos',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsFetchingLogos(false);
+      setLogoFetchStatus('');
+      queryClient.invalidateQueries({ queryKey: ['admin-colleges'] });
+      queryClient.invalidateQueries({ queryKey: ['colleges'] });
+    }
+  };
 
   const filteredColleges = colleges.filter((college) =>
     college.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -88,10 +141,31 @@ export function AdminCollegeTable({ colleges, isLoading }: AdminCollegeTableProp
             className="pl-10"
           />
         </div>
-        <Button onClick={handleAddNew}>
-          <Plus className="w-4 h-4 mr-2" />
-          Add College
-        </Button>
+        <div className="flex gap-2">
+          {missingLogoCount > 0 && (
+            <Button
+              variant="outline"
+              onClick={handleFetchLogos}
+              disabled={isFetchingLogos}
+            >
+              {isFetchingLogos ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  {logoFetchStatus || 'Fetching...'}
+                </>
+              ) : (
+                <>
+                  <ImageDown className="w-4 h-4 mr-2" />
+                  Fetch Logos ({missingLogoCount})
+                </>
+              )}
+            </Button>
+          )}
+          <Button onClick={handleAddNew}>
+            <Plus className="w-4 h-4 mr-2" />
+            Add College
+          </Button>
+        </div>
       </div>
 
       {/* Stats */}
