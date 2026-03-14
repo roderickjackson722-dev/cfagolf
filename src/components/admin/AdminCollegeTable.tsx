@@ -21,10 +21,61 @@ export function AdminCollegeTable({ colleges, isLoading }: AdminCollegeTableProp
   const [editingCollege, setEditingCollege] = useState<College | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [deletingCollege, setDeletingCollege] = useState<College | null>(null);
+  const [isFetchingLogos, setIsFetchingLogos] = useState(false);
+  const [logoFetchStatus, setLogoFetchStatus] = useState('');
 
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
   const createCollege = useCreateCollege();
   const updateCollege = useUpdateCollege();
   const deleteCollege = useDeleteCollege();
+
+  const missingLogoCount = colleges.filter(c => !c.logo_url && c.website_url).length;
+
+  const handleFetchLogos = async () => {
+    setIsFetchingLogos(true);
+    setLogoFetchStatus('Starting...');
+    let totalSucceeded = 0;
+    let offset = 0;
+
+    try {
+      while (true) {
+        setLogoFetchStatus(`Processing batch (offset ${offset})...`);
+        const { data, error } = await supabase.functions.invoke('fetch-college-logos', {
+          body: { batchSize: 30, offset: 0 }, // always 0 since processed ones get logos
+        });
+
+        if (error) throw error;
+        if (!data.success) throw new Error(data.error);
+
+        totalSucceeded += data.succeeded;
+        setLogoFetchStatus(`Fetched ${totalSucceeded} logos so far... (${data.remaining} remaining)`);
+
+        if (data.processed === 0 || data.remaining === 0) break;
+        offset += 30;
+
+        // Refresh data between batches
+        queryClient.invalidateQueries({ queryKey: ['admin-colleges'] });
+        queryClient.invalidateQueries({ queryKey: ['colleges'] });
+      }
+
+      toast({
+        title: 'Logo Fetch Complete',
+        description: `Successfully fetched ${totalSucceeded} logos.`,
+      });
+    } catch (err) {
+      toast({
+        title: 'Error',
+        description: err instanceof Error ? err.message : 'Failed to fetch logos',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsFetchingLogos(false);
+      setLogoFetchStatus('');
+      queryClient.invalidateQueries({ queryKey: ['admin-colleges'] });
+      queryClient.invalidateQueries({ queryKey: ['colleges'] });
+    }
+  };
 
   const filteredColleges = colleges.filter((college) =>
     college.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
