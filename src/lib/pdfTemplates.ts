@@ -244,7 +244,7 @@ export const generateTournamentLog = (): void => {
   const pageWidth = doc.internal.pageSize.getWidth();
   doc.setFillColor(26, 46, 37);
   doc.rect(0, 0, pageWidth, 25, 'F');
-  doc.addImage(cfaWatermark, 'PNG', 10, 3, 25, 19);
+  doc.addImage(cfaWatermark, 'JPEG', 10, 3, 25, 19);
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
