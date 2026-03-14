@@ -5,11 +5,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Download, Trash2, Search, Users } from 'lucide-react';
+import { Download, Trash2, Search, Users, Send, X } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
 export function AdminSubscriberTable() {
   const [search, setSearch] = useState('');
+  const [testEmail, setTestEmail] = useState('');
+  const [showTestSend, setShowTestSend] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: subscribers = [], isLoading } = useQuery({
@@ -32,6 +34,24 @@ export function AdminSubscriberTable() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-subscribers'] });
       toast({ title: 'Subscriber removed' });
+    },
+  });
+
+  const sendTestMutation = useMutation({
+    mutationFn: async (email: string) => {
+      const { data, error } = await supabase.functions.invoke('send-monthly-newsletter', {
+        body: { test_email: email },
+      });
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      toast({ title: 'Test newsletter sent!', description: 'Check the inbox for this month\'s tip.' });
+      setShowTestSend(false);
+      setTestEmail('');
+    },
+    onError: (error) => {
+      toast({ title: 'Failed to send', description: error.message, variant: 'destructive' });
     },
   });
 
@@ -75,11 +95,37 @@ export function AdminSubscriberTable() {
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)} className="pl-8 w-48" />
           </div>
+          <Button variant="outline" size="sm" onClick={() => setShowTestSend(!showTestSend)}>
+            <Send className="w-4 h-4 mr-1" /> Send Test
+          </Button>
           <Button variant="outline" size="sm" onClick={exportCSV}>
             <Download className="w-4 h-4 mr-1" /> Export CSV
           </Button>
         </div>
       </div>
+
+      {showTestSend && (
+        <div className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+          <span className="text-sm text-muted-foreground whitespace-nowrap">Send this month's newsletter to:</span>
+          <Input
+            type="email"
+            placeholder="test@example.com"
+            value={testEmail}
+            onChange={(e) => setTestEmail(e.target.value)}
+            className="max-w-xs"
+          />
+          <Button
+            size="sm"
+            onClick={() => sendTestMutation.mutate(testEmail)}
+            disabled={!testEmail || sendTestMutation.isPending}
+          >
+            {sendTestMutation.isPending ? 'Sending...' : 'Send'}
+          </Button>
+          <Button size="sm" variant="ghost" onClick={() => { setShowTestSend(false); setTestEmail(''); }}>
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
+      )}
 
       {isLoading ? (
         <div className="text-center py-8 text-muted-foreground">Loading...</div>
