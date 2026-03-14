@@ -10,6 +10,8 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+const UNSUBSCRIBE_URL = "https://hmycumiukfdbfhplgbri.supabase.co/functions/v1/unsubscribe";
+
 interface Tip {
   subject: string;
   title: string;
@@ -17,8 +19,9 @@ interface Tip {
   action_items: string[];
 }
 
-function getMonthlyEmailHtml(tip: Tip, subscriberName?: string) {
+function getMonthlyEmailHtml(tip: Tip, subscriberName?: string, subscriberEmail?: string) {
   const firstName = subscriberName?.split(' ')[0] || 'Golf Family';
+  const unsubLink = `${UNSUBSCRIBE_URL}?email=${encodeURIComponent(subscriberEmail || '')}`;
 
   return `
     <!DOCTYPE html>
@@ -63,7 +66,7 @@ function getMonthlyEmailHtml(tip: Tip, subscriberName?: string) {
         <div style="background: #f3f4f6; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
           <p style="font-size: 12px; color: #6b7280; margin: 0;">
             You're receiving this because you subscribed to CFA Golf recruiting tips.<br>
-            <a href="mailto:contact@cfa.golf?subject=Unsubscribe" style="color: #166534;">Unsubscribe</a> · <a href="https://cfagolf.lovable.app" style="color: #166534;">Visit CFA Golf</a>
+            <a href="${unsubLink}" style="color: #166534;">Unsubscribe</a> · <a href="https://cfagolf.lovable.app" style="color: #166534;">Visit CFA Golf</a>
           </p>
         </div>
       </div>
@@ -78,21 +81,40 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    const body = await req.json();
+    const { month_index, test_email } = body;
+
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    const monthIndex = new Date().getMonth();
+    const targetMonth = month_index !== undefined ? month_index : new Date().getMonth();
 
     // Fetch tip from database
     const { data: tipData, error: tipError } = await supabase
       .from("newsletter_tips")
       .select("subject, title, tip, action_items")
-      .eq("month_index", monthIndex)
+      .eq("month_index", targetMonth)
       .single();
 
     if (tipError || !tipData) {
-      throw new Error(`No newsletter tip found for month ${monthIndex}: ${tipError?.message}`);
+      throw new Error(`No newsletter tip found for month ${targetMonth}: ${tipError?.message}`);
+    }
+
+    // If test_email is provided, send only to that address
+    if (test_email) {
+      const emailResponse = await resend.emails.send({
+        from: "CFA Golf <contact@cfa.golf>",
+        to: [test_email],
+        subject: `[TEST] ${tipData.subject}`,
+        html: getMonthlyEmailHtml(tipData as Tip, "Test User", test_email),
+      });
+
+      console.log("Test email sent:", emailResponse);
+      return new Response(
+        JSON.stringify({ success: true, sent: 1, test: true }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
     }
 
     // Fetch all active subscribers
@@ -122,7 +144,7 @@ const handler = async (req: Request): Promise<Response> => {
             from: "CFA Golf <contact@cfa.golf>",
             to: [sub.email],
             subject: tipData.subject,
-            html: getMonthlyEmailHtml(tipData as Tip, sub.full_name || undefined),
+            html: getMonthlyEmailHtml(tipData as Tip, sub.full_name || undefined, sub.email),
           })
         )
       );

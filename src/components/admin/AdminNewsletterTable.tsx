@@ -24,6 +24,9 @@ export function AdminNewsletterTable() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<NewsletterTip>>({});
   const [previewId, setPreviewId] = useState<string | null>(null);
+  const [sendingTestId, setSendingTestId] = useState<string | null>(null);
+  const [testEmail, setTestEmail] = useState('');
+  const [testEmailFor, setTestEmailFor] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
   const { data: tips = [], isLoading } = useQuery({
@@ -50,6 +53,24 @@ export function AdminNewsletterTable() {
     },
   });
 
+  const sendTestMutation = useMutation({
+    mutationFn: async ({ monthIndex, email }: { monthIndex: number; email: string }) => {
+      const { data, error } = await supabase.functions.invoke('send-monthly-newsletter', {
+        body: { month_index: monthIndex, test_email: email },
+      });
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      toast({ title: 'Test email sent!', description: 'Check your inbox.' });
+      setTestEmailFor(null);
+      setTestEmail('');
+    },
+    onError: (error) => {
+      toast({ title: 'Failed to send test', description: error.message, variant: 'destructive' });
+    },
+  });
+
   const startEdit = (tip: NewsletterTip) => {
     setEditingId(tip.id);
     setEditForm({
@@ -63,6 +84,14 @@ export function AdminNewsletterTable() {
   const saveEdit = () => {
     if (!editingId) return;
     updateMutation.mutate({ id: editingId, ...editForm });
+  };
+
+  const handleSendTest = (tip: NewsletterTip) => {
+    if (testEmailFor === tip.id && testEmail) {
+      sendTestMutation.mutate({ monthIndex: tip.month_index, email: testEmail });
+    } else {
+      setTestEmailFor(tip.id);
+    }
   };
 
   const currentMonth = new Date().getMonth();
@@ -82,6 +111,7 @@ export function AdminNewsletterTable() {
           const isEditing = editingId === tip.id;
           const isCurrent = tip.month_index === currentMonth;
           const isPreviewing = previewId === tip.id;
+          const isTestOpen = testEmailFor === tip.id;
 
           return (
             <Card key={tip.id} className={isCurrent ? 'border-primary/50 bg-primary/5' : ''}>
@@ -94,6 +124,9 @@ export function AdminNewsletterTable() {
                   <div className="flex gap-1">
                     {!isEditing && (
                       <>
+                        <Button variant="ghost" size="sm" onClick={() => handleSendTest(tip)}>
+                          <Send className="w-3 h-3 mr-1" /> Test
+                        </Button>
                         <Button variant="ghost" size="sm" onClick={() => setPreviewId(isPreviewing ? null : tip.id)}>
                           {isPreviewing ? 'Hide' : 'Preview'}
                         </Button>
@@ -106,6 +139,28 @@ export function AdminNewsletterTable() {
                 </div>
               </CardHeader>
               <CardContent>
+                {isTestOpen && !isEditing && (
+                  <div className="flex items-center gap-2 mb-3 p-2 bg-muted rounded-lg">
+                    <Input
+                      type="email"
+                      placeholder="Enter email to send test..."
+                      value={testEmail}
+                      onChange={(e) => setTestEmail(e.target.value)}
+                      className="flex-1"
+                    />
+                    <Button
+                      size="sm"
+                      onClick={() => sendTestMutation.mutate({ monthIndex: tip.month_index, email: testEmail })}
+                      disabled={!testEmail || sendTestMutation.isPending}
+                    >
+                      {sendTestMutation.isPending ? 'Sending...' : 'Send'}
+                    </Button>
+                    <Button size="sm" variant="ghost" onClick={() => { setTestEmailFor(null); setTestEmail(''); }}>
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                )}
+
                 {isEditing ? (
                   <div className="space-y-3">
                     <div>
@@ -157,15 +212,15 @@ export function AdminNewsletterTable() {
 
                     {isPreviewing && (
                       <div className="mt-4 border rounded-lg overflow-hidden">
-                        <div className="bg-[#166534] text-white p-4 text-center">
+                        <div className="bg-primary text-primary-foreground p-4 text-center">
                           <h3 className="font-bold text-lg">{tip.title}</h3>
                           <p className="text-sm opacity-90">Monthly Recruiting Tip from CFA Golf</p>
                         </div>
-                        <div className="p-4 bg-white text-sm text-gray-800">
+                        <div className="p-4 bg-card text-sm text-card-foreground">
                           <p className="mb-2">Hey Golf Family,</p>
                           <p className="mb-3">{tip.tip}</p>
-                          <div className="bg-green-50 border-l-4 border-[#166534] p-3 rounded-r-lg">
-                            <p className="font-semibold text-[#166534] mb-2">📋 This Month's Action Items:</p>
+                          <div className="bg-primary/5 border-l-4 border-primary p-3 rounded-r-lg">
+                            <p className="font-semibold text-primary mb-2">📋 This Month's Action Items:</p>
                             <ul className="list-disc pl-5 space-y-1">
                               {(tip.action_items || []).map((item, i) => (
                                 <li key={i}>{item}</li>
