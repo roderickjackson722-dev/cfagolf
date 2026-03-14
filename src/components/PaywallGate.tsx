@@ -39,13 +39,6 @@ export function PaywallGate() {
                 <p className="text-sm text-muted-foreground">Target schools, coach tracker, and more</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
-              <div className="w-2 h-2 rounded-full bg-primary mt-2" />
-              <div>
-                <p className="font-medium">Monthly Coaching Calls</p>
-                <p className="text-sm text-muted-foreground">One-on-one guidance from experts</p>
-              </div>
-            </div>
           </div>
 
           <div className="space-y-3">

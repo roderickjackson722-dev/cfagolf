@@ -394,10 +394,10 @@ export function AuthForm() {
       <div className="bg-muted/50 rounded-lg p-4 border">
         <div className="flex items-center gap-2 mb-2">
           <CreditCard className="w-5 h-5 text-primary" />
-          <span className="font-semibold">CFA Annual Consulting Membership</span>
+          <span className="font-semibold">CFA 1-on-1 Consulting</span>
         </div>
         <p className="text-sm text-muted-foreground mb-3">
-          Full access to recruiting tools, monthly coaching calls, and expert guidance.
+          Full access to recruiting tools, 12 consulting calls, and expert guidance.
         </p>
         
         <div className="flex items-baseline gap-2">

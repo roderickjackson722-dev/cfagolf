@@ -740,7 +740,7 @@ export const generateMarketingFlyer = (): void => {
   y += 12;
 
   const services = [
-    ['12 Monthly Coaching Calls', 'One-on-one guidance through every phase of recruiting'],
+    ['12 One-on-One Consulting Calls', 'One-on-one guidance through every phase of recruiting'],
     ['LPGA & PGA Pro Webinars', 'Exclusive sessions with touring professionals'],
     ['College Coach Sessions', 'Learn what coaches look for in recruits'],
     ['Target School List Builder', 'Strategic school matching based on your profile'],
