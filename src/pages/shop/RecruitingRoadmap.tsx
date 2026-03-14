@@ -60,6 +60,7 @@ const ROADMAP_SECTIONS = [
 
 const RecruitingRoadmap = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
+  const fileUrl = useToolkitFileUrl('roadmap');
 
   if (loading) {
     return (
