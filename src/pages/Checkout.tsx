@@ -55,7 +55,7 @@ const consultingFeatures = [
 ];
 
 const digitalFeatures = [
-  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,200+ college golf programs" },
+  { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,000+ college golf programs" },
   { icon: Target, title: "Target School List Builder", description: "Build and organize your dream school list" },
   { icon: Trophy, title: "Tournament Result Tracker", description: "Log and showcase your competitive results" },
   { icon: MessageCircle, title: "Coach Contact Tracker", description: "Manage outreach to college coaches" },
