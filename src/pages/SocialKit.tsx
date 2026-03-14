@@ -42,7 +42,7 @@ From finding the right programs to tracking coach outreach to comparing scholars
     },
     {
       title: 'Stats Highlight',
-      text: `Did you know there are 1,200+ college golf programs across D1, D2, D3, NAIA, and JUCO? 🏌️‍♂️
+      text: `Did you know there are 1,000+ college golf programs across D1, D2, D3, NAIA, and JUCO? 🏌️‍♂️
 
 Finding the RIGHT fit for your game AND your goals can feel overwhelming.
 
