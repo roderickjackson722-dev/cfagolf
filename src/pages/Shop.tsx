@@ -5,6 +5,7 @@ import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useDigitalProducts } from '@/hooks/useDigitalProducts';
 import { useDigitalProductsList, getProductIcon } from '@/hooks/useDigitalProductsList';
+import { ProductPreview } from '@/components/shop/ProductPreview';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -148,9 +149,12 @@ const Shop = () => {
                           </Button>
                         </Link>
                       ) : (
-                        <Button variant="outline" disabled className="w-full">
-                          <Lock className="w-4 h-4 mr-2" /> Purchase to Unlock
-                        </Button>
+                        <>
+                          <Button variant="outline" disabled className="w-full">
+                            <Lock className="w-4 h-4 mr-2" /> Purchase to Unlock
+                          </Button>
+                          <ProductPreview productKey={product.product_key} />
+                        </>
                       )}
                     </CardContent>
                   </Card>
