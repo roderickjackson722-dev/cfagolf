@@ -4,6 +4,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useDigitalProducts } from '@/hooks/useDigitalProducts';
+import { useDigitalProductsList, getProductIcon } from '@/hooks/useDigitalProductsList';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,54 +15,14 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const PRODUCTS = [
-  {
-    id: 'roadmap',
-    title: 'The Recruiting Roadmap',
-    subtitle: 'Automated Recruiting Plan',
-    description: 'A comprehensive step-by-step PDF guide covering how to build a highlight reel, write emails to coaches, and build a target school list.',
-    icon: FileText,
-    route: '/shop/roadmap',
-    color: 'text-emerald-700',
-    bgColor: 'bg-emerald-50',
-  },
-  {
-    id: 'templates',
-    title: '15 Email Templates for Golf Coaches',
-    subtitle: 'Templates & Swipe Files',
-    description: 'Ready-to-use email templates for initial outreach, follow-ups, video submission emails, and more. Copy, customize, and send.',
-    icon: Mail,
-    route: '/shop/templates',
-    color: 'text-blue-700',
-    bgColor: 'bg-blue-50',
-  },
-  {
-    id: 'resume',
-    title: 'The Athlete Resume Template',
-    subtitle: 'Golf-Specific Resume',
-    description: 'A professionally designed resume template built specifically for junior golfers pursuing college programs.',
-    icon: UserCircle,
-    route: '/shop/resume',
-    color: 'text-amber-700',
-    bgColor: 'bg-amber-50',
-  },
-  {
-    id: 'course',
-    title: 'The Recruiting Huddle',
-    subtitle: 'Video Masterclass',
-    description: 'A pre-recorded video course covering the complete recruiting timeline from Freshman to Senior year.',
-    icon: Video,
-    route: '/shop/course',
-    color: 'text-purple-700',
-    bgColor: 'bg-purple-50',
-  },
-];
-
 const Shop = () => {
   const { user } = useAuth();
   const { hasToolkitAccess, loading, purchaseToolkit, verifyPurchase } = useDigitalProducts();
+  const { data: products = [], isLoading: productsLoading } = useDigitalProductsList();
   const [searchParams] = useSearchParams();
   const [isPurchasing, setIsPurchasing] = useState(false);
+
+  const bundlePrice = products.length > 0 ? products[0].price_cents : 9900;
 
   // Handle purchase verification on return
   useEffect(() => {
@@ -117,7 +78,7 @@ const Shop = () => {
               ) : (
                 <div className="space-y-3">
                   <div className="text-center">
-                    <span className="text-4xl font-bold text-foreground">$99</span>
+                    <span className="text-4xl font-bold text-foreground">${(bundlePrice / 100).toFixed(0)}</span>
                     <span className="text-muted-foreground ml-2">one-time</span>
                   </div>
                   {user ? (
@@ -159,13 +120,13 @@ const Shop = () => {
               What's Inside the Toolkit
             </h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {PRODUCTS.map((product) => {
-                const Icon = product.icon;
+              {products.map((product) => {
+                const Icon = getProductIcon(product.icon_name);
                 return (
                   <Card key={product.id} className="hover:shadow-lg transition-shadow border-border/50">
                     <CardHeader className="pb-3">
                       <div className="flex items-start gap-4">
-                        <div className={`w-12 h-12 rounded-xl ${product.bgColor} flex items-center justify-center flex-shrink-0`}>
+                        <div className={`w-12 h-12 rounded-xl ${product.bg_color} flex items-center justify-center flex-shrink-0`}>
                           <Icon className={`w-6 h-6 ${product.color}`} />
                         </div>
                         <div>
@@ -179,7 +140,7 @@ const Shop = () => {
                       {hasToolkitAccess ? (
                         <Link to={product.route}>
                           <Button variant="outline" className="w-full">
-                            {product.id === 'course' ? (
+                            {product.product_key === 'course' ? (
                               <><Play className="w-4 h-4 mr-2" /> Watch Now</>
                             ) : (
                               <><Download className="w-4 h-4 mr-2" /> Access Now</>

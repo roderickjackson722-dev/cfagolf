@@ -1,21 +1,52 @@
-import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { DollarSign, Users, ShoppingCart, TrendingUp } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { DollarSign, Users, ShoppingCart, TrendingUp, Pencil, Save, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
+import { toast } from 'sonner';
 
-const PRODUCTS = [
-  { id: 'roadmap', title: 'The Recruiting Roadmap', route: '/shop/roadmap' },
-  { id: 'templates', title: '15 Email Templates for Golf Coaches', route: '/shop/templates' },
-  { id: 'resume', title: 'The Athlete Resume Template', route: '/shop/resume' },
-  { id: 'course', title: 'The Recruiting Huddle', route: '/shop/course' },
-];
+type DigitalProduct = {
+  id: string;
+  product_key: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  price_cents: number;
+  icon_name: string;
+  color: string;
+  bg_color: string;
+  route: string;
+  sort_order: number;
+  is_active: boolean;
+};
 
 export const AdminToolkitTable = () => {
-  const { data: purchases = [], isLoading } = useQuery({
+  const queryClient = useQueryClient();
+  const [editingProduct, setEditingProduct] = useState<DigitalProduct | null>(null);
+
+  const { data: products = [], isLoading: productsLoading } = useQuery({
+    queryKey: ['admin-digital-products'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('digital_products')
+        .select('*')
+        .order('sort_order');
+      if (error) throw error;
+      return data as DigitalProduct[];
+    },
+  });
+
+  const { data: purchases = [], isLoading: purchasesLoading } = useQuery({
     queryKey: ['admin-toolkit-purchases'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -42,11 +73,36 @@ export const AdminToolkitTable = () => {
     enabled: purchases.length > 0,
   });
 
-  const profileMap = Object.fromEntries(profiles.map(p => [p.user_id, p]));
+  const updateMutation = useMutation({
+    mutationFn: async (product: DigitalProduct) => {
+      const { error } = await supabase
+        .from('digital_products')
+        .update({
+          title: product.title.trim(),
+          subtitle: product.subtitle.trim(),
+          description: product.description.trim(),
+          price_cents: product.price_cents,
+          is_active: product.is_active,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', product.id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-digital-products'] });
+      queryClient.invalidateQueries({ queryKey: ['digital-products'] });
+      setEditingProduct(null);
+      toast.success('Product updated');
+    },
+    onError: () => toast.error('Failed to update product'),
+  });
 
+  const profileMap = Object.fromEntries(profiles.map(p => [p.user_id, p]));
   const totalRevenue = purchases.reduce((sum, p) => sum + (p.amount_paid || 0), 0);
   const directPurchases = purchases.filter(p => p.purchase_type === 'direct').length;
   const membershipGrants = purchases.filter(p => p.purchase_type !== 'direct').length;
+
+  const isLoading = productsLoading || purchasesLoading;
 
   if (isLoading) {
     return <div className="space-y-4">{Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-16 w-full" />)}</div>;
@@ -74,19 +130,43 @@ export const AdminToolkitTable = () => {
         ))}
       </div>
 
-      {/* Products overview */}
+      {/* Editable Products */}
       <Card>
         <CardHeader><CardTitle className="text-base">Products in Toolkit</CardTitle></CardHeader>
         <CardContent>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {PRODUCTS.map(p => (
-              <a key={p.id} href={p.route} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors">
-                <span className="font-medium text-sm">{p.title}</span>
-                <Badge variant="outline" className="ml-auto text-xs">View</Badge>
-              </a>
-            ))}
-          </div>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Product</TableHead>
+                <TableHead>Price</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="w-[80px]">Edit</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {products.map(product => (
+                <TableRow key={product.id}>
+                  <TableCell>
+                    <div>
+                      <p className="font-medium text-sm">{product.title}</p>
+                      <p className="text-xs text-muted-foreground">{product.subtitle}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell className="font-mono text-sm">${(product.price_cents / 100).toFixed(0)}</TableCell>
+                  <TableCell>
+                    <Badge variant={product.is_active ? 'default' : 'secondary'}>
+                      {product.is_active ? 'Active' : 'Hidden'}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Button variant="ghost" size="sm" onClick={() => setEditingProduct({ ...product })}>
+                      <Pencil className="w-4 h-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
 
@@ -132,6 +212,70 @@ export const AdminToolkitTable = () => {
           )}
         </CardContent>
       </Card>
+
+      {/* Edit Dialog */}
+      <Dialog open={!!editingProduct} onOpenChange={(open) => !open && setEditingProduct(null)}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Edit Product</DialogTitle>
+          </DialogHeader>
+          {editingProduct && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label>Title</Label>
+                <Input
+                  value={editingProduct.title}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, title: e.target.value })}
+                  maxLength={100}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Subtitle</Label>
+                <Input
+                  value={editingProduct.subtitle}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, subtitle: e.target.value })}
+                  maxLength={100}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Description</Label>
+                <Textarea
+                  value={editingProduct.description}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, description: e.target.value })}
+                  maxLength={500}
+                  rows={3}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Price ($)</Label>
+                <Input
+                  type="number"
+                  min={0}
+                  value={editingProduct.price_cents / 100}
+                  onChange={(e) => setEditingProduct({ ...editingProduct, price_cents: Math.round(Number(e.target.value) * 100) })}
+                />
+              </div>
+              <div className="flex items-center gap-3">
+                <Switch
+                  checked={editingProduct.is_active}
+                  onCheckedChange={(checked) => setEditingProduct({ ...editingProduct, is_active: checked })}
+                />
+                <Label>Active (visible to customers)</Label>
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditingProduct(null)}>Cancel</Button>
+            <Button
+              onClick={() => editingProduct && updateMutation.mutate(editingProduct)}
+              disabled={updateMutation.isPending}
+            >
+              {updateMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}
+              Save
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

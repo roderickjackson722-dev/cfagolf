@@ -244,6 +244,57 @@ export type Database = {
         }
         Relationships: []
       }
+      digital_products: {
+        Row: {
+          bg_color: string
+          color: string
+          created_at: string
+          description: string
+          icon_name: string
+          id: string
+          is_active: boolean
+          price_cents: number
+          product_key: string
+          route: string
+          sort_order: number
+          subtitle: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          bg_color?: string
+          color?: string
+          created_at?: string
+          description?: string
+          icon_name?: string
+          id?: string
+          is_active?: boolean
+          price_cents?: number
+          product_key: string
+          route: string
+          sort_order?: number
+          subtitle?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          bg_color?: string
+          color?: string
+          created_at?: string
+          description?: string
+          icon_name?: string
+          id?: string
+          is_active?: boolean
+          price_cents?: number
+          product_key?: string
+          route?: string
+          sort_order?: number
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_templates: {
         Row: {
           body: string
