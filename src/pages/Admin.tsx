@@ -388,6 +388,23 @@ const Admin = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+            {/* Newsletter Editor Tab */}
+            <TabsContent value="newsletter">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Newspaper className="w-5 h-5 text-primary" />
+                    <CardTitle>Monthly Newsletter</CardTitle>
+                  </div>
+                  <CardDescription>
+                    View and edit the monthly recruiting tip emails sent to all active subscribers on the 1st of each month.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminNewsletterTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
           </Tabs>
         </div>
       </main>
