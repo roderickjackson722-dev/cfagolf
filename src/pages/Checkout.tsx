@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Link, useSearchParams, useNavigate } from 'react-router-dom';
-import { Check, ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Users, Calendar, Phone, Video, Database, Target, Trophy, MapPin, DollarSign, Clock, Award, MessageCircle } from 'lucide-react';
+import { Check, ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Users, Calendar, Phone, Database, Target, Trophy, MapPin, DollarSign, Clock, Award, MessageCircle, Presentation } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
