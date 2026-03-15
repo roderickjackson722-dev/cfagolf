@@ -29,6 +29,7 @@ const digitalFeatures = [
 ];
 
 const consultingExtras = [
+  "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
   "Academic & Eligibility Evaluation",
