@@ -21,12 +21,12 @@ const digitalFeatures = [
   "Scholarship Calculator",
   "Recruiting Timeline & Worksheets",
   "LPGA & PGA Pro Webinars",
-  "College Coach Q&A Sessions",
   "Free Toolkit after 6 months",
 ];
 
 const consultingFeatures = [
   "Everything in Digital Member",
+  "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
   "Academic & Eligibility Evaluation",

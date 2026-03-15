@@ -25,7 +25,6 @@ const digitalHighlights = [
   "Campus Visit Planner",
   "Scholarship Calculator",
   "LPGA & PGA Pro Webinars",
-  "College Coach Q&A Sessions",
   "Recruiting Timeline & Worksheets"
 ];
 

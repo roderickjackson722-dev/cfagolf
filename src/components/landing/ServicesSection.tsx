@@ -26,10 +26,10 @@ const digitalFeatures = [
   "Scholarship Calculator",
   "Recruiting Timeline & Worksheets",
   "LPGA & PGA Pro Webinars",
-  "College Coach Q&A Sessions",
 ];
 
 const consultingExtras = [
+  "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
   "Academic & Eligibility Evaluation",

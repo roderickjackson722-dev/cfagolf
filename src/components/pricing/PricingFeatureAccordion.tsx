@@ -80,7 +80,7 @@ const featureCategories: FeatureCategory[] = [
         title: "College Coach Q&A Sessions",
         description: "Learn directly from current and former college golf coaches about what they look for in recruits.",
         consulting: true,
-        digital: true,
+        digital: false,
       },
       {
         title: "Recruiting Strategy Workshops",
