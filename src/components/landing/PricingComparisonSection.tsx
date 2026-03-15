@@ -8,7 +8,7 @@ const toolkitFeatures = [
   "Recruiting Roadmap Guide",
   "Coach Email Templates",
   "Athlete Resume Builder",
-  "The Recruiting Huddle (Written Masterclass)",
+  "The Recruiting Timeline (Written Masterclass)",
   "Lifetime Access",
 ];
 

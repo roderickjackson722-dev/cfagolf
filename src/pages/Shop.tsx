@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import {
-  FileText, Mail, UserCircle, Video, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play
+  FileText, Mail, UserCircle, Calendar, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -223,7 +223,7 @@ const Shop = () => {
                 { icon: Mail, text: "Proven email templates for every stage of coach outreach" },
                 { icon: UserCircle, text: "How to create an athlete resume that stands out" },
                 { icon: FileText, text: "Step-by-step target school list building methodology" },
-                { icon: Video, text: "Complete freshman-to-senior recruiting timeline walkthrough" },
+                { icon: Calendar, text: "Complete freshman-to-senior recruiting timeline walkthrough" },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border/50">
                   <item.icon className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />

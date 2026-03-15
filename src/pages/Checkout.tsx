@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Link, useSearchParams, useNavigate } from 'react-router-dom';
-import { Check, ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Users, Calendar, Phone, Video, Database, Target, Trophy, MapPin, DollarSign, Clock, Award, MessageCircle } from 'lucide-react';
+import { Check, ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Users, Calendar, Phone, Database, Target, Trophy, MapPin, DollarSign, Clock, Award, MessageCircle, Presentation } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -41,7 +41,7 @@ const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1)
 
 const consultingFeatures = [
   { icon: Phone, title: "12 One-on-One Consulting Calls", description: "Personal guidance tailored to your recruiting journey" },
-  { icon: Video, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
+  { icon: Presentation, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
   { icon: Award, title: "Sessions with Current & Former College Coaches", description: "Get insider perspectives on what coaches look for" },
   { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,000+ college golf programs" },
   { icon: Target, title: "Personalized Target School List Building", description: "Build your dream list with expert guidance" },
@@ -50,7 +50,7 @@ const consultingFeatures = [
   { icon: MapPin, title: "Campus Visit Preparation & Comparison", description: "Make the most of your official and unofficial visits" },
   { icon: DollarSign, title: "Scholarship Offer Analysis & Negotiation Tips", description: "Understand and compare financial aid packages" },
   { icon: Clock, title: "Recruiting Timeline & Action Plans (by grade)", description: "Know exactly what to do and when" },
-  { icon: Video, title: "Highlight Video Review & Feedback", description: "Create videos that get coaches' attention" },
+  { icon: Award, title: "Highlight Review & Feedback", description: "Get expert feedback on your recruiting materials" },
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers to your questions within 24 hours" },
 ];
 
@@ -61,7 +61,7 @@ const digitalFeatures = [
   { icon: MessageCircle, title: "Coach Contact Tracker", description: "Manage outreach to college coaches" },
   { icon: MapPin, title: "Campus Visit Planner", description: "Plan and compare your campus visits" },
   { icon: DollarSign, title: "Scholarship Calculator", description: "Compare financial aid packages side by side" },
-  { icon: Video, title: "LPGA & PGA Pro Webinars", description: "Learn from industry professionals" },
+  { icon: Presentation, title: "LPGA & PGA Pro Webinars", description: "Learn from industry professionals" },
   { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
   { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
 ];
