@@ -41,7 +41,7 @@ const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1)
 
 const consultingFeatures = [
   { icon: Phone, title: "12 One-on-One Consulting Calls", description: "Personal guidance tailored to your recruiting journey" },
-  { icon: Video, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
+  { icon: Presentation, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
   { icon: Award, title: "Sessions with Current & Former College Coaches", description: "Get insider perspectives on what coaches look for" },
   { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,000+ college golf programs" },
   { icon: Target, title: "Personalized Target School List Building", description: "Build your dream list with expert guidance" },
