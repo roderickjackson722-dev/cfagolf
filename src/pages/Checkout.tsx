@@ -50,7 +50,7 @@ const consultingFeatures = [
   { icon: MapPin, title: "Campus Visit Preparation & Comparison", description: "Make the most of your official and unofficial visits" },
   { icon: DollarSign, title: "Scholarship Offer Analysis & Negotiation Tips", description: "Understand and compare financial aid packages" },
   { icon: Clock, title: "Recruiting Timeline & Action Plans (by grade)", description: "Know exactly what to do and when" },
-  { icon: Video, title: "Highlight Video Review & Feedback", description: "Create videos that get coaches' attention" },
+  { icon: Award, title: "Highlight Review & Feedback", description: "Get expert feedback on your recruiting materials" },
   { icon: MessageCircle, title: "Priority Email Support", description: "Get answers to your questions within 24 hours" },
 ];
 
