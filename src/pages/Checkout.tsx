@@ -61,7 +61,7 @@ const digitalFeatures = [
   { icon: MessageCircle, title: "Coach Contact Tracker", description: "Manage outreach to college coaches" },
   { icon: MapPin, title: "Campus Visit Planner", description: "Plan and compare your campus visits" },
   { icon: DollarSign, title: "Scholarship Calculator", description: "Compare financial aid packages side by side" },
-  { icon: Video, title: "LPGA & PGA Pro Webinars", description: "Learn from industry professionals" },
+  { icon: Presentation, title: "LPGA & PGA Pro Webinars", description: "Learn from industry professionals" },
   { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
   { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
 ];
