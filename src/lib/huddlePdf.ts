@@ -22,7 +22,7 @@ const addHeader = (doc: jsPDF, title: string) => {
   doc.text(title, pw / 2, 18, { align: 'center' });
   doc.setTextColor(200, 200, 200);
   doc.setFontSize(8);
-  doc.text('College Fairway Advisors — The Recruiting Huddle', pw / 2, 26, { align: 'center' });
+  doc.text('College Fairway Advisors — The Recruiting Timeline', pw / 2, 26, { align: 'center' });
 };
 
 const addFooter = (doc: jsPDF) => {
