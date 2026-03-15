@@ -62,7 +62,7 @@ const digitalFeatures = [
   { icon: MapPin, title: "Campus Visit Planner", description: "Plan and compare your campus visits" },
   { icon: DollarSign, title: "Scholarship Calculator", description: "Compare financial aid packages side by side" },
   { icon: Video, title: "LPGA & PGA Pro Webinars", description: "Learn from industry professionals" },
-  { icon: Award, title: "College Coach Q&A Sessions", description: "Hear directly from college coaches" },
+  { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
   { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
 ];
 
