@@ -125,6 +125,6 @@ export const generateHuddleLessonPDF = (lessonId?: string) => {
         renderLesson(doc, lesson, 40);
       }
     }
-    doc.save('CFA-Recruiting-Huddle-Complete.pdf');
+    doc.save('CFA-Recruiting-Timeline-Complete.pdf');
   }
 };

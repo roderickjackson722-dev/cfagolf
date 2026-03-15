@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, Mail, UserCircle, Video } from 'lucide-react';
+import { FileText, Mail, UserCircle, Calendar } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export type DigitalProduct = {
@@ -23,7 +23,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
   FileText,
   Mail,
   UserCircle,
-  Video,
+  Calendar,
+  Video: Calendar,
 };
 
 export const getProductIcon = (iconName: string): LucideIcon => {

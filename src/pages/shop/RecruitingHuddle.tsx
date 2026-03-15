@@ -44,7 +44,7 @@ const RecruitingHuddle = () => {
             <div>
               <Badge variant="outline" className="mb-1">Written Masterclass</Badge>
               <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">
-                The Recruiting Huddle
+                The Recruiting Timeline
               </h1>
             </div>
           </div>
