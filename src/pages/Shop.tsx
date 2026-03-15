@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import {
-  FileText, Mail, UserCircle, Video, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play
+  FileText, Mail, UserCircle, Calendar, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
