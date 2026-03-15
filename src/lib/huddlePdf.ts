@@ -111,7 +111,7 @@ export const generateHuddleLessonPDF = (lessonId?: string) => {
     addHeader(doc, lesson.title);
     addFooter(doc);
     renderLesson(doc, lesson, 40);
-    doc.save(`CFA-Huddle-${lesson.id}-${lesson.title.replace(/\s+/g, '-').substring(0, 30)}.pdf`);
+    doc.save(`CFA-Timeline-${lesson.id}-${lesson.title.replace(/\s+/g, '-').substring(0, 30)}.pdf`);
   } else {
     // All lessons
     let first = true;
