@@ -1,0 +1,1 @@
+UPDATE public.digital_products SET route = REPLACE(route, '/shop/', '/toolkit/') WHERE route LIKE '/shop/%';
