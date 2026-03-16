@@ -2,6 +2,7 @@ import JSZip from 'jszip';
 import jsPDF from 'jspdf';
 import cfaWatermark from '@/assets/cfa-logo-watermark.jpg';
 import { MODULES } from '@/data/huddleLessons';
+import { EMAIL_TEMPLATES } from '@/data/emailTemplates';
 
 /**
  * Generates all toolkit PDFs and bundles them into a single ZIP download.
