@@ -23,7 +23,7 @@ const AthleteResume = () => {
     );
   }
 
-  if (!hasToolkitAccess) return <Navigate to="/shop" replace />;
+  if (!hasToolkitAccess) return <Navigate to="/toolkit" replace />;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
