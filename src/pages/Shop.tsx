@@ -189,7 +189,7 @@ const Shop = () => {
                         <Link to={product.route}>
                           <Button variant="outline" className="w-full">
                             {product.product_key === 'course' ? (
-                              <><Play className="w-4 h-4 mr-2" /> Watch Now</>
+                              <><BookOpen className="w-4 h-4 mr-2" /> View &amp; Download PDF</>
                             ) : (
                               <><Download className="w-4 h-4 mr-2" /> Access Now</>
                             )}
