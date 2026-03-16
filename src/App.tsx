@@ -88,11 +88,11 @@ const App = () => (
             <Route path="/tools/transfer-guide" element={<TransferGuide />} />
             <Route path="/flyer/transfer" element={<TransferFlyer />} />
             <Route path="/player-release" element={<PlayerRelease />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/shop/roadmap" element={<RecruitingRoadmap />} />
-            <Route path="/shop/templates" element={<EmailTemplates />} />
-            <Route path="/shop/resume" element={<AthleteResume />} />
-            <Route path="/shop/course" element={<RecruitingHuddle />} />
+            <Route path="/toolkit" element={<Shop />} />
+            <Route path="/toolkit/roadmap" element={<RecruitingRoadmap />} />
+            <Route path="/toolkit/templates" element={<EmailTemplates />} />
+            <Route path="/toolkit/resume" element={<AthleteResume />} />
+            <Route path="/toolkit/course" element={<RecruitingHuddle />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

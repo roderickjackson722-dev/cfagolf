@@ -81,8 +81,8 @@ serve(async (req) => {
       customer_email: customerId ? undefined : email,
       line_items: [{ price: TOOLKIT_PRICE_ID, quantity: 1 }],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/shop?purchased=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get("origin")}/shop`,
+      success_url: `${req.headers.get("origin")}/toolkit?purchased=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${req.headers.get("origin")}/toolkit`,
       metadata: {
         user_id: userId || "guest",
         product_key: "recruiting_toolkit",

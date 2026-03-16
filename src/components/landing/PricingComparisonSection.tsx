@@ -61,7 +61,7 @@ const cards: PricingCard[] = [
     priceNote: "One-time purchase • Lifetime access",
     features: toolkitFeatures,
     ctaLabel: "Buy the Toolkit",
-    ctaLink: "/shop",
+    ctaLink: "/toolkit",
     icon: Package,
   },
   {

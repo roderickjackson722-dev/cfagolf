@@ -65,7 +65,7 @@ export const ToolkitPromoSection = () => {
             <p className="text-sm text-muted-foreground mb-6">
               Also included free for Digital Members after 6 months & all Consulting members
             </p>
-            <Link to="/shop">
+            <Link to="/toolkit">
               <Button size="lg" className="h-14 px-10 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90">
                 View the Toolkit
                 <ArrowRight className="w-5 h-5 ml-2" />
