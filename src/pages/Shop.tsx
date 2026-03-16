@@ -27,6 +27,7 @@ const Shop = () => {
   const [guestEmail, setGuestEmail] = useState('');
   const [guestPurchaseSuccess, setGuestPurchaseSuccess] = useState(false);
   const [verifying, setVerifying] = useState(false);
+  const [isBundling, setIsBundling] = useState(false);
 
   const bundlePrice = products.length > 0 ? products[0].price_cents : 9900;
 
