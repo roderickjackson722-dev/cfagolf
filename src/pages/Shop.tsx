@@ -13,9 +13,10 @@ import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import {
-  FileText, Mail, UserCircle, Calendar, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play
+  FileText, Mail, UserCircle, Calendar, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play, Archive
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { downloadToolkitBundle } from '@/lib/toolkitBundle';
 
 const Shop = () => {
   const { user } = useAuth();
