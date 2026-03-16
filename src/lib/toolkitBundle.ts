@@ -210,67 +210,34 @@ function generateTimelineBlob(): ArrayBuffer {
 
       let y = 40;
 
-      // Overview
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(26, 46, 37);
-      doc.text('Overview', margin, y);
-      y += 6;
+      // Content paragraphs
       doc.setFontSize(10);
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(50, 50, 50);
-      const overviewLines = doc.splitTextToSize(lesson.content, maxW);
-      doc.text(overviewLines, margin, y);
-      y += overviewLines.length * 5 + 8;
+      for (const paragraph of lesson.content) {
+        const lines = doc.splitTextToSize(paragraph, maxW);
+        if (y + lines.length * 5 > 260) { doc.addPage(); addWatermark(doc); addFooter(doc); y = 20; }
+        doc.text(lines, margin, y);
+        y += lines.length * 5 + 4;
+      }
+      y += 4;
 
-      // Key Points
-      if (lesson.keyPoints && lesson.keyPoints.length > 0) {
+      // Key Takeaways
+      if (lesson.keyTakeaways && lesson.keyTakeaways.length > 0) {
+        if (y + 20 > 260) { doc.addPage(); addWatermark(doc); addFooter(doc); y = 20; }
         doc.setFontSize(12);
         doc.setFont('helvetica', 'bold');
         doc.setTextColor(26, 46, 37);
-        doc.text('Key Points', margin, y);
+        doc.text('Key Takeaways', margin, y);
         y += 6;
         doc.setFontSize(10);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(50, 50, 50);
-        for (const kp of lesson.keyPoints) {
-          const lines = doc.splitTextToSize(`•  ${kp}`, maxW - 6);
+        for (const kt of lesson.keyTakeaways) {
+          const lines = doc.splitTextToSize(`•  ${kt}`, maxW - 6);
+          if (y + lines.length * 5 > 260) { doc.addPage(); addWatermark(doc); addFooter(doc); y = 20; }
           doc.text(lines, margin + 4, y);
           y += lines.length * 5 + 2;
-        }
-        y += 4;
-      }
-
-      // Action Items
-      if (lesson.actionItems && lesson.actionItems.length > 0) {
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(26, 46, 37);
-        doc.text('Action Items', margin, y);
-        y += 6;
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(50, 50, 50);
-        for (const ai of lesson.actionItems) {
-          doc.text(`☐  ${ai}`, margin + 4, y);
-          y += 6;
-        }
-        y += 4;
-      }
-
-      // Tips
-      if (lesson.tips && lesson.tips.length > 0) {
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(26, 46, 37);
-        doc.text('Pro Tips', margin, y);
-        y += 6;
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(50, 50, 50);
-        for (const t of lesson.tips) {
-          doc.text(`•  ${t}`, margin + 6, y);
-          y += 6;
         }
       }
     }
