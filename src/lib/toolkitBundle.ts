@@ -2,6 +2,7 @@ import JSZip from 'jszip';
 import jsPDF from 'jspdf';
 import cfaWatermark from '@/assets/cfa-logo-watermark.jpg';
 import { MODULES } from '@/data/huddleLessons';
+import { EMAIL_TEMPLATES } from '@/data/emailTemplates';
 
 /**
  * Generates all toolkit PDFs and bundles them into a single ZIP download.
@@ -19,11 +20,8 @@ export const downloadToolkitBundle = async () => {
   // 3. Recruiting Timeline (all lessons)
   zip.file('CFA-Recruiting-Timeline-Complete.pdf', generateTimelineBlob());
 
-  // Note: Email Templates are interactive/copy-paste, not a single PDF.
-  // We include a note file instead.
-  zip.file('Email-Templates-README.txt',
-    'The 15 Coach Email Templates are interactive and available in the CFA Toolkit at:\nhttps://cfagolf.lovable.app/toolkit/templates\n\nLog in to copy, customize, and use each template directly.'
-  );
+  // 4. Email Templates PDF
+  zip.file('CFA-Email-Templates.pdf', generateEmailTemplatesBlob());
 
   const blob = await zip.generateAsync({ type: 'blob' });
   const url = URL.createObjectURL(blob);
@@ -243,5 +241,76 @@ function generateTimelineBlob(): ArrayBuffer {
     }
   }
 
+  return doc.output('arraybuffer');
+}
+
+// ---- Email Templates ----
+function generateEmailTemplatesBlob(): ArrayBuffer {
+  const doc = new jsPDF();
+  const margin = 15;
+  const pw = doc.internal.pageSize.getWidth();
+  const maxW = pw - margin * 2;
+
+  addWatermark(doc);
+  addHeader(doc, '15 Coach Email Templates');
+
+  let y = 45;
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(80, 80, 80);
+  const intro = doc.splitTextToSize(
+    'Proven email templates for every stage of the college golf recruiting process. Customize the bracketed fields with your information before sending.',
+    maxW
+  );
+  doc.text(intro, margin, y);
+  y += intro.length * 6 + 8;
+
+  let templateNum = 0;
+  for (const category of EMAIL_TEMPLATES) {
+    if (y + 20 > 265) { doc.addPage(); addWatermark(doc); addFooter(doc); y = 20; }
+    y = addSectionHeader(doc, category.category, y);
+    y += 2;
+
+    for (const template of category.templates) {
+      templateNum++;
+      const titleLine = `${templateNum}. ${template.title}`;
+      const subjectLine = `Subject: ${template.subject}`;
+      const bodyLines = doc.splitTextToSize(template.body, maxW - 8);
+      const estHeight = 18 + bodyLines.length * 4.5;
+
+      if (y + Math.min(estHeight, 60) > 265) {
+        doc.addPage(); addWatermark(doc); addFooter(doc); y = 20;
+      }
+
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(26, 46, 37);
+      doc.text(titleLine, margin, y);
+      y += 6;
+
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'italic');
+      doc.setTextColor(100, 100, 100);
+      doc.text(subjectLine, margin, y);
+      y += 6;
+
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(50, 50, 50);
+      const boxHeight = bodyLines.length * 4.5 + 4;
+      doc.setFillColor(248, 248, 248);
+      doc.roundedRect(margin, y - 3, maxW, boxHeight, 2, 2, 'F');
+
+      for (const line of bodyLines) {
+        if (y + 5 > 270) { doc.addPage(); addWatermark(doc); addFooter(doc); y = 20; }
+        doc.text(line, margin + 4, y);
+        y += 4.5;
+      }
+      y += 8;
+    }
+    y += 4;
+  }
+
+  addFooter(doc);
   return doc.output('arraybuffer');
 }
