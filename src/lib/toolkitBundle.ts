@@ -20,11 +20,8 @@ export const downloadToolkitBundle = async () => {
   // 3. Recruiting Timeline (all lessons)
   zip.file('CFA-Recruiting-Timeline-Complete.pdf', generateTimelineBlob());
 
-  // Note: Email Templates are interactive/copy-paste, not a single PDF.
-  // We include a note file instead.
-  zip.file('Email-Templates-README.txt',
-    'The 15 Coach Email Templates are interactive and available in the CFA Toolkit at:\nhttps://cfagolf.lovable.app/toolkit/templates\n\nLog in to copy, customize, and use each template directly.'
-  );
+  // 4. Email Templates PDF
+  zip.file('CFA-Email-Templates.pdf', generateEmailTemplatesBlob());
 
   const blob = await zip.generateAsync({ type: 'blob' });
   const url = URL.createObjectURL(blob);
