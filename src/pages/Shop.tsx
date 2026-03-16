@@ -13,9 +13,10 @@ import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import {
-  FileText, Mail, UserCircle, Calendar, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play
+  FileText, Mail, UserCircle, Calendar, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play, Archive
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { downloadToolkitBundle } from '@/lib/toolkitBundle';
 
 const Shop = () => {
   const { user } = useAuth();
@@ -26,6 +27,7 @@ const Shop = () => {
   const [guestEmail, setGuestEmail] = useState('');
   const [guestPurchaseSuccess, setGuestPurchaseSuccess] = useState(false);
   const [verifying, setVerifying] = useState(false);
+  const [isBundling, setIsBundling] = useState(false);
 
   const bundlePrice = products.length > 0 ? products[0].price_cents : 9900;
 
@@ -112,9 +114,34 @@ const Shop = () => {
 
             {!loading && (
               hasToolkitAccess ? (
-                <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-success/10 text-success font-semibold">
-                  <CheckCircle className="w-5 h-5" />
-                  You have full access
+                <div className="flex flex-col items-center gap-3">
+                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-success/10 text-success font-semibold">
+                    <CheckCircle className="w-5 h-5" />
+                    You have full access
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="rounded-full"
+                    disabled={isBundling}
+                    onClick={async () => {
+                      setIsBundling(true);
+                      try {
+                        await downloadToolkitBundle();
+                        toast.success('Toolkit ZIP downloaded!');
+                      } catch {
+                        toast.error('Failed to generate ZIP');
+                      } finally {
+                        setIsBundling(false);
+                      }
+                    }}
+                  >
+                    {isBundling ? (
+                      <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Generating ZIP…</>
+                    ) : (
+                      <><Archive className="w-4 h-4 mr-2" /> Download All PDFs as ZIP</>
+                    )}
+                  </Button>
                 </div>
               ) : (
                 <div className="space-y-4">
