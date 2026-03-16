@@ -289,7 +289,7 @@ const EmailTemplates = () => {
     );
   }
 
-  if (!hasToolkitAccess) return <Navigate to="/shop" replace />;
+  if (!hasToolkitAccess) return <Navigate to="/toolkit" replace />;
 
   const handleCopy = (text: string, id: string) => {
     navigator.clipboard.writeText(text);
