@@ -93,6 +93,8 @@ const App = () => (
             <Route path="/toolkit/templates" element={<EmailTemplates />} />
             <Route path="/toolkit/resume" element={<AthleteResume />} />
             <Route path="/toolkit/course" element={<RecruitingHuddle />} />
+            <Route path="/shop" element={<Navigate to="/toolkit" replace />} />
+            <Route path="/shop/*" element={<Navigate to="/toolkit" replace />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
