@@ -24,7 +24,7 @@ const RecruitingHuddle = () => {
     );
   }
 
-  if (!hasToolkitAccess) return <Navigate to="/shop" replace />;
+  if (!hasToolkitAccess) return <Navigate to="/toolkit" replace />;
 
   const totalLessons = MODULES.reduce((sum, m) => sum + m.lessons.length, 0);
 
