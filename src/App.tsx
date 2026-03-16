@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 
@@ -93,6 +93,8 @@ const App = () => (
             <Route path="/toolkit/templates" element={<EmailTemplates />} />
             <Route path="/toolkit/resume" element={<AthleteResume />} />
             <Route path="/toolkit/course" element={<RecruitingHuddle />} />
+            <Route path="/shop" element={<Navigate to="/toolkit" replace />} />
+            <Route path="/shop/*" element={<Navigate to="/toolkit" replace />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
