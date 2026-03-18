@@ -143,30 +143,6 @@ export function Navbar() {
                   >
                     Dashboard
                   </Link>
-                   <Link
-                    to="/favorites"
-                    onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
-                      isActive('/favorites')
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                  >
-                    <Heart className="w-4 h-4" />
-                    Favorites
-                  </Link>
-                  <Link
-                    to="/tools/wagr-tournaments"
-                    onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
-                      isActive('/tools/wagr-tournaments')
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                  >
-                    <Trophy className="w-4 h-4" />
-                    WAGR
-                  </Link>
                   {isAdmin && (
                     <Link
                       to="/admin"

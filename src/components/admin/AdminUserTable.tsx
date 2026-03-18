@@ -223,15 +223,16 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
 
   return (
     <Dialog open={!!user} onOpenChange={() => onClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-[95vw] w-full max-h-[95vh] overflow-y-auto h-[90vh]">
         <DialogHeader>
           <DialogTitle>Manage User: {user.full_name || user.email}</DialogTitle>
+          <DialogDescription>View and manage profile, coaching sessions, notes, and action items.</DialogDescription>
         </DialogHeader>
         
-        <Tabs defaultValue="profile" className="w-full">
+        <Tabs defaultValue="progress" className="w-full flex-1">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="progress">Meeting Progress</TabsTrigger>
+            <TabsTrigger value="progress">Coaching Workspace</TabsTrigger>
           </TabsList>
 
           <TabsContent value="profile" className="space-y-4 mt-4">
