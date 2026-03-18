@@ -94,14 +94,15 @@ export function MeetingProgressTracker({ userId, userName }: MeetingProgressTrac
 
     // Then update session details directly
     if (progress?.id) {
+      const d = details;
       const { error } = await supabase
         .from('meeting_progress')
         .update({
-          session_date: details.sessionDate ? new Date(details.sessionDate).toISOString() : null,
-          session_duration_minutes: details.duration ? parseInt(details.duration) : null,
-          meet_link: details.meetLink || null,
-          next_agenda: details.nextAgenda || null,
-        })
+          session_date: d.sessionDate ? new Date(d.sessionDate).toISOString() : null,
+          session_duration_minutes: d.duration ? parseInt(d.duration) : null,
+          meet_link: d.meetLink || null,
+          next_agenda: d.nextAgenda || null,
+        } as any)
         .eq('id', progress.id);
       
       if (error) {
