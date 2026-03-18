@@ -109,6 +109,78 @@ export const DELIVERABLE_SCHEMAS: DeliverableSchema[] = [
     ],
   },
 
+  // Module 2 — Core Course Tracker
+  {
+    key: 'core-course-tracker',
+    title: 'Core Course Tracker',
+    description: 'Track your NCAA core course requirements and progress.',
+    moduleNumber: 2,
+    program: 'hs',
+    fields: [
+      { key: 'total_core_required', label: 'Total Core Courses Required', type: 'number', placeholder: '16' },
+      { key: 'core_completed', label: 'Core Courses Completed So Far', type: 'number', placeholder: '10' },
+      { key: 'english_completed', label: 'English Courses Completed (4 required)', type: 'number', placeholder: '3' },
+      { key: 'math_completed', label: 'Math Courses Completed (3 required)', type: 'number', placeholder: '2' },
+      { key: 'science_completed', label: 'Natural/Physical Science Completed (2 required)', type: 'number', placeholder: '2' },
+      { key: 'social_science_completed', label: 'Social Science Completed (2 required)', type: 'number', placeholder: '1' },
+      { key: 'additional_core_completed', label: 'Additional Core Courses Completed (4 required)', type: 'number', placeholder: '2' },
+      { key: 'courses_in_progress', label: 'Core Courses Currently In Progress', type: 'textarea', placeholder: 'List courses you are taking this semester that count as core' },
+      { key: 'courses_remaining', label: 'Core Courses Still Needed', type: 'textarea', placeholder: 'List remaining courses you need to complete before graduation' },
+      { key: 'on_track', label: 'Am I on Track to Complete All 16 Core Courses?', type: 'select', options: ['Yes — on track', 'Close — need 1-2 more', 'Behind — need a plan', 'Unsure'] },
+      { key: 'eligibility_center_registered', label: 'Registered with NCAA Eligibility Center', type: 'checkbox' },
+      { key: 'transcript_submitted', label: 'Transcript Submitted to Eligibility Center', type: 'checkbox' },
+      { key: 'core_course_notes', label: 'Notes & Questions', type: 'textarea', placeholder: 'Any concerns about core course eligibility?' },
+    ],
+  },
+
+  // Module 2 — Test Prep Plan
+  {
+    key: 'test-prep-plan',
+    title: 'Test Prep Plan',
+    description: 'Plan your SAT/ACT preparation timeline and goals.',
+    moduleNumber: 2,
+    program: 'hs',
+    fields: [
+      { key: 'primary_test', label: 'Primary Test', type: 'select', options: ['SAT', 'ACT', 'Both', 'Undecided'] },
+      { key: 'current_sat_score', label: 'Current/Practice SAT Score', type: 'text', placeholder: '1100' },
+      { key: 'target_sat_score', label: 'Target SAT Score', type: 'text', placeholder: '1200' },
+      { key: 'current_act_score', label: 'Current/Practice ACT Score', type: 'text', placeholder: '22' },
+      { key: 'target_act_score', label: 'Target ACT Score', type: 'text', placeholder: '25' },
+      { key: 'test_date_1', label: 'Planned Test Date #1', type: 'date' },
+      { key: 'test_date_2', label: 'Planned Test Date #2 (retake if needed)', type: 'date' },
+      { key: 'prep_method', label: 'Prep Method', type: 'select', options: ['Self-study (Khan Academy, books)', 'Tutor', 'Prep Course (online)', 'Prep Course (in-person)', 'Combination'] },
+      { key: 'weekly_prep_hours', label: 'Weekly Prep Hours Planned', type: 'number', placeholder: '5' },
+      { key: 'weakest_sections', label: 'Weakest Sections to Focus On', type: 'textarea', placeholder: 'Math — algebra, Reading — inference questions...' },
+      { key: 'prep_resources', label: 'Prep Resources Being Used', type: 'textarea', placeholder: 'Khan Academy, Princeton Review, tutor name...' },
+      { key: 'score_send_plan', label: 'Score Send Plan', type: 'textarea', placeholder: 'Which schools will you send scores to?' },
+      { key: 'test_prep_notes', label: 'Notes', type: 'textarea', placeholder: 'Any accommodations needed, testing concerns, etc.' },
+    ],
+  },
+
+  // Module 2 — GPA Planning Worksheet
+  {
+    key: 'gpa-planning',
+    title: 'GPA Planning Worksheet',
+    description: 'Track your GPA trajectory and plan for academic eligibility.',
+    moduleNumber: 2,
+    program: 'hs',
+    fields: [
+      { key: 'current_cumulative_gpa', label: 'Current Cumulative GPA', type: 'text', placeholder: '3.2' },
+      { key: 'core_course_gpa', label: 'Core Course GPA (if known)', type: 'text', placeholder: '3.0' },
+      { key: 'freshman_gpa', label: 'Freshman Year GPA', type: 'text', placeholder: '3.0' },
+      { key: 'sophomore_gpa', label: 'Sophomore Year GPA', type: 'text', placeholder: '3.2' },
+      { key: 'junior_gpa', label: 'Junior Year GPA', type: 'text', placeholder: '3.4' },
+      { key: 'senior_gpa_projected', label: 'Senior Year GPA (Projected)', type: 'text', placeholder: '3.5' },
+      { key: 'target_gpa', label: 'Target GPA for College Eligibility', type: 'text', placeholder: '2.3 (NCAA D1 minimum) or higher' },
+      { key: 'gpa_trend', label: 'GPA Trend', type: 'select', options: ['Improving', 'Steady', 'Declining', 'Inconsistent'] },
+      { key: 'hardest_classes', label: 'Hardest Classes This Year', type: 'textarea', placeholder: 'Which classes are most challenging?' },
+      { key: 'academic_support', label: 'Academic Support Being Used', type: 'textarea', placeholder: 'Tutoring, study groups, teacher office hours...' },
+      { key: 'classes_at_risk', label: 'Classes at Risk (C or below)', type: 'textarea', placeholder: 'List any classes where your grade is in danger' },
+      { key: 'sliding_scale_check', label: 'I understand the NCAA GPA/test score sliding scale', type: 'checkbox' },
+      { key: 'gpa_notes', label: 'Notes & Action Plan', type: 'textarea', placeholder: 'What steps will you take to maintain or improve your GPA?' },
+    ],
+  },
+
   // Module 3 — Scoring Benchmarks
   {
     key: 'scoring-benchmarks',
