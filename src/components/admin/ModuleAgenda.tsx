@@ -368,10 +368,15 @@ export function ModuleAgenda() {
 
       {/* Transfer Program */}
       <div className="mt-8">
-        <h3 className="font-display text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-          <Badge className="bg-primary/10 text-primary">6 Modules</Badge>
-          Transfer Student Program
-        </h3>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="font-display text-lg font-bold text-foreground flex items-center gap-2">
+            <Badge className="bg-primary/10 text-primary">6 Modules</Badge>
+            Transfer Student Program
+          </h3>
+          <Button variant="outline" size="sm" onClick={handleDownloadTransfer} className="gap-2">
+            <Download className="w-4 h-4" /> Download PDF
+          </Button>
+        </div>
         <Accordion type="single" collapsible className="space-y-4">
           {TRANSFER_MODULE_AGENDAS.map((module) => (
             <AccordionItem key={module.moduleNumber} value={`transfer-${module.moduleNumber}`} className="border rounded-lg px-4">
