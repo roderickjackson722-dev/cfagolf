@@ -609,9 +609,9 @@ const TRANSFER_MODULE_AGENDAS: ModuleAgenda[] = [
 ];
 
 // Helper to convert new DetailItem format to plain strings for PDF export
-function toPlainAgendas(agendas: ModuleAgenda[]): Array<{
+function toPlainAgendas(agendas: ModuleAgenda[], includeNotes: boolean): Array<{
   moduleNumber: number; title: string; totalDuration: string; objective: string;
-  agenda: Array<{ topic: string; duration: string; details?: string[] }>;
+  agenda: Array<{ topic: string; duration: string; details?: string[]; notes?: (string | undefined)[] }>;
   deliverables: string[]; pageNumber?: string;
 }> {
   return agendas.map(m => ({
@@ -619,6 +619,7 @@ function toPlainAgendas(agendas: ModuleAgenda[]): Array<{
     agenda: m.agenda.map(a => ({
       ...a,
       details: a.details?.map(d => d.text),
+      notes: includeNotes ? a.details?.map(d => d.note) : undefined,
     })),
   }));
 }
@@ -628,9 +629,9 @@ export function ModuleAgenda() {
 
   const handleDownloadHS = () => {
     try {
-      const doc = generateModuleAgendaPdf(toPlainAgendas(MODULE_AGENDAS), 'High School Recruiting Program');
-      doc.save('CFA-HS-Module-Agenda.pdf');
-      toast({ title: 'Downloaded', description: 'High School agenda PDF saved.' });
+      const doc = generateModuleAgendaPdf(toPlainAgendas(MODULE_AGENDAS, showNotes), 'High School Recruiting Program');
+      doc.save(showNotes ? 'CFA-HS-Module-Agenda-With-Notes.pdf' : 'CFA-HS-Module-Agenda.pdf');
+      toast({ title: 'Downloaded', description: `High School agenda PDF saved${showNotes ? ' with talking points' : ''}.` });
     } catch (e) {
       toast({ title: 'Error', description: 'Failed to generate PDF.', variant: 'destructive' });
     }
@@ -638,9 +639,9 @@ export function ModuleAgenda() {
 
   const handleDownloadTransfer = () => {
     try {
-      const doc = generateModuleAgendaPdf(toPlainAgendas(TRANSFER_MODULE_AGENDAS), 'Transfer Student Program');
-      doc.save('CFA-Transfer-Module-Agenda.pdf');
-      toast({ title: 'Downloaded', description: 'Transfer agenda PDF saved.' });
+      const doc = generateModuleAgendaPdf(toPlainAgendas(TRANSFER_MODULE_AGENDAS, showNotes), 'Transfer Student Program');
+      doc.save(showNotes ? 'CFA-Transfer-Module-Agenda-With-Notes.pdf' : 'CFA-Transfer-Module-Agenda.pdf');
+      toast({ title: 'Downloaded', description: `Transfer agenda PDF saved${showNotes ? ' with talking points' : ''}.` });
     } catch (e) {
       toast({ title: 'Error', description: 'Failed to generate PDF.', variant: 'destructive' });
     }
