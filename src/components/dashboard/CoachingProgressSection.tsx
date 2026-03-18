@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { CheckCircle2, Circle, BookOpen, ChevronDown, ChevronRight, FileText } from 'lucide-react';
+import { CheckCircle2, Circle, BookOpen, ChevronDown, ChevronRight, FileText, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { MEETING_MODULES, useMyMeetingProgress } from '@/hooks/useMeetingProgress';
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 import { RecruitingTimelineWorksheet } from '@/components/worksheets/RecruitingTimelineWorksheet';
 import { ProgramFitQuestionnaire } from '@/components/worksheets/ProgramFitQuestionnaire';
 import { EligibilityChecklist } from '@/components/worksheets/EligibilityChecklist';
@@ -201,8 +203,13 @@ export function CoachingProgressSection() {
             {completedCount}/{MEETING_MODULES.length} Complete
           </Badge>
         </div>
-        <CardDescription>
-          Track your one-on-one coaching sessions and access module materials
+        <CardDescription className="flex items-center justify-between">
+          <span>Track your one-on-one coaching sessions and access module materials</span>
+          <Link to="/coaching">
+            <Button variant="outline" size="sm" className="gap-1">
+              <ExternalLink className="w-3 h-3" /> Full Coaching View
+            </Button>
+          </Link>
         </CardDescription>
         <div className="mt-3">
           <div className="flex justify-between text-sm mb-1">

@@ -561,8 +561,12 @@ export type Database = {
           created_at: string
           id: string
           is_completed: boolean | null
+          meet_link: string | null
           module_number: number
           module_title: string
+          next_agenda: string | null
+          session_date: string | null
+          session_duration_minutes: number | null
           updated_at: string
           user_id: string
         }
@@ -572,8 +576,12 @@ export type Database = {
           created_at?: string
           id?: string
           is_completed?: boolean | null
+          meet_link?: string | null
           module_number: number
           module_title: string
+          next_agenda?: string | null
+          session_date?: string | null
+          session_duration_minutes?: number | null
           updated_at?: string
           user_id: string
         }
@@ -583,8 +591,12 @@ export type Database = {
           created_at?: string
           id?: string
           is_completed?: boolean | null
+          meet_link?: string | null
           module_number?: number
           module_title?: string
+          next_agenda?: string | null
+          session_date?: string | null
+          session_duration_minutes?: number | null
           updated_at?: string
           user_id?: string
         }
@@ -1054,6 +1066,78 @@ export type Database = {
           updated_at?: string
           user_id?: string
           work_study?: number | null
+        }
+        Relationships: []
+      }
+      session_action_items: {
+        Row: {
+          assigned_by: string
+          completed_date: string | null
+          created_at: string
+          due_date: string | null
+          id: string
+          is_completed: boolean
+          module_number: number
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          assigned_by?: string
+          completed_date?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          is_completed?: boolean
+          module_number: number
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          assigned_by?: string
+          completed_date?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          is_completed?: boolean
+          module_number?: number
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      session_notes: {
+        Row: {
+          author_id: string
+          author_role: string
+          content: string
+          created_at: string
+          id: string
+          module_number: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          author_id: string
+          author_role?: string
+          content: string
+          created_at?: string
+          id?: string
+          module_number: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          author_id?: string
+          author_role?: string
+          content?: string
+          created_at?: string
+          id?: string
+          module_number?: number
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

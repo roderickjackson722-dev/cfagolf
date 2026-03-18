@@ -78,6 +78,10 @@ export interface MeetingProgress {
   is_completed: boolean;
   completed_date: string | null;
   admin_notes: string | null;
+  session_date: string | null;
+  session_duration_minutes: number | null;
+  meet_link: string | null;
+  next_agenda: string | null;
   created_at: string;
   updated_at: string;
 }
