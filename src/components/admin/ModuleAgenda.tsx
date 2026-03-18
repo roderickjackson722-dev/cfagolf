@@ -1,7 +1,10 @@
-import { BookOpen, Clock, CheckCircle2, ListChecks } from 'lucide-react';
+import { BookOpen, Clock, CheckCircle2, ListChecks, Download } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { generateModuleAgendaPdf } from '@/lib/moduleAgendaPdf';
+import { toast } from '@/hooks/use-toast';
 
 interface AgendaItem {
   topic: string;
