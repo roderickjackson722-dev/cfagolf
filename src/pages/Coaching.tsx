@@ -278,8 +278,13 @@ export default function Coaching() {
                         </div>
                       )}
 
+                      {/* Deliverables */}
+                      <DeliverablesList
+                        moduleNumber={module.moduleNumber}
+                        program="hs"
+                      />
+
                       {/* Shared Notes */}
-                      <div>
                         <p className="text-sm font-medium mb-2 flex items-center gap-1">
                           <MessageSquare className="w-4 h-4" /> Session Notes
                         </p>
