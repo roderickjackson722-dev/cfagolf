@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { CheckCircle2, Circle, BookOpen, ChevronDown, ChevronRight, FileText } from 'lucide-react';
+import { CheckCircle2, Circle, BookOpen, ChevronDown, ChevronRight, FileText, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { MEETING_MODULES, useMyMeetingProgress } from '@/hooks/useMeetingProgress';
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 import { RecruitingTimelineWorksheet } from '@/components/worksheets/RecruitingTimelineWorksheet';
 import { ProgramFitQuestionnaire } from '@/components/worksheets/ProgramFitQuestionnaire';
 import { EligibilityChecklist } from '@/components/worksheets/EligibilityChecklist';
