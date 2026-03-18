@@ -261,6 +261,26 @@ const TRANSFER_MODULE_AGENDAS: ModuleAgenda[] = [
 ];
 
 export function ModuleAgenda() {
+  const handleDownloadHS = () => {
+    try {
+      const doc = generateModuleAgendaPdf(MODULE_AGENDAS, 'High School Recruiting Program');
+      doc.save('CFA-HS-Module-Agenda.pdf');
+      toast({ title: 'Downloaded', description: 'High School agenda PDF saved.' });
+    } catch (e) {
+      toast({ title: 'Error', description: 'Failed to generate PDF.', variant: 'destructive' });
+    }
+  };
+
+  const handleDownloadTransfer = () => {
+    try {
+      const doc = generateModuleAgendaPdf(TRANSFER_MODULE_AGENDAS, 'Transfer Student Program');
+      doc.save('CFA-Transfer-Module-Agenda.pdf');
+      toast({ title: 'Downloaded', description: 'Transfer agenda PDF saved.' });
+    } catch (e) {
+      toast({ title: 'Error', description: 'Failed to generate PDF.', variant: 'destructive' });
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -270,10 +290,15 @@ export function ModuleAgenda() {
 
       {/* High School Program */}
       <div>
-        <h3 className="font-display text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-          <Badge className="bg-primary/10 text-primary">12 Modules</Badge>
-          High School Recruiting Program
-        </h3>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="font-display text-lg font-bold text-foreground flex items-center gap-2">
+            <Badge className="bg-primary/10 text-primary">12 Modules</Badge>
+            High School Recruiting Program
+          </h3>
+          <Button variant="outline" size="sm" onClick={handleDownloadHS} className="gap-2">
+            <Download className="w-4 h-4" /> Download PDF
+          </Button>
+        </div>
         <Accordion type="single" collapsible className="space-y-4">
         {MODULE_AGENDAS.map((module) => (
           <AccordionItem key={module.moduleNumber} value={`module-${module.moduleNumber}`} className="border rounded-lg px-4">
