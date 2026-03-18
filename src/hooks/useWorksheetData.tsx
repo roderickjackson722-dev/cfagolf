@@ -3,8 +3,9 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
 
-export function useWorksheetData<T>(worksheetKey: string, defaultData: T) {
+export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overrideUserId?: string) {
   const { user } = useAuth();
+  const effectiveUserId = overrideUserId || user?.id;
   const [data, setData] = useState<T>(defaultData);
   const [isLoading, setIsLoading] = useState(true);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
