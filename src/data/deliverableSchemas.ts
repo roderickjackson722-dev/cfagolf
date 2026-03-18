@@ -40,6 +40,75 @@ export const DELIVERABLE_SCHEMAS: DeliverableSchema[] = [
     ],
   },
 
+  // Module 1 — Program Fit Questionnaire
+  {
+    key: 'program-fit-questionnaire',
+    title: 'Program Fit Questionnaire',
+    description: 'Identify what matters most to you in a college golf program.',
+    moduleNumber: 1,
+    program: 'hs',
+    fields: [
+      { key: 'preferred_division', label: 'Preferred Division(s)', type: 'select', options: ['D1', 'D2', 'D3', 'NAIA', 'JUCO', 'Open to All'] },
+      { key: 'school_size_pref', label: 'Preferred School Size', type: 'select', options: ['Small (under 5,000)', 'Medium (5,000–15,000)', 'Large (15,000–30,000)', 'Very Large (30,000+)', 'No Preference'] },
+      { key: 'location_pref', label: 'Location Preference', type: 'textarea', placeholder: 'Region, climate, distance from home...' },
+      { key: 'academic_priorities', label: 'Academic Priorities (Major, Programs)', type: 'textarea', placeholder: 'What do you want to study? Any specific programs or majors required?' },
+      { key: 'team_culture', label: 'What Team Culture Matters to You?', type: 'textarea', placeholder: 'Competitive intensity, team bonding, coaching style...' },
+      { key: 'coaching_style_pref', label: 'Preferred Coaching Style', type: 'select', options: ['Hands-on / Structured', 'Player-led / Independent', 'Balanced', 'No Preference'] },
+      { key: 'financial_needs', label: 'Financial Needs & Scholarship Expectations', type: 'textarea', placeholder: 'Do you need a full ride? Partial scholarship? Academic aid?' },
+      { key: 'hbcu_interest', label: 'Interest in HBCUs', type: 'select', options: ['Very Interested', 'Somewhat Interested', 'Not a Priority', 'No Preference'] },
+      { key: 'facilities_importance', label: 'How Important Are Golf Facilities?', type: 'select', options: ['Very Important', 'Somewhat Important', 'Not a Priority'] },
+      { key: 'playing_time', label: 'Playing Time Expectations', type: 'textarea', placeholder: 'Do you want to be a starter right away or willing to develop?' },
+      { key: 'other_priorities', label: 'Other Priorities or Must-Haves', type: 'textarea', placeholder: 'Anything else that matters to you in choosing a school?' },
+    ],
+  },
+
+  // Module 1 — Initial Target School List
+  {
+    key: 'initial-target-schools',
+    title: 'Initial Target School List',
+    description: 'Build your starting list of schools to research and pursue.',
+    moduleNumber: 1,
+    program: 'hs',
+    fields: [
+      { key: 'dream_school_1', label: 'Dream School #1', type: 'text', placeholder: 'School name' },
+      { key: 'dream_school_1_why', label: 'Why?', type: 'textarea', placeholder: 'What attracts you to this school?' },
+      { key: 'dream_school_2', label: 'Dream School #2', type: 'text', placeholder: '' },
+      { key: 'dream_school_2_why', label: 'Why?', type: 'textarea', placeholder: '' },
+      { key: 'target_school_1', label: 'Target School #1 (Realistic Fit)', type: 'text', placeholder: '' },
+      { key: 'target_school_1_why', label: 'Why?', type: 'textarea', placeholder: '' },
+      { key: 'target_school_2', label: 'Target School #2', type: 'text', placeholder: '' },
+      { key: 'target_school_2_why', label: 'Why?', type: 'textarea', placeholder: '' },
+      { key: 'safety_school_1', label: 'Safety School #1', type: 'text', placeholder: '' },
+      { key: 'safety_school_1_why', label: 'Why?', type: 'textarea', placeholder: '' },
+      { key: 'safety_school_2', label: 'Safety School #2', type: 'text', placeholder: '' },
+      { key: 'safety_school_2_why', label: 'Why?', type: 'textarea', placeholder: '' },
+      { key: 'schools_to_research', label: 'Other Schools to Research', type: 'textarea', placeholder: 'List any additional schools you want to learn more about' },
+    ],
+  },
+
+  // Module 1 — Division Comparison
+  {
+    key: 'division-comparison',
+    title: 'Division Comparison Understanding',
+    description: 'Compare NCAA, NAIA, and NJCAA divisions to find your best fit.',
+    moduleNumber: 1,
+    program: 'hs',
+    fields: [
+      { key: 'd1_pros', label: 'D1 — Pros', type: 'textarea', placeholder: 'What appeals to you about D1?' },
+      { key: 'd1_cons', label: 'D1 — Cons / Concerns', type: 'textarea', placeholder: '' },
+      { key: 'd2_pros', label: 'D2 — Pros', type: 'textarea', placeholder: '' },
+      { key: 'd2_cons', label: 'D2 — Cons / Concerns', type: 'textarea', placeholder: '' },
+      { key: 'd3_pros', label: 'D3 — Pros', type: 'textarea', placeholder: '' },
+      { key: 'd3_cons', label: 'D3 — Cons / Concerns', type: 'textarea', placeholder: '' },
+      { key: 'naia_pros', label: 'NAIA — Pros', type: 'textarea', placeholder: '' },
+      { key: 'naia_cons', label: 'NAIA — Cons / Concerns', type: 'textarea', placeholder: '' },
+      { key: 'juco_pros', label: 'JUCO — Pros', type: 'textarea', placeholder: '' },
+      { key: 'juco_cons', label: 'JUCO — Cons / Concerns', type: 'textarea', placeholder: '' },
+      { key: 'best_fit_division', label: 'Which Division Feels Like the Best Fit Right Now?', type: 'select', options: ['D1', 'D2', 'D3', 'NAIA', 'JUCO', 'Still Deciding'] },
+      { key: 'division_notes', label: 'Notes & Questions', type: 'textarea', placeholder: 'Any remaining questions about divisions?' },
+    ],
+  },
+
   // Module 3 — Scoring Benchmarks
   {
     key: 'scoring-benchmarks',
