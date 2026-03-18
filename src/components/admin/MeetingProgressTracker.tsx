@@ -82,7 +82,7 @@ export function MeetingProgressTracker({ userId, userName }: MeetingProgressTrac
 
   const handleSaveAll = async (moduleNumber: number) => {
     const progress = getProgressForModule(moduleNumber);
-    const details = sessionDetails[moduleNumber] || {};
+    const details = sessionDetails[moduleNumber] || { sessionDate: '', duration: '', meetLink: '', nextAgenda: '' };
     
     // First save via existing mutation
     updateProgress.mutate({
