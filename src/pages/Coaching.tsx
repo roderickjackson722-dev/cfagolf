@@ -14,6 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Separator } from '@/components/ui/separator';
+import { DeliverablesList } from '@/components/worksheets/DeliverablesList';
 import { MEETING_MODULES, useMyMeetingProgress } from '@/hooks/useMeetingProgress';
 import { useSessionNotes, useAddSessionNote, useDeleteSessionNote } from '@/hooks/useSessionNotes';
 import { useSessionActionItems, useToggleActionItem } from '@/hooks/useSessionActionItems';
@@ -276,6 +277,12 @@ export default function Coaching() {
                           </div>
                         </div>
                       )}
+
+                      {/* Deliverables */}
+                      <DeliverablesList
+                        moduleNumber={module.moduleNumber}
+                        program="hs"
+                      />
 
                       {/* Shared Notes */}
                       <div>

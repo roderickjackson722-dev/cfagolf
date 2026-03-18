@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Separator } from '@/components/ui/separator';
+import { DeliverablesList } from '@/components/worksheets/DeliverablesList';
 import { 
   MEETING_MODULES, 
   useUserMeetingProgress, 
@@ -386,6 +387,16 @@ export function MeetingProgressTracker({ userId, userName }: MeetingProgressTrac
                         </Button>
                       </div>
                     </div>
+
+                    <Separator />
+
+                    {/* Deliverables */}
+                    <DeliverablesList
+                      moduleNumber={module.moduleNumber}
+                      program="hs"
+                      readOnly={true}
+                      userId={userId}
+                    />
 
                     <Separator />
 
