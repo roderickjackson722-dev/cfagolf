@@ -394,7 +394,7 @@ export function MeetingProgressTracker({ userId, userName }: MeetingProgressTrac
                     <DeliverablesList
                       moduleNumber={module.moduleNumber}
                       program="hs"
-                      readOnly={true}
+                      readOnly={false}
                       userId={userId}
                     />
 
