@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, GraduationCap, Database, User, LogIn, Heart, Shield, Trophy } from 'lucide-react';
+import { Menu, X, GraduationCap, Database, User, LogIn, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
@@ -63,28 +63,6 @@ export function Navbar() {
                   }`}
                 >
                   Dashboard
-                </Link>
-                <Link
-                  to="/favorites"
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                    isActive('/favorites')
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                  }`}
-                >
-                  <Heart className="w-4 h-4" />
-                  Favorites
-                </Link>
-                <Link
-                  to="/tools/wagr-tournaments"
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                    isActive('/tools/wagr-tournaments')
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                  }`}
-                >
-                  <Trophy className="w-4 h-4" />
-                  WAGR
                 </Link>
                 {isAdmin && (
                   <Link
@@ -164,30 +142,6 @@ export function Navbar() {
                     }`}
                   >
                     Dashboard
-                  </Link>
-                   <Link
-                    to="/favorites"
-                    onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
-                      isActive('/favorites')
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                  >
-                    <Heart className="w-4 h-4" />
-                    Favorites
-                  </Link>
-                  <Link
-                    to="/tools/wagr-tournaments"
-                    onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
-                      isActive('/tools/wagr-tournaments')
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                  >
-                    <Trophy className="w-4 h-4" />
-                    WAGR
                   </Link>
                   {isAdmin && (
                     <Link
