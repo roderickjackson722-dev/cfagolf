@@ -5,6 +5,7 @@ interface AgendaItem {
   topic: string;
   duration: string;
   details?: string[];
+  notes?: (string | undefined)[]; // parallel array of moderator notes
 }
 
 interface ModuleAgendaData {
@@ -67,6 +68,7 @@ export function generateModuleAgendaPdf(modules: ModuleAgendaData[], programTitl
   const pageWidth = doc.internal.pageSize.getWidth();
   const margin = 15;
   const contentWidth = pageWidth - margin * 2;
+  const hasAnyNotes = modules.some(m => m.agenda.some(a => a.notes?.some(n => n)));
 
   // Title page
   addWatermark(doc);
@@ -79,7 +81,8 @@ export function generateModuleAgendaPdf(modules: ModuleAgendaData[], programTitl
   doc.text(programTitle, pageWidth / 2, 65, { align: 'center' });
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  doc.text('Session-by-Session Agenda Guide', pageWidth / 2, 73, { align: 'center' });
+  const subtitle = hasAnyNotes ? 'Session Agenda Guide — With Moderator Notes' : 'Session-by-Session Agenda Guide';
+  doc.text(subtitle, pageWidth / 2, 73, { align: 'center' });
 
   doc.setTextColor(80, 80, 80);
   doc.setFontSize(11);
@@ -137,8 +140,9 @@ export function generateModuleAgendaPdf(modules: ModuleAgendaData[], programTitl
 
     module.agenda.forEach((item, idx) => {
       const detailCount = item.details?.length || 0;
-      const neededHeight = 10 + detailCount * 4.5;
-      y = checkPageBreak(doc, y, neededHeight);
+      const noteCount = item.notes?.filter(n => n)?.length || 0;
+      const neededHeight = 10 + detailCount * 4.5 + noteCount * 8;
+      y = checkPageBreak(doc, y, Math.min(neededHeight, 40));
 
       // Topic bar
       doc.setFillColor(idx % 2 === 0 ? 248 : 255, idx % 2 === 0 ? 248 : 255, idx % 2 === 0 ? 248 : 255);
@@ -153,13 +157,37 @@ export function generateModuleAgendaPdf(modules: ModuleAgendaData[], programTitl
       y += 7;
 
       if (item.details) {
-        doc.setFontSize(8);
-        doc.setTextColor(80, 80, 80);
-        item.details.forEach((detail) => {
+        item.details.forEach((detail, di) => {
+          // Bullet point
+          doc.setFontSize(8);
+          doc.setTextColor(80, 80, 80);
           y = checkPageBreak(doc, y, 5);
           const lines = doc.splitTextToSize(`• ${detail}`, contentWidth - 12);
           doc.text(lines, margin + 6, y);
           y += lines.length * 3.8;
+
+          // Moderator note for this bullet
+          const note = item.notes?.[di];
+          if (note) {
+            const noteIndent = margin + 10;
+            const noteWidth = contentWidth - 18;
+            const noteLines = doc.splitTextToSize(note, noteWidth - 6);
+            const noteBlockHeight = noteLines.length * 3.2 + 4;
+            y = checkPageBreak(doc, y, noteBlockHeight + 2);
+
+            // Note background
+            doc.setFillColor(240, 245, 240);
+            doc.roundedRect(noteIndent, y - 1, noteWidth, noteBlockHeight, 1, 1, 'F');
+
+            // Note text
+            doc.setFontSize(7);
+            doc.setFont('helvetica', 'italic');
+            doc.setTextColor(26, 46, 37);
+            doc.text('💬', noteIndent + 2, y + 2.5);
+            doc.text(noteLines, noteIndent + 6, y + 2.5);
+            doc.setFont('helvetica', 'normal');
+            y += noteBlockHeight + 1.5;
+          }
         });
         y += 2;
       }
