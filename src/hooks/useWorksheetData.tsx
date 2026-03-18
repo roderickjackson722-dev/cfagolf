@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overrideUserId?: string) {
   const { user } = useAuth();
   const effectiveUserId = overrideUserId || user?.id;
+  const isAdminView = !!overrideUserId;
   const [data, setData] = useState<T>(defaultData);
   const [isLoading, setIsLoading] = useState(true);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -13,7 +14,7 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
 
   // Load data from DB on mount
   useEffect(() => {
-    if (!user) {
+    if (!effectiveUserId) {
       // Fall back to localStorage for non-authenticated users
       const saved = localStorage.getItem(`cfa-${worksheetKey}`);
       if (saved) {
@@ -28,7 +29,7 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
         const { data: row, error } = await supabase
           .from('worksheet_data')
           .select('data')
-          .eq('user_id', user.id)
+          .eq('user_id', effectiveUserId)
           .eq('worksheet_key', worksheetKey)
           .maybeSingle();
 
@@ -36,20 +37,18 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
 
         if (row?.data) {
           setData(row.data as unknown as T);
-        } else {
-          // Migrate from localStorage if exists
+        } else if (!isAdminView) {
+          // Migrate from localStorage if exists (only for own data)
           const saved = localStorage.getItem(`cfa-${worksheetKey}`);
           if (saved) {
             try {
               const parsed = JSON.parse(saved);
               setData(parsed);
-              // Save to DB immediately
               await supabase.from('worksheet_data').upsert({
-                user_id: user.id,
+                user_id: effectiveUserId,
                 worksheet_key: worksheetKey,
                 data: parsed as any,
               }, { onConflict: 'user_id,worksheet_key' });
-              // Clean up localStorage after migration
               localStorage.removeItem(`cfa-${worksheetKey}`);
             } catch {}
           }
@@ -63,7 +62,7 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
     };
 
     load();
-  }, [user, worksheetKey]);
+  }, [effectiveUserId, worksheetKey, isAdminView]);
 
   // Debounced save to DB
   const saveToDb = useCallback((newData: T) => {
@@ -72,14 +71,14 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
     }
 
     saveTimeoutRef.current = setTimeout(async () => {
-      if (!user) {
+      if (!effectiveUserId) {
         localStorage.setItem(`cfa-${worksheetKey}`, JSON.stringify(newData));
         return;
       }
 
       try {
         const { error } = await supabase.from('worksheet_data').upsert({
-          user_id: user.id,
+          user_id: effectiveUserId,
           worksheet_key: worksheetKey,
           data: newData as any,
         }, { onConflict: 'user_id,worksheet_key' });
@@ -89,8 +88,8 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
         console.error('Error saving worksheet:', err);
         toast.error('Failed to save worksheet progress');
       }
-    }, 1000); // 1 second debounce
-  }, [user, worksheetKey]);
+    }, 1000);
+  }, [effectiveUserId, worksheetKey]);
 
   const updateData = useCallback((updater: T | ((prev: T) => T)) => {
     setData(prev => {
