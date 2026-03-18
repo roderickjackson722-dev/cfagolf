@@ -203,8 +203,13 @@ export function CoachingProgressSection() {
             {completedCount}/{MEETING_MODULES.length} Complete
           </Badge>
         </div>
-        <CardDescription>
-          Track your one-on-one coaching sessions and access module materials
+        <CardDescription className="flex items-center justify-between">
+          <span>Track your one-on-one coaching sessions and access module materials</span>
+          <Link to="/coaching">
+            <Button variant="outline" size="sm" className="gap-1">
+              <ExternalLink className="w-3 h-3" /> Full Coaching View
+            </Button>
+          </Link>
         </CardDescription>
         <div className="mt-3">
           <div className="flex justify-between text-sm mb-1">
