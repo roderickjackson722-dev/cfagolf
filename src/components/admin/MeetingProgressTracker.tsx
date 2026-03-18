@@ -398,6 +398,16 @@ export function MeetingProgressTracker({ userId, userName }: MeetingProgressTrac
 
                     <Separator />
 
+                    {/* Deliverables */}
+                    <DeliverablesList
+                      moduleNumber={module.moduleNumber}
+                      program="hs"
+                      readOnly={true}
+                      userId={userId}
+                    />
+
+                    <Separator />
+
                     {/* Shared Notes */}
                     <div>
                       <p className="text-sm font-medium mb-2 flex items-center gap-1">
