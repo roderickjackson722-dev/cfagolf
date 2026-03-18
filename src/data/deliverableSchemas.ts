@@ -366,6 +366,137 @@ export const DELIVERABLE_SCHEMAS: DeliverableSchema[] = [
     ],
   },
 
+  // Module 0 — Recruiting Timeline Overview
+  {
+    key: 'intro-recruiting-timeline',
+    title: 'Recruiting Timeline Overview',
+    description: 'Map out your recruiting journey milestones from freshman to senior year.',
+    moduleNumber: 0,
+    program: 'hs',
+    fields: [
+      { key: 'current_grade', label: 'Current Grade Level', type: 'select', options: ['9th Grade (Freshman)', '10th Grade (Sophomore)', '11th Grade (Junior)', '12th Grade (Senior)'] },
+      { key: 'june15_aware', label: 'I understand the June 15 (after soph year) D1/D2 contact date', type: 'checkbox' },
+      { key: 'ncaa_registered', label: 'Registered with NCAA Eligibility Center', type: 'checkbox' },
+      { key: 'this_semester_goals', label: 'This Semester\'s Recruiting Goals', type: 'textarea', placeholder: 'What 2-3 things do you want to accomplish this semester?' },
+      { key: 'next_semester_goals', label: 'Next Semester\'s Recruiting Goals', type: 'textarea', placeholder: '' },
+      { key: 'key_deadlines', label: 'Key Upcoming Deadlines', type: 'textarea', placeholder: 'Test dates, tournament registrations, application deadlines...' },
+      { key: 'summer_plan', label: 'Summer Recruiting Plan', type: 'textarea', placeholder: 'Tournaments, camps, campus visits planned for summer' },
+      { key: 'signing_period_aware', label: 'I understand early and regular signing period dates', type: 'checkbox' },
+      { key: 'timeline_concerns', label: 'Questions or Concerns About My Timeline', type: 'textarea', placeholder: 'Am I behind? What should I prioritize?' },
+    ],
+  },
+
+  // Module 6 — Email Draft Worksheet
+  {
+    key: 'email-draft-worksheet',
+    title: 'Coach Email Draft Worksheet',
+    description: 'Draft and refine your introductory and follow-up emails to college coaches.',
+    moduleNumber: 6,
+    program: 'hs',
+    fields: [
+      { key: 'intro_email_subject', label: 'Introductory Email — Subject Line', type: 'text', placeholder: 'Class of 2026 | [Your Name] | [Handicap/Scoring Avg]' },
+      { key: 'intro_email_body', label: 'Introductory Email — Body Draft', type: 'textarea', placeholder: 'Dear Coach [Name],\n\nMy name is...' },
+      { key: 'intro_email_reviewed', label: 'Intro email reviewed by advisor', type: 'checkbox' },
+      { key: 'followup_email_subject', label: 'Follow-Up Email — Subject Line', type: 'text', placeholder: 'Tournament Update | [Your Name] | [Event Name]' },
+      { key: 'followup_email_body', label: 'Follow-Up Email — Body Draft', type: 'textarea', placeholder: 'Dear Coach [Name],\n\nI wanted to update you on my recent tournament results...' },
+      { key: 'followup_reviewed', label: 'Follow-up email reviewed by advisor', type: 'checkbox' },
+      { key: 'thank_you_template', label: 'Thank You Email Template (post-visit/call)', type: 'textarea', placeholder: 'Dear Coach [Name],\n\nThank you for taking the time to...' },
+      { key: 'email_tips_reviewed', label: 'I have reviewed the email best practices guide', type: 'checkbox' },
+      { key: 'email_notes', label: 'Notes & Revisions', type: 'textarea', placeholder: 'Feedback from advisor, things to improve...' },
+    ],
+  },
+
+  // Module 6 — Outreach Tracker
+  {
+    key: 'outreach-tracker-worksheet',
+    title: 'Coach Outreach Tracker',
+    description: 'Track all coach communications and follow-up schedules.',
+    moduleNumber: 6,
+    program: 'hs',
+    fields: [
+      { key: 'total_coaches_contacted', label: 'Total Coaches Contacted', type: 'number', placeholder: '15' },
+      { key: 'total_responses', label: 'Total Responses Received', type: 'number', placeholder: '5' },
+      { key: 'school_1', label: 'School #1 — Name & Coach', type: 'text', placeholder: 'University X — Coach Smith' },
+      { key: 'school_1_status', label: 'School #1 — Status', type: 'select', options: ['Email Sent', 'Response Received', 'Phone Call Scheduled', 'Phone Call Completed', 'Visit Invited', 'No Response', 'Not Interested'] },
+      { key: 'school_1_next', label: 'School #1 — Next Step & Date', type: 'text', placeholder: 'Follow up March 20' },
+      { key: 'school_2', label: 'School #2 — Name & Coach', type: 'text', placeholder: '' },
+      { key: 'school_2_status', label: 'School #2 — Status', type: 'select', options: ['Email Sent', 'Response Received', 'Phone Call Scheduled', 'Phone Call Completed', 'Visit Invited', 'No Response', 'Not Interested'] },
+      { key: 'school_2_next', label: 'School #2 — Next Step & Date', type: 'text', placeholder: '' },
+      { key: 'school_3', label: 'School #3 — Name & Coach', type: 'text', placeholder: '' },
+      { key: 'school_3_status', label: 'School #3 — Status', type: 'select', options: ['Email Sent', 'Response Received', 'Phone Call Scheduled', 'Phone Call Completed', 'Visit Invited', 'No Response', 'Not Interested'] },
+      { key: 'school_3_next', label: 'School #3 — Next Step & Date', type: 'text', placeholder: '' },
+      { key: 'outreach_notes', label: 'Outreach Notes & Strategy', type: 'textarea', placeholder: 'Which coaches seem most interested? Any patterns in responses?' },
+    ],
+  },
+
+  // Module 6 — Phone Call Script
+  {
+    key: 'phone-call-script',
+    title: 'Phone Call Script & Prep',
+    description: 'Prepare for phone conversations with college coaches.',
+    moduleNumber: 6,
+    program: 'hs',
+    fields: [
+      { key: 'opening_intro', label: 'Opening Introduction (15-second elevator pitch)', type: 'textarea', placeholder: 'Hi Coach [Name], this is [Your Name], a [grade] from [City, State]...' },
+      { key: 'key_talking_points', label: 'Key Talking Points', type: 'textarea', placeholder: '1. Recent tournament results\n2. Academic standing\n3. Why I\'m interested in [School]\n4. Visit availability' },
+      { key: 'questions_for_coach', label: 'Questions to Ask the Coach', type: 'textarea', placeholder: '1. What does a typical practice schedule look like?\n2. How many roster spots are open?\n3. What scoring average are you recruiting?\n4. Can I schedule a campus visit?' },
+      { key: 'what_to_avoid', label: 'Things to Avoid Saying', type: 'textarea', placeholder: 'Don\'t ask about scholarship money on first call, don\'t badmouth other schools...' },
+      { key: 'follow_up_plan', label: 'Post-Call Follow-Up Plan', type: 'textarea', placeholder: 'Send thank-you email within 24 hours, update outreach tracker...' },
+      { key: 'practice_call_done', label: 'I have practiced my call script out loud', type: 'checkbox' },
+      { key: 'parent_role', label: 'Parent\'s Role During Calls', type: 'textarea', placeholder: 'Will they be listening? When should they speak?' },
+      { key: 'call_script_notes', label: 'Notes & Feedback', type: 'textarea', placeholder: '' },
+    ],
+  },
+
+  // Module 7 — Visit Prep Checklist
+  {
+    key: 'visit-prep-checklist',
+    title: 'Campus Visit Prep Checklist',
+    description: 'Prepare everything you need before visiting a college campus.',
+    moduleNumber: 7,
+    program: 'hs',
+    fields: [
+      { key: 'school_name', label: 'School Name', type: 'text', placeholder: '' },
+      { key: 'visit_date', label: 'Visit Date', type: 'date' },
+      { key: 'visit_type', label: 'Visit Type', type: 'select', options: ['Unofficial Visit', 'Official Visit', 'Junior Day', 'Golf Camp', 'Tournament Visit'] },
+      { key: 'coach_confirmed', label: 'Visit confirmed with coach', type: 'checkbox' },
+      { key: 'travel_booked', label: 'Travel/hotel arranged', type: 'checkbox' },
+      { key: 'resume_printed', label: 'Athletic resume printed and ready', type: 'checkbox' },
+      { key: 'questions_prepared', label: 'Questions for coach prepared', type: 'checkbox' },
+      { key: 'outfit_ready', label: 'Appropriate outfit selected (golf attire)', type: 'checkbox' },
+      { key: 'research_done', label: 'Researched school academics, team roster, schedule', type: 'checkbox' },
+      { key: 'questions_list', label: 'Questions to Ask During Visit', type: 'textarea', placeholder: '1. What does a typical day look like?\n2. Practice schedule and travel?\n3. Academic support?\n4. Team culture and expectations?' },
+      { key: 'things_to_observe', label: 'Things to Observe on Campus', type: 'textarea', placeholder: 'Facilities, dorms, dining, campus vibe, practice facility...' },
+      { key: 'visit_prep_notes', label: 'Additional Prep Notes', type: 'textarea', placeholder: '' },
+    ],
+  },
+
+  // Module 7 — Campus Evaluation Form
+  {
+    key: 'campus-evaluation-form',
+    title: 'Campus Evaluation Form',
+    description: 'Rate and document your impressions after each campus visit.',
+    moduleNumber: 7,
+    program: 'hs',
+    fields: [
+      { key: 'eval_school_name', label: 'School Name', type: 'text', placeholder: '' },
+      { key: 'eval_visit_date', label: 'Visit Date', type: 'date' },
+      { key: 'overall_impression', label: 'Overall Impression (1–10)', type: 'number', placeholder: '8' },
+      { key: 'academics_rating', label: 'Academics Rating (1–10)', type: 'number', placeholder: '7' },
+      { key: 'golf_program_rating', label: 'Golf Program Rating (1–10)', type: 'number', placeholder: '8' },
+      { key: 'facilities_rating', label: 'Facilities Rating (1–10)', type: 'number', placeholder: '7' },
+      { key: 'campus_vibe_rating', label: 'Campus Vibe / Culture Rating (1–10)', type: 'number', placeholder: '8' },
+      { key: 'coaching_staff_rating', label: 'Coaching Staff Impression (1–10)', type: 'number', placeholder: '9' },
+      { key: 'team_culture_rating', label: 'Team Culture Rating (1–10)', type: 'number', placeholder: '7' },
+      { key: 'location_rating', label: 'Location Rating (1–10)', type: 'number', placeholder: '6' },
+      { key: 'pros', label: 'Pros — What I Liked', type: 'textarea', placeholder: 'Top things that stood out positively' },
+      { key: 'cons', label: 'Cons — Concerns', type: 'textarea', placeholder: 'Any negatives or red flags?' },
+      { key: 'could_i_see_myself_here', label: 'Can I See Myself Here for 4 Years?', type: 'select', options: ['Definitely Yes', 'Probably Yes', 'Maybe', 'Probably Not', 'Definitely Not'] },
+      { key: 'follow_up_needed', label: 'Follow-up action needed', type: 'textarea', placeholder: 'Send thank-you email, request more info, schedule return visit...' },
+      { key: 'evaluation_notes', label: 'Additional Notes', type: 'textarea', placeholder: '' },
+    ],
+  },
+
   // Module 7 — Decision Criteria
   {
     key: 'decision-criteria',
