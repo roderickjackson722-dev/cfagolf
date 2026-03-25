@@ -142,6 +142,10 @@ const Admin = () => {
                 <Mail className="w-4 h-4" />
                 Coach CRM
               </TabsTrigger>
+              <TabsTrigger value="demo-call" className="flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                Demo Call
+              </TabsTrigger>
               <TabsTrigger value="agenda" className="flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
                 Module Agenda
