@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -21,6 +21,7 @@ import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
 import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
 import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
+import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -140,6 +141,10 @@ const Admin = () => {
               <TabsTrigger value="crm" className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 Coach CRM
+              </TabsTrigger>
+              <TabsTrigger value="demo-call" className="flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                Demo Call
               </TabsTrigger>
               <TabsTrigger value="agenda" className="flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
@@ -318,6 +323,10 @@ const Admin = () => {
                   <CoachCRM />
                 </CardContent>
               </Card>
+            </TabsContent>
+            {/* Demo Call Agenda Tab */}
+            <TabsContent value="demo-call">
+              <DemoCallAgenda />
             </TabsContent>
             {/* Module Agenda Tab */}
             <TabsContent value="agenda">
