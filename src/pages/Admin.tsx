@@ -21,6 +21,7 @@ import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
 import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
 import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
+import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
