@@ -324,6 +324,10 @@ const Admin = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+            {/* Demo Call Agenda Tab */}
+            <TabsContent value="demo-call">
+              <DemoCallAgenda />
+            </TabsContent>
             {/* Module Agenda Tab */}
             <TabsContent value="agenda">
               <Card>
