@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 
 const consultingHighlights = [
-  "Everything in Digital Member",
+  "Everything in Annual Portal Membership",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
   "Academic & Eligibility Evaluation",
