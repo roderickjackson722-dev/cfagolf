@@ -106,6 +106,15 @@ export function AdminUserTable() {
                   <TableCell>{profile.graduation_year || '—'}</TableCell>
                   <TableCell>{profile.state || '—'}</TableCell>
                   <TableCell>
+                    {(profile as any).program_type === 'consulting' ? (
+                      <Badge className="bg-amber-100 text-amber-800 border-amber-300">Consulting</Badge>
+                    ) : (profile as any).program_type === 'digital' ? (
+                      <Badge className="bg-blue-100 text-blue-800 border-blue-300">Digital</Badge>
+                    ) : (
+                      <Badge variant="outline" className="text-muted-foreground">Free Signup</Badge>
+                    )}
+                  </TableCell>
+                  <TableCell>
                     <div className="flex items-center gap-2">
                       <Switch
                         checked={profile.has_paid_access || false}
