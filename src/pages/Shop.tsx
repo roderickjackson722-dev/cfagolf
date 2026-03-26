@@ -177,7 +177,7 @@ const Shop = () => {
 
                   <p className="text-sm text-muted-foreground">
                     {user
-                      ? 'Also included free for Digital Members after 6 months & all Consulting members'
+                      ? 'Also included free for Annual Portal Members after 6 months & all Consulting members'
                       : 'No account required — download links sent to your email'}
                   </p>
                 </div>

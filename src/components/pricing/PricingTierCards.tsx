@@ -29,7 +29,7 @@ export function PricingTierCards() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground text-center">
-            Everything in Digital, plus dedicated 1-on-1 expert guidance through every step of the recruiting journey.
+            Everything in Annual Portal, plus dedicated 1-on-1 expert guidance through every step of the recruiting journey.
           </p>
           <Link to="/checkout?plan=consulting" className="block">
             <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
@@ -55,17 +55,17 @@ export function PricingTierCards() {
         <div className="flex-1 h-px bg-border" />
       </div>
 
-      {/* Digital Membership */}
+      {/* Annual Portal Membership */}
       <Card className="relative overflow-hidden border-2 border-border shadow-xl">
         <div className="absolute top-0 right-0">
           <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Service</Badge>
         </div>
         <CardHeader className="text-center pb-4 pt-8">
           <CardTitle className="text-2xl font-display font-bold text-foreground">
-            Digital Member
+            Annual Portal Membership
           </CardTitle>
           <CardDescription className="text-muted-foreground">
-            DIY recruiting tools & resources
+            Full platform access & recruiting tools
           </CardDescription>
           <div className="pt-6">
             <span className="text-5xl font-bold text-foreground">$24.99</span>

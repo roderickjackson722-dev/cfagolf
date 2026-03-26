@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 
 const consultingHighlights = [
-  "Everything in Digital Member",
+  "Everything in Annual Portal Membership",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
   "Academic & Eligibility Evaluation",
@@ -91,17 +91,17 @@ export function PricingSection() {
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          {/* Digital Member */}
+          {/* Annual Portal Membership */}
           <Card className="relative overflow-hidden border-2 border-border shadow-xl">
             <div className="absolute top-0 right-0">
               <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Service</Badge>
             </div>
             <CardHeader className="text-center pb-4 pt-8">
               <CardTitle className="text-2xl font-display font-bold text-foreground">
-                Digital Member
+                Annual Portal Membership
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                DIY recruiting tools & resources
+                Full platform access & recruiting tools
               </CardDescription>
               <div className="pt-6">
                 <span className="text-5xl font-bold text-foreground">$24.99</span>

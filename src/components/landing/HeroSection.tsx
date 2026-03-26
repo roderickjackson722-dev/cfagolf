@@ -40,9 +40,9 @@ export function HeroSection() {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/database">
+              <Link to="/pricing">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 border-white/30 text-white hover:bg-white hover:text-primary font-semibold text-lg px-8 h-14 rounded-full">
-                  Explore Colleges
+                  View Pricing
                 </Button>
               </Link>
             </div>

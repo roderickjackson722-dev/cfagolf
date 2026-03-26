@@ -141,8 +141,8 @@ const TransferFlyer = () => {
 
           {/* Footer / Contact */}
           <div className="border-t border-border pt-2 flex flex-wrap items-center justify-center gap-5 text-[10px] text-foreground/70 font-medium">
-            <span className="flex items-center gap-1"><Globe className="w-3 h-3" /> collegefairwayadvisors.com</span>
-            <span className="flex items-center gap-1"><Mail className="w-3 h-3" /> info@collegefairwayadvisors.com</span>
+            <span className="flex items-center gap-1"><Globe className="w-3 h-3" /> cfa.golf</span>
+            <span className="flex items-center gap-1"><Mail className="w-3 h-3" /> contact@cfa.golf</span>
             <span className="flex items-center gap-1"><Star className="w-3 h-3" /> @collegefairwayadvisors</span>
           </div>
         </div>

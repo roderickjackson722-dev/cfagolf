@@ -61,7 +61,7 @@ const faqs = [
   },
   {
     question: 'What is the investment for your services?',
-    answer: 'Our 1-on-1 Consulting package is a one-time $2,499 investment that includes 12 consulting calls and full platform access. We also offer a Digital Membership at $24.99/mo for self-guided recruiting tools. Book a free 30-minute consultation to discuss which option is the best fit for your family.',
+    answer: 'Our 1-on-1 Consulting package is a one-time $2,499 investment that includes 12 consulting calls and full platform access. We also offer our Annual Portal Membership at $24.99/mo for self-guided recruiting tools, and a one-time Recruiting Toolkit for $99. Book a free 30-minute consultation to discuss which option is the best fit for your family.',
   },
   {
     question: 'Do you guarantee a scholarship?',

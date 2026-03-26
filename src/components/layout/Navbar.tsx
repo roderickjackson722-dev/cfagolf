@@ -18,7 +18,7 @@ export function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
-    { to: '/database', label: 'College Database' },
+    { to: '/pricing', label: 'Pricing' },
     { to: '/toolkit', label: 'Toolkit' },
     { to: '/member-preview', label: 'Member Preview' },
   ];

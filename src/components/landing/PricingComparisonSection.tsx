@@ -25,7 +25,7 @@ const digitalFeatures = [
 ];
 
 const consultingFeatures = [
-  "Everything in Digital Member",
+  "Everything in Annual Portal Membership",
   "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
@@ -65,8 +65,8 @@ const cards: PricingCard[] = [
     icon: Package,
   },
   {
-    title: "Digital Member",
-    description: "DIY recruiting tools & resources",
+    title: "Annual Portal Membership",
+    description: "Full platform access & recruiting tools",
     price: "$24.99",
     priceSuffix: "/mo",
     priceNote: "Monthly subscription • Cancel anytime",
