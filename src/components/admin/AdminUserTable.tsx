@@ -380,8 +380,7 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="high_school">Free Signup</SelectItem>
-                    <SelectItem value="digital">Digital Membership</SelectItem>
+                    <SelectItem value="digital">Annual Portal Membership</SelectItem>
                     <SelectItem value="consulting">1-on-1 Consulting</SelectItem>
                   </SelectContent>
                 </Select>
