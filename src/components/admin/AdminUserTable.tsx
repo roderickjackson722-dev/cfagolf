@@ -364,6 +364,27 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
             </div>
 
             <div className="pt-4 border-t">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <Label>Program Type</Label>
+                  <p className="text-sm text-muted-foreground">
+                    What the user signed up for
+                  </p>
+                </div>
+                <Select
+                  value={(formData as any).program_type || 'high_school'}
+                  onValueChange={(value) => updateField('program_type' as any, value)}
+                >
+                  <SelectTrigger className="w-48">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="high_school">Free Signup</SelectItem>
+                    <SelectItem value="digital">Digital Membership</SelectItem>
+                    <SelectItem value="consulting">1-on-1 Consulting</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="flex items-center justify-between">
                 <div>
                   <Label>Paid Access Status</Label>
