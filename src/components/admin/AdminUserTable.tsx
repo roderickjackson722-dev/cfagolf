@@ -75,6 +75,7 @@ export function AdminUserTable() {
               <TableHead>Email</TableHead>
               <TableHead>Graduation</TableHead>
               <TableHead>State</TableHead>
+              <TableHead>Program</TableHead>
               <TableHead>Paid Access</TableHead>
               <TableHead>Joined</TableHead>
               <TableHead className="w-16">Actions</TableHead>
