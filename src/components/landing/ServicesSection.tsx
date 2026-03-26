@@ -81,7 +81,7 @@ export function ServicesSection() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-xs text-muted-foreground text-center font-medium uppercase tracking-wide">
-                Everything in Digital, plus:
+                Everything in Annual Portal, plus:
               </p>
               <div className="space-y-2">
                 {consultingExtras.map((feature, index) => (

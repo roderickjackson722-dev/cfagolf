@@ -65,8 +65,8 @@ const cards: PricingCard[] = [
     icon: Package,
   },
   {
-    title: "Digital Member",
-    description: "DIY recruiting tools & resources",
+    title: "Annual Portal Membership",
+    description: "Full platform access & recruiting tools",
     price: "$24.99",
     priceSuffix: "/mo",
     priceNote: "Monthly subscription • Cancel anytime",

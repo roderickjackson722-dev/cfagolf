@@ -29,7 +29,7 @@ export function PricingTierCards() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground text-center">
-            Everything in Digital, plus dedicated 1-on-1 expert guidance through every step of the recruiting journey.
+            Everything in Annual Portal, plus dedicated 1-on-1 expert guidance through every step of the recruiting journey.
           </p>
           <Link to="/checkout?plan=consulting" className="block">
             <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">

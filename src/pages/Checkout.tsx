@@ -28,9 +28,9 @@ const PROGRAMS = {
   },
   digital: {
     price: 24.99,
-    label: 'Digital Membership',
-    shortLabel: 'CFA Digital Member',
-    description: 'Self-service recruiting tools & resources',
+    label: 'Annual Portal Membership',
+    shortLabel: 'CFA Annual Portal Member',
+    description: 'Full platform access & recruiting tools',
     programType: 'digital',
     isSubscription: true,
   },

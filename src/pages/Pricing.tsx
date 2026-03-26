@@ -79,7 +79,7 @@ const Pricing = () => {
               </Link>
               <Link to="/checkout?plan=digital">
                 <Button size="lg" variant="outline" className="rounded-full font-semibold px-8">
-                  Digital Member — $24.99/mo
+                  Annual Portal Membership — $24.99/mo
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>

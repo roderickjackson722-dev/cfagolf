@@ -181,7 +181,7 @@ function AvailabilityBadge({ available, label }: { available: boolean; label: st
         </div>
       )}
       <span className="text-xs text-muted-foreground hidden sm:inline">
-        {available ? `Included in ${label}` : `Not in ${label}`}
+        {available ? `Included` : `Not included`}
       </span>
     </div>
   );

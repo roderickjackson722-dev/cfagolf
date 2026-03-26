@@ -63,7 +63,7 @@ export const ToolkitPromoSection = () => {
               <span className="text-muted-foreground text-lg">one-time</span>
             </div>
             <p className="text-sm text-muted-foreground mb-6">
-              Also included free for Digital Members after 6 months & all Consulting members
+              Also included free for Annual Portal Members after 6 months & all Consulting members
             </p>
             <Link to="/toolkit">
               <Button size="lg" className="h-14 px-10 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90">
