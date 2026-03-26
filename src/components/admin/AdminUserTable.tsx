@@ -214,7 +214,8 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
         home_course: user.home_course || '',
         goal_division: user.goal_division || '',
         has_paid_access: user.has_paid_access,
-      });
+        program_type: (user as any).program_type || 'high_school',
+      } as any);
     }
   }, [user]);
 
