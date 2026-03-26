@@ -25,7 +25,7 @@ const digitalFeatures = [
 ];
 
 const consultingFeatures = [
-  "Everything in Digital Member",
+  "Everything in Annual Portal Membership",
   "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
