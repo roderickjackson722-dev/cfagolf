@@ -109,7 +109,7 @@ export function ServicesSection() {
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          {/* Digital Member */}
+          {/* Annual Portal Membership */}
           <Card className="relative overflow-hidden border-2 border-border shadow-xl group card-hover">
             <div className="absolute top-0 right-0">
               <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Service</Badge>
