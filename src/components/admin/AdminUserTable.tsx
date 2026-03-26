@@ -75,6 +75,7 @@ export function AdminUserTable() {
               <TableHead>Email</TableHead>
               <TableHead>Graduation</TableHead>
               <TableHead>State</TableHead>
+              <TableHead>Program</TableHead>
               <TableHead>Paid Access</TableHead>
               <TableHead>Joined</TableHead>
               <TableHead className="w-16">Actions</TableHead>
@@ -83,7 +84,7 @@ export function AdminUserTable() {
           <TableBody>
             {filteredUsers.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
+                <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
                   No users found
                 </TableCell>
               </TableRow>
@@ -104,6 +105,15 @@ export function AdminUserTable() {
                   <TableCell>{profile.email || '—'}</TableCell>
                   <TableCell>{profile.graduation_year || '—'}</TableCell>
                   <TableCell>{profile.state || '—'}</TableCell>
+                  <TableCell>
+                    {(profile as any).program_type === 'consulting' ? (
+                      <Badge className="bg-amber-100 text-amber-800 border-amber-300">Consulting</Badge>
+                    ) : (profile as any).program_type === 'digital' ? (
+                      <Badge className="bg-blue-100 text-blue-800 border-blue-300">Digital</Badge>
+                    ) : (
+                      <Badge variant="outline" className="text-muted-foreground">Free Signup</Badge>
+                    )}
+                  </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <Switch
@@ -204,7 +214,8 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
         home_course: user.home_course || '',
         goal_division: user.goal_division || '',
         has_paid_access: user.has_paid_access,
-      });
+        program_type: (user as any).program_type || 'high_school',
+      } as any);
     }
   }, [user]);
 
@@ -354,6 +365,27 @@ function UserDetailDialog({ user, onClose }: { user: UserProfile | null; onClose
             </div>
 
             <div className="pt-4 border-t">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <Label>Program Type</Label>
+                  <p className="text-sm text-muted-foreground">
+                    What the user signed up for
+                  </p>
+                </div>
+                <Select
+                  value={(formData as any).program_type || 'high_school'}
+                  onValueChange={(value) => updateField('program_type' as any, value)}
+                >
+                  <SelectTrigger className="w-48">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="high_school">Free Signup</SelectItem>
+                    <SelectItem value="digital">Digital Membership</SelectItem>
+                    <SelectItem value="consulting">1-on-1 Consulting</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="flex items-center justify-between">
                 <div>
                   <Label>Paid Access Status</Label>
