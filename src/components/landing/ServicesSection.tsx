@@ -119,10 +119,10 @@ export function ServicesSection() {
                 <Monitor className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
               </div>
               <CardTitle className="text-2xl font-display font-bold text-foreground">
-                Digital Member
+                Annual Portal Membership
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                DIY recruiting tools & resources
+                Full platform access & recruiting tools
               </CardDescription>
               <div className="pt-4">
                 <span className="text-4xl font-bold text-foreground">$24.99</span>
