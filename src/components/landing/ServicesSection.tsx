@@ -50,7 +50,7 @@ export function ServicesSection() {
             Service Packages
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Two Ways to{' '}
+            Three Ways to{' '}
             <span className="text-primary">Get Recruited</span>
           </h2>
           <p className="text-lg text-muted-foreground">
