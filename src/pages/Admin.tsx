@@ -8,7 +8,7 @@ import { useColleges } from '@/hooks/useColleges';
 import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
 import { AdminUserTable } from '@/components/admin/AdminUserTable';
 import { AdminMembershipTable } from '@/components/admin/AdminMembershipTable';
-import { AdminVisitorTable } from '@/components/admin/AdminVisitorTable';
+import { AdminAnalyticsDashboard } from '@/components/admin/AdminAnalyticsDashboard';
 import { ClippdImporter } from '@/components/admin/ClippdImporter';
 import { AdminTestimonialTable } from '@/components/admin/AdminTestimonialTable';
 import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
