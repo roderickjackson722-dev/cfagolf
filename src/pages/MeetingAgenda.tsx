@@ -229,7 +229,7 @@ export default function MeetingAgenda() {
                                   <Checkbox
                                     checked={item.is_completed}
                                     onCheckedChange={() =>
-                                      toggleItem.mutate({ itemId: item.id, isCompleted: !item.is_completed })
+                                      toggleItem.mutate({ itemId: item.id, isCompleted: !item.is_completed, userId: userId! })
                                     }
                                   />
                                   <span className={`text-sm flex-1 ${item.is_completed ? 'line-through text-muted-foreground' : ''}`}>
