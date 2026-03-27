@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { 
   CheckCircle2, Circle, BookOpen, ChevronDown, ChevronUp, Save, 
-  MessageSquare, ListChecks, Plus, Trash2, Calendar, Clock, Video, Link as LinkIcon
+  MessageSquare, ListChecks, Plus, Trash2, Calendar, Clock, Video, Link as LinkIcon, Share2
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
