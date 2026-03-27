@@ -183,13 +183,6 @@ export function MeetingProgressTracker({ userId, userName }: MeetingProgressTrac
               <Share2 className="w-3 h-3 mr-1" /> Share Agenda
             </Button>
           </div>
-            {totalActionItems > 0 && (
-              <Badge variant="outline">
-                <ListChecks className="w-3 h-3 mr-1" />
-                {completedActionItems}/{totalActionItems} Tasks
-              </Badge>
-            )}
-          </div>
         </div>
         <CardDescription>
           {userName ? `Manage ${userName}'s coaching sessions` : 'Manage coaching session progress'}
