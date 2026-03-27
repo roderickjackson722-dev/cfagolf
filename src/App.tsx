@@ -42,6 +42,7 @@ import RecruitingHuddle from "./pages/shop/RecruitingHuddle";
 import NotFound from "./pages/NotFound";
 import Unsubscribe from "./pages/Unsubscribe";
 import Coaching from "./pages/Coaching";
+import MeetingAgenda from "./pages/MeetingAgenda";
 import { LeadMagnetPopup } from "./components/LeadMagnetPopup";
 
 const queryClient = new QueryClient();
