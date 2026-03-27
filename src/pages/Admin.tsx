@@ -119,8 +119,8 @@ const Admin = () => {
                 Data Import
               </TabsTrigger>
               <TabsTrigger value="visitors" className="flex items-center gap-2">
-                <Eye className="w-4 h-4" />
-                Visitors
+                <BarChart3 className="w-4 h-4" />
+                Analytics
               </TabsTrigger>
               <TabsTrigger value="testimonials" className="flex items-center gap-2">
                 <MessageSquare className="w-4 h-4" />
