@@ -231,20 +231,20 @@ const Admin = () => {
               <ClippdImporter />
             </TabsContent>
 
-            {/* Site Visitors Tab */}
+            {/* Analytics Tab */}
             <TabsContent value="visitors">
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-2">
-                    <Eye className="w-5 h-5 text-primary" />
-                    <CardTitle>Site Visitors</CardTitle>
+                    <BarChart3 className="w-5 h-5 text-primary" />
+                    <CardTitle>Site Analytics</CardTitle>
                   </div>
                   <CardDescription>
-                    View recent site visitors, their locations, and browsing activity. Emails are sent automatically for each new visitor.
+                    Website traffic analytics, visitor locations, and browsing activity.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <AdminVisitorTable />
+                  <AdminAnalyticsDashboard />
                 </CardContent>
               </Card>
             </TabsContent>
