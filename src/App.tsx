@@ -42,6 +42,7 @@ import RecruitingHuddle from "./pages/shop/RecruitingHuddle";
 import NotFound from "./pages/NotFound";
 import Unsubscribe from "./pages/Unsubscribe";
 import Coaching from "./pages/Coaching";
+import MeetingAgenda from "./pages/MeetingAgenda";
 import { LeadMagnetPopup } from "./components/LeadMagnetPopup";
 
 const queryClient = new QueryClient();
@@ -97,6 +98,7 @@ const App = () => (
             <Route path="/shop" element={<Navigate to="/toolkit" replace />} />
             <Route path="/shop/*" element={<Navigate to="/toolkit" replace />} />
             <Route path="/coaching" element={<Coaching />} />
+            <Route path="/meeting-agenda/:userId" element={<MeetingAgenda />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

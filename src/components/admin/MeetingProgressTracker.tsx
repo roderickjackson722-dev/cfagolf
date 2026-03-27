@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { 
   CheckCircle2, Circle, BookOpen, ChevronDown, ChevronUp, Save, 
-  MessageSquare, ListChecks, Plus, Trash2, Calendar, Clock, Video, Link as LinkIcon
+  MessageSquare, ListChecks, Plus, Trash2, Calendar, Clock, Video, Link as LinkIcon, Share2
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -171,6 +171,17 @@ export function MeetingProgressTracker({ userId, userName }: MeetingProgressTrac
                 {completedActionItems}/{totalActionItems} Tasks
               </Badge>
             )}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                const url = `${window.location.origin}/meeting-agenda/${userId}`;
+                navigator.clipboard.writeText(url);
+                toast({ title: 'Link Copied', description: 'Shareable meeting agenda link copied to clipboard.' });
+              }}
+            >
+              <Share2 className="w-3 h-3 mr-1" /> Share Agenda
+            </Button>
           </div>
         </div>
         <CardDescription>

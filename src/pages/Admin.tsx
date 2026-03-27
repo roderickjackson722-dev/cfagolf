@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -8,7 +8,7 @@ import { useColleges } from '@/hooks/useColleges';
 import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
 import { AdminUserTable } from '@/components/admin/AdminUserTable';
 import { AdminMembershipTable } from '@/components/admin/AdminMembershipTable';
-import { AdminVisitorTable } from '@/components/admin/AdminVisitorTable';
+import { AdminAnalyticsDashboard } from '@/components/admin/AdminAnalyticsDashboard';
 import { ClippdImporter } from '@/components/admin/ClippdImporter';
 import { AdminTestimonialTable } from '@/components/admin/AdminTestimonialTable';
 import { CollegeBulkImporter } from '@/components/admin/CollegeBulkImporter';
@@ -119,8 +119,8 @@ const Admin = () => {
                 Data Import
               </TabsTrigger>
               <TabsTrigger value="visitors" className="flex items-center gap-2">
-                <Eye className="w-4 h-4" />
-                Visitors
+                <BarChart3 className="w-4 h-4" />
+                Analytics
               </TabsTrigger>
               <TabsTrigger value="testimonials" className="flex items-center gap-2">
                 <MessageSquare className="w-4 h-4" />
@@ -231,20 +231,20 @@ const Admin = () => {
               <ClippdImporter />
             </TabsContent>
 
-            {/* Site Visitors Tab */}
+            {/* Analytics Tab */}
             <TabsContent value="visitors">
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-2">
-                    <Eye className="w-5 h-5 text-primary" />
-                    <CardTitle>Site Visitors</CardTitle>
+                    <BarChart3 className="w-5 h-5 text-primary" />
+                    <CardTitle>Site Analytics</CardTitle>
                   </div>
                   <CardDescription>
-                    View recent site visitors, their locations, and browsing activity. Emails are sent automatically for each new visitor.
+                    Website traffic analytics, visitor locations, and browsing activity.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <AdminVisitorTable />
+                  <AdminAnalyticsDashboard />
                 </CardContent>
               </Card>
             </TabsContent>
