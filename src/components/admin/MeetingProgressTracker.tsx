@@ -171,6 +171,24 @@ export function MeetingProgressTracker({ userId, userName }: MeetingProgressTrac
                 {completedActionItems}/{totalActionItems} Tasks
               </Badge>
             )}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                const url = `${window.location.origin}/meeting-agenda/${userId}`;
+                navigator.clipboard.writeText(url);
+                toast({ title: 'Link Copied', description: 'Shareable meeting agenda link copied to clipboard.' });
+              }}
+            >
+              <Share2 className="w-3 h-3 mr-1" /> Share Agenda
+            </Button>
+          </div>
+            {totalActionItems > 0 && (
+              <Badge variant="outline">
+                <ListChecks className="w-3 h-3 mr-1" />
+                {completedActionItems}/{totalActionItems} Tasks
+              </Badge>
+            )}
           </div>
         </div>
         <CardDescription>
