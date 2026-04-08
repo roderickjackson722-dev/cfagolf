@@ -33,7 +33,6 @@ const portalFeatures = [
   "Scholarship Calculator",
   "Recruiting Timeline & Worksheets",
   "LPGA & PGA Pro Webinars",
-  "Free Toolkit after 6 months",
 ];
 
 const consultingFeatures = [
@@ -48,7 +47,7 @@ const consultingFeatures = [
   "Campus Visit Preparation & Coaching",
   "Transfer Portal Guidance",
   "Priority Email Support",
-  "Free Toolkit included",
+  "Recruiting Toolkit included",
 ];
 
 type TierCard = {
@@ -79,9 +78,8 @@ const tiers: TierCard[] = [
   {
     title: "Annual Portal Membership",
     description: "Full platform access & recruiting tools",
-    price: "$24.99",
-    priceSuffix: "/mo",
-    priceNote: "Monthly subscription • Cancel anytime",
+    price: "$299",
+    priceNote: "One-time annual purchase",
     features: portalFeatures,
     ctaLabel: "Subscribe Now",
     ctaLink: "/checkout?plan=digital",
@@ -312,7 +310,7 @@ const Pricing = () => {
               </div>
               <div className="text-center w-20 sm:w-28">
                 <Badge variant="secondary">Portal</Badge>
-                <p className="text-[10px] text-muted-foreground mt-1">$24.99/mo</p>
+                <p className="text-[10px] text-muted-foreground mt-1">$299/yr</p>
               </div>
               <div className="text-center w-20 sm:w-28">
                 <Badge className="bg-primary text-primary-foreground">Consulting</Badge>
@@ -366,7 +364,7 @@ const Pricing = () => {
               </Link>
               <Link to="/checkout?plan=digital">
                 <Button size="lg" variant="outline" className="rounded-full font-semibold px-8">
-                  Annual Portal Membership — $24.99/mo
+                  Annual Portal Membership — $299
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>

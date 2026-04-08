@@ -68,9 +68,8 @@ export function PricingTierCards() {
             Full platform access & recruiting tools
           </CardDescription>
           <div className="pt-6">
-            <span className="text-5xl font-bold text-foreground">$24.99</span>
-            <span className="text-lg text-muted-foreground">/mo</span>
-            <p className="text-sm text-muted-foreground mt-2">Monthly subscription • Cancel anytime</p>
+            <span className="text-5xl font-bold text-foreground">$299</span>
+            <p className="text-sm text-muted-foreground mt-2">One-time annual purchase</p>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">

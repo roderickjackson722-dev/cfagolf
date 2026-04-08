@@ -27,12 +27,12 @@ const PROGRAMS = {
     isSubscription: false,
   },
   digital: {
-    price: 24.99,
+    price: 299,
     label: 'Annual Portal Membership',
     shortLabel: 'CFA Annual Portal Member',
     description: 'Full platform access & recruiting tools',
     programType: 'digital',
-    isSubscription: true,
+    isSubscription: false,
   },
 } as const;
 
@@ -360,7 +360,7 @@ const Checkout = () => {
                       </span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
-                      {program.isSubscription ? 'Monthly subscription' : '12 coaching sessions included'}
+                      {program.programType === 'consulting' ? '12 coaching sessions included' : 'One-time annual purchase'}
                     </p>
                     {getActiveDiscount() > 0 && (
                       <p className="text-sm text-primary font-medium mt-1">

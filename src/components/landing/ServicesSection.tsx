@@ -125,9 +125,8 @@ export function ServicesSection() {
                 Full platform access & recruiting tools
               </CardDescription>
               <div className="pt-4">
-                <span className="text-4xl font-bold text-foreground">$24.99</span>
-                <span className="text-lg text-muted-foreground">/mo</span>
-                <p className="text-sm text-muted-foreground mt-1">Cancel anytime</p>
+                <span className="text-4xl font-bold text-foreground">$299</span>
+                <p className="text-sm text-muted-foreground mt-1">One-time annual purchase</p>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
