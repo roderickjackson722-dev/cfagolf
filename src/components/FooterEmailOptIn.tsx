@@ -53,7 +53,7 @@ export function FooterEmailOptIn() {
     <div>
       <h4 className="font-semibold mb-2 text-white">Get Free Eligibility Checklist</h4>
       <p className="text-white/60 text-sm mb-3">
-        Subscribe for monthly recruiting tips & a free PDF download.
+        Subscribe for recruiting tips & a free PDF download.
       </p>
       <form onSubmit={handleSubmit} className="flex gap-2">
         <Input

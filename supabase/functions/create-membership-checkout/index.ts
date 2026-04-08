@@ -15,10 +15,10 @@ const PROGRAMS: Record<string, { priceId: string; amount: number; name: string; 
     mode: "payment",
   },
   digital: {
-    priceId: "price_1TAf5QLXW44Q7xfEdizOawqg",
-    amount: 2499, // $24.99/mo
+    priceId: "price_1ABC123xyzYourNew299PriceID",
+    amount: 29900, // $299/year
     name: "CFA Golf Annual Portal Membership",
-    mode: "subscription",
+    mode: "payment",
   },
 };
 

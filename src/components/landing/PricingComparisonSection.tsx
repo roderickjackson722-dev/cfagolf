@@ -21,7 +21,6 @@ const digitalFeatures = [
   "Scholarship Calculator",
   "Recruiting Timeline & Worksheets",
   "LPGA & PGA Pro Webinars",
-  "Free Toolkit after 6 months",
 ];
 
 const consultingFeatures = [
@@ -36,7 +35,7 @@ const consultingFeatures = [
   "Campus Visit Preparation & Coaching",
   "Transfer Portal Guidance",
   "Priority Email Support",
-  "Free Toolkit included",
+  "Recruiting Toolkit included",
 ];
 
 type PricingCard = {
@@ -67,9 +66,8 @@ const cards: PricingCard[] = [
   {
     title: "Annual Portal Membership",
     description: "Full platform access & recruiting tools",
-    price: "$24.99",
-    priceSuffix: "/mo",
-    priceNote: "Monthly subscription • Cancel anytime",
+    price: "$299",
+    priceNote: "One-time annual purchase",
     features: digitalFeatures,
     ctaLabel: "Subscribe Now",
     ctaLink: "/checkout?plan=digital",
