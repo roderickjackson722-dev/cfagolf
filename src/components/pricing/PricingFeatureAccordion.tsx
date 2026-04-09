@@ -211,7 +211,7 @@ export function PricingFeatureAccordion() {
         </div>
         <div className="text-center w-24 sm:w-32">
           <Badge variant="secondary">Annual Portal</Badge>
-          <p className="text-[10px] text-muted-foreground mt-1">$24.99/mo</p>
+          <p className="text-[10px] text-muted-foreground mt-1">$299/yr</p>
         </div>
       </div>
 
