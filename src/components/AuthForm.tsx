@@ -15,7 +15,7 @@ import { ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Check, Users } from 'l
 const currentYear = new Date().getFullYear();
 const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1);
 
-const MEMBERSHIP_PRICE = 1999.99;
+const MEMBERSHIP_PRICE = 2499;
 
 export function AuthForm() {
   const navigate = useNavigate();
