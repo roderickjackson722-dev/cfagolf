@@ -223,6 +223,7 @@ export function AuthForm() {
         body: { 
           promoCode: promoApplied ? promoCode : null,
           referralCode: referralApplied && !promoApplied ? referralCode : null,
+          programType: 'consulting',
         },
       });
 
