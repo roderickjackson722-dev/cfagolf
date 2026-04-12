@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Check, Video, Mail, Target, MapPin, ChevronDown } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
+import { Check, Video, Mail, Target, MapPin, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const standardFeatures = [
   "30-min Zoom review",
@@ -69,6 +72,25 @@ const faqs = [
 ];
 
 const Review = () => {
+  const [loading, setLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+  const isSuccess = searchParams.get("success") === "true";
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-review-checkout");
+      if (error) throw error;
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (err: any) {
+      toast({ title: "Checkout error", description: err.message, variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       {/* Header */}
@@ -77,6 +99,13 @@ const Review = () => {
           <p className="text-lg font-semibold tracking-wide">College Fairway Advisors</p>
         </div>
       </header>
+
+      {/* Success Banner */}
+      {isSuccess && (
+        <div className="bg-[#1E3F20] text-white py-4 px-4 text-center">
+          <p className="text-lg font-semibold">✅ Payment received! Scroll down to book your session.</p>
+        </div>
+      )}
 
       {/* Hero */}
       <section className="bg-white py-12 md:py-16 px-4">
@@ -112,13 +141,13 @@ const Review = () => {
           {/* eBook Owner */}
           <Card className="border-2 border-[#1E3F20] bg-white relative shadow-lg">
             <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1E3F20] text-white hover:bg-[#1E3F20] text-xs px-3 py-1">
-              Recommended
+              Your eBook Owner Price
             </Badge>
             <CardContent className="p-8">
               <p className="text-sm font-semibold uppercase tracking-wider text-[#1E3F20] mb-2">eBook Owner Price</p>
               <p className="text-4xl font-bold text-[#1A2B4C] mb-1">$149</p>
               <p className="text-sm text-[#1E3F20] font-medium mb-6">Save $50 — Exclusive link for Playbook owners</p>
-              <ul className="space-y-3">
+              <ul className="space-y-3 mb-8">
                 {ebookFeatures.map((f, i) => (
                   <li key={f} className="flex items-start gap-2 text-foreground">
                     <Check className={`h-5 w-5 mt-0.5 shrink-0 ${i === ebookFeatures.length - 1 ? "text-[#1E3F20]" : "text-[#1E3F20]/70"}`} />
@@ -126,6 +155,13 @@ const Review = () => {
                   </li>
                 ))}
               </ul>
+              <Button
+                onClick={handleCheckout}
+                disabled={loading}
+                className="w-full bg-[#1E3F20] hover:bg-[#1E3F20]/90 text-white text-lg py-6"
+              >
+                {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Pay $149 & Book Your Session"}
+              </Button>
             </CardContent>
           </Card>
         </div>
