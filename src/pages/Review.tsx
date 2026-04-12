@@ -195,15 +195,15 @@ const Review = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-[#1A2B4C] mb-8 font-serif">
             Book Your Session Now
           </h2>
-          {/* Calendly placeholder */}
-          <div className="bg-white border border-border rounded-lg p-8 md:p-12 mb-4 min-h-[400px] flex items-center justify-center">
-            <div className="text-center text-muted-foreground">
-              <p className="text-lg font-medium mb-2">Calendly Widget</p>
-              <p className="text-sm">Replace this div with your Calendly inline embed:</p>
-              <code className="text-xs bg-muted px-2 py-1 rounded mt-2 inline-block">
-                https://calendly.com/YOUR-LINK/30min
-              </code>
-            </div>
+          <div className="bg-white border border-border rounded-lg mb-4 min-h-[650px] overflow-hidden">
+            <iframe
+              src="https://calendly.com/contact-cfa/30min"
+              width="100%"
+              height="650"
+              frameBorder="0"
+              title="Book your Coach's Eye Review session"
+              className="rounded-lg"
+            />
           </div>
           <p className="text-sm text-muted-foreground">
             You'll receive a confirmation email with Zoom link immediately after booking.
