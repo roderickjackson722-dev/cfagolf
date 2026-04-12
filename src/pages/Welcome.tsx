@@ -42,7 +42,7 @@ const Welcome = () => {
         <section className="relative py-16 md:py-24 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
           <div className="container max-w-3xl mx-auto px-4 relative text-center space-y-6">
-            <img src={cfaLogo} alt="CFA Golf" className="w-20 h-20 mx-auto object-contain" />
+            <img src={cfaLogo} alt="CFA Golf" className="h-24 w-auto mx-auto object-contain" />
             <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground">
               Welcome to the CFA Family!
             </h1>

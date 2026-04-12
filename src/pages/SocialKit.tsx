@@ -195,7 +195,7 @@ export default function SocialKit() {
       <header className="bg-primary text-primary-foreground py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-4 mb-4">
-            <img src={cfaLogo} alt="CFA" className="w-12 h-12 object-contain" />
+            <img src={cfaLogo} alt="CFA" className="h-16 w-auto object-contain" />
             <div>
               <h1 className="font-display text-2xl md:text-3xl font-bold">Social Media Kit</h1>
               <p className="text-primary-foreground/80">Ready-to-use assets and captions for sharing CFA</p>

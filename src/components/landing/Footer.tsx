@@ -13,11 +13,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <img src={cfaLogo} alt="CFA" className="w-14 h-14 object-contain" />
-              <div>
-                <h3 className="font-display text-xl font-bold">College Fairway Advisors</h3>
-                <p className="text-white/60 text-sm">Your path to college golf</p>
-              </div>
+              <img src={cfaLogo} alt="CFA" className="h-16 w-auto object-contain" />
             </div>
             <p className="text-white/70 mb-4 max-w-md">
               Expert guidance for junior golfers and their families navigating the college golf recruiting process.

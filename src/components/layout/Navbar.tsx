@@ -28,13 +28,8 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5">
-            <img src={cfaLogo} alt="CFA" className="w-14 h-14 object-contain" />
-            <div className="hidden sm:block">
-              <span className="font-display text-lg font-bold text-foreground leading-tight block">
-                College Fairway Advisors
-              </span>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src={cfaLogo} alt="CFA" className="h-16 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}

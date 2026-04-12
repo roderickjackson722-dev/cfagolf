@@ -59,7 +59,7 @@ export default function SocialLanding() {
         </div>
 
         <div className="relative container mx-auto px-4 py-20 md:py-32 text-center space-y-6">
-          <img src={cfaLogo} alt="College Fairway Advisors" className="w-20 h-20 mx-auto object-contain" />
+          <img src={cfaLogo} alt="College Fairway Advisors" className="h-28 w-auto mx-auto object-contain" />
           
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-sm">
             <Star className="w-4 h-4 fill-cfa-gold text-cfa-gold" />

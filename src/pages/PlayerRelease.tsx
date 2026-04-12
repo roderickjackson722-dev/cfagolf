@@ -119,7 +119,7 @@ const PlayerRelease = () => {
         <div className="container max-w-3xl mx-auto px-4">
           {/* Header */}
           <div className="text-center mb-8 space-y-4">
-            <img src={cfaLogo} alt="CFA" className="w-16 h-16 mx-auto object-contain" />
+            <img src={cfaLogo} alt="CFA" className="h-24 w-auto mx-auto object-contain" />
             <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground">
               Player Profile Release & Consent Form
             </h1>
