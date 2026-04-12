@@ -43,6 +43,7 @@ import NotFound from "./pages/NotFound";
 import Unsubscribe from "./pages/Unsubscribe";
 import Coaching from "./pages/Coaching";
 import MeetingAgenda from "./pages/MeetingAgenda";
+import Review from "./pages/Review";
 
 
 const queryClient = new QueryClient();
