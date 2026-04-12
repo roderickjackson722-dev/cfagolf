@@ -43,6 +43,7 @@ import NotFound from "./pages/NotFound";
 import Unsubscribe from "./pages/Unsubscribe";
 import Coaching from "./pages/Coaching";
 import MeetingAgenda from "./pages/MeetingAgenda";
+import Review from "./pages/Review";
 
 
 const queryClient = new QueryClient();
@@ -99,6 +100,7 @@ const App = () => (
             <Route path="/shop/*" element={<Navigate to="/toolkit" replace />} />
             <Route path="/coaching" element={<Coaching />} />
             <Route path="/meeting-agenda/:userId" element={<MeetingAgenda />} />
+            <Route path="/review" element={<Review />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
