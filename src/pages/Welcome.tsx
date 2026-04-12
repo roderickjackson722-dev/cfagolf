@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { usePlayerRelease } from '@/hooks/usePlayerRelease';
 import { Navigate } from 'react-router-dom';
 import { Calendar, ExternalLink, CheckCircle2, GraduationCap, Users, Target, BarChart3 } from 'lucide-react';
-import cfaLogo from '@/assets/cfa-logo.png';
+import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 const CALENDLY_LINK = "https://calendly.com/contact-cfa/30min";
 

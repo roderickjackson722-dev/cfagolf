@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
-import cfaLogo from '@/assets/cfa-logo.png';
+import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 const SITE_URL = 'https://cfagolf.com';
 

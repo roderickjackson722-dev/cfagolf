@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Switch } from '@/components/ui/switch';
 import { toast } from '@/hooks/use-toast';
 import { CheckCircle2, FileText, Shield, Camera, PenLine, Loader2 } from 'lucide-react';
-import cfaLogo from '@/assets/cfa-logo.png';
+import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 const PlayerRelease = () => {
   const { user, loading, hasPaidAccess, profile } = useAuth();

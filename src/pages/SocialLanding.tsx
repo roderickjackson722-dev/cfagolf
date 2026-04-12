@@ -2,7 +2,7 @@ import { ArrowRight, Calendar, Star, Target, Users, BarChart3, GraduationCap, Bo
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
-import cfaLogo from '@/assets/cfa-logo.png';
+import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 

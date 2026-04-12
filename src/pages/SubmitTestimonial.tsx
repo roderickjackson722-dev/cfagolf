@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Star, Heart, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import cfaLogo from '@/assets/cfa-logo.png';
+import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 export default function SubmitTestimonial() {
   const [name, setName] = useState('');
