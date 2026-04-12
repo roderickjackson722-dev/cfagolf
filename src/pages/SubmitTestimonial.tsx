@@ -58,7 +58,7 @@ export default function SubmitTestimonial() {
       <main className="container mx-auto px-4 py-12 max-w-2xl">
         {/* Header */}
         <div className="text-center mb-10">
-          <img src={cfaLogo} alt="CFA" className="w-20 h-20 object-contain mx-auto mb-4" />
+          <img src={cfaLogo} alt="CFA" className="h-24 w-auto object-contain mx-auto mb-4" />
           <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">
             Share Your <span className="text-primary">CFA Experience</span>
           </h1>
