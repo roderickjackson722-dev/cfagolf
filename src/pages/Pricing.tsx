@@ -128,10 +128,11 @@ const compareCategories: CompareCategory[] = [
   {
     category: "Guides & Templates",
     features: [
-      { title: "Recruiting Roadmap Guide", description: "Step-by-step guide through the recruiting process.", toolkit: true, portal: false, consulting: true },
-      { title: "Coach Email Templates", description: "Proven email templates for reaching out to coaches.", toolkit: true, portal: false, consulting: true },
-      { title: "Athlete Resume Builder", description: "Create a professional athletic resume.", toolkit: true, portal: false, consulting: true },
-      { title: "The Recruiting Timeline (Masterclass)", description: "Written masterclass covering the full timeline.", toolkit: true, portal: false, consulting: true },
+      { title: "4 Copy-and-Paste Email Templates", description: "Introduction, follow-up, tournament update, and coach reply scripts.", toolkit: true, portal: false, consulting: true },
+      { title: "Golf Resume Template", description: "A one-page profile coaches actually open.", toolkit: true, portal: false, consulting: true },
+      { title: "60-Second Highlight Reel Formula", description: "Structure a highlight video coaches will watch.", toolkit: true, portal: false, consulting: true },
+      { title: "Target School List Guide", description: "Find the right programs for your game and goals.", toolkit: true, portal: false, consulting: true },
+      { title: "4-Year Recruiting Timeline", description: "Exactly what to do — Freshman through Senior year.", toolkit: true, portal: false, consulting: true },
     ],
   },
   {
