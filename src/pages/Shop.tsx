@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import {
-  FileText, Mail, UserCircle, Calendar, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play, Archive
+  FileText, Mail, UserCircle, Calendar, ShoppingCart, CheckCircle, Lock, ArrowRight, Loader2, BookOpen, Download, Play, Archive, Target, Video
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { downloadToolkitBundle } from '@/lib/toolkitBundle';
@@ -29,8 +29,6 @@ const Shop = () => {
   const [verifying, setVerifying] = useState(false);
   const [isBundling, setIsBundling] = useState(false);
 
-  const bundlePrice = products.length > 0 ? products[0].price_cents : 9900;
-
   // Handle purchase verification on return
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
@@ -41,7 +39,7 @@ const Shop = () => {
         .then((result) => {
           if (result?.paid) {
             if (user) {
-              toast.success('Purchase successful! You now have full access to the Recruiting Toolkit.');
+              toast.success('Purchase successful! You now have full access to the ebook.');
             } else {
               setGuestPurchaseSuccess(true);
             }
@@ -104,12 +102,15 @@ const Shop = () => {
           </div>
         )}
 
-            <Badge variant="secondary" className="mb-4">Digital Products</Badge>
+            <Badge variant="secondary" className="mb-4">Digital Download — Ebook</Badge>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-              The CFA Recruiting Toolkit
+              Want to Play College Golf?
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">
-              Everything you need to navigate the college golf recruiting process — templates, guides, and a full written course. One purchase, lifetime access.
+            <p className="text-lg text-muted-foreground mb-2">
+              Here's Your First Step.
+            </p>
+            <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Stop guessing what coaches want to see. This is the exact playbook College Fairway Advisors uses with private clients — now in a $25 download.
             </p>
 
             {!loading && (
@@ -128,7 +129,7 @@ const Shop = () => {
                       setIsBundling(true);
                       try {
                         await downloadToolkitBundle();
-                        toast.success('Toolkit ZIP downloaded!');
+                        toast.success('Ebook ZIP downloaded!');
                       } catch {
                         toast.error('Failed to generate ZIP');
                       } finally {
@@ -146,8 +147,8 @@ const Shop = () => {
               ) : (
                 <div className="space-y-4">
                   <div className="text-center">
-                    <span className="text-4xl font-bold text-foreground">${(bundlePrice / 100).toFixed(0)}</span>
-                    <span className="text-muted-foreground ml-2">one-time</span>
+                    <span className="text-4xl font-bold text-foreground">$25</span>
+                    <span className="text-muted-foreground ml-2">one-time · instant download</span>
                   </div>
 
                   {!user && (
@@ -171,15 +172,16 @@ const Shop = () => {
                     {isPurchasing ? (
                       <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Processing...</>
                     ) : (
-                      <><ShoppingCart className="w-5 h-5 mr-2" /> Buy the Toolkit</>
+                      <><ShoppingCart className="w-5 h-5 mr-2" /> Buy the Ebook — $25</>
                     )}
                   </Button>
 
                   <p className="text-sm text-muted-foreground">
                     {user
-                      ? 'Also included free for Annual Portal Members after 6 months & all Consulting members'
+                      ? 'Also included free for all Consulting members'
                       : 'No account required — download links sent to your email'}
                   </p>
+                  <p className="text-xs text-muted-foreground italic">Less than a sleeve of Pro V1s.</p>
                 </div>
               )
             )}
@@ -188,76 +190,57 @@ const Shop = () => {
 
         <Separator />
 
-        {/* Products Grid */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-center mb-10">
-              What's Inside the Toolkit
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {products.map((product) => {
-                const Icon = getProductIcon(product.icon_name);
-                return (
-                  <Card key={product.id} className="hover:shadow-lg transition-shadow border-border/50">
-                    <CardHeader className="pb-3">
-                      <div className="flex items-start gap-4">
-                        <div className={`w-12 h-12 rounded-xl ${product.bg_color} flex items-center justify-center flex-shrink-0`}>
-                          <Icon className={`w-6 h-6 ${product.color}`} />
-                        </div>
-                        <div>
-                          <Badge variant="outline" className="mb-2 text-xs">{product.subtitle}</Badge>
-                          <CardTitle className="text-lg">{product.title}</CardTitle>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-sm mb-4">{product.description}</CardDescription>
-                      {hasToolkitAccess ? (
-                        <Link to={product.route}>
-                          <Button variant="outline" className="w-full">
-                            {product.product_key === 'course' ? (
-                              <><BookOpen className="w-4 h-4 mr-2" /> View &amp; Download PDF</>
-                            ) : (
-                              <><Download className="w-4 h-4 mr-2" /> Access Now</>
-                            )}
-                          </Button>
-                        </Link>
-                      ) : (
-                        <>
-                          <Button variant="outline" disabled className="w-full">
-                            <Lock className="w-4 h-4 mr-2" /> Purchase to Unlock
-                          </Button>
-                          <ProductPreview productKey={product.product_key} />
-                        </>
-                      )}
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
+        {/* Built for 9th-12th graders */}
+        <section className="py-12 bg-muted/20">
+          <div className="container mx-auto px-4 text-center max-w-2xl">
+            <Badge variant="outline" className="mb-3">Built for 9th–12th Graders</Badge>
+            <p className="text-muted-foreground">
+              Whether you're just starting high school or heading into senior year, the timeline and templates adapt to where you are right now.
+            </p>
           </div>
         </section>
 
-        {/* What You'll Learn */}
-        <section className="py-16 bg-muted/30">
+        {/* What's Inside */}
+        <section className="py-16">
           <div className="container mx-auto px-4 max-w-3xl">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-center mb-10">
-              What You'll Learn
+              Inside You'll Get
             </h2>
             <div className="space-y-4">
               {[
-                { icon: BookOpen, text: "How to build a compelling highlight reel that gets coaches' attention" },
-                { icon: Mail, text: "Proven email templates for every stage of coach outreach" },
-                { icon: UserCircle, text: "How to create an athlete resume that stands out" },
-                { icon: FileText, text: "Step-by-step target school list building methodology" },
-                { icon: Calendar, text: "Complete freshman-to-senior recruiting timeline walkthrough" },
+                { icon: Mail, emoji: "📧", text: "4 Copy-and-Paste Email Templates", desc: "Introduction, follow-up, tournament update, and coach reply scripts. Just add your name and hit send." },
+                { icon: FileText, emoji: "📄", text: "The Golf Resume Template", desc: "A one-page profile coaches actually open. Pre-formatted for your stats, scores, and video links." },
+                { icon: Video, emoji: "🎥", text: "The 60-Second Highlight Reel Formula", desc: "Learn exactly what to include and how to structure a highlight video that coaches will watch." },
+                { icon: Target, emoji: "🎯", text: "How to Build a Target School List That Fits", desc: "Find the right programs for your game, academics, and goals." },
+                { icon: Calendar, emoji: "📅", text: "A 4-Year Timeline", desc: "Exactly what to do — Freshman through Senior year. Never miss a critical recruiting window." },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border/50">
-                  <item.icon className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                  <p className="text-foreground">{item.text}</p>
+                <div key={i} className="flex items-start gap-4 p-5 bg-card rounded-xl border border-border/50 hover:shadow-md transition-shadow">
+                  <span className="text-2xl flex-shrink-0">{item.emoji}</span>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">{item.text}</h3>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
+
+            {/* Bottom CTA */}
+            {!loading && !hasToolkitAccess && (
+              <div className="text-center mt-12">
+                <Button
+                  onClick={handlePurchase}
+                  disabled={isPurchasing}
+                  size="lg"
+                  className="h-14 px-10 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90"
+                >
+                  {isPurchasing ? (
+                    <><Loader2 className="w-5 h-5 animate-spin mr-2" /> Processing...</>
+                  ) : (
+                    <><ShoppingCart className="w-5 h-5 mr-2" /> Get Instant Access — $25</>
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
         </section>
       </main>
