@@ -17,11 +17,12 @@ const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 
 /* ── Tier card data ── */
 const toolkitFeatures = [
-  "Recruiting Roadmap Guide",
-  "Coach Email Templates",
-  "Athlete Resume Builder",
-  "The Recruiting Timeline (Written Masterclass)",
-  "Lifetime Access",
+  "4 Copy-and-Paste Email Templates",
+  "Golf Resume Template",
+  "60-Second Highlight Reel Formula",
+  "How to Build a Target School List",
+  "4-Year Recruiting Timeline",
+  "Instant Download • Lifetime Access",
 ];
 
 const portalFeatures = [
@@ -47,7 +48,7 @@ const consultingFeatures = [
   "Campus Visit Preparation & Coaching",
   "Transfer Portal Guidance",
   "Priority Email Support",
-  "Recruiting Toolkit included",
+  "Ebook included",
 ];
 
 type TierCard = {
@@ -66,12 +67,12 @@ type TierCard = {
 
 const tiers: TierCard[] = [
   {
-    title: "Recruiting Toolkit",
-    description: "Guides, templates & masterclass",
-    price: "$99",
-    priceNote: "One-time purchase • Lifetime access",
+    title: "Want to Play College Golf?",
+    description: "The complete recruiting playbook ebook",
+    price: "$25",
+    priceNote: "One-time purchase • Instant download",
     features: toolkitFeatures,
-    ctaLabel: "Buy the Toolkit",
+    ctaLabel: "Get the Ebook",
     ctaLink: "/toolkit",
     icon: Package,
   },
@@ -127,10 +128,11 @@ const compareCategories: CompareCategory[] = [
   {
     category: "Guides & Templates",
     features: [
-      { title: "Recruiting Roadmap Guide", description: "Step-by-step guide through the recruiting process.", toolkit: true, portal: false, consulting: true },
-      { title: "Coach Email Templates", description: "Proven email templates for reaching out to coaches.", toolkit: true, portal: false, consulting: true },
-      { title: "Athlete Resume Builder", description: "Create a professional athletic resume.", toolkit: true, portal: false, consulting: true },
-      { title: "The Recruiting Timeline (Masterclass)", description: "Written masterclass covering the full timeline.", toolkit: true, portal: false, consulting: true },
+      { title: "4 Copy-and-Paste Email Templates", description: "Introduction, follow-up, tournament update, and coach reply scripts.", toolkit: true, portal: false, consulting: true },
+      { title: "Golf Resume Template", description: "A one-page profile coaches actually open.", toolkit: true, portal: false, consulting: true },
+      { title: "60-Second Highlight Reel Formula", description: "Structure a highlight video coaches will watch.", toolkit: true, portal: false, consulting: true },
+      { title: "Target School List Guide", description: "Find the right programs for your game and goals.", toolkit: true, portal: false, consulting: true },
+      { title: "4-Year Recruiting Timeline", description: "Exactly what to do — Freshman through Senior year.", toolkit: true, portal: false, consulting: true },
     ],
   },
   {
@@ -305,8 +307,8 @@ const Pricing = () => {
             <div className="grid grid-cols-[1fr_auto_auto_auto] gap-3 items-center mb-2 px-4 py-3 bg-muted/50 rounded-lg sticky top-0 z-10">
               <span className="font-semibold text-foreground text-sm">Feature</span>
               <div className="text-center w-20 sm:w-28">
-                <Badge variant="outline">Toolkit</Badge>
-                <p className="text-[10px] text-muted-foreground mt-1">$99</p>
+                <Badge variant="outline">Ebook</Badge>
+                <p className="text-[10px] text-muted-foreground mt-1">$25</p>
               </div>
               <div className="text-center w-20 sm:w-28">
                 <Badge variant="secondary">Portal</Badge>

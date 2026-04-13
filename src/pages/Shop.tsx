@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { downloadToolkitBundle } from '@/lib/toolkitBundle';
+import ebookCover from '@/assets/ebook-cover.png';
 
 const Shop = () => {
   const { user } = useAuth();
@@ -78,10 +79,22 @@ const Shop = () => {
       <main className="flex-1">
         {/* Hero */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/10">
-          <div className="container mx-auto px-4 text-center max-w-3xl">
+          <div className="container mx-auto px-4 max-w-5xl">
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              {/* Cover Image */}
+              <div className="flex justify-center">
+                <img
+                  src={ebookCover}
+                  alt="Want to Play College Golf? Ebook Cover"
+                  className="w-full max-w-sm rounded-2xl shadow-2xl"
+                />
+              </div>
+
+              {/* Text + CTA */}
+              <div className="text-center md:text-left">
         {/* Guest purchase success banner */}
         {guestPurchaseSuccess && (
-          <div className="mb-8 mx-auto max-w-xl rounded-2xl border border-emerald-200 bg-emerald-50 dark:bg-emerald-950/30 dark:border-emerald-800 p-6 text-center space-y-3">
+          <div className="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50 dark:bg-emerald-950/30 dark:border-emerald-800 p-6 text-center space-y-3">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900 mx-auto">
               <CheckCircle className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
             </div>
@@ -109,7 +122,7 @@ const Shop = () => {
             <p className="text-lg text-muted-foreground mb-2">
               Here's Your First Step.
             </p>
-            <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-base text-muted-foreground mb-8">
               Stop guessing what coaches want to see. This is the exact playbook College Fairway Advisors uses with private clients — now in a $25 download.
             </p>
 
@@ -185,6 +198,8 @@ const Shop = () => {
                 </div>
               )
             )}
+              </div>
+            </div>
           </div>
         </section>
 
