@@ -17,11 +17,12 @@ const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 
 /* ── Tier card data ── */
 const toolkitFeatures = [
-  "Recruiting Roadmap Guide",
-  "Coach Email Templates",
-  "Athlete Resume Builder",
-  "The Recruiting Timeline (Written Masterclass)",
-  "Lifetime Access",
+  "4 Copy-and-Paste Email Templates",
+  "Golf Resume Template",
+  "60-Second Highlight Reel Formula",
+  "How to Build a Target School List",
+  "4-Year Recruiting Timeline",
+  "Instant Download • Lifetime Access",
 ];
 
 const portalFeatures = [
@@ -47,7 +48,7 @@ const consultingFeatures = [
   "Campus Visit Preparation & Coaching",
   "Transfer Portal Guidance",
   "Priority Email Support",
-  "Recruiting Toolkit included",
+  "Ebook included",
 ];
 
 type TierCard = {
@@ -66,12 +67,12 @@ type TierCard = {
 
 const tiers: TierCard[] = [
   {
-    title: "Recruiting Toolkit",
-    description: "Guides, templates & masterclass",
-    price: "$99",
-    priceNote: "One-time purchase • Lifetime access",
+    title: "Want to Play College Golf?",
+    description: "The complete recruiting playbook ebook",
+    price: "$25",
+    priceNote: "One-time purchase • Instant download",
     features: toolkitFeatures,
-    ctaLabel: "Buy the Toolkit",
+    ctaLabel: "Get the Ebook",
     ctaLink: "/toolkit",
     icon: Package,
   },
