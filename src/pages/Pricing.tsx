@@ -307,8 +307,8 @@ const Pricing = () => {
             <div className="grid grid-cols-[1fr_auto_auto_auto] gap-3 items-center mb-2 px-4 py-3 bg-muted/50 rounded-lg sticky top-0 z-10">
               <span className="font-semibold text-foreground text-sm">Feature</span>
               <div className="text-center w-20 sm:w-28">
-                <Badge variant="outline">Toolkit</Badge>
-                <p className="text-[10px] text-muted-foreground mt-1">$99</p>
+                <Badge variant="outline">Ebook</Badge>
+                <p className="text-[10px] text-muted-foreground mt-1">$25</p>
               </div>
               <div className="text-center w-20 sm:w-28">
                 <Badge variant="secondary">Portal</Badge>
