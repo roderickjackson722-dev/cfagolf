@@ -370,7 +370,7 @@ const Pricing = () => {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Link to="/toolkit">
+              <Link to="/ebook">
                 <Button size="lg" variant="outline" className="rounded-full font-semibold px-8">
                   Recruiting Toolkit — $99
                   <ArrowRight className="ml-2 w-5 h-5" />
