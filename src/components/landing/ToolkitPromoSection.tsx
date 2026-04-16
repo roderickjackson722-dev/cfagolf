@@ -55,7 +55,7 @@ export const ToolkitPromoSection = () => {
             <p className="text-sm text-muted-foreground mb-6">
               Instant download. Less than a sleeve of Pro V1s.
             </p>
-            <Link to="/toolkit">
+            <Link to="/ebook">
               <Button size="lg" className="h-14 px-10 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90">
                 Get the Ebook
                 <ArrowRight className="w-5 h-5 ml-2" />
