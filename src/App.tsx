@@ -91,13 +91,14 @@ const App = () => (
             <Route path="/tools/transfer-guide" element={<TransferGuide />} />
             <Route path="/flyer/transfer" element={<TransferFlyer />} />
             <Route path="/player-release" element={<PlayerRelease />} />
-            <Route path="/toolkit" element={<Shop />} />
-            <Route path="/toolkit/roadmap" element={<RecruitingRoadmap />} />
-            <Route path="/toolkit/templates" element={<EmailTemplates />} />
-            <Route path="/toolkit/resume" element={<AthleteResume />} />
-            <Route path="/toolkit/course" element={<RecruitingHuddle />} />
-            <Route path="/shop" element={<Navigate to="/toolkit" replace />} />
-            <Route path="/shop/*" element={<Navigate to="/toolkit" replace />} />
+            <Route path="/ebook" element={<Shop />} />
+            <Route path="/ebook/roadmap" element={<RecruitingRoadmap />} />
+            <Route path="/ebook/templates" element={<EmailTemplates />} />
+            <Route path="/ebook/resume" element={<AthleteResume />} />
+            <Route path="/ebook/course" element={<RecruitingHuddle />} />
+            <Route path="/toolkit" element={<Navigate to="/ebook" replace />} />
+            <Route path="/shop" element={<Navigate to="/ebook" replace />} />
+            <Route path="/shop/*" element={<Navigate to="/ebook" replace />} />
             <Route path="/coaching" element={<Coaching />} />
             <Route path="/meeting-agenda/:userId" element={<MeetingAgenda />} />
             <Route path="/review" element={<Review />} />

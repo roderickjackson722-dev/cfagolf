@@ -19,7 +19,7 @@ export function Navbar() {
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
     { to: '/pricing', label: 'Pricing' },
-    { to: '/toolkit', label: 'Toolkit' },
+    { to: '/ebook', label: 'E-Book' },
     { to: '/member-preview', label: 'Member Preview' },
   ];
 
