@@ -29,7 +29,7 @@ const EmailTemplates = () => {
     );
   }
 
-  if (!hasToolkitAccess) return <Navigate to="/toolkit" replace />;
+  if (!hasToolkitAccess) return <Navigate to="/ebook" replace />;
 
   const handleCopy = (text: string, id: string) => {
     navigator.clipboard.writeText(text);
@@ -43,7 +43,7 @@ const EmailTemplates = () => {
       <Navbar />
       <main className="flex-1 py-10">
         <div className="container mx-auto px-4 max-w-3xl">
-          <Link to="/toolkit" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6">
+          <Link to="/ebook" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6">
             <ArrowLeft className="w-4 h-4 mr-1" /> Back to Toolkit
           </Link>
 
