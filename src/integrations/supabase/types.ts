@@ -244,28 +244,49 @@ export type Database = {
       digital_product_purchases: {
         Row: {
           amount_paid: number | null
+          buyer_email: string | null
+          buyer_name: string | null
+          city: string | null
+          country: string | null
           created_at: string
           id: string
           product_key: string
           purchase_type: string
+          referrer_path: string | null
+          referrer_url: string | null
+          region: string | null
           stripe_session_id: string | null
           user_id: string
         }
         Insert: {
           amount_paid?: number | null
+          buyer_email?: string | null
+          buyer_name?: string | null
+          city?: string | null
+          country?: string | null
           created_at?: string
           id?: string
           product_key?: string
           purchase_type?: string
+          referrer_path?: string | null
+          referrer_url?: string | null
+          region?: string | null
           stripe_session_id?: string | null
           user_id: string
         }
         Update: {
           amount_paid?: number | null
+          buyer_email?: string | null
+          buyer_name?: string | null
+          city?: string | null
+          country?: string | null
           created_at?: string
           id?: string
           product_key?: string
           purchase_type?: string
+          referrer_path?: string | null
+          referrer_url?: string | null
+          region?: string | null
           stripe_session_id?: string | null
           user_id?: string
         }
