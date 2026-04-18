@@ -53,6 +53,28 @@ serve(async (req) => {
 
       const metaUserId = session.metadata?.user_id;
       const buyerEmail = session.metadata?.buyer_email || session.customer_details?.email;
+      const buyerName = session.customer_details?.name || null;
+      const referrerPath = session.metadata?.referrer_path || null;
+      const referrerUrl = session.metadata?.referrer_url || null;
+
+      // Best-effort geo lookup from request IP
+      let country: string | null = null;
+      let region: string | null = null;
+      let city: string | null = null;
+      try {
+        const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0].trim();
+        if (ip) {
+          const geoRes = await fetch(`https://ipapi.co/${ip}/json/`);
+          if (geoRes.ok) {
+            const geo = await geoRes.json();
+            country = geo.country_name || null;
+            region = geo.region || null;
+            city = geo.city || null;
+          }
+        }
+      } catch (e) {
+        console.log("Geo lookup failed:", e);
+      }
 
       // Record purchase for logged-in users
       if (metaUserId && metaUserId !== "guest") {
@@ -63,8 +85,58 @@ serve(async (req) => {
             product_key: session.metadata?.product_key || "recruiting_toolkit",
             stripe_session_id: sessionId,
             purchase_type: "direct",
-            amount_paid: session.amount_total || 9900,
+            amount_paid: session.amount_total || 2500,
+            buyer_email: buyerEmail,
+            buyer_name: buyerName,
+            referrer_path: referrerPath,
+            referrer_url: referrerUrl,
+            country,
+            region,
+            city,
           }, { onConflict: "user_id,product_key" });
+      }
+
+      // Send admin sale notification
+      const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+      const productName = "Want to Play College Golf? (eBook)";
+      const amountFormatted = `$${((session.amount_total || 2500) / 100).toFixed(2)}`;
+      const saleDate = new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+
+      if (RESEND_API_KEY) {
+        try {
+          await fetch("https://api.resend.com/emails", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${RESEND_API_KEY}`,
+            },
+            body: JSON.stringify({
+              from: "CFA Golf <notifications@cfa.golf>",
+              to: ["contact@cfa.golf"],
+              subject: "New Ebook Sale! 🎉",
+              html: `
+                <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;">
+                  <h2 style="color:#166534;border-bottom:2px solid #166534;padding-bottom:10px;">New Ebook Sale!</h2>
+                  <p>New sale on College Fairway Advisors!</p>
+                  <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:20px 0;">
+                    <p style="margin:8px 0;"><strong>Product:</strong> ${productName}</p>
+                    <p style="margin:8px 0;"><strong>Buyer Email:</strong> ${buyerEmail || "Unknown"}</p>
+                    <p style="margin:8px 0;"><strong>Amount:</strong> ${amountFormatted}</p>
+                    <p style="margin:8px 0;"><strong>Sale Date:</strong> ${saleDate}</p>
+                    <p style="margin:8px 0;"><strong>Referrer Page:</strong> ${referrerPath || "Direct"}</p>
+                    <p style="margin:8px 0;"><strong>Location:</strong> ${[city, region, country].filter(Boolean).join(", ") || "Unknown"}</p>
+                  </div>
+                </div>
+              `,
+            }),
+          });
+        } catch (e) {
+          console.error("Admin sale email failed:", e);
+        }
       }
 
       // Send download links email to buyer
