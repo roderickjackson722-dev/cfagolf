@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3 } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,6 +19,7 @@ import { CoachCRM } from '@/components/admin/CoachCRM';
 import { ModuleAgenda } from '@/components/admin/ModuleAgenda';
 import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
+import { AdminSalesTable } from '@/components/admin/AdminSalesTable';
 import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
 import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
 import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
@@ -157,6 +158,10 @@ const Admin = () => {
               <TabsTrigger value="toolkit" className="flex items-center gap-2">
                 <ShoppingBag className="w-4 h-4" />
                 Toolkit
+              </TabsTrigger>
+              <TabsTrigger value="sales" className="flex items-center gap-2">
+                <DollarSign className="w-4 h-4" />
+                Sales
               </TabsTrigger>
               <TabsTrigger value="subscribers" className="flex items-center gap-2">
                 <MailPlus className="w-4 h-4" />
