@@ -385,6 +385,23 @@ const Admin = () => {
               </Card>
 
             </TabsContent>
+            {/* Sales Tab */}
+            <TabsContent value="sales">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <DollarSign className="w-5 h-5 text-primary" />
+                    <CardTitle>Sales</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Every digital product purchase, including buyer details, amount, source page, and location.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminSalesTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
             {/* Email Subscribers Tab */}
             <TabsContent value="subscribers">
               <Card>
