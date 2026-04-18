@@ -81,8 +81,10 @@ export function useDigitalProducts() {
 
   const purchaseToolkit = async (guestEmail?: string) => {
     try {
+      const referrerPath = typeof window !== 'undefined' ? window.location.pathname + window.location.search : '';
+      const referrerUrl = typeof window !== 'undefined' ? window.location.href : '';
       const { data, error } = await supabase.functions.invoke('create-toolkit-checkout', {
-        body: { email: guestEmail },
+        body: { email: guestEmail, referrerPath, referrerUrl },
       });
       if (error) throw error;
       if (data?.url) {
