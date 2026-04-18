@@ -15,7 +15,7 @@ serve(async (req) => {
   }
 
   try {
-    const { email: bodyEmail } = await req.json().catch(() => ({}));
+    const { email: bodyEmail, referrerPath, referrerUrl } = await req.json().catch(() => ({}));
 
     // Try to get authenticated user (optional)
     let userId: string | null = null;
@@ -87,6 +87,8 @@ serve(async (req) => {
         user_id: userId || "guest",
         product_key: "recruiting_toolkit",
         buyer_email: email,
+        referrer_path: (referrerPath || "").toString().slice(0, 500),
+        referrer_url: (referrerUrl || "").toString().slice(0, 500),
       },
     });
 
