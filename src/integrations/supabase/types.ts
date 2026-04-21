@@ -91,6 +91,51 @@ export type Database = {
           },
         ]
       }
+      coach_access_requests: {
+        Row: {
+          college_name: string
+          conference: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string | null
+          phone: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          title: string | null
+        }
+        Insert: {
+          college_name: string
+          conference?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message?: string | null
+          phone?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          title?: string | null
+        }
+        Update: {
+          college_name?: string
+          conference?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string | null
+          phone?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          title?: string | null
+        }
+        Relationships: []
+      }
       coach_contacts: {
         Row: {
           coach_name: string
@@ -143,6 +188,186 @@ export type Database = {
           response_received?: boolean | null
           school_name?: string
           status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      coach_favorites: {
+        Row: {
+          coach_id: string
+          created_at: string
+          golfer_email: string | null
+          golfer_name: string | null
+          golfer_user_id: string | null
+          id: string
+          notes: string | null
+        }
+        Insert: {
+          coach_id: string
+          created_at?: string
+          golfer_email?: string | null
+          golfer_name?: string | null
+          golfer_user_id?: string | null
+          id?: string
+          notes?: string | null
+        }
+        Update: {
+          coach_id?: string
+          created_at?: string
+          golfer_email?: string | null
+          golfer_name?: string | null
+          golfer_user_id?: string | null
+          id?: string
+          notes?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coach_favorites_coach_id_fkey"
+            columns: ["coach_id"]
+            isOneToOne: false
+            referencedRelation: "coaches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      coach_messages: {
+        Row: {
+          coach_id: string
+          created_at: string
+          id: string
+          is_read: boolean
+          message: string
+          sender_email: string
+          sender_name: string
+          sender_user_id: string | null
+        }
+        Insert: {
+          coach_id: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message: string
+          sender_email: string
+          sender_name: string
+          sender_user_id?: string | null
+        }
+        Update: {
+          coach_id?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          sender_email?: string
+          sender_name?: string
+          sender_user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coach_messages_coach_id_fkey"
+            columns: ["coach_id"]
+            isOneToOne: false
+            referencedRelation: "coaches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      coach_profile_views: {
+        Row: {
+          coach_id: string
+          created_at: string
+          id: string
+          view_date: string
+          viewer_full_name: string | null
+          viewer_graduation_year: number | null
+          viewer_handicap: number | null
+          viewer_session_id: string | null
+          viewer_user_id: string | null
+        }
+        Insert: {
+          coach_id: string
+          created_at?: string
+          id?: string
+          view_date?: string
+          viewer_full_name?: string | null
+          viewer_graduation_year?: number | null
+          viewer_handicap?: number | null
+          viewer_session_id?: string | null
+          viewer_user_id?: string | null
+        }
+        Update: {
+          coach_id?: string
+          created_at?: string
+          id?: string
+          view_date?: string
+          viewer_full_name?: string | null
+          viewer_graduation_year?: number | null
+          viewer_handicap?: number | null
+          viewer_session_id?: string | null
+          viewer_user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coach_profile_views_coach_id_fkey"
+            columns: ["coach_id"]
+            isOneToOne: false
+            referencedRelation: "coaches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      coaches: {
+        Row: {
+          bio: string | null
+          college_name: string
+          conference: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          is_active: boolean
+          last_login_at: string | null
+          photo_url: string | null
+          program_overview: string | null
+          recruiting_preferences: string | null
+          slug: string
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bio?: string | null
+          college_name: string
+          conference?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          is_active?: boolean
+          last_login_at?: string | null
+          photo_url?: string | null
+          program_overview?: string | null
+          recruiting_preferences?: string | null
+          slug: string
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bio?: string | null
+          college_name?: string
+          conference?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          is_active?: boolean
+          last_login_at?: string | null
+          photo_url?: string | null
+          program_overview?: string | null
+          recruiting_preferences?: string | null
+          slug?: string
+          title?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -1563,7 +1788,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "moderator" | "user"
+      app_role: "admin" | "moderator" | "user" | "coach"
       division: "D1" | "D2" | "D3" | "NAIA" | "JUCO"
       school_size: "Small" | "Medium" | "Large" | "Very Large"
     }
@@ -1693,7 +1918,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "moderator", "user"],
+      app_role: ["admin", "moderator", "user", "coach"],
       division: ["D1", "D2", "D3", "NAIA", "JUCO"],
       school_size: ["Small", "Medium", "Large", "Very Large"],
     },
