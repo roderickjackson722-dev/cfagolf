@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -23,6 +23,7 @@ import { AdminSalesTable } from '@/components/admin/AdminSalesTable';
 import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
 import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
 import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
+import { AdminCoachesTable } from '@/components/admin/AdminCoachesTable';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -170,6 +171,10 @@ const Admin = () => {
               <TabsTrigger value="newsletter" className="flex items-center gap-2">
                 <Newspaper className="w-4 h-4" />
                 Newsletter
+              </TabsTrigger>
+              <TabsTrigger value="coaches" className="flex items-center gap-2">
+                <UserCog className="w-4 h-4" />
+                Coaches
               </TabsTrigger>
             </TabsList>
 
@@ -433,6 +438,23 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminNewsletterTable />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            {/* Coaches Portal Tab */}
+            <TabsContent value="coaches">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <UserCog className="w-5 h-5 text-primary" />
+                    <CardTitle>Coaches Portal</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Create coach accounts, send magic-login links, reset passwords, and review access requests.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminCoachesTable />
                 </CardContent>
               </Card>
             </TabsContent>
