@@ -85,12 +85,19 @@ export function Navbar() {
                     <UserMenu />
                   </div>
                 ) : (
-                  <Link to="/login" className="hidden md:block">
-                    <Button className="rounded-full">
-                      <LogIn className="w-4 h-4 mr-2" />
-                      Sign In
-                    </Button>
-                  </Link>
+                  <div className="hidden md:flex items-center gap-2">
+                    <Link to="/coach/login">
+                      <Button variant="outline" className="rounded-full">
+                        Coaches
+                      </Button>
+                    </Link>
+                    <Link to="/login">
+                      <Button className="rounded-full">
+                        <LogIn className="w-4 h-4 mr-2" />
+                        Sign In
+                      </Button>
+                    </Link>
+                  </div>
                 )}
               </>
             )}
@@ -155,13 +162,22 @@ export function Navbar() {
                 </>
               )}
               {!loading && !user && (
-                <Link
-                  to="/login"
-                  onClick={() => setIsOpen(false)}
-                  className="px-4 py-3 rounded-lg text-sm font-medium text-primary bg-primary/10"
-                >
-                  Sign In
-                </Link>
+                <>
+                  <Link
+                    to="/coach/login"
+                    onClick={() => setIsOpen(false)}
+                    className="px-4 py-3 rounded-lg text-sm font-medium text-foreground border border-border"
+                  >
+                    Coaches Login
+                  </Link>
+                  <Link
+                    to="/login"
+                    onClick={() => setIsOpen(false)}
+                    className="px-4 py-3 rounded-lg text-sm font-medium text-primary bg-primary/10"
+                  >
+                    Sign In
+                  </Link>
+                </>
               )}
               {user && (
                 <div className="pt-2 border-t border-border/50 mt-2">

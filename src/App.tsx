@@ -44,6 +44,10 @@ import Unsubscribe from "./pages/Unsubscribe";
 import Coaching from "./pages/Coaching";
 import MeetingAgenda from "./pages/MeetingAgenda";
 import Review from "./pages/Review";
+import CoachLogin from "./pages/coach/CoachLogin";
+import CoachDashboard from "./pages/coach/CoachDashboard";
+import CoachProfileEdit from "./pages/coach/CoachProfileEdit";
+import CoachPublicProfile from "./pages/coach/CoachPublicProfile";
 
 
 const queryClient = new QueryClient();
@@ -103,6 +107,10 @@ const App = () => (
             <Route path="/meeting-agenda/:userId" element={<MeetingAgenda />} />
             <Route path="/review" element={<Review />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
+            <Route path="/coach/login" element={<CoachLogin />} />
+            <Route path="/coach/dashboard" element={<CoachDashboard />} />
+            <Route path="/coach/profile/edit" element={<CoachProfileEdit />} />
+            <Route path="/coach/:slug" element={<CoachPublicProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
