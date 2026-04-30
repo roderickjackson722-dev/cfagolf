@@ -1498,6 +1498,54 @@ export type Database = {
         }
         Relationships: []
       }
+      swing_videos: {
+        Row: {
+          camera_angle: string | null
+          club: string | null
+          created_at: string
+          id: string
+          is_public: boolean
+          notes: string | null
+          sort_order: number
+          swing_type: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          video_type: string
+          video_url: string
+        }
+        Insert: {
+          camera_angle?: string | null
+          club?: string | null
+          created_at?: string
+          id?: string
+          is_public?: boolean
+          notes?: string | null
+          sort_order?: number
+          swing_type?: string | null
+          title?: string
+          updated_at?: string
+          user_id: string
+          video_type?: string
+          video_url: string
+        }
+        Update: {
+          camera_angle?: string | null
+          club?: string | null
+          created_at?: string
+          id?: string
+          is_public?: boolean
+          notes?: string | null
+          sort_order?: number
+          swing_type?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          video_type?: string
+          video_url?: string
+        }
+        Relationships: []
+      }
       target_schools: {
         Row: {
           category: string
@@ -1846,6 +1894,38 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_public_swing_golfers: {
+        Args: never
+        Returns: {
+          avatar_url: string
+          city: string
+          full_name: string
+          goal_division: string
+          graduation_year: number
+          handicap: number
+          high_school: string
+          latest_video_at: string
+          state: string
+          user_id: string
+          video_count: number
+        }[]
+      }
+      get_public_swing_profile: {
+        Args: { _user_id: string }
+        Returns: {
+          avatar_url: string
+          city: string
+          club_team: string
+          full_name: string
+          goal_division: string
+          graduation_year: number
+          handicap: number
+          high_school: string
+          home_course: string
+          state: string
+          user_id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

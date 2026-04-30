@@ -44,12 +44,13 @@ const tools = [
     path: '/tools/target-schools'
   },
   {
-    id: 'video-specs',
+    id: 'swing-vault',
     icon: Video,
-    title: "Swing Video Shot List",
-    description: "Create professional highlight reels",
+    title: "Swing Vault",
+    description: "Upload swing video links — coaches can discover you in the public CFA gallery",
     status: 'available',
-    downloadable: true
+    interactive: true,
+    path: '/tools/swing-vault'
   },
   {
     id: 'tournament-log',

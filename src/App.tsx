@@ -52,6 +52,9 @@ import PresentationStart from "./pages/admin/Presentation";
 import PresentationMode from "./pages/admin/PresentationMode";
 import PresentationView from "./pages/PresentationView";
 import RecruitingTimeline from "./pages/RecruitingTimeline";
+import SwingVault from "./pages/SwingVault";
+import SwingGallery from "./pages/SwingGallery";
+import SwingProfile from "./pages/SwingProfile";
 
 
 const queryClient = new QueryClient();
@@ -119,6 +122,9 @@ const App = () => (
             <Route path="/admin/presentation" element={<PresentationStart />} />
             <Route path="/admin/presentation/mode" element={<PresentationMode />} />
             <Route path="/presentation/:token" element={<PresentationView />} />
+            <Route path="/tools/swing-vault" element={<SwingVault />} />
+            <Route path="/m/swing" element={<SwingGallery />} />
+            <Route path="/m/swing/:userId" element={<SwingProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
