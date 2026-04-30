@@ -55,6 +55,7 @@ type TierCard = {
   title: string;
   description: string;
   price: string;
+  originalPrice?: string;
   priceSuffix?: string;
   priceNote: string;
   features: string[];
@@ -80,23 +81,25 @@ const tiers: TierCard[] = [
     title: "Annual Portal Membership",
     description: "Full platform access & recruiting tools",
     price: "$299",
+    originalPrice: "$499",
     priceNote: "One-time annual purchase",
     features: portalFeatures,
     ctaLabel: "Subscribe Now",
     ctaLink: "/checkout?plan=digital",
     icon: Monitor,
-    badge: "Self-Service",
+    badge: "Sale",
   },
   {
     title: "1-on-1 Consulting",
     description: "Full-service personalized guidance",
     price: "$2,499",
+    originalPrice: "$3,499",
     priceNote: "One-time • 12 consulting calls included",
     features: consultingFeatures,
     ctaLabel: "Get Started",
     ctaLink: "/checkout?plan=consulting",
     icon: Handshake,
-    badge: "Most Comprehensive",
+    badge: "Sale • Most Comprehensive",
     highlighted: true,
   },
 ];
