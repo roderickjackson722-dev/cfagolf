@@ -16,7 +16,8 @@ import {
   Loader2,
   Trophy,
   ArrowRightLeft,
-  BookOpen
+  BookOpen,
+  FolderLock
 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
@@ -135,6 +136,24 @@ const tools = [
     status: 'available',
     interactive: true,
     path: '/tools/transfer-guide'
+  },
+  {
+    id: 'core-course-tracker',
+    icon: GraduationCap,
+    title: "NCAA Core Course Tracker",
+    description: "Map courses to the 16 NCAA requirements & calculate Core GPA",
+    status: 'available',
+    interactive: true,
+    path: '/tools/core-course-tracker'
+  },
+  {
+    id: 'document-vault',
+    icon: FolderLock,
+    title: "Document Vault",
+    description: "Securely store transcripts, resumes, releases — share when ready",
+    status: 'available',
+    interactive: true,
+    path: '/tools/document-vault'
   },
 ];
 

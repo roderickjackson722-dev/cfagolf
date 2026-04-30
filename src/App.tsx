@@ -55,6 +55,9 @@ import RecruitingTimeline from "./pages/RecruitingTimeline";
 import SwingVault from "./pages/SwingVault";
 import SwingGallery from "./pages/SwingGallery";
 import SwingProfile from "./pages/SwingProfile";
+import CoreCourseTrackerPage from "./pages/CoreCourseTrackerPage";
+import DocumentVault from "./pages/DocumentVault";
+import SharedDocuments from "./pages/SharedDocuments";
 
 
 const queryClient = new QueryClient();
@@ -123,6 +126,9 @@ const App = () => (
             <Route path="/admin/presentation/mode" element={<PresentationMode />} />
             <Route path="/presentation/:token" element={<PresentationView />} />
             <Route path="/tools/swing-vault" element={<SwingVault />} />
+            <Route path="/tools/core-course-tracker" element={<CoreCourseTrackerPage />} />
+            <Route path="/tools/document-vault" element={<DocumentVault />} />
+            <Route path="/shared/:token" element={<SharedDocuments />} />
             <Route path="/m/swing" element={<SwingGallery />} />
             <Route path="/m/swing/:userId" element={<SwingProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
