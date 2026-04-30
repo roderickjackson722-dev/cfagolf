@@ -351,15 +351,14 @@ const Checkout = () => {
                   <Separator className="my-4" />
                   
                   <div className="bg-muted/50 rounded-lg p-4 text-center">
-                    <div className="flex items-baseline justify-center gap-1">
-                      {getActiveDiscount() > 0 && (
-                        <span className="text-lg line-through text-muted-foreground">
-                          ${MEMBERSHIP_PRICE.toLocaleString()}
-                        </span>
-                      )}
+                    <div className="flex items-baseline justify-center gap-2 flex-wrap">
+                      <span className="text-lg line-through text-muted-foreground">
+                        ${getActiveDiscount() > 0 ? MEMBERSHIP_PRICE.toLocaleString() : program.originalPrice.toLocaleString()}
+                      </span>
                       <span className="text-3xl font-bold text-primary">
                         ${getDiscountedPrice().toLocaleString()}
                       </span>
+                      <span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
                       {program.programType === 'consulting' ? '12 coaching sessions included' : 'One-time annual purchase'}
