@@ -182,6 +182,10 @@ const Admin = () => {
                 <Link2 className="w-4 h-4" />
                 Share Links
               </TabsTrigger>
+              <TabsTrigger value="slide-editor" className="flex items-center gap-2">
+                <Eye className="w-4 h-4" />
+                Slide Editor
+              </TabsTrigger>
             </TabsList>
 
             {/* College Management Tab */}
