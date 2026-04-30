@@ -2,12 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Maximize2, Minimize2, Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { memberToolsSlides } from "@/data/memberToolsSlides";
 import { Button } from "@/components/ui/button";
+
+interface Slide {
+  id: string;
+  position: number;
+  title: string;
+  bullets: string[];
+  image_url: string | null;
+  is_logo_slide: boolean;
+  logo_url: string | null;
+}
 
 const PresentationView = () => {
   const { token } = useParams<{ token: string }>();
   const [status, setStatus] = useState<"loading" | "valid" | "invalid">("loading");
+  const [slides, setSlides] = useState<Slide[]>([]);
   const [idx, setIdx] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [isFs, setIsFs] = useState(false);
@@ -32,6 +42,16 @@ const PresentationView = () => {
         setStatus("invalid");
         return;
       }
+      const { data: slideRows } = await supabase
+        .from("presentation_slides")
+        .select("*")
+        .order("position", { ascending: true });
+      setSlides(
+        ((slideRows as any[]) || []).map((s) => ({
+          ...s,
+          bullets: Array.isArray(s.bullets) ? s.bullets : [],
+        })) as Slide[],
+      );
       setStatus("valid");
     })();
   }, [token]);
@@ -45,13 +65,13 @@ const PresentationView = () => {
   useEffect(() => {
     if (status !== "valid") return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") setIdx((i) => Math.min(i + 1, memberToolsSlides.length - 1));
+      if (e.key === "ArrowRight") setIdx((i) => Math.min(i + 1, slides.length - 1));
       else if (e.key === "ArrowLeft") setIdx((i) => Math.max(i - 1, 0));
       else if (e.key === "f" || e.key === "F") toggleFs();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [status]);
+  }, [status, slides.length]);
 
   useEffect(() => {
     const onFs = () => setIsFs(!!document.fullscreenElement);
@@ -87,8 +107,16 @@ const PresentationView = () => {
     );
   }
 
-  const slide = memberToolsSlides[idx];
-  const total = memberToolsSlides.length;
+  if (slides.length === 0) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center">
+        <p className="text-slate-400">No slides configured yet.</p>
+      </div>
+    );
+  }
+
+  const slide = slides[idx];
+  const total = slides.length;
 
   return (
     <div ref={containerRef} className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
@@ -101,7 +129,12 @@ const PresentationView = () => {
           <div className="flex items-center gap-1.5">
             <Clock className="w-4 h-4" /> {fmt(elapsed)}
           </div>
-          <Button variant="ghost" size="sm" onClick={toggleFs} className="text-slate-300 hover:text-white">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleFs}
+            className="text-slate-300 hover:text-white"
+          >
             {isFs ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
           </Button>
         </div>
@@ -111,8 +144,15 @@ const PresentationView = () => {
       <div className="flex-1 flex items-center justify-center px-8 py-8">
         <div className="w-full max-w-7xl grid md:grid-cols-2 gap-10 items-center">
           <div>
+            {slide.is_logo_slide && slide.logo_url && (
+              <img
+                src={slide.logo_url}
+                alt="College Fairway Advisors"
+                className="h-20 md:h-24 mb-6 object-contain"
+              />
+            )}
             <div className="text-sm uppercase tracking-widest text-emerald-400 mb-3">
-              Slide {slide.index}
+              Slide {slide.position}
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">{slide.title}</h1>
             <ul className="space-y-3">
@@ -125,10 +165,12 @@ const PresentationView = () => {
             </ul>
           </div>
           <div className="rounded-xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl">
-            {slide.videoEmbed ? (
-              <iframe src={slide.videoEmbed} className="w-full aspect-video" allowFullScreen />
+            {slide.image_url ? (
+              <img src={slide.image_url} alt={slide.title} className="w-full h-auto" />
             ) : (
-              <img src={slide.image} alt={slide.title} className="w-full h-auto" />
+              <div className="aspect-video flex items-center justify-center text-slate-500 text-sm">
+                No image uploaded
+              </div>
             )}
           </div>
         </div>
@@ -136,7 +178,7 @@ const PresentationView = () => {
 
       {/* Progress dots */}
       <div className="px-6 py-3 flex items-center justify-center gap-1.5">
-        {memberToolsSlides.map((_, i) => (
+        {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setIdx(i)}

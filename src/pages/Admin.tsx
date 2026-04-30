@@ -25,6 +25,7 @@ import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
 import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
 import { AdminCoachesTable } from '@/components/admin/AdminCoachesTable';
 import { AdminPresentationTokens } from '@/components/admin/AdminPresentationTokens';
+import { AdminPresentationSlides } from '@/components/admin/AdminPresentationSlides';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -180,6 +181,10 @@ const Admin = () => {
               <TabsTrigger value="share-links" className="flex items-center gap-2">
                 <Link2 className="w-4 h-4" />
                 Share Links
+              </TabsTrigger>
+              <TabsTrigger value="slide-editor" className="flex items-center gap-2">
+                <Eye className="w-4 h-4" />
+                Slide Editor
               </TabsTrigger>
             </TabsList>
 
@@ -477,6 +482,23 @@ const Admin = () => {
                 </CardHeader>
                 <CardContent>
                   <AdminPresentationTokens />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            {/* Slide Editor Tab — edit titles, bullets, images, logo for the public presentation */}
+            <TabsContent value="slide-editor">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Eye className="w-5 h-5 text-primary" />
+                    <CardTitle>Presentation Slide Editor</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Edit slide titles, bullets, and upload real screenshots and your CFA logo. All share links use this same content — changes go live immediately after Save.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminPresentationSlides />
                 </CardContent>
               </Card>
             </TabsContent>
