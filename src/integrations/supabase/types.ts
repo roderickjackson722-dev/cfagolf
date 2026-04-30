@@ -381,6 +381,7 @@ export type Database = {
           golf_national_ranking: number | null
           id: string
           is_hbcu: boolean
+          logo_needs_manual: boolean
           logo_url: string | null
           min_act_score: number | null
           min_sat_score: number | null
@@ -402,6 +403,7 @@ export type Database = {
           golf_national_ranking?: number | null
           id?: string
           is_hbcu?: boolean
+          logo_needs_manual?: boolean
           logo_url?: string | null
           min_act_score?: number | null
           min_sat_score?: number | null
@@ -423,6 +425,7 @@ export type Database = {
           golf_national_ranking?: number | null
           id?: string
           is_hbcu?: boolean
+          logo_needs_manual?: boolean
           logo_url?: string | null
           min_act_score?: number | null
           min_sat_score?: number | null

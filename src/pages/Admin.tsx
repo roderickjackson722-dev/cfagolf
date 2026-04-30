@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
 import { useColleges } from '@/hooks/useColleges';
 import { AdminCollegeTable } from '@/components/admin/AdminCollegeTable';
+import { AdminDatabaseCleanup } from '@/components/admin/AdminDatabaseCleanup';
 import { AdminUserTable } from '@/components/admin/AdminUserTable';
 import { AdminMembershipTable } from '@/components/admin/AdminMembershipTable';
 import { AdminAnalyticsDashboard } from '@/components/admin/AdminAnalyticsDashboard';
@@ -189,7 +190,8 @@ const Admin = () => {
             </TabsList>
 
             {/* College Management Tab */}
-            <TabsContent value="colleges">
+            <TabsContent value="colleges" className="space-y-6">
+              <AdminDatabaseCleanup />
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-2">
