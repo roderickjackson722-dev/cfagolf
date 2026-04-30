@@ -20,6 +20,7 @@ const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 const PROGRAMS = {
   consulting: {
     price: 2499,
+    originalPrice: 3499,
     label: '1-on-1 Consulting Program',
     shortLabel: 'CFA 1-on-1 Consulting',
     description: 'Full-service personalized recruiting guidance with 12 coaching sessions',
@@ -28,6 +29,7 @@ const PROGRAMS = {
   },
   digital: {
     price: 299,
+    originalPrice: 499,
     label: 'Annual Portal Membership',
     shortLabel: 'CFA Annual Portal Member',
     description: 'Full platform access & recruiting tools',
