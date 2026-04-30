@@ -47,16 +47,14 @@ export default function SwingGallery() {
     return matchSearch && matchGrad;
   });
 
+  useEffect(() => {
+    document.title = "CFA Swing Vault — College Golf Recruiting Profiles";
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute("content", "Browse swing videos and recruiting profiles of junior golfers. College coaches can discover prospective student-athletes seeking placement.");
+  }, []);
+
   return (
     <>
-      <Helmet>
-        <title>CFA Swing Vault — College Golf Recruiting Profiles | College Fairway Advisors</title>
-        <meta
-          name="description"
-          content="Browse swing videos and recruiting profiles of junior golfers. College coaches can discover prospective student-athletes seeking placement."
-        />
-        <link rel="canonical" href="https://cfa.golf/m/swing" />
-      </Helmet>
       <div className="min-h-screen bg-background flex flex-col">
         <Navbar />
         <main className="flex-1 py-8">

@@ -86,16 +86,14 @@ export default function SwingProfile() {
 
   const name = profile.full_name ?? "Junior Golfer";
 
+  useEffect(() => {
+    document.title = `${name} — Swing Profile | CFA Recruiting`;
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute("content", `${name}'s swing videos and recruiting profile${profile.graduation_year ? `, Class of ${profile.graduation_year}` : ""}${profile.high_school ? `, ${profile.high_school}` : ""}.`);
+  }, [name, profile.graduation_year, profile.high_school]);
+
   return (
     <>
-      <Helmet>
-        <title>{name} — Swing Profile | CFA Recruiting</title>
-        <meta
-          name="description"
-          content={`${name}'s swing videos and recruiting profile${profile.graduation_year ? `, Class of ${profile.graduation_year}` : ""}${profile.high_school ? `, ${profile.high_school}` : ""}.`}
-        />
-        <link rel="canonical" href={`https://cfa.golf/m/swing/${profile.user_id}`} />
-      </Helmet>
       <div className="min-h-screen bg-background flex flex-col">
         <Navbar />
         <main className="flex-1 py-8">
