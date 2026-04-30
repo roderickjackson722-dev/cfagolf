@@ -147,6 +147,9 @@ export function PricingComparisonSection() {
                     {card.description}
                   </CardDescription>
                   <div className="pt-4">
+                    {card.originalPrice && (
+                      <span className="text-2xl text-muted-foreground line-through mr-2 align-middle">{card.originalPrice}</span>
+                    )}
                     <span className="text-4xl font-bold text-foreground">{card.price}</span>
                     {card.priceSuffix && (
                       <span className="text-lg text-muted-foreground">{card.priceSuffix}</span>
