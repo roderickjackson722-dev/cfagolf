@@ -181,9 +181,14 @@ export const AdminPresentationSlides = () => {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md border bg-muted/40 p-4 text-sm text-muted-foreground">
-        Edit the public 20-slide Member Tools presentation. All share links display the same content.
-        Changes go live immediately after Save.
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-md border bg-muted/40 p-4">
+        <div className="text-sm text-muted-foreground">
+          Edit the Member Tools presentation. Add or remove slides as needed — all share links update immediately after Save.
+        </div>
+        <Button size="sm" onClick={addSlide} disabled={adding}>
+          {adding ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : <Plus className="w-4 h-4 mr-1" />}
+          Add slide
+        </Button>
       </div>
 
       {slides.map((slide, idx) => (
