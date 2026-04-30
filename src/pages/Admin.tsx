@@ -189,7 +189,8 @@ const Admin = () => {
             </TabsList>
 
             {/* College Management Tab */}
-            <TabsContent value="colleges">
+            <TabsContent value="colleges" className="space-y-6">
+              <AdminDatabaseCleanup />
               <Card>
                 <CardHeader>
                   <div className="flex items-center gap-2">
