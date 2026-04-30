@@ -1498,6 +1498,54 @@ export type Database = {
         }
         Relationships: []
       }
+      swing_videos: {
+        Row: {
+          camera_angle: string | null
+          club: string | null
+          created_at: string
+          id: string
+          is_public: boolean
+          notes: string | null
+          sort_order: number
+          swing_type: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          video_type: string
+          video_url: string
+        }
+        Insert: {
+          camera_angle?: string | null
+          club?: string | null
+          created_at?: string
+          id?: string
+          is_public?: boolean
+          notes?: string | null
+          sort_order?: number
+          swing_type?: string | null
+          title?: string
+          updated_at?: string
+          user_id: string
+          video_type?: string
+          video_url: string
+        }
+        Update: {
+          camera_angle?: string | null
+          club?: string | null
+          created_at?: string
+          id?: string
+          is_public?: boolean
+          notes?: string | null
+          sort_order?: number
+          swing_type?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          video_type?: string
+          video_url?: string
+        }
+        Relationships: []
+      }
       target_schools: {
         Row: {
           category: string
