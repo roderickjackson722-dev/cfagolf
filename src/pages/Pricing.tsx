@@ -318,11 +318,15 @@ const Pricing = () => {
               </div>
               <div className="text-center w-20 sm:w-28">
                 <Badge variant="secondary">Portal</Badge>
-                <p className="text-[10px] text-muted-foreground mt-1">$299/yr</p>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  <span className="line-through mr-1">$499</span>$299
+                </p>
               </div>
               <div className="text-center w-20 sm:w-28">
                 <Badge className="bg-primary text-primary-foreground">Consulting</Badge>
-                <p className="text-[10px] text-muted-foreground mt-1">$2,499</p>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  <span className="line-through mr-1">$3,499</span>$2,499
+                </p>
               </div>
             </div>
 
