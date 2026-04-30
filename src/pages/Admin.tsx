@@ -463,6 +463,23 @@ const Admin = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+            {/* Share Links Tab — public 20-min Member Tools presentation */}
+            <TabsContent value="share-links">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Link2 className="w-5 h-5 text-primary" />
+                    <CardTitle>Member Tools Presentation Links</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Generate, copy, and revoke unguessable share links for the public 20-slide member tools demo. Use these in Zoom sales calls.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminPresentationTokens />
+                </CardContent>
+              </Card>
+            </TabsContent>
           </Tabs>
         </div>
       </main>
