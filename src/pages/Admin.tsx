@@ -25,6 +25,7 @@ import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
 import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
 import { AdminCoachesTable } from '@/components/admin/AdminCoachesTable';
 import { AdminPresentationTokens } from '@/components/admin/AdminPresentationTokens';
+import { AdminPresentationSlides } from '@/components/admin/AdminPresentationSlides';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
