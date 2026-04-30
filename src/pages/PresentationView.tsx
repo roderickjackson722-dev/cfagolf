@@ -151,9 +151,6 @@ const PresentationView = () => {
                 className="h-20 md:h-24 mb-6 object-contain"
               />
             )}
-            <div className="text-sm uppercase tracking-widest text-emerald-400 mb-3">
-              Slide {slide.position}
-            </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">{slide.title}</h1>
             <ul className="space-y-3">
               {slide.bullets.map((b, i) => (
