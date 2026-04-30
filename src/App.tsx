@@ -50,6 +50,7 @@ import CoachProfileEdit from "./pages/coach/CoachProfileEdit";
 import CoachPublicProfile from "./pages/coach/CoachPublicProfile";
 import PresentationStart from "./pages/admin/Presentation";
 import PresentationMode from "./pages/admin/PresentationMode";
+import PresentationView from "./pages/PresentationView";
 
 
 const queryClient = new QueryClient();
@@ -115,6 +116,7 @@ const App = () => (
             <Route path="/coach/:slug" element={<CoachPublicProfile />} />
             <Route path="/admin/presentation" element={<PresentationStart />} />
             <Route path="/admin/presentation/mode" element={<PresentationMode />} />
+            <Route path="/presentation/:token" element={<PresentationView />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
