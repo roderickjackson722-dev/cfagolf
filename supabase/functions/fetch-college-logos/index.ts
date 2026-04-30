@@ -31,11 +31,12 @@ Deno.serve(async (req) => {
     const batchSize = body.batchSize || 50;
     const offset = body.offset || 0;
 
-    // Get colleges without logos that have website URLs
+    // Get colleges without logos that have website URLs and haven't been flagged manual
     const { data: colleges, error: fetchError } = await supabase
       .from("colleges")
       .select("id, name, website_url")
       .is("logo_url", null)
+      .eq("logo_needs_manual", false)
       .not("website_url", "is", null)
       .range(offset, offset + batchSize - 1);
 
