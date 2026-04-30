@@ -150,6 +150,11 @@ Deno.serve(async (req) => {
       if (!logoUploaded) {
         failed++;
         errors.push(`${college.name}: No logo found at ${domain}`);
+        // Flag for manual review
+        await supabase
+          .from("colleges")
+          .update({ logo_needs_manual: true })
+          .eq("id", college.id);
       }
 
       // Small delay to avoid rate limiting
