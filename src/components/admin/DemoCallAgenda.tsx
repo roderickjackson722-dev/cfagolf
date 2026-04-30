@@ -19,83 +19,153 @@ interface AgendaSection {
 
 const AGENDA: AgendaSection[] = [
   {
-    sectionTitle: 'Section 1: Opening & Discovery',
-    duration: '5 min',
+    sectionTitle: 'Section 1: Opening & Discovery (Camera only — no slides yet)',
+    duration: '4 min',
     items: [
       {
         timeRange: '0:00 – 2:00',
         title: 'Warm welcome & rapport',
         bullets: [
-          'Greet by first name, thank them for their time.',
-          'Quick personal intro (your background in college golf recruiting).',
-          'Ask: "What prompted you to book this call today?" (listen for pain point).',
+          'Greet by first name; thank them for booking the call.',
+          'Quick intro: your background in college golf recruiting.',
+          'Confirm who is on the call (player, parents, etc.).',
+          'Set expectations: "15 minutes — I\'ll learn about your goals, then walk you through exactly what\'s inside CFA."',
         ],
       },
       {
-        timeRange: '2:00 – 5:00',
-        title: 'Gather key info',
+        timeRange: '2:00 – 4:00',
+        title: 'Discovery — gather key info',
         bullets: [
-          "Student's grade, handicap, tournament experience.",
-          'GPA and intended major.',
-          "Schools/divisions they're considering.",
-          'What they\'ve done so far (resume, coach outreach).',
-          'Ask: "What\'s your biggest concern about the recruiting process?" (identify gap).',
+          'Grade / graduation year, handicap index, recent tournament scores.',
+          'GPA, test scores, intended major.',
+          'Target schools / divisions (D1, D2, D3, NAIA, JUCO, HBCU interest).',
+          'Ask: "What\'s your biggest concern about the recruiting process right now?" — listen carefully.',
         ],
       },
     ],
   },
   {
-    sectionTitle: 'Section 2: CFA Solution Overview',
-    duration: '5 min',
+    sectionTitle: 'Section 2: Walk the Presentation Deck (Slides 1–15)',
+    duration: '8 min',
     items: [
       {
-        timeRange: '5:00 – 7:00',
-        title: 'Present our three service tiers',
+        timeRange: '4:00 – 4:30',
+        title: 'Slide 1 — Welcome / What You\'ll See Inside CFA',
         bullets: [
-          'Free (database access)',
-          'Membership (self-guided tools)',
-          'Consulting (1-on-1 hands-on program)',
+          '"This is a guided tour of every tool inside CFA — built specifically for college golf recruits."',
+          'Anchor value: "Replaces $2,000+ recruiting services with a one-time investment."',
         ],
       },
       {
-        timeRange: '7:00 – 9:00',
-        title: 'Highlight key differentiators',
+        timeRange: '4:30 – 5:00',
+        title: 'Slide 2 — What We Offer',
         bullets: [
-          'Not a mass-blast service — personalized.',
-          'Direct coach network (10+ years of HBCU connections).',
-          'Show a success story (one sentence, relatable).',
-          'Mention the consulting program structure (10 modules — timeline, coach outreach, scholarship evaluation).',
+          'Three paths: E-Book, Membership (self-guided), Consulting (1-on-1 with Rod).',
+          'Tell them you\'ll show what\'s inside Membership/Consulting and recommend the right fit at the end.',
+        ],
+      },
+      {
+        timeRange: '5:00 – 5:20',
+        title: 'Slide 3 — Player Dashboard',
+        bullets: [
+          '"This is the home base — every tool, every module, all in one place."',
+          'Mention 12-module HS program / 6-module Transfer program progress tracking.',
+        ],
+      },
+      {
+        timeRange: '5:20 – 5:50',
+        title: 'Slide 4 — College Database',
+        bullets: [
+          'Filter by division, state, scholarships, GPA, ranking; D1 through JUCO.',
+          'Tie back to their target schools from discovery.',
+        ],
+      },
+      {
+        timeRange: '5:50 – 6:10',
+        title: 'Slides 5 & 6 — Document Vault + Swing Video Vault',
+        bullets: [
+          'Vault: transcripts, resumes, release forms — secure, share-when-ready.',
+          'Swing Vault: one shareable link of swing/tournament clips for coaches.',
+        ],
+      },
+      {
+        timeRange: '6:10 – 6:40',
+        title: 'Slides 7 & 8 — Recruiting Timeline + Academic Eligibility',
+        bullets: [
+          'Personalized timeline by graduation year with NCAA deadline reminders.',
+          'NCAA core course tracker, GPA/test monitoring, eligibility checklist.',
+        ],
+      },
+      {
+        timeRange: '6:40 – 7:00',
+        title: 'Slides 9 & 10 — Goals + Tournament Log',
+        bullets: [
+          'Short and long-term recruiting goals, coach-reviewed weekly.',
+          'WAGR-counting event planning, multi-round scoring, verifiable stats.',
+        ],
+      },
+      {
+        timeRange: '7:00 – 7:30',
+        title: 'Slides 11 & 12 — Email Templates + Coach Tracker',
+        bullets: [
+          'Pre-written outreach templates with merge fields and response tracking.',
+          'Log every email/call/visit, follow-up reminders, full pipeline to committed.',
+        ],
+      },
+      {
+        timeRange: '7:30 – 8:00',
+        title: 'Slides 13 & 14 — Program Fit + Scholarship Calculator',
+        bullets: [
+          'Program Fit Questionnaire generates a target list automatically.',
+          'Net-cost comparison across offers (athletic + academic + need-based aid).',
+        ],
+      },
+      {
+        timeRange: '8:00 – 8:30',
+        title: 'Slides 16–19 — Coach Network (HBCU + College Coaches, Team Examples)',
+        bullets: [
+          'Highlight CFA\'s HBCU coach network — a true differentiator.',
+          'Show real team examples (Alabama A&M, Alabama State Women\'s) to make it concrete.',
+        ],
+      },
+      {
+        timeRange: '8:30 – 9:00',
+        title: 'Slide 15 — Next Steps / How to Enroll',
+        bullets: [
+          'Portal $299 (one-time) or Consulting $2,499 (one-time, Klarna available).',
+          '"You can start onboarding the same day."',
         ],
       },
     ],
   },
   {
-    sectionTitle: 'Section 3: Close & Next Steps',
-    duration: '5 min',
+    sectionTitle: 'Section 3: Close & Next Steps (Slide 20 — Q&A / Contact)',
+    duration: '3 min',
     items: [
       {
         timeRange: '9:00 – 11:00',
         title: 'Address objections',
         bullets: [
-          'Ask: "What questions do you have for me?"',
-          'Handle pricing: frame as investment vs. cost of tournaments / value of scholarship.',
-          'Handle "we need to think about it": offer a recap email + 2-day follow-up.',
+          '"It\'s expensive" → reframe vs one bad recruiting decision or competitor recurring fees.',
+          '"We need to think about it" → "What specifically? Let me address it now."',
+          '"My swing coach is helping" → "Swing coaches build the game; CFA builds the path."',
         ],
       },
       {
         timeRange: '11:00 – 13:00',
-        title: 'Present clear next step',
+        title: 'Recommend the right tier & present next step',
         bullets: [
-          '"Based on what you shared, I would start by [specific action for their situation]."',
-          'Offer to book onboarding (consulting) or start membership.',
+          'Based on discovery: "I\'d start you with [Portal / Consulting] because…"',
+          'Walk them to the checkout or Calendly link live — pick a time together.',
         ],
       },
       {
         timeRange: '13:00 – 15:00',
-        title: 'Confirm action',
+        title: 'Confirm action & close',
         bullets: [
-          'If ready: "Great, I\'ll send you the onboarding link right after this call."',
-          'If not ready: schedule a follow-up call and send recap email.',
+          'Confirm enrollment or booked time and what they\'ll receive next.',
+          'Send recap email + checkout link to contact@cfa.golf same day.',
+          'Thank them by name; reinforce excitement about working together.',
         ],
       },
     ],
@@ -103,25 +173,25 @@ const AGENDA: AgendaSection[] = [
 ];
 
 const DOS = [
-  'Listen more than you talk.',
-  "Use the family's name.",
-  'Repeat back their pain point to build trust.',
+  'Share your screen with the presentation deck open before the call starts.',
+  'Tie each slide back to what they said in discovery.',
+  "Use the family's name throughout the call.",
 ];
 
 const DONTS = [
-  "Don't push pricing before showing value.",
-  "Don't rush the discovery phase.",
-  'Don\'t skip asking "What\'s your biggest concern?"',
+  "Don't read every bullet on every slide — talk to it.",
+  "Don't pitch pricing before you\'ve walked the tools.",
+  'Don\'t skip the "biggest concern" question in discovery.',
 ];
 
 export const DemoCallAgenda = () => {
   const handleDownloadPdf = () => {
     const consolidatedModule = {
       moduleNumber: 0,
-      title: 'Sales Demo Call Agenda (15 Minutes)',
+      title: 'Sales Demo Call Agenda (15 Minutes) — Aligned to Presentation Deck',
       totalDuration: '15 min',
       objective:
-        'Run a focused 15-minute discovery and close call with prospective families. Stay disciplined on time blocks: 5 min discovery, 5 min solution, 5 min close.',
+        'Run a focused 15-minute discovery and close call with prospective families, walking them through the 20-slide CFA presentation deck. Time blocks: 4 min discovery, 8 min slide walkthrough, 3 min close.',
       agenda: AGENDA.flatMap((section) =>
         section.items.map((item) => ({
           topic: `${item.timeRange} | ${item.title}`,
@@ -130,18 +200,18 @@ export const DemoCallAgenda = () => {
         }))
       ),
       deliverables: [
-        "Do: Listen more than you talk.",
-        "Do: Use the family's name.",
-        'Do: Repeat back their pain point to build trust.',
-        "Don't: Push pricing before showing value.",
-        "Don't: Rush the discovery phase.",
-        'Don\'t: Skip asking "What\'s your biggest concern?"',
+        'Do: Share screen with deck open before the call starts.',
+        'Do: Tie each slide back to discovery answers.',
+        "Do: Use the family's name throughout.",
+        "Don't: Read bullets verbatim — talk to them.",
+        "Don't: Pitch pricing before walking the tools.",
+        'Don\'t: Skip the "biggest concern" question.',
       ],
     };
 
     const pdf = generateModuleAgendaPdf(
       [consolidatedModule],
-      'Sales Demo Call Agenda — 15 Minutes'
+      'Sales Demo Call Agenda — 15 Minutes (Deck-Aligned)'
     );
     const filename = 'CFA-Sales-Demo-Call-Agenda-15min.pdf';
     pdf.save(filename);
@@ -160,7 +230,7 @@ export const DemoCallAgenda = () => {
                   <CardTitle>Sales Demo Call Agenda (15 Minutes)</CardTitle>
                 </div>
                 <CardDescription className="mt-1">
-                  Internal guide for running a focused 15-minute discovery and close call with prospective families.
+                  Aligned to the 20-slide CFA presentation deck. 4 min discovery · 8 min slide walkthrough · 3 min close.
                 </CardDescription>
               </div>
               <Button size="sm" onClick={handleDownloadPdf}>
@@ -175,15 +245,15 @@ export const DemoCallAgenda = () => {
               <Clock className="w-5 h-5 text-primary" />
               <span className="font-semibold text-primary">Total Call Time: 15 minutes</span>
               <span className="text-muted-foreground text-sm ml-2">
-                — 5 min discovery · 5 min solution · 5 min close
+                — 4 min discovery · 8 min slide walkthrough · 3 min close
               </span>
             </div>
 
             {/* Visual timer bar */}
             <div className="flex h-2 rounded-full overflow-hidden mb-6">
-              <div className="flex-1 bg-primary/70" title="Opening & Discovery" />
-              <div className="flex-1 bg-primary/50" title="Solution Overview" />
-              <div className="flex-1 bg-primary/30" title="Close & Next Steps" />
+              <div className="basis-[27%] bg-primary/70" title="Opening & Discovery" />
+              <div className="basis-[53%] bg-primary/50" title="Slide Walkthrough" />
+              <div className="basis-[20%] bg-primary/30" title="Close & Next Steps" />
             </div>
 
             <div className="space-y-6">
