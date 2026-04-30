@@ -1001,6 +1001,42 @@ export type Database = {
         }
         Relationships: []
       }
+      presentation_slides: {
+        Row: {
+          bullets: Json
+          created_at: string
+          id: string
+          image_url: string | null
+          is_logo_slide: boolean
+          logo_url: string | null
+          position: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          bullets?: Json
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_logo_slide?: boolean
+          logo_url?: string | null
+          position: number
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          bullets?: Json
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_logo_slide?: boolean
+          logo_url?: string | null
+          position?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       presentation_tokens: {
         Row: {
           created_at: string
