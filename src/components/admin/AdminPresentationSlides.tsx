@@ -127,6 +127,48 @@ export const AdminPresentationSlides = () => {
     load();
   };
 
+  const addSlide = async () => {
+    setAdding(true);
+    const nextPos = slides.length > 0 ? Math.max(...slides.map((s) => s.position)) + 1 : 1;
+    const { error } = await supabase.from("presentation_slides").insert({
+      position: nextPos,
+      title: "New Slide",
+      bullets: [],
+      is_logo_slide: false,
+    });
+    setAdding(false);
+    if (error) {
+      toast({ title: "Failed to add slide", description: error.message, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Slide added" });
+    load();
+  };
+
+  const deleteSlide = async (id: string) => {
+    setDeletingId(id);
+    const { error } = await supabase.from("presentation_slides").delete().eq("id", id);
+    setDeletingId(null);
+    setConfirmDeleteId(null);
+    if (error) {
+      toast({ title: "Delete failed", description: error.message, variant: "destructive" });
+      return;
+    }
+    // Renumber remaining slides to keep positions sequential
+    const remaining = slides.filter((s) => s.id !== id).sort((a, b) => a.position - b.position);
+    for (let i = 0; i < remaining.length; i++) {
+      const desired = i + 1;
+      if (remaining[i].position !== desired) {
+        await supabase
+          .from("presentation_slides")
+          .update({ position: desired })
+          .eq("id", remaining[i].id);
+      }
+    }
+    toast({ title: "Slide deleted" });
+    load();
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
