@@ -1894,6 +1894,38 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_public_swing_golfers: {
+        Args: never
+        Returns: {
+          avatar_url: string
+          city: string
+          full_name: string
+          goal_division: string
+          graduation_year: number
+          handicap: number
+          high_school: string
+          latest_video_at: string
+          state: string
+          user_id: string
+          video_count: number
+        }[]
+      }
+      get_public_swing_profile: {
+        Args: { _user_id: string }
+        Returns: {
+          avatar_url: string
+          city: string
+          club_team: string
+          full_name: string
+          goal_division: string
+          graduation_year: number
+          handicap: number
+          high_school: string
+          home_course: string
+          state: string
+          user_id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
