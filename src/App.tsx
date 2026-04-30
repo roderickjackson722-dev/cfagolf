@@ -51,6 +51,7 @@ import CoachPublicProfile from "./pages/coach/CoachPublicProfile";
 import PresentationStart from "./pages/admin/Presentation";
 import PresentationMode from "./pages/admin/PresentationMode";
 import PresentationView from "./pages/PresentationView";
+import RecruitingTimeline from "./pages/RecruitingTimeline";
 
 
 const queryClient = new QueryClient();
@@ -96,6 +97,7 @@ const App = () => (
             <Route path="/tools/wagr-tournaments" element={<WagrTournaments />} />
             <Route path="/tools/transfer-portal" element={<TransferPortalTracker />} />
             <Route path="/tools/transfer-guide" element={<TransferGuide />} />
+            <Route path="/tools/recruiting-timeline" element={<RecruitingTimeline />} />
             <Route path="/flyer/transfer" element={<TransferFlyer />} />
             <Route path="/player-release" element={<PlayerRelease />} />
             <Route path="/ebook" element={<Shop />} />

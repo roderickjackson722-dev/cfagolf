@@ -102,10 +102,11 @@ const tools = [
   {
     id: 'timeline',
     icon: Calendar,
-    title: "12-Month Recruiting Timeline",
-    description: "Stay on track with your timeline",
+    title: "Recruiting Timeline (9th–12th)",
+    description: "Interactive 4-year roadmap with progress tracking",
     status: 'available',
-    downloadable: true
+    interactive: true,
+    path: '/tools/recruiting-timeline'
   },
   {
     id: 'wagr-tournaments',
