@@ -22,6 +22,7 @@ export function PricingTierCards() {
             Full-service personalized recruiting guidance
           </CardDescription>
           <div className="pt-6">
+            <span className="text-3xl text-muted-foreground line-through mr-2 align-middle">$3,499</span>
             <span className="text-5xl font-bold text-foreground">$2,499</span>
             <p className="text-sm text-muted-foreground mt-2">One-time • 12 consulting calls included</p>
             <p className="text-xs text-muted-foreground mt-1">Payment plans available</p>
@@ -68,6 +69,7 @@ export function PricingTierCards() {
             Full platform access & recruiting tools
           </CardDescription>
           <div className="pt-6">
+            <span className="text-3xl text-muted-foreground line-through mr-2 align-middle">$499</span>
             <span className="text-5xl font-bold text-foreground">$299</span>
             <p className="text-sm text-muted-foreground mt-2">One-time annual purchase</p>
           </div>
