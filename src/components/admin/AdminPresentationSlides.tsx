@@ -221,6 +221,18 @@ export const AdminPresentationSlides = () => {
                 )}
                 Save
               </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => setConfirmDeleteId(slide.id)}
+                disabled={deletingId === slide.id}
+              >
+                {deletingId === slide.id ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Trash2 className="w-4 h-4" />
+                )}
+              </Button>
             </div>
           </div>
 
