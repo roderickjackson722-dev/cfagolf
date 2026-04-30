@@ -43,6 +43,7 @@ type PricingCard = {
   title: string;
   description: string;
   price: string;
+  originalPrice?: string;
   priceSuffix?: string;
   priceNote: string;
   features: string[];
@@ -68,23 +69,25 @@ const cards: PricingCard[] = [
     title: "Annual Portal Membership",
     description: "Full platform access & recruiting tools",
     price: "$299",
+    originalPrice: "$499",
     priceNote: "One-time annual purchase",
     features: digitalFeatures,
     ctaLabel: "Subscribe Now",
     ctaLink: "/checkout?plan=digital",
     icon: Monitor,
-    badge: "Self-Service",
+    badge: "Sale",
   },
   {
     title: "1-on-1 Consulting",
     description: "Full-service personalized guidance",
     price: "$2,499",
+    originalPrice: "$3,499",
     priceNote: "One-time • 12 consulting calls included",
     features: consultingFeatures,
     ctaLabel: "Get Started",
     ctaLink: "/checkout?plan=consulting",
     icon: Handshake,
-    badge: "Most Comprehensive",
+    badge: "Sale • Most Comprehensive",
     highlighted: true,
   },
 ];
@@ -144,6 +147,9 @@ export function PricingComparisonSection() {
                     {card.description}
                   </CardDescription>
                   <div className="pt-4">
+                    {card.originalPrice && (
+                      <span className="text-2xl text-muted-foreground line-through mr-2 align-middle">{card.originalPrice}</span>
+                    )}
                     <span className="text-4xl font-bold text-foreground">{card.price}</span>
                     {card.priceSuffix && (
                       <span className="text-lg text-muted-foreground">{card.priceSuffix}</span>

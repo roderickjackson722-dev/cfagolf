@@ -20,6 +20,7 @@ const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 const PROGRAMS = {
   consulting: {
     price: 2499,
+    originalPrice: 3499,
     label: '1-on-1 Consulting Program',
     shortLabel: 'CFA 1-on-1 Consulting',
     description: 'Full-service personalized recruiting guidance with 12 coaching sessions',
@@ -28,6 +29,7 @@ const PROGRAMS = {
   },
   digital: {
     price: 299,
+    originalPrice: 499,
     label: 'Annual Portal Membership',
     shortLabel: 'CFA Annual Portal Member',
     description: 'Full platform access & recruiting tools',
@@ -349,15 +351,14 @@ const Checkout = () => {
                   <Separator className="my-4" />
                   
                   <div className="bg-muted/50 rounded-lg p-4 text-center">
-                    <div className="flex items-baseline justify-center gap-1">
-                      {getActiveDiscount() > 0 && (
-                        <span className="text-lg line-through text-muted-foreground">
-                          ${MEMBERSHIP_PRICE.toLocaleString()}
-                        </span>
-                      )}
+                    <div className="flex items-baseline justify-center gap-2 flex-wrap">
+                      <span className="text-lg line-through text-muted-foreground">
+                        ${getActiveDiscount() > 0 ? MEMBERSHIP_PRICE.toLocaleString() : program.originalPrice.toLocaleString()}
+                      </span>
                       <span className="text-3xl font-bold text-primary">
                         ${getDiscountedPrice().toLocaleString()}
                       </span>
+                      <span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
                       {program.programType === 'consulting' ? '12 coaching sessions included' : 'One-time annual purchase'}
@@ -563,19 +564,19 @@ const Checkout = () => {
                           Full access to recruiting tools, 12 consulting calls, and expert guidance.
                         </p>
                         
-                        <div className="flex items-baseline gap-2">
-                          {getActiveDiscount() > 0 && (
-                            <span className="text-lg line-through text-muted-foreground">
-                              ${MEMBERSHIP_PRICE.toLocaleString()}
-                            </span>
-                          )}
+                        <div className="flex items-baseline gap-2 flex-wrap">
+                          <span className="text-lg line-through text-muted-foreground">
+                            ${getActiveDiscount() > 0 ? MEMBERSHIP_PRICE.toLocaleString() : program.originalPrice.toLocaleString()}
+                          </span>
                           <span className="text-2xl font-bold text-primary">
                             ${getDiscountedPrice().toLocaleString()}
                           </span>
-                          {getActiveDiscount() > 0 && (
+                          {getActiveDiscount() > 0 ? (
                             <span className="text-sm text-primary font-medium">
                               ({getActiveDiscount()}% off)
                             </span>
+                          ) : (
+                            <span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>
                           )}
                         </div>
                       </div>

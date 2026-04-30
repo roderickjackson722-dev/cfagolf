@@ -55,6 +55,7 @@ type TierCard = {
   title: string;
   description: string;
   price: string;
+  originalPrice?: string;
   priceSuffix?: string;
   priceNote: string;
   features: string[];
@@ -80,23 +81,25 @@ const tiers: TierCard[] = [
     title: "Annual Portal Membership",
     description: "Full platform access & recruiting tools",
     price: "$299",
+    originalPrice: "$499",
     priceNote: "One-time annual purchase",
     features: portalFeatures,
     ctaLabel: "Subscribe Now",
     ctaLink: "/checkout?plan=digital",
     icon: Monitor,
-    badge: "Self-Service",
+    badge: "Sale",
   },
   {
     title: "1-on-1 Consulting",
     description: "Full-service personalized guidance",
     price: "$2,499",
+    originalPrice: "$3,499",
     priceNote: "One-time • 12 consulting calls included",
     features: consultingFeatures,
     ctaLabel: "Get Started",
     ctaLink: "/checkout?plan=consulting",
     icon: Handshake,
-    badge: "Most Comprehensive",
+    badge: "Sale • Most Comprehensive",
     highlighted: true,
   },
 ];
@@ -242,6 +245,9 @@ const Pricing = () => {
                       {tier.description}
                     </CardDescription>
                     <div className="pt-4">
+                      {tier.originalPrice && (
+                        <span className="text-2xl text-muted-foreground line-through mr-2 align-middle">{tier.originalPrice}</span>
+                      )}
                       <span className="text-4xl font-bold text-foreground">{tier.price}</span>
                       {tier.priceSuffix && (
                         <span className="text-lg text-muted-foreground">{tier.priceSuffix}</span>
@@ -312,11 +318,15 @@ const Pricing = () => {
               </div>
               <div className="text-center w-20 sm:w-28">
                 <Badge variant="secondary">Portal</Badge>
-                <p className="text-[10px] text-muted-foreground mt-1">$299/yr</p>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  <span className="line-through mr-1">$499</span>$299
+                </p>
               </div>
               <div className="text-center w-20 sm:w-28">
                 <Badge className="bg-primary text-primary-foreground">Consulting</Badge>
-                <p className="text-[10px] text-muted-foreground mt-1">$2,499</p>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  <span className="line-through mr-1">$3,499</span>$2,499
+                </p>
               </div>
             </div>
 
