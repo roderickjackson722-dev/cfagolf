@@ -564,19 +564,19 @@ const Checkout = () => {
                           Full access to recruiting tools, 12 consulting calls, and expert guidance.
                         </p>
                         
-                        <div className="flex items-baseline gap-2">
-                          {getActiveDiscount() > 0 && (
-                            <span className="text-lg line-through text-muted-foreground">
-                              ${MEMBERSHIP_PRICE.toLocaleString()}
-                            </span>
-                          )}
+                        <div className="flex items-baseline gap-2 flex-wrap">
+                          <span className="text-lg line-through text-muted-foreground">
+                            ${getActiveDiscount() > 0 ? MEMBERSHIP_PRICE.toLocaleString() : program.originalPrice.toLocaleString()}
+                          </span>
                           <span className="text-2xl font-bold text-primary">
                             ${getDiscountedPrice().toLocaleString()}
                           </span>
-                          {getActiveDiscount() > 0 && (
+                          {getActiveDiscount() > 0 ? (
                             <span className="text-sm text-primary font-medium">
                               ({getActiveDiscount()}% off)
                             </span>
+                          ) : (
+                            <span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>
                           )}
                         </div>
                       </div>
