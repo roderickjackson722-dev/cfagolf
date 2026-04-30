@@ -1,5 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUp, Eye, ImagePlus, Loader2, Save, Upload } from "lucide-react";
+import { ArrowDown, ArrowUp, Eye, ImagePlus, Loader2, Plus, Save, Trash2, Upload } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
