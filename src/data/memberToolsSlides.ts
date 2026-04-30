@@ -195,7 +195,7 @@ export const memberToolsSlides: MemberToolsSlide[] = [
     index: 19,
     title: "Next Steps — How to Enroll",
     bullets: [
-      "Choose Portal ($299) or Consulting ($2,499)",
+      "Choose Portal ($299, was $499) or Consulting ($2,499, was $3,499)",
       "Klarna available on Consulting",
       "Start onboarding the same day",
     ],

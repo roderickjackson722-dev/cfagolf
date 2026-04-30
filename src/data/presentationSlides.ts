@@ -51,8 +51,8 @@ export const presentationSlides: PresentationSlide[] = [
     showOnScreen: "Share /pricing page",
     speakerNotes: [
       "Free: limited college database preview",
-      "Membership ($299 one-time): full Client Portal — database, coach tracker, scholarship calc, etc.",
-      "Consulting ($2,499 one-time): everything + 1-on-1 strategy with Rod, 12-module HS or 6-module Transfer program",
+      "Membership ($299, was $499 — one-time): full Client Portal — database, coach tracker, scholarship calc, etc.",
+      "Consulting ($2,499, was $3,499 — one-time): everything + 1-on-1 strategy with Rod, 12-module HS or 6-module Transfer program",
       "Anchor against $2,000+/year competitors charging recurring fees",
     ],
     shortcutUrl: "/pricing",
