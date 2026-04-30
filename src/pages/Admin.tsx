@@ -485,6 +485,23 @@ const Admin = () => {
                 </CardContent>
               </Card>
             </TabsContent>
+            {/* Slide Editor Tab — edit titles, bullets, images, logo for the public presentation */}
+            <TabsContent value="slide-editor">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Eye className="w-5 h-5 text-primary" />
+                    <CardTitle>Presentation Slide Editor</CardTitle>
+                  </div>
+                  <CardDescription>
+                    Edit slide titles, bullets, and upload real screenshots and your CFA logo. All share links use this same content — changes go live immediately after Save.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <AdminPresentationSlides />
+                </CardContent>
+              </Card>
+            </TabsContent>
           </Tabs>
         </div>
       </main>
