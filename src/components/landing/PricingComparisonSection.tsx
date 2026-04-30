@@ -43,6 +43,7 @@ type PricingCard = {
   title: string;
   description: string;
   price: string;
+  originalPrice?: string;
   priceSuffix?: string;
   priceNote: string;
   features: string[];
