@@ -48,6 +48,8 @@ import CoachLogin from "./pages/coach/CoachLogin";
 import CoachDashboard from "./pages/coach/CoachDashboard";
 import CoachProfileEdit from "./pages/coach/CoachProfileEdit";
 import CoachPublicProfile from "./pages/coach/CoachPublicProfile";
+import PresentationStart from "./pages/admin/Presentation";
+import PresentationMode from "./pages/admin/PresentationMode";
 
 
 const queryClient = new QueryClient();
@@ -111,6 +113,8 @@ const App = () => (
             <Route path="/coach/dashboard" element={<CoachDashboard />} />
             <Route path="/coach/profile/edit" element={<CoachProfileEdit />} />
             <Route path="/coach/:slug" element={<CoachPublicProfile />} />
+            <Route path="/admin/presentation" element={<PresentationStart />} />
+            <Route path="/admin/presentation/mode" element={<PresentationMode />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
