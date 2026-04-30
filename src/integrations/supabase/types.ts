@@ -574,6 +574,51 @@ export type Database = {
         }
         Relationships: []
       }
+      document_shares: {
+        Row: {
+          created_at: string
+          document_ids: string[]
+          expires_at: string | null
+          id: string
+          is_active: boolean
+          label: string | null
+          last_viewed_at: string | null
+          recipient_name: string | null
+          token: string
+          updated_at: string
+          user_id: string
+          view_count: number
+        }
+        Insert: {
+          created_at?: string
+          document_ids?: string[]
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          last_viewed_at?: string | null
+          recipient_name?: string | null
+          token: string
+          updated_at?: string
+          user_id: string
+          view_count?: number
+        }
+        Update: {
+          created_at?: string
+          document_ids?: string[]
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          last_viewed_at?: string | null
+          recipient_name?: string | null
+          token?: string
+          updated_at?: string
+          user_id?: string
+          view_count?: number
+        }
+        Relationships: []
+      }
       email_subscribers: {
         Row: {
           email: string
@@ -846,6 +891,48 @@ export type Database = {
           next_agenda?: string | null
           session_date?: string | null
           session_duration_minutes?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      member_documents: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          file_name: string
+          file_size: number
+          id: string
+          mime_type: string
+          storage_path: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          file_name: string
+          file_size?: number
+          id?: string
+          mime_type?: string
+          storage_path: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          file_name?: string
+          file_size?: number
+          id?: string
+          mime_type?: string
+          storage_path?: string
+          title?: string
           updated_at?: string
           user_id?: string
         }
@@ -1926,6 +2013,23 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_shared_documents: {
+        Args: { _token: string }
+        Returns: {
+          category: string
+          description: string
+          document_id: string
+          expires_at: string
+          file_name: string
+          file_size: number
+          label: string
+          mime_type: string
+          owner_name: string
+          share_id: string
+          storage_path: string
+          title: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1938,6 +2042,7 @@ export type Database = {
         Args: { referral_id: string }
         Returns: undefined
       }
+      increment_share_view: { Args: { _token: string }; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user" | "coach"
