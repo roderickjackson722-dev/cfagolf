@@ -1,5 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUp, Eye, ImagePlus, Loader2, Save, Upload } from "lucide-react";
+import { ArrowDown, ArrowUp, Eye, ImagePlus, Loader2, Plus, Save, Trash2, Upload } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +38,9 @@ export const AdminPresentationSlides = () => {
   const [savingId, setSavingId] = useState<string | null>(null);
   const [uploadingId, setUploadingId] = useState<string | null>(null);
   const [previewIdx, setPreviewIdx] = useState<number | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [adding, setAdding] = useState(false);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
 
   const load = async () => {
     setLoading(true);
@@ -114,6 +127,48 @@ export const AdminPresentationSlides = () => {
     load();
   };
 
+  const addSlide = async () => {
+    setAdding(true);
+    const nextPos = slides.length > 0 ? Math.max(...slides.map((s) => s.position)) + 1 : 1;
+    const { error } = await supabase.from("presentation_slides").insert({
+      position: nextPos,
+      title: "New Slide",
+      bullets: [],
+      is_logo_slide: false,
+    });
+    setAdding(false);
+    if (error) {
+      toast({ title: "Failed to add slide", description: error.message, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Slide added" });
+    load();
+  };
+
+  const deleteSlide = async (id: string) => {
+    setDeletingId(id);
+    const { error } = await supabase.from("presentation_slides").delete().eq("id", id);
+    setDeletingId(null);
+    setConfirmDeleteId(null);
+    if (error) {
+      toast({ title: "Delete failed", description: error.message, variant: "destructive" });
+      return;
+    }
+    // Renumber remaining slides to keep positions sequential
+    const remaining = slides.filter((s) => s.id !== id).sort((a, b) => a.position - b.position);
+    for (let i = 0; i < remaining.length; i++) {
+      const desired = i + 1;
+      if (remaining[i].position !== desired) {
+        await supabase
+          .from("presentation_slides")
+          .update({ position: desired })
+          .eq("id", remaining[i].id);
+      }
+    }
+    toast({ title: "Slide deleted" });
+    load();
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -126,9 +181,14 @@ export const AdminPresentationSlides = () => {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md border bg-muted/40 p-4 text-sm text-muted-foreground">
-        Edit the public 20-slide Member Tools presentation. All share links display the same content.
-        Changes go live immediately after Save.
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-md border bg-muted/40 p-4">
+        <div className="text-sm text-muted-foreground">
+          Edit the Member Tools presentation. Add or remove slides as needed — all share links update immediately after Save.
+        </div>
+        <Button size="sm" onClick={addSlide} disabled={adding}>
+          {adding ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : <Plus className="w-4 h-4 mr-1" />}
+          Add slide
+        </Button>
       </div>
 
       {slides.map((slide, idx) => (
@@ -160,6 +220,18 @@ export const AdminPresentationSlides = () => {
                   <Save className="w-4 h-4 mr-1" />
                 )}
                 Save
+              </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => setConfirmDeleteId(slide.id)}
+                disabled={deletingId === slide.id}
+              >
+                {deletingId === slide.id ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Trash2 className="w-4 h-4" />
+                )}
               </Button>
             </div>
           </div>
@@ -261,6 +333,26 @@ export const AdminPresentationSlides = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={confirmDeleteId !== null} onOpenChange={(o) => !o && setConfirmDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete this slide?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This permanently removes the slide and renumbers the remaining ones. This cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => confirmDeleteId && deleteSlide(confirmDeleteId)}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
