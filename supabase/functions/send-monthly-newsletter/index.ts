@@ -109,7 +109,7 @@ const handler = async (req: Request): Promise<Response> => {
     // If test_email is provided, send only to that address
     if (test_email) {
       const emailResponse = await resend.emails.send({
-        from: "CFA Golf <contact@cfa.golf>",
+        from: "College Fairway Advisors <contact@cfa.golf>",
         to: [test_email],
         subject: `[TEST] ${tipData.subject}`,
         html: getMonthlyEmailHtml(tipData as Tip, "Test User", test_email),
@@ -146,7 +146,7 @@ const handler = async (req: Request): Promise<Response> => {
       const results = await Promise.allSettled(
         batch.map(sub =>
           resend.emails.send({
-            from: "CFA Golf <contact@cfa.golf>",
+            from: "College Fairway Advisors <contact@cfa.golf>",
             to: [sub.email],
             subject: tipData.subject,
             html: getMonthlyEmailHtml(tipData as Tip, sub.full_name || undefined, sub.email),
