@@ -441,13 +441,13 @@ export const generatePreCallPrep = (): void => {
   y += 5;
   y = addSectionHeader(doc, 'FOLLOW-UP ACTIONS', y);
   const followUp = [
-    '☐ Send thank you email by:',
-    '☐ Send requested materials:',
-    '☐ Schedule next contact:',
-    '☐ Other:'
+    'Send thank you email by:',
+    'Send requested materials:',
+    'Schedule next contact:',
+    'Other:'
   ];
   followUp.forEach((item, i) => {
-    y = addTableRow(doc, item, y, i % 2 === 0);
+    y = addCheckboxRow(doc, item, y, i % 2 === 0);
   });
   
   addFooter(doc);
