@@ -65,6 +65,7 @@ const handler = async (req: Request): Promise<Response> => {
           
           <h3 style="color: #166534; margin-top: 25px;">Your CFA Golf Toolkit:</h3>
           <ul style="font-size: 15px; padding-left: 20px;">
+            <li><strong>Self-Paced Online Course</strong> - 10 modules + downloadable worksheets and a completion certificate</li>
             <li><strong>College Database</strong> - Search 1,000+ programs</li>
             <li><strong>Target School Builder</strong> - Organize your dream schools</li>
             <li><strong>Coach Tracker</strong> - Manage coach communications</li>
