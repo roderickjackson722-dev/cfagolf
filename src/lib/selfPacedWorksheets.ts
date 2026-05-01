@@ -1,6 +1,9 @@
-// Maps every "module-guide" worksheet ID in src/data/selfPacedCourse.ts to
-// concrete PDF content for the generic generateModuleWorksheetPDF generator.
+// Adapter that turns the existing self-paced worksheet generators
+// (which always call doc.save and return void) into either a download
+// or an in-app preview (returns a blob URL of the PDF) — without
+// duplicating all the per-worksheet rendering code.
 
+import jsPDF from 'jspdf';
 import { generateModuleWorksheetPDF, pdfGenerators } from '@/lib/pdfTemplates';
 import { SELF_PACED_MODULES, type ModuleWorksheet, type SelfPacedModule } from '@/data/selfPacedCourse';
 
@@ -342,31 +345,72 @@ const GUIDES: Record<string, GuideContent> = {
   },
 };
 
+// Run a generator while temporarily intercepting jsPDF.save / output to
+// either trigger a download (default) or capture a blob URL for preview.
+type Mode = 'download' | 'preview';
+
+function runWithMode<T>(mode: Mode, run: () => T): { result: T; blobUrl?: string } {
+  if (mode === 'download') return { result: run() };
+
+  // Capture blob URL by overriding save() on the prototype during the run.
+  let captured: string | undefined;
+  const proto = jsPDF.prototype as unknown as { save: (filename?: string) => jsPDF };
+  const originalSave = proto.save;
+  proto.save = function patchedSave(this: jsPDF) {
+    const blob = this.output('blob');
+    captured = URL.createObjectURL(blob);
+    return this;
+  };
+  try {
+    const result = run();
+    return { result, blobUrl: captured };
+  } finally {
+    proto.save = originalSave;
+  }
+}
+
+function generateForMode(
+  mode: Mode,
+  module: SelfPacedModule,
+  worksheet: ModuleWorksheet,
+): string | undefined {
+  const run = (): boolean => {
+    if (worksheet.generator !== 'module-guide') {
+      const fn = pdfGenerators[worksheet.generator];
+      if (!fn) return false;
+      fn();
+      return true;
+    }
+    const guide = GUIDES[worksheet.id];
+    if (!guide) return false;
+    generateModuleWorksheetPDF({
+      moduleNumber: module.moduleNumber,
+      moduleTitle: module.title,
+      worksheetTitle: worksheet.title,
+      intro: guide.intro,
+      sections: guide.sections,
+      filename: guide.filename,
+    });
+    return true;
+  };
+
+  const { result, blobUrl } = runWithMode(mode, run);
+  if (!result) return undefined;
+  return mode === 'preview' ? blobUrl : 'ok';
+}
+
 export function downloadModuleWorksheet(
   module: SelfPacedModule,
   worksheet: ModuleWorksheet,
 ): boolean {
-  if (worksheet.generator !== 'module-guide') {
-    const fn = pdfGenerators[worksheet.generator];
-    if (fn) {
-      fn();
-      return true;
-    }
-    return false;
-  }
+  return generateForMode('download', module, worksheet) !== undefined;
+}
 
-  const guide = GUIDES[worksheet.id];
-  if (!guide) return false;
-
-  generateModuleWorksheetPDF({
-    moduleNumber: module.moduleNumber,
-    moduleTitle: module.title,
-    worksheetTitle: worksheet.title,
-    intro: guide.intro,
-    sections: guide.sections,
-    filename: guide.filename,
-  });
-  return true;
+export function previewModuleWorksheet(
+  module: SelfPacedModule,
+  worksheet: ModuleWorksheet,
+): string | undefined {
+  return generateForMode('preview', module, worksheet);
 }
 
 export { SELF_PACED_MODULES };
