@@ -60,6 +60,8 @@ import DocumentVault from "./pages/DocumentVault";
 import SharedDocuments from "./pages/SharedDocuments";
 import SelfPaced from "./pages/SelfPaced";
 import SelfPacedModule from "./pages/SelfPacedModule";
+import TermsOfUse from "./pages/TermsOfUse";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 
 const queryClient = new QueryClient();
@@ -133,6 +135,9 @@ const App = () => (
             <Route path="/shared/:token" element={<SharedDocuments />} />
             <Route path="/self-paced" element={<SelfPaced />} />
             <Route path="/self-paced/:slug" element={<SelfPacedModule />} />
+            <Route path="/terms-of-use" element={<TermsOfUse />} />
+            <Route path="/terms" element={<Navigate to="/terms-of-use" replace />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/m/swing" element={<SwingGallery />} />
             <Route path="/m/swing/:userId" element={<SwingProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
