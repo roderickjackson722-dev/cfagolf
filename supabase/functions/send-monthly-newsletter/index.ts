@@ -33,9 +33,13 @@ function getMonthlyEmailHtml(tip: Tip, subscriberName?: string, subscriberEmail?
     <body style="font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9fafb;">
       <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
 
+        <div style="background: white; padding: 24px 30px 12px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+          <img src="https://hmycumiukfdbfhplgbri.supabase.co/storage/v1/object/public/email-assets/cfa-logo.png" alt="College Fairway Advisors" width="160" style="max-width: 160px; height: auto; display: inline-block;" />
+        </div>
+
         <div style="background: linear-gradient(135deg, #166534 0%, #15803d 100%); color: white; padding: 30px; text-align: center;">
           <h1 style="margin: 0 0 5px 0; font-size: 24px;">${tip.title}</h1>
-          <p style="margin: 0; opacity: 0.9; font-size: 14px;">Monthly Recruiting Tip from CFA Golf</p>
+          <p style="margin: 0; opacity: 0.9; font-size: 14px;">Monthly Recruiting Tip from College Fairway Advisors</p>
         </div>
 
         <div style="padding: 30px;">
@@ -51,7 +55,8 @@ function getMonthlyEmailHtml(tip: Tip, subscriberName?: string, subscriberEmail?
           </div>
 
           <div style="text-align: center; margin: 30px 0;">
-            <a href="https://cfagolf.lovable.app/login" style="display: inline-block; background-color: #166534; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">Open Your CFA Toolkit →</a>
+            <a href="https://cfa.golf/pricing" style="display: inline-block; background-color: #166534; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">Explore CFA Programs →</a>
+            <p style="font-size: 12px; color: #6b7280; margin: 10px 0 0;">Already a member? <a href="https://cfa.golf/login" style="color: #166534;">Log in here</a></p>
           </div>
 
           <p style="font-size: 15px;">Keep grinding — your college golf future is being built right now!</p>

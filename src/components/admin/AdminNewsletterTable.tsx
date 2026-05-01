@@ -212,9 +212,16 @@ export function AdminNewsletterTable() {
 
                     {isPreviewing && (
                       <div className="mt-4 border rounded-lg overflow-hidden">
+                        <div className="bg-white p-4 text-center border-b">
+                          <img
+                            src="https://hmycumiukfdbfhplgbri.supabase.co/storage/v1/object/public/email-assets/cfa-logo.png"
+                            alt="College Fairway Advisors"
+                            className="h-16 mx-auto"
+                          />
+                        </div>
                         <div className="bg-primary text-primary-foreground p-4 text-center">
                           <h3 className="font-bold text-lg">{tip.title}</h3>
-                          <p className="text-sm opacity-90">Monthly Recruiting Tip from CFA Golf</p>
+                          <p className="text-sm opacity-90">Monthly Recruiting Tip from College Fairway Advisors</p>
                         </div>
                         <div className="p-4 bg-card text-sm text-card-foreground">
                           <p className="mb-2">Hey Golf Family,</p>
@@ -226,6 +233,10 @@ export function AdminNewsletterTable() {
                                 <li key={i}>{item}</li>
                               ))}
                             </ul>
+                          </div>
+                          <div className="text-center mt-4">
+                            <span className="inline-block bg-primary text-primary-foreground px-5 py-2 rounded-md font-semibold text-sm">Explore CFA Programs →</span>
+                            <p className="text-xs text-muted-foreground mt-2">Already a member? Log in here</p>
                           </div>
                         </div>
                       </div>
