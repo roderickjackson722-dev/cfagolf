@@ -512,7 +512,7 @@ export function AuthForm() {
           <ArrowLeft className="mr-2 w-4 h-4" />
           Back
         </Button>
-        <Button onClick={handlePayAndSignUp} className="flex-1" disabled={isLoading}>
+        <Button onClick={handlePayAndSignUp} className="flex-1" disabled={isLoading || !agreedToTerms}>
           {isLoading ? (
             <>
               <Loader2 className="mr-2 w-4 h-4 animate-spin" />
