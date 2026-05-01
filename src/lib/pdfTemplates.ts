@@ -947,8 +947,10 @@ export const generateModuleWorksheetPDF = (input: ModuleWorksheetPDFInput): void
         }
         doc.setFontSize(10);
         doc.setFont('helvetica', 'normal');
-        const wrapped = doc.splitTextToSize(`☐  ${line}`, pageWidth - 28);
-        doc.text(wrapped, 14, y + 5.5);
+        doc.setTextColor(0, 0, 0);
+        drawCheckbox(doc, 14, y + 2.5);
+        const wrapped = doc.splitTextToSize(line, pageWidth - 32);
+        doc.text(wrapped, 21, y + 5.5);
         y += Math.max(10, wrapped.length * 5 + 4);
       }
     });
