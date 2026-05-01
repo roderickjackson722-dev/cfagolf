@@ -26,6 +26,9 @@ const toolkitFeatures = [
 ];
 
 const portalFeatures = [
+  "10 Self-Paced Course Modules (Intro + 9)",
+  "Downloadable Worksheets & Templates",
+  "Completion Certificate",
   "Full College Golf Database Access",
   "Target School List Builder",
   "Tournament Result Tracker",
@@ -33,11 +36,11 @@ const portalFeatures = [
   "Campus Visit Planner",
   "Scholarship Calculator",
   "Recruiting Timeline & Worksheets",
-  "LPGA & PGA Pro Webinars",
 ];
 
 const consultingFeatures = [
-  "Everything in Annual Portal Membership",
+  "Everything in the Self-Paced Online Course",
+  "LPGA & PGA Pro Webinars",
   "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
@@ -78,13 +81,13 @@ const tiers: TierCard[] = [
     icon: Package,
   },
   {
-    title: "Annual Portal Membership",
-    description: "Full platform access & recruiting tools",
+    title: "Self-Paced Online Course",
+    description: "Self-guided recruiting course + full platform access",
     price: "$299",
     originalPrice: "$499",
-    priceNote: "One-time annual purchase",
+    priceNote: "One-time fee • Lifetime course access",
     features: portalFeatures,
-    ctaLabel: "Subscribe Now",
+    ctaLabel: "Enroll Now",
     ctaLink: "/checkout?plan=digital",
     icon: Monitor,
     badge: "Sale",
