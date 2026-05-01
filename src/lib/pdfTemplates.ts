@@ -90,6 +90,29 @@ const addTableRow = (doc: jsPDF, label: string, y: number, isEven: boolean = fal
   return y + 10;
 };
 
+// Draw an actual checkbox square (jsPDF default fonts cannot render
+// the Unicode ☐ glyph, which renders as a garbage character such as "&").
+const drawCheckbox = (doc: jsPDF, x: number, y: number, size = 3.5) => {
+  doc.setDrawColor(80, 80, 80);
+  doc.setLineWidth(0.3);
+  doc.rect(x, y, size, size);
+};
+
+// Row with a real drawn checkbox + label (replaces "☐ ..." strings).
+const addCheckboxRow = (doc: jsPDF, label: string, y: number, isEven: boolean): number => {
+  const pageWidth = doc.internal.pageSize.getWidth();
+  if (isEven) {
+    doc.setFillColor(245, 243, 239);
+    doc.rect(10, y, pageWidth - 20, 8, 'F');
+  }
+  drawCheckbox(doc, 14, y + 2.5);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(0, 0, 0);
+  doc.text(label, 21, y + 5.5);
+  return y + 10;
+};
+
 // 1. Target School List Builder
 export const generateTargetSchoolList = (): void => {
   const doc = new jsPDF();
