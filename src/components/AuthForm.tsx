@@ -52,6 +52,7 @@ export function AuthForm() {
   const [isCheckingReferral, setIsCheckingReferral] = useState(false);
   
   const [isLoading, setIsLoading] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const { signIn, signUp } = useAuth();
 
   // Check for referral code in URL
@@ -187,6 +188,10 @@ export function AuthForm() {
     if (!signUpEmail || !signUpPassword || !fullName) {
       toast.error('Please complete all required fields');
       setSignUpStep(1);
+      return;
+    }
+    if (!agreedToTerms) {
+      toast.error('Please agree to the Terms of Use and Privacy Policy to continue');
       return;
     }
 
