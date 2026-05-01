@@ -673,7 +673,8 @@ export const generateTimeline = (): void => {
     y = addSectionHeader(doc, m.month, y);
     m.tasks.forEach((task, i) => {
       doc.setFontSize(10);
-      doc.text(`☐ ${task}`, 18, y + 5);
+      drawCheckbox(doc, 18, y + 2.5);
+      doc.text(task, 25, y + 5);
       y += 8;
     });
     y += 3;
@@ -705,7 +706,8 @@ export const generateTimeline = (): void => {
     y = addSectionHeader(doc, m.month, y);
     m.tasks.forEach((task) => {
       doc.setFontSize(10);
-      doc.text(`☐ ${task}`, 18, y + 5);
+      drawCheckbox(doc, 18, y + 2.5);
+      doc.text(task, 25, y + 5);
       y += 8;
     });
     y += 3;
