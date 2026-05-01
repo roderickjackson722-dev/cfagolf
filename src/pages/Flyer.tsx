@@ -84,7 +84,7 @@ const Flyer = () => {
           <div>
             <div className="bg-cfa-sage/40 px-3 py-1.5 rounded-t-md">
               <h2 className="font-display font-bold text-foreground text-[11px] uppercase tracking-wide">
-                What's Included in Your Membership
+                What's Included in Your Program
               </h2>
             </div>
             <div className="border border-border rounded-b-md divide-y divide-border">

@@ -56,7 +56,7 @@ const Welcome = () => {
         <section className="pb-12 md:pb-16">
           <div className="container max-w-4xl mx-auto px-4">
             <h2 className="text-2xl font-display font-semibold text-center mb-8 text-foreground">
-              What's Included in Your Membership
+              What's Included in Your Program
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {benefits.map((b) => (

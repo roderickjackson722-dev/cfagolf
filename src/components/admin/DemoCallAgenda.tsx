@@ -60,8 +60,8 @@ const AGENDA: AgendaSection[] = [
         timeRange: '4:30 – 5:00',
         title: 'Slide 2 — What We Offer',
         bullets: [
-          'Three paths: E-Book, Membership (self-guided), Consulting (1-on-1 with Rod).',
-          'Tell them you\'ll show what\'s inside Membership/Consulting and recommend the right fit at the end.',
+          'Three paths: E-Book, Self-Paced Online Course (self-guided), 1-on-1 Consulting (with Rod).',
+          'Tell them you\'ll show what\'s inside the Self-Paced Course / Consulting and recommend the right fit at the end.',
         ],
       },
       {

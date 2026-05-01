@@ -78,7 +78,7 @@ const PaymentSuccess = () => {
           ) : verified ? (
             <>
               <p className="text-muted-foreground">
-                Your membership is now active! You have full access to all CFA Golf recruiting tools and resources.
+                Your program access is now active! You have full access to all CFA Golf recruiting tools and resources.
               </p>
               <Button 
                 onClick={() => {
