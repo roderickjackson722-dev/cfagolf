@@ -352,20 +352,44 @@ type Mode = 'download' | 'preview';
 function runWithMode<T>(mode: Mode, run: () => T): { result: T; blobUrl?: string } {
   if (mode === 'download') return { result: run() };
 
-  // Capture blob URL by overriding save() on the prototype during the run.
+  // In jsPDF v4 `save` is set as an OWN property on each instance (not on
+  // the prototype), so patching the prototype has no effect. Instead we
+  // wrap the jsPDF constructor on globalThis for the duration of the run
+  // and override `save` on every new instance to capture a blob URL.
   let captured: string | undefined;
-  const proto = jsPDF.prototype as unknown as { save: (filename?: string) => jsPDF };
-  const originalSave = proto.save;
-  proto.save = function patchedSave(this: jsPDF) {
+  const Ctor = jsPDF as unknown as new (...args: unknown[]) => jsPDF;
+  const originalInit = (Ctor.prototype as unknown as { __cfaPatched?: boolean }).__cfaPatched;
+  // Patch via wrapping the prototype's constructor behavior using a Proxy is heavy.
+  // Simpler: monkey-patch a hook that selfPaced generators use — we override
+  // every instance's `save` right after construction by patching the API.
+  // jsPDF exposes API on jsPDF.API; methods added there appear on instances.
+  const api = (jsPDF as unknown as { API: Record<string, unknown> }).API;
+  const originalApiSave = api.save as ((filename?: string) => jsPDF) | undefined;
+  const patchedSave = function patchedSave(this: jsPDF) {
     const blob = this.output('blob');
     captured = URL.createObjectURL(blob);
     return this;
   };
+  api.save = patchedSave;
+  // Also patch any instance created during the run by intercepting via a
+  // wrapped constructor. We replace the symbol used by callers (`jsPDF`)
+  // is not feasible at runtime here, so instead we rely on the fact that
+  // generators import `jsPDF` and call `new jsPDF()`. Override save on
+  // each via patching the prototype AFTER construction is impossible without
+  // hooking the constructor — so we use a global construction hook by
+  // replacing `jsPDF.prototype`'s constructor's `init` via the API hook.
+  // jsPDF copies API properties onto each instance during init, so setting
+  // api.save above is sufficient for instances created from now on.
+  void originalInit;
   try {
     const result = run();
     return { result, blobUrl: captured };
   } finally {
-    proto.save = originalSave;
+    if (originalApiSave) {
+      api.save = originalApiSave;
+    } else {
+      delete api.save;
+    }
   }
 }
 
