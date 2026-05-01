@@ -1,22 +1,33 @@
 import { useState } from 'react';
 import { Navigate, useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, FileDown, Lightbulb, ListChecks, Loader2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Eye, FileDown, Lightbulb, ListChecks, Loader2 } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Progress } from '@/components/ui/progress';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
-import { SELF_PACED_MODULES, getModuleBySlug } from '@/data/selfPacedCourse';
+import { SELF_PACED_MODULES, getModuleBySlug, type ModuleWorksheet } from '@/data/selfPacedCourse';
 import { downloadModuleWorksheet } from '@/lib/selfPacedWorksheets';
+import { useSelfPacedChecklist } from '@/hooks/useSelfPacedChecklist';
+import { WorksheetPreviewDialog } from '@/components/selfpaced/WorksheetPreviewDialog';
 import { toast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 const SelfPacedModule = () => {
   const { slug } = useParams<{ slug: string }>();
   const { user, hasPaidAccess, loading } = useAuth();
   const { data: isAdmin } = useIsAdmin();
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
+  const [previewWs, setPreviewWs] = useState<ModuleWorksheet | null>(null);
+
+  const mod = slug ? getModuleBySlug(slug) : undefined;
+  // Hooks must always run; provide a safe fallback module while loading/redirecting.
+  const safeModule = mod ?? SELF_PACED_MODULES[0];
+  const checklist = useSelfPacedChecklist(safeModule);
 
   if (loading) {
     return (
@@ -27,8 +38,6 @@ const SelfPacedModule = () => {
   }
   if (!user) return <Navigate to="/login" replace />;
   if (!isAdmin && !hasPaidAccess) return <Navigate to="/pricing" replace />;
-
-  const mod = slug ? getModuleBySlug(slug) : undefined;
   if (!mod) return <Navigate to="/self-paced" replace />;
 
   const idx = SELF_PACED_MODULES.findIndex((m) => m.slug === mod.slug);
@@ -43,7 +52,7 @@ const SelfPacedModule = () => {
       const ok = downloadModuleWorksheet(mod, ws);
       if (!ok) throw new Error('Worksheet not configured');
       toast({ title: 'Download started', description: `${ws.title}.pdf` });
-    } catch (err) {
+    } catch {
       toast({
         title: 'Download failed',
         description: 'Please refresh and try again.',
@@ -53,6 +62,10 @@ const SelfPacedModule = () => {
       setTimeout(() => setDownloadingId(null), 600);
     }
   };
+
+  const checklistProgress = Math.round(
+    (checklist.completedCount / Math.max(checklist.total, 1)) * 100,
+  );
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -68,9 +81,16 @@ const SelfPacedModule = () => {
 
           {/* Header */}
           <div className="mb-8">
-            <Badge variant="outline" className="mb-2">
-              {mod.moduleNumber === 0 ? 'Introduction' : `Module ${mod.moduleNumber}`}
-            </Badge>
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <Badge variant="outline">
+                {mod.moduleNumber === 0 ? 'Introduction' : `Module ${mod.moduleNumber}`}
+              </Badge>
+              {checklist.allComplete && (
+                <Badge variant="default" className="gap-1">
+                  <CheckCircle2 className="w-3 h-3" /> Complete
+                </Badge>
+              )}
+            </div>
             <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2">
               {mod.title}
             </h1>
@@ -115,7 +135,7 @@ const SelfPacedModule = () => {
             </CardContent>
           </Card>
 
-          {/* Action Checklist */}
+          {/* Action Checklist (interactive, persisted) */}
           <Card className="mb-6">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
@@ -123,17 +143,43 @@ const SelfPacedModule = () => {
                 Action Checklist
               </CardTitle>
               <CardDescription>
-                Complete these before moving to the next module.
+                Check items off as you complete them — your progress saves automatically and marks the
+                module complete once everything is done.
               </CardDescription>
             </CardHeader>
             <CardContent>
+              <div className="mb-4">
+                <div className="flex items-center justify-between text-xs text-muted-foreground mb-1.5">
+                  <span>Checklist progress</span>
+                  <span>
+                    {checklist.completedCount} / {checklist.total}
+                  </span>
+                </div>
+                <Progress value={checklistProgress} className="h-2" />
+              </div>
               <ul className="space-y-2">
-                {mod.checklist.map((item, i) => (
-                  <li key={i} className="text-sm text-foreground flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
+                {mod.checklist.map((item, i) => {
+                  const done = !!checklist.checked[String(i)];
+                  return (
+                    <li key={i} className="flex items-start gap-3 py-1.5">
+                      <Checkbox
+                        id={`chk-${mod.slug}-${i}`}
+                        checked={done}
+                        onCheckedChange={() => checklist.toggle(i)}
+                        className="mt-0.5"
+                      />
+                      <label
+                        htmlFor={`chk-${mod.slug}-${i}`}
+                        className={cn(
+                          'text-sm leading-relaxed cursor-pointer flex-1',
+                          done ? 'line-through text-muted-foreground' : 'text-foreground',
+                        )}
+                      >
+                        {item}
+                      </label>
+                    </li>
+                  );
+                })}
               </ul>
             </CardContent>
           </Card>
@@ -146,36 +192,41 @@ const SelfPacedModule = () => {
                 Downloadable Worksheets
               </CardTitle>
               <CardDescription>
-                Print and fill in. Each worksheet is a standalone PDF you can save and share.
+                Preview each worksheet in-app before downloading the printable PDF.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
               {mod.worksheets.map((ws) => (
                 <div
                   key={ws.id}
-                  className="flex items-center justify-between gap-3 p-3 rounded-lg border bg-background"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-lg border bg-background"
                 >
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-sm text-foreground">{ws.title}</p>
                     <p className="text-xs text-muted-foreground">{ws.description}</p>
                   </div>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleDownload(ws.id)}
-                    disabled={downloadingId === ws.id}
-                  >
-                    {downloadingId === ws.id ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-                        ...
-                      </>
-                    ) : (
-                      <>
-                        <FileDown className="w-4 h-4 mr-1" /> PDF
-                      </>
-                    )}
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button size="sm" variant="ghost" onClick={() => setPreviewWs(ws)}>
+                      <Eye className="w-4 h-4 mr-1" /> Preview
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleDownload(ws.id)}
+                      disabled={downloadingId === ws.id}
+                    >
+                      {downloadingId === ws.id ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                          ...
+                        </>
+                      ) : (
+                        <>
+                          <FileDown className="w-4 h-4 mr-1" /> PDF
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               ))}
             </CardContent>
@@ -207,6 +258,13 @@ const SelfPacedModule = () => {
         </div>
       </main>
       <Footer />
+
+      <WorksheetPreviewDialog
+        module={mod}
+        worksheet={previewWs}
+        open={!!previewWs}
+        onOpenChange={(o) => !o && setPreviewWs(null)}
+      />
     </div>
   );
 };
