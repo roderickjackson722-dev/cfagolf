@@ -45,7 +45,7 @@ export function PaywallGate() {
             <Link to="/pricing" className="block">
               <Button className="w-full rounded-full h-12 text-base cfa-gradient hover:opacity-90" size="lg">
                 <CreditCard className="w-5 h-5 mr-2" />
-                View Membership Options
+                View Pricing & Programs
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>

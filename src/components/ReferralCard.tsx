@@ -49,7 +49,7 @@ export function ReferralCard() {
         <CardContent>
           <div className="text-center py-4">
             <p className="text-muted-foreground mb-4">
-              Create your unique referral code to start sharing. Friends who sign up with your code get 10% off their membership!
+              Create your unique referral code to start sharing. Friends who sign up with your code get 10% off their purchase!
             </p>
             <Button onClick={handleCreateCode} disabled={isCreating}>
               {isCreating ? (
@@ -145,7 +145,7 @@ export function ReferralCard() {
           <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
             <li>Share your unique referral code or link with friends</li>
             <li>They enter your code during checkout</li>
-            <li>They get {referral.discount_percent}% off their membership</li>
+            <li>They get {referral.discount_percent}% off their purchase</li>
           </ol>
         </div>
       </CardContent>
