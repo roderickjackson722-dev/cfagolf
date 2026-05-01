@@ -72,9 +72,9 @@ const featureCategories: FeatureCategory[] = [
     features: [
       {
         title: "LPGA & PGA Pro Webinars",
-        description: "Exclusive partnered webinars featuring LPGA and PGA professionals sharing insights on collegiate golf and beyond.",
+        description: "Exclusive partnered webinars featuring LPGA and PGA professionals sharing insights on collegiate golf and beyond. Available in 1-on-1 Consulting only.",
         consulting: true,
-        digital: true,
+        digital: false,
       },
       {
         title: "College Coach Q&A Sessions",
@@ -212,7 +212,7 @@ export function PricingFeatureAccordion() {
           </p>
         </div>
         <div className="text-center w-24 sm:w-32">
-          <Badge variant="secondary">Annual Portal</Badge>
+          <Badge variant="secondary">Self-Paced</Badge>
           <p className="text-[10px] text-muted-foreground mt-1">
             <span className="line-through mr-1">$499</span>$299
           </p>

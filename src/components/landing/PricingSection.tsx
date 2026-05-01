@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 
 const consultingHighlights = [
-  "Everything in Annual Portal Membership",
+  "Everything in the Self-Paced Online Course",
+  "LPGA & PGA Pro Webinars",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
   "Academic & Eligibility Evaluation",
@@ -18,13 +19,15 @@ const consultingHighlights = [
 ];
 
 const digitalHighlights = [
+  "10 Self-Paced Course Modules (Intro + 9)",
+  "Downloadable Worksheets & Templates",
+  "Completion Certificate",
   "Full College Golf Database Access",
   "Target School List Builder",
   "Tournament Result Tracker",
   "Coach Contact Tracker",
   "Campus Visit Planner",
   "Scholarship Calculator",
-  "LPGA & PGA Pro Webinars",
   "Recruiting Timeline & Worksheets"
 ];
 
@@ -92,22 +95,22 @@ export function PricingSection() {
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          {/* Annual Portal Membership */}
+          {/* Self-Paced Online Course */}
           <Card className="relative overflow-hidden border-2 border-border shadow-xl">
             <div className="absolute top-0 right-0">
-              <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Service</Badge>
+              <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Paced</Badge>
             </div>
             <CardHeader className="text-center pb-4 pt-8">
               <CardTitle className="text-2xl font-display font-bold text-foreground">
-                Annual Portal Membership
+                Self-Paced Online Course
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                Full platform access & recruiting tools
+                Self-guided recruiting course + full platform access
               </CardDescription>
               <div className="pt-6">
                 <span className="text-3xl text-muted-foreground line-through mr-2 align-middle">$499</span>
                 <span className="text-5xl font-bold text-foreground">$299</span>
-                <p className="text-sm text-muted-foreground mt-2">One-time annual purchase</p>
+                <p className="text-sm text-muted-foreground mt-2">One-time fee • Lifetime course access</p>
               </div>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -123,7 +126,7 @@ export function PricingSection() {
               </div>
               <Link to="/checkout?plan=digital" className="block">
                 <Button size="lg" className="w-full h-14 text-lg font-semibold rounded-full cfa-gradient hover:opacity-90 transition-opacity">
-                  Subscribe Now
+                  Enroll Now
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>

@@ -18,6 +18,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
 const digitalFeatures = [
+  "10 Self-Paced Course Modules (Intro + 9)",
+  "Downloadable Worksheets & Templates",
+  "Completion Certificate",
   "Full College Golf Database Access",
   "Target School List Builder",
   "Tournament Result Tracker",
@@ -25,10 +28,10 @@ const digitalFeatures = [
   "Campus Visit Planner",
   "Scholarship Calculator",
   "Recruiting Timeline & Worksheets",
-  "LPGA & PGA Pro Webinars",
 ];
 
 const consultingExtras = [
+  "LPGA & PGA Pro Webinars",
   "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
@@ -110,25 +113,25 @@ export function ServicesSection() {
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          {/* Annual Portal Membership */}
+          {/* Self-Paced Online Course */}
           <Card className="relative overflow-hidden border-2 border-border shadow-xl group card-hover">
             <div className="absolute top-0 right-0">
-              <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Service</Badge>
+              <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Paced</Badge>
             </div>
             <CardHeader className="text-center pb-4 pt-8">
               <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary transition-colors">
                 <Monitor className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
               </div>
               <CardTitle className="text-2xl font-display font-bold text-foreground">
-                Annual Portal Membership
+                Self-Paced Online Course
               </CardTitle>
               <CardDescription className="text-muted-foreground">
-                Full platform access & recruiting tools
+                Self-guided recruiting course + full platform access
               </CardDescription>
               <div className="pt-4">
                 <span className="text-2xl text-muted-foreground line-through mr-2 align-middle">$499</span>
                 <span className="text-4xl font-bold text-foreground">$299</span>
-                <p className="text-sm text-muted-foreground mt-1">One-time annual purchase</p>
+                <p className="text-sm text-muted-foreground mt-1">One-time fee • Lifetime course access</p>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -147,7 +150,7 @@ export function ServicesSection() {
               </div>
               <Link to="/checkout?plan=digital" className="block">
                 <Button size="lg" variant="outline" className="w-full h-12 font-semibold rounded-full">
-                  Subscribe Now
+                  Enroll Now
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>

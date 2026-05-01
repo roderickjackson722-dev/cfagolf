@@ -56,31 +56,31 @@ export function PricingTierCards() {
         <div className="flex-1 h-px bg-border" />
       </div>
 
-      {/* Annual Portal Membership */}
+      {/* Self-Paced Online Course */}
       <Card className="relative overflow-hidden border-2 border-border shadow-xl">
         <div className="absolute top-0 right-0">
-          <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Service</Badge>
+          <Badge variant="secondary" className="rounded-none rounded-bl-lg">Self-Paced</Badge>
         </div>
         <CardHeader className="text-center pb-4 pt-8">
           <CardTitle className="text-2xl font-display font-bold text-foreground">
-            Annual Portal Membership
+            Self-Paced Online Course
           </CardTitle>
           <CardDescription className="text-muted-foreground">
-            Full platform access & recruiting tools
+            Self-guided recruiting course + full platform access
           </CardDescription>
           <div className="pt-6">
             <span className="text-3xl text-muted-foreground line-through mr-2 align-middle">$499</span>
             <span className="text-5xl font-bold text-foreground">$299</span>
-            <p className="text-sm text-muted-foreground mt-2">One-time annual purchase</p>
+            <p className="text-sm text-muted-foreground mt-2">One-time fee • Lifetime course access</p>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground text-center">
-            Access our full suite of digital recruiting tools, college database, and self-paced resources.
+            A 10-module self-paced course (Intro + 9) with downloadable worksheets, a completion certificate, and full access to our college database and recruiting tools.
           </p>
           <Link to="/checkout?plan=digital" className="block">
             <Button size="lg" variant="outline" className="w-full h-14 text-lg font-semibold rounded-full">
-              Subscribe Now
+              Enroll Now
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
