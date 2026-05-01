@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
+import { ProtectedShell } from "@/components/ProtectedShell";
 
 // Pages
 import Landing from "./pages/Landing";
@@ -76,6 +77,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <VisitorTracker />
+      <ProtectedShell />
       
       <TooltipProvider>
         <Toaster />
