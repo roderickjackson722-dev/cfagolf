@@ -215,19 +215,19 @@ export const generateVideoSpecs = (): void => {
   // Required Shots
   y = addSectionHeader(doc, 'REQUIRED SHOTS CHECKLIST', y);
   const shots = [
-    '☐ Driver - Face on view (3 swings)',
-    '☐ Driver - Down the line view (3 swings)',
-    '☐ Iron - Face on view (3 swings)',
-    '☐ Iron - Down the line view (3 swings)',
-    '☐ Wedge - Face on & down line',
-    '☐ Putting - Face on view',
-    '☐ Putting - Down the line view',
-    '☐ Chipping - Various lies',
-    '☐ Bunker shot',
-    '☐ On-course playing footage'
+    'Driver - Face on view (3 swings)',
+    'Driver - Down the line view (3 swings)',
+    'Iron - Face on view (3 swings)',
+    'Iron - Down the line view (3 swings)',
+    'Wedge - Face on & down line',
+    'Putting - Face on view',
+    'Putting - Down the line view',
+    'Chipping - Various lies',
+    'Bunker shot',
+    'On-course playing footage'
   ];
   shots.forEach((shot, i) => {
-    y = addTableRow(doc, shot, y, i % 2 === 0);
+    y = addCheckboxRow(doc, shot, y, i % 2 === 0);
   });
   
   // Page 2 - Tips
