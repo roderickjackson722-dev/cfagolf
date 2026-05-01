@@ -1,25 +1,75 @@
 import jsPDF from 'jspdf';
 import cfaWatermark from '@/assets/cfa-logo-watermark.jpg';
 
+// ---------------------------------------------------------------------------
+// Per-user PDF watermarking
+// ---------------------------------------------------------------------------
+// Callers (UI components that generate PDFs) should call setPdfRecipient()
+// with the logged-in user's name + email before invoking any of the PDF
+// generators in this file. Every generated page will then be stamped with a
+// faint diagonal "Name • Email — CFA Confidential" label so leaked copies are
+// traceable to the original recipient.
+// ---------------------------------------------------------------------------
+let currentRecipient: { name?: string; email?: string } = {};
+
+export function setPdfRecipient(recipient: { name?: string | null; email?: string | null }) {
+  currentRecipient = {
+    name: recipient.name?.trim() || undefined,
+    email: recipient.email?.trim() || undefined,
+  };
+}
+
+export function clearPdfRecipient() {
+  currentRecipient = {};
+}
+
+const getRecipientLabel = (): string => {
+  const parts = [currentRecipient.name, currentRecipient.email].filter(Boolean);
+  return parts.join(' • ');
+};
+
 // Helper to add watermark to each page
 const addWatermark = (doc: jsPDF) => {
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
-  
-  // Add semi-transparent watermark in center
+
+  // Add semi-transparent CFA logo watermark in center
   doc.saveGraphicsState();
   // @ts-ignore - setGState exists in jsPDF
   doc.setGState(new doc.GState({ opacity: 0.08 }));
-  
-  // Calculate centered position for watermark
+
   const watermarkWidth = 120;
   const watermarkHeight = 80;
   const x = (pageWidth - watermarkWidth) / 2;
   const y = (pageHeight - watermarkHeight) / 2;
-  
   doc.addImage(cfaWatermark, 'JPEG', x, y, watermarkWidth, watermarkHeight);
   doc.restoreGraphicsState();
+
+  // Add per-user diagonal text watermark (traceable identifier)
+  const label = getRecipientLabel();
+  if (label) {
+    doc.saveGraphicsState();
+    // @ts-ignore - setGState exists in jsPDF
+    doc.setGState(new doc.GState({ opacity: 0.18 }));
+    doc.setTextColor(26, 46, 37); // forest green
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+
+    // Repeat the label across the page on a -30deg diagonal so it appears
+    // in screenshots no matter what region the user crops.
+    const text = `${label}  —  CFA Confidential`;
+    const stepY = 70;
+    const stepX = 180;
+    for (let yy = -20; yy < pageHeight + stepY; yy += stepY) {
+      for (let xx = -40; xx < pageWidth + stepX; xx += stepX) {
+        doc.text(text, xx, yy, { angle: 30 });
+      }
+    }
+    doc.restoreGraphicsState();
+    doc.setTextColor(0, 0, 0);
+  }
 };
+
 
 // Helper to add header to PDF
 const addHeader = (doc: jsPDF, title: string) => {
