@@ -186,4 +186,37 @@
   .btn-secondary {
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors;
   }
+
+  /* Content protection: prevent text selection on protected pages.
+     Inputs, textareas, and contenteditable elements remain selectable. */
+  body.cfa-protected {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  body.cfa-protected input,
+  body.cfa-protected textarea,
+  body.cfa-protected [contenteditable="true"] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  /* Hide watermark when printing is attempted (it stays visible on screenshots). */
+  @media print {
+    body.cfa-protected * {
+      visibility: hidden !important;
+    }
+    body.cfa-protected::after {
+      content: "Printing is disabled for protected member content. © College Fairway Advisors";
+      visibility: visible;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Inter, sans-serif;
+      font-size: 14pt;
+    }
+  }
 }
