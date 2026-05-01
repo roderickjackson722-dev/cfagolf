@@ -85,7 +85,7 @@ export function ServicesSection() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-xs text-muted-foreground text-center font-medium uppercase tracking-wide">
-                Everything in Annual Portal, plus:
+                Everything in the Self-Paced Online Course, plus:
               </p>
               <div className="space-y-2">
                 {consultingExtras.map((feature, index) => (
