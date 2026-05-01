@@ -61,7 +61,7 @@ const faqs = [
   },
   {
     question: 'What is the investment for your services?',
-    answer: 'Our 1-on-1 Consulting package is a one-time $2,499 investment that includes 12 consulting calls and full platform access. We also offer our Annual Portal Membership at $299 for self-guided recruiting tools, and our "Want to Play College Golf?" ebook for $25. Book a free 30-minute consultation to discuss which option is the best fit for your family.',
+    answer: 'Our 1-on-1 Consulting package is a one-time $2,499 investment that includes 12 consulting calls and full platform access. We also offer our Self-Paced Online Course at $299 — a one-time fee for lifetime access to the full recruiting curriculum and platform tools — and our "Want to Play College Golf?" ebook for $25. Book a free 30-minute consultation to discuss which option is the best fit for your family.',
   },
   {
     question: 'Do you guarantee a scholarship?',

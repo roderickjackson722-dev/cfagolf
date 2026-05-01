@@ -132,7 +132,7 @@ const AGENDA: AgendaSection[] = [
         timeRange: '8:30 – 9:00',
         title: 'Slide 15 — Next Steps / How to Enroll',
         bullets: [
-          'Portal $299 (was $499, one-time) or Consulting $2,499 (was $3,499, one-time, Klarna available).',
+          'Self-Paced Online Course $299 (was $499, one-time) or 1-on-1 Consulting $2,499 (was $3,499, one-time, Klarna available).',
           '"You can start onboarding the same day."',
         ],
       },
@@ -155,7 +155,7 @@ const AGENDA: AgendaSection[] = [
         timeRange: '11:00 – 13:00',
         title: 'Recommend the right tier & present next step',
         bullets: [
-          'Based on discovery: "I\'d start you with [Portal / Consulting] because…"',
+          'Based on discovery: "I\'d start you with [Self-Paced Course / Consulting] because…"',
           'Walk them to the checkout or Calendly link live — pick a time together.',
         ],
       },

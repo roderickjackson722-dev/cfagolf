@@ -17,7 +17,7 @@ const PROGRAMS: Record<string, { priceId: string; amount: number; name: string; 
   digital: {
     priceId: "price_1TK1IyLXW44Q7xfEFeqlEVdj",
     amount: 29900, // $299/year
-    name: "CFA Golf Annual Portal Membership",
+    name: "CFA Golf Self-Paced Online Course",
     mode: "payment",
   },
 };
