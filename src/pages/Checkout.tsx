@@ -30,9 +30,9 @@ const PROGRAMS = {
   digital: {
     price: 299,
     originalPrice: 499,
-    label: 'Annual Portal Membership',
-    shortLabel: 'CFA Annual Portal Member',
-    description: 'Full platform access & recruiting tools',
+    label: 'Self-Paced Online Course',
+    shortLabel: 'CFA Self-Paced Online Course',
+    description: 'Self-guided recruiting course + full platform access. One-time fee for lifetime course access.',
     programType: 'digital',
     isSubscription: false,
   },
@@ -57,14 +57,15 @@ const consultingFeatures = [
 ];
 
 const digitalFeatures = [
+  { icon: Presentation, title: "10 Self-Paced Course Modules (Intro + 9)", description: "Step-by-step recruiting curriculum you complete on your own time" },
+  { icon: FileTextIcon, title: "Downloadable Worksheets & Templates", description: "Printable PDFs for every module" },
+  { icon: Award, title: "Completion Certificate", description: "Earn a CFA certificate when you finish all modules" },
   { icon: Database, title: "Full College Golf Database Access", description: "Search and filter 1,000+ college golf programs" },
   { icon: Target, title: "Target School List Builder", description: "Build and organize your dream school list" },
   { icon: Trophy, title: "Tournament Result Tracker", description: "Log and showcase your competitive results" },
   { icon: MessageCircle, title: "Coach Contact Tracker", description: "Manage outreach to college coaches" },
   { icon: MapPin, title: "Campus Visit Planner", description: "Plan and compare your campus visits" },
   { icon: DollarSign, title: "Scholarship Calculator", description: "Compare financial aid packages side by side" },
-  { icon: Presentation, title: "LPGA & PGA Pro Webinars", description: "Learn from industry professionals" },
-  { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
   { icon: Clock, title: "Recruiting Timeline & Worksheets", description: "Stay on track with guided action plans" },
 ];
 

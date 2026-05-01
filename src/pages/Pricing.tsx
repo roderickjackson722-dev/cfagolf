@@ -144,7 +144,7 @@ const compareCategories: CompareCategory[] = [
   {
     category: "Webinars & Educational Content",
     features: [
-      { title: "LPGA & PGA Pro Webinars", description: "Exclusive partnered webinars with golf professionals.", toolkit: false, portal: true, consulting: true },
+      { title: "LPGA & PGA Pro Webinars", description: "Exclusive partnered webinars with golf professionals (Consulting only).", toolkit: false, portal: false, consulting: true },
       { title: "College Coach Q&A Sessions", description: "Learn directly from current and former college coaches.", toolkit: false, portal: false, consulting: true },
       { title: "Recruiting Strategy Workshops", description: "Self-paced workshops on recruiting best practices.", toolkit: false, portal: true, consulting: true },
     ],
@@ -320,7 +320,7 @@ const Pricing = () => {
                 <p className="text-[10px] text-muted-foreground mt-1">$25</p>
               </div>
               <div className="text-center w-20 sm:w-28">
-                <Badge variant="secondary">Portal</Badge>
+                <Badge variant="secondary">Self-Paced</Badge>
                 <p className="text-[10px] text-muted-foreground mt-1">
                   <span className="line-through mr-1">$499</span>$299
                 </p>
@@ -379,7 +379,7 @@ const Pricing = () => {
               </Link>
               <Link to="/checkout?plan=digital">
                 <Button size="lg" variant="outline" className="rounded-full font-semibold px-8">
-                  Annual Portal Membership — $299
+                  Self-Paced Online Course — $299
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
