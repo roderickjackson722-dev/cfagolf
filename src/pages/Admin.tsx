@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -22,6 +22,7 @@ import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
 import { AdminSalesTable } from '@/components/admin/AdminSalesTable';
 import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
+import { AdminReleasesTable } from '@/components/admin/AdminReleasesTable';
 import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
 import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
 import { AdminCoachesTable } from '@/components/admin/AdminCoachesTable';
@@ -219,6 +220,9 @@ const Admin = () => {
                   <TabsTrigger value="subscribers" className="flex items-center gap-2">
                     <MailPlus className="w-4 h-4" /> Subscribers
                   </TabsTrigger>
+                  <TabsTrigger value="releases" className="flex items-center gap-2">
+                    <FileSignature className="w-4 h-4" /> Releases
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="users">
@@ -268,6 +272,23 @@ const Admin = () => {
                     </CardHeader>
                     <CardContent>
                       <AdminSubscriberTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="releases">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <FileSignature className="w-5 h-5 text-primary" />
+                        <CardTitle>Player Profile Releases</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Search, view, and export signed Player Profile Release forms. Update status when a parent or player asks to withdraw consent.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminReleasesTable />
                     </CardContent>
                   </Card>
                 </TabsContent>
