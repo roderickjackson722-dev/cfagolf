@@ -846,6 +846,87 @@ export const pdfGenerators: Record<string, () => void> = {
   'marketing-flyer': generateMarketingFlyer
 };
 
+// Generic Self-Paced Module Worksheet PDF generator.
+// Used for module-specific guides that don't have a dedicated template
+// (e.g. Goal-Setting, Eligibility Checklist, Practice Plan, Decision Matrix).
+export interface ModuleWorksheetPDFInput {
+  moduleNumber: number;
+  moduleTitle: string;
+  worksheetTitle: string;
+  intro: string;
+  sections: Array<{ heading: string; lines: string[] }>;
+  filename: string;
+}
+
+export const generateModuleWorksheetPDF = (input: ModuleWorksheetPDFInput): void => {
+  const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const checkPage = (y: number): number => {
+    if (y > pageHeight - 25) {
+      addFooter(doc);
+      doc.addPage();
+      addWatermark(doc);
+      addHeader(doc, input.worksheetTitle);
+      return 45;
+    }
+    return y;
+  };
+
+  addWatermark(doc);
+  addHeader(doc, input.worksheetTitle);
+
+  let y = 45;
+
+  // Module label
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(102, 140, 115);
+  const modLabel =
+    input.moduleNumber === 0
+      ? 'Introduction Module'
+      : `Module ${input.moduleNumber} — ${input.moduleTitle}`;
+  doc.text(modLabel, 14, y);
+  y += 8;
+
+  // Intro
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'italic');
+  doc.setTextColor(80, 80, 80);
+  const introLines = doc.splitTextToSize(input.intro, pageWidth - 28);
+  doc.text(introLines, 14, y);
+  y += introLines.length * 5 + 6;
+
+  doc.setTextColor(0, 0, 0);
+
+  // Sections
+  input.sections.forEach((section) => {
+    y = checkPage(y);
+    y = addSectionHeader(doc, section.heading.toUpperCase(), y);
+    section.lines.forEach((line, i) => {
+      y = checkPage(y);
+      // If line ends with ":" treat as fillable label, else as a checkbox/bullet item
+      if (line.endsWith(':')) {
+        y = addTableRow(doc, line, y, i % 2 === 0);
+      } else {
+        if (i % 2 === 0) {
+          doc.setFillColor(245, 243, 239);
+          doc.rect(10, y, pageWidth - 20, 8, 'F');
+        }
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        const wrapped = doc.splitTextToSize(`☐  ${line}`, pageWidth - 28);
+        doc.text(wrapped, 14, y + 5.5);
+        y += Math.max(10, wrapped.length * 5 + 4);
+      }
+    });
+    y += 4;
+  });
+
+  addFooter(doc);
+  doc.save(input.filename);
+};
+
 // Recruiting Roadmap PDF
 export const generateRecruitingRoadmapPDF = (): void => {
   const doc = new jsPDF();

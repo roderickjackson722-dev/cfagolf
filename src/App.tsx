@@ -58,6 +58,8 @@ import SwingProfile from "./pages/SwingProfile";
 import CoreCourseTrackerPage from "./pages/CoreCourseTrackerPage";
 import DocumentVault from "./pages/DocumentVault";
 import SharedDocuments from "./pages/SharedDocuments";
+import SelfPaced from "./pages/SelfPaced";
+import SelfPacedModule from "./pages/SelfPacedModule";
 
 
 const queryClient = new QueryClient();
@@ -129,6 +131,8 @@ const App = () => (
             <Route path="/tools/core-course-tracker" element={<CoreCourseTrackerPage />} />
             <Route path="/tools/document-vault" element={<DocumentVault />} />
             <Route path="/shared/:token" element={<SharedDocuments />} />
+            <Route path="/self-paced" element={<SelfPaced />} />
+            <Route path="/self-paced/:slug" element={<SelfPacedModule />} />
             <Route path="/m/swing" element={<SwingGallery />} />
             <Route path="/m/swing/:userId" element={<SwingProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
