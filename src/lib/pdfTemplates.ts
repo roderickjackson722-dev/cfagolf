@@ -649,7 +649,14 @@ export const generateTimeline = (): void => {
   
   // Grade Level
   doc.setFontSize(10);
-  doc.text('Current Grade Level:  ☐ Freshman  ☐ Sophomore  ☐ Junior  ☐ Senior', 14, y);
+  doc.text('Current Grade Level:', 14, y);
+  const grades = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
+  let gx = 60;
+  grades.forEach((g) => {
+    drawCheckbox(doc, gx, y - 3);
+    doc.text(g, gx + 5, y);
+    gx += 30;
+  });
   y += 12;
   
   // Months 1-6
