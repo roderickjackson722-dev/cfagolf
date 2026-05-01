@@ -90,6 +90,29 @@ const addTableRow = (doc: jsPDF, label: string, y: number, isEven: boolean = fal
   return y + 10;
 };
 
+// Draw an actual checkbox square (jsPDF default fonts cannot render
+// the Unicode ☐ glyph, which renders as a garbage character such as "&").
+const drawCheckbox = (doc: jsPDF, x: number, y: number, size = 3.5) => {
+  doc.setDrawColor(80, 80, 80);
+  doc.setLineWidth(0.3);
+  doc.rect(x, y, size, size);
+};
+
+// Row with a real drawn checkbox + label (replaces "☐ ..." strings).
+const addCheckboxRow = (doc: jsPDF, label: string, y: number, isEven: boolean): number => {
+  const pageWidth = doc.internal.pageSize.getWidth();
+  if (isEven) {
+    doc.setFillColor(245, 243, 239);
+    doc.rect(10, y, pageWidth - 20, 8, 'F');
+  }
+  drawCheckbox(doc, 14, y + 2.5);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(0, 0, 0);
+  doc.text(label, 21, y + 5.5);
+  return y + 10;
+};
+
 // 1. Target School List Builder
 export const generateTargetSchoolList = (): void => {
   const doc = new jsPDF();
@@ -192,19 +215,19 @@ export const generateVideoSpecs = (): void => {
   // Required Shots
   y = addSectionHeader(doc, 'REQUIRED SHOTS CHECKLIST', y);
   const shots = [
-    '☐ Driver - Face on view (3 swings)',
-    '☐ Driver - Down the line view (3 swings)',
-    '☐ Iron - Face on view (3 swings)',
-    '☐ Iron - Down the line view (3 swings)',
-    '☐ Wedge - Face on & down line',
-    '☐ Putting - Face on view',
-    '☐ Putting - Down the line view',
-    '☐ Chipping - Various lies',
-    '☐ Bunker shot',
-    '☐ On-course playing footage'
+    'Driver - Face on view (3 swings)',
+    'Driver - Down the line view (3 swings)',
+    'Iron - Face on view (3 swings)',
+    'Iron - Down the line view (3 swings)',
+    'Wedge - Face on & down line',
+    'Putting - Face on view',
+    'Putting - Down the line view',
+    'Chipping - Various lies',
+    'Bunker shot',
+    'On-course playing footage'
   ];
   shots.forEach((shot, i) => {
-    y = addTableRow(doc, shot, y, i % 2 === 0);
+    y = addCheckboxRow(doc, shot, y, i % 2 === 0);
   });
   
   // Page 2 - Tips
@@ -418,13 +441,13 @@ export const generatePreCallPrep = (): void => {
   y += 5;
   y = addSectionHeader(doc, 'FOLLOW-UP ACTIONS', y);
   const followUp = [
-    '☐ Send thank you email by:',
-    '☐ Send requested materials:',
-    '☐ Schedule next contact:',
-    '☐ Other:'
+    'Send thank you email by:',
+    'Send requested materials:',
+    'Schedule next contact:',
+    'Other:'
   ];
   followUp.forEach((item, i) => {
-    y = addTableRow(doc, item, y, i % 2 === 0);
+    y = addCheckboxRow(doc, item, y, i % 2 === 0);
   });
   
   addFooter(doc);
@@ -626,7 +649,14 @@ export const generateTimeline = (): void => {
   
   // Grade Level
   doc.setFontSize(10);
-  doc.text('Current Grade Level:  ☐ Freshman  ☐ Sophomore  ☐ Junior  ☐ Senior', 14, y);
+  doc.text('Current Grade Level:', 14, y);
+  const grades = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
+  let gx = 60;
+  grades.forEach((g) => {
+    drawCheckbox(doc, gx, y - 3);
+    doc.text(g, gx + 5, y);
+    gx += 30;
+  });
   y += 12;
   
   // Months 1-6
@@ -643,7 +673,8 @@ export const generateTimeline = (): void => {
     y = addSectionHeader(doc, m.month, y);
     m.tasks.forEach((task, i) => {
       doc.setFontSize(10);
-      doc.text(`☐ ${task}`, 18, y + 5);
+      drawCheckbox(doc, 18, y + 2.5);
+      doc.text(task, 25, y + 5);
       y += 8;
     });
     y += 3;
@@ -675,7 +706,8 @@ export const generateTimeline = (): void => {
     y = addSectionHeader(doc, m.month, y);
     m.tasks.forEach((task) => {
       doc.setFontSize(10);
-      doc.text(`☐ ${task}`, 18, y + 5);
+      drawCheckbox(doc, 18, y + 2.5);
+      doc.text(task, 25, y + 5);
       y += 8;
     });
     y += 3;
@@ -915,8 +947,10 @@ export const generateModuleWorksheetPDF = (input: ModuleWorksheetPDFInput): void
         }
         doc.setFontSize(10);
         doc.setFont('helvetica', 'normal');
-        const wrapped = doc.splitTextToSize(`☐  ${line}`, pageWidth - 28);
-        doc.text(wrapped, 14, y + 5.5);
+        doc.setTextColor(0, 0, 0);
+        drawCheckbox(doc, 14, y + 2.5);
+        const wrapped = doc.splitTextToSize(line, pageWidth - 32);
+        doc.text(wrapped, 21, y + 5.5);
         y += Math.max(10, wrapped.length * 5 + 4);
       }
     });

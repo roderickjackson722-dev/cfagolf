@@ -246,7 +246,7 @@ const SelfPacedModule = () => {
             {next ? (
               <Button asChild>
                 <Link to={`/self-paced/${next.slug}`}>
-                  {next.shortTitle} <ArrowRight className="w-4 h-4 ml-1" />
+                  Next: {next.shortTitle} <ArrowRight className="w-4 h-4 ml-1" />
                 </Link>
               </Button>
             ) : (
