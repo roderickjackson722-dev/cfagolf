@@ -52,6 +52,7 @@ export function AuthForm() {
   const [isCheckingReferral, setIsCheckingReferral] = useState(false);
   
   const [isLoading, setIsLoading] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const { signIn, signUp } = useAuth();
 
   // Check for referral code in URL
@@ -187,6 +188,10 @@ export function AuthForm() {
     if (!signUpEmail || !signUpPassword || !fullName) {
       toast.error('Please complete all required fields');
       setSignUpStep(1);
+      return;
+    }
+    if (!agreedToTerms) {
+      toast.error('Please agree to the Terms of Use and Privacy Policy to continue');
       return;
     }
 
@@ -502,12 +507,34 @@ export function AuthForm() {
         <p className="text-xs text-muted-foreground">Promo codes override referral discounts</p>
       </div>
 
+
+      <div className="flex items-start gap-2 pt-2">
+        <input
+          id="agree-terms"
+          type="checkbox"
+          checked={agreedToTerms}
+          onChange={(e) => setAgreedToTerms(e.target.checked)}
+          className="mt-1 h-4 w-4 rounded border-input accent-primary cursor-pointer"
+          required
+        />
+        <label htmlFor="agree-terms" className="text-sm text-muted-foreground cursor-pointer leading-snug">
+          I have read and agree to the{' '}
+          <a href="/terms-of-use" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:no-underline">
+            Terms of Use
+          </a>{' '}
+          and{' '}
+          <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:no-underline">
+            Privacy Policy
+          </a>
+          .
+        </label>
+      </div>
       <div className="flex gap-3 pt-2">
         <Button onClick={handleStep3Back} variant="outline" className="flex-1" disabled={isLoading}>
           <ArrowLeft className="mr-2 w-4 h-4" />
           Back
         </Button>
-        <Button onClick={handlePayAndSignUp} className="flex-1" disabled={isLoading}>
+        <Button onClick={handlePayAndSignUp} className="flex-1" disabled={isLoading || !agreedToTerms}>
           {isLoading ? (
             <>
               <Loader2 className="mr-2 w-4 h-4 animate-spin" />
