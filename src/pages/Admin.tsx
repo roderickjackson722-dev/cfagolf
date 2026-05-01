@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2 } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -104,405 +104,432 @@ const Admin = () => {
             </p>
           </div>
 
-          {/* Tabs for different sections */}
-          <Tabs defaultValue="colleges" className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="colleges" className="flex items-center gap-2">
+          {/* Top-level category tabs */}
+          <Tabs defaultValue="content" className="space-y-6">
+            <TabsList className="flex flex-wrap h-auto">
+              <TabsTrigger value="content" className="flex items-center gap-2">
                 <Database className="w-4 h-4" />
-                Colleges
+                Content
               </TabsTrigger>
-              <TabsTrigger value="users" className="flex items-center gap-2">
+              <TabsTrigger value="members" className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
-                Users
-              </TabsTrigger>
-              <TabsTrigger value="memberships" className="flex items-center gap-2">
-                <CreditCard className="w-4 h-4" />
-                Memberships
-              </TabsTrigger>
-              <TabsTrigger value="import" className="flex items-center gap-2">
-                <Download className="w-4 h-4" />
-                Data Import
-              </TabsTrigger>
-              <TabsTrigger value="visitors" className="flex items-center gap-2">
-                <BarChart3 className="w-4 h-4" />
-                Analytics
-              </TabsTrigger>
-              <TabsTrigger value="testimonials" className="flex items-center gap-2">
-                <MessageSquare className="w-4 h-4" />
-                Reviews
-              </TabsTrigger>
-              <TabsTrigger value="flyer" className="flex items-center gap-2">
-                <FileText className="w-4 h-4" />
-                Flyer
-              </TabsTrigger>
-              <TabsTrigger value="promos" className="flex items-center gap-2">
-                <Tag className="w-4 h-4" />
-                Promo Codes
-              </TabsTrigger>
-              <TabsTrigger value="highschools" className="flex items-center gap-2">
-                <GraduationCap className="w-4 h-4" />
-                High Schools
-              </TabsTrigger>
-              <TabsTrigger value="crm" className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                Coach CRM
-              </TabsTrigger>
-              <TabsTrigger value="demo-call" className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                Demo Call
-              </TabsTrigger>
-              <TabsTrigger value="agenda" className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4" />
-                Module Agenda
-              </TabsTrigger>
-              <TabsTrigger value="wagr" className="flex items-center gap-2">
-                <Trophy className="w-4 h-4" />
-                WAGR
-              </TabsTrigger>
-              <TabsTrigger value="toolkit" className="flex items-center gap-2">
-                <ShoppingBag className="w-4 h-4" />
-                Toolkit
+                Members
               </TabsTrigger>
               <TabsTrigger value="sales" className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4" />
-                Sales
-              </TabsTrigger>
-              <TabsTrigger value="subscribers" className="flex items-center gap-2">
-                <MailPlus className="w-4 h-4" />
-                Subscribers
-              </TabsTrigger>
-              <TabsTrigger value="newsletter" className="flex items-center gap-2">
-                <Newspaper className="w-4 h-4" />
-                Newsletter
+                Sales & Marketing
               </TabsTrigger>
               <TabsTrigger value="coaches" className="flex items-center gap-2">
-                <UserCog className="w-4 h-4" />
+                <Briefcase className="w-4 h-4" />
                 Coaches
               </TabsTrigger>
-              <TabsTrigger value="share-links" className="flex items-center gap-2">
-                <Link2 className="w-4 h-4" />
-                Share Links
-              </TabsTrigger>
-              <TabsTrigger value="slide-editor" className="flex items-center gap-2">
-                <Eye className="w-4 h-4" />
-                Slide Editor
+              <TabsTrigger value="sales-tools" className="flex items-center gap-2">
+                <Presentation className="w-4 h-4" />
+                Sales Tools
               </TabsTrigger>
             </TabsList>
 
-            {/* College Management Tab */}
-            <TabsContent value="colleges" className="space-y-6">
-              <AdminDatabaseCleanup />
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Database className="w-5 h-5 text-primary" />
-                    <CardTitle>College Database</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Add, edit, or remove colleges from the database. Upload logos and manage all college information.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminCollegeTable 
-                    colleges={colleges} 
-                    isLoading={collegesLoading} 
-                  />
-                </CardContent>
-              </Card>
+            {/* === CONTENT === */}
+            <TabsContent value="content">
+              <Tabs defaultValue="colleges" className="space-y-6">
+                <TabsList className="flex flex-wrap h-auto">
+                  <TabsTrigger value="colleges" className="flex items-center gap-2">
+                    <Database className="w-4 h-4" /> Colleges
+                  </TabsTrigger>
+                  <TabsTrigger value="highschools" className="flex items-center gap-2">
+                    <GraduationCap className="w-4 h-4" /> High Schools
+                  </TabsTrigger>
+                  <TabsTrigger value="wagr" className="flex items-center gap-2">
+                    <Trophy className="w-4 h-4" /> WAGR
+                  </TabsTrigger>
+                  <TabsTrigger value="import" className="flex items-center gap-2">
+                    <Download className="w-4 h-4" /> Data Import
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="colleges" className="space-y-6">
+                  <AdminDatabaseCleanup />
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <Database className="w-5 h-5 text-primary" />
+                        <CardTitle>College Database</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Add, edit, or remove colleges from the database. Upload logos and manage all college information.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminCollegeTable colleges={colleges} isLoading={collegesLoading} />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="highschools">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <GraduationCap className="w-5 h-5 text-primary" />
+                        <CardTitle>Georgia High School Golf Teams</CardTitle>
+                      </div>
+                      <CardDescription>
+                        452 GHSA member schools with golf programs. Add coach contact info as you discover it.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminHighSchoolTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="wagr">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <Trophy className="w-5 h-5 text-primary" />
+                        <CardTitle>WAGR Tournaments</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Manage World Amateur Golf Ranking tournament database. Add events manually or import from wagr.com.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminWagrTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="import" className="space-y-6">
+                  <CollegeBulkImporter />
+                  <ClippdImporter />
+                </TabsContent>
+              </Tabs>
             </TabsContent>
 
-            {/* User Management Tab */}
-            <TabsContent value="users">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Users className="w-5 h-5 text-primary" />
-                    <CardTitle>Registered Users</CardTitle>
-                  </div>
-                  <CardDescription>
-                    View all registered user profiles, manage paid access status, and see user details.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminUserTable />
-                </CardContent>
-              </Card>
+            {/* === MEMBERS === */}
+            <TabsContent value="members">
+              <Tabs defaultValue="users" className="space-y-6">
+                <TabsList className="flex flex-wrap h-auto">
+                  <TabsTrigger value="users" className="flex items-center gap-2">
+                    <Users className="w-4 h-4" /> Users
+                  </TabsTrigger>
+                  <TabsTrigger value="memberships" className="flex items-center gap-2">
+                    <CreditCard className="w-4 h-4" /> Memberships
+                  </TabsTrigger>
+                  <TabsTrigger value="subscribers" className="flex items-center gap-2">
+                    <MailPlus className="w-4 h-4" /> Subscribers
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="users">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <Users className="w-5 h-5 text-primary" />
+                        <CardTitle>Registered Users</CardTitle>
+                      </div>
+                      <CardDescription>
+                        View all registered user profiles, manage paid access status, and see user details.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminUserTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="memberships">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <CreditCard className="w-5 h-5 text-primary" />
+                        <CardTitle>Memberships & Payments</CardTitle>
+                      </div>
+                      <CardDescription>
+                        View all customer memberships, payment history, and revenue statistics from Stripe.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminMembershipTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="subscribers">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <MailPlus className="w-5 h-5 text-primary" />
+                        <CardTitle>Email Subscribers</CardTitle>
+                      </div>
+                      <CardDescription>
+                        View and manage email list subscribers. Export to CSV or remove inactive subscribers.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminSubscriberTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
             </TabsContent>
 
-            {/* Membership Management Tab */}
-            <TabsContent value="memberships">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <CreditCard className="w-5 h-5 text-primary" />
-                    <CardTitle>Memberships & Payments</CardTitle>
-                  </div>
-                  <CardDescription>
-                    View all customer memberships, payment history, and revenue statistics from Stripe.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminMembershipTable />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Data Import Tab */}
-            <TabsContent value="import" className="space-y-6">
-              <CollegeBulkImporter />
-              <ClippdImporter />
-            </TabsContent>
-
-            {/* Analytics Tab */}
-            <TabsContent value="visitors">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5 text-primary" />
-                    <CardTitle>Site Analytics</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Website traffic analytics, visitor locations, and browsing activity.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminAnalyticsDashboard />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Testimonials Management Tab */}
-            <TabsContent value="testimonials">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <MessageSquare className="w-5 h-5 text-primary" />
-                    <CardTitle>Customer Reviews</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Review submitted testimonials and approve them to display on the website.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminTestimonialTable />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            {/* Flyer Editor Tab */}
-            <TabsContent value="flyer">
-              <AdminFlyerEditor />
-            </TabsContent>
-
-            {/* Promo Codes Tab */}
-            <TabsContent value="promos">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Tag className="w-5 h-5 text-primary" />
-                    <CardTitle>Promo Codes</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Create and manage discount promo codes for the checkout process.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminPromoCodeTable />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* High Schools Tab */}
-            <TabsContent value="highschools">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <GraduationCap className="w-5 h-5 text-primary" />
-                    <CardTitle>Georgia High School Golf Teams</CardTitle>
-                  </div>
-                  <CardDescription>
-                    452 GHSA member schools with golf programs. Add coach contact info as you discover it.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminHighSchoolTable />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Coach CRM Tab */}
-            <TabsContent value="crm">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-5 h-5 text-primary" />
-                    <CardTitle>Coach Outreach CRM</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Manage relationships with high school golf coaches. Send personalized email campaigns to promote CFA to their golf families.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <CoachCRM />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            {/* Demo Call Agenda Tab */}
-            <TabsContent value="demo-call">
-              <DemoCallAgenda />
-            </TabsContent>
-            {/* Module Agenda Tab */}
-            <TabsContent value="agenda">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="w-5 h-5 text-primary" />
-                    <CardTitle>Module Agenda</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Session-by-session agenda for each coaching module. Use this as your guide during client meetings.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ModuleAgenda />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            {/* WAGR Tournaments Tab */}
-            <TabsContent value="wagr">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Trophy className="w-5 h-5 text-primary" />
-                    <CardTitle>WAGR Tournaments</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Manage World Amateur Golf Ranking tournament database. Add events manually or import from wagr.com.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminWagrTable />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            {/* Toolkit Tab */}
-            <TabsContent value="toolkit">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <ShoppingBag className="w-5 h-5 text-primary" />
-                    <CardTitle>Recruiting Toolkit</CardTitle>
-                  </div>
-                  <CardDescription>
-                    View toolkit sales, purchase history, and product links. Products are sold as a $99 bundle.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminToolkitTable />
-                </CardContent>
-              </Card>
-
-            </TabsContent>
-            {/* Sales Tab */}
+            {/* === SALES & MARKETING === */}
             <TabsContent value="sales">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <DollarSign className="w-5 h-5 text-primary" />
-                    <CardTitle>Sales</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Every digital product purchase, including buyer details, amount, source page, and location.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminSalesTable />
-                </CardContent>
-              </Card>
+              <Tabs defaultValue="sales-log" className="space-y-6">
+                <TabsList className="flex flex-wrap h-auto">
+                  <TabsTrigger value="sales-log" className="flex items-center gap-2">
+                    <DollarSign className="w-4 h-4" /> Sales
+                  </TabsTrigger>
+                  <TabsTrigger value="promos" className="flex items-center gap-2">
+                    <Tag className="w-4 h-4" /> Promo Codes
+                  </TabsTrigger>
+                  <TabsTrigger value="toolkit" className="flex items-center gap-2">
+                    <ShoppingBag className="w-4 h-4" /> Toolkit
+                  </TabsTrigger>
+                  <TabsTrigger value="flyer" className="flex items-center gap-2">
+                    <FileText className="w-4 h-4" /> Flyer
+                  </TabsTrigger>
+                  <TabsTrigger value="newsletter" className="flex items-center gap-2">
+                    <Newspaper className="w-4 h-4" /> Newsletter
+                  </TabsTrigger>
+                  <TabsTrigger value="testimonials" className="flex items-center gap-2">
+                    <MessageSquare className="w-4 h-4" /> Reviews
+                  </TabsTrigger>
+                  <TabsTrigger value="analytics" className="flex items-center gap-2">
+                    <BarChart3 className="w-4 h-4" /> Analytics
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="sales-log">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <DollarSign className="w-5 h-5 text-primary" />
+                        <CardTitle>Sales</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Every digital product purchase, including buyer details, amount, source page, and location.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminSalesTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="promos">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <Tag className="w-5 h-5 text-primary" />
+                        <CardTitle>Promo Codes</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Create and manage discount promo codes for the checkout process.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminPromoCodeTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="toolkit">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <ShoppingBag className="w-5 h-5 text-primary" />
+                        <CardTitle>Recruiting Toolkit</CardTitle>
+                      </div>
+                      <CardDescription>
+                        View toolkit sales, purchase history, and product links. Products are sold as a $99 bundle.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminToolkitTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="flyer">
+                  <AdminFlyerEditor />
+                </TabsContent>
+
+                <TabsContent value="newsletter">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <Newspaper className="w-5 h-5 text-primary" />
+                        <CardTitle>Monthly Newsletter</CardTitle>
+                      </div>
+                      <CardDescription>
+                        View and edit the monthly recruiting tip emails sent to all active subscribers on the 1st of each month.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminNewsletterTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="testimonials">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <MessageSquare className="w-5 h-5 text-primary" />
+                        <CardTitle>Customer Reviews</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Review submitted testimonials and approve them to display on the website.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminTestimonialTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="analytics">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <BarChart3 className="w-5 h-5 text-primary" />
+                        <CardTitle>Site Analytics</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Website traffic analytics, visitor locations, and browsing activity.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminAnalyticsDashboard />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
             </TabsContent>
-            {/* Email Subscribers Tab */}
-            <TabsContent value="subscribers">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <MailPlus className="w-5 h-5 text-primary" />
-                    <CardTitle>Email Subscribers</CardTitle>
-                  </div>
-                  <CardDescription>
-                    View and manage email list subscribers. Export to CSV or remove inactive subscribers.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminSubscriberTable />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            {/* Newsletter Editor Tab */}
-            <TabsContent value="newsletter">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Newspaper className="w-5 h-5 text-primary" />
-                    <CardTitle>Monthly Newsletter</CardTitle>
-                  </div>
-                  <CardDescription>
-                    View and edit the monthly recruiting tip emails sent to all active subscribers on the 1st of each month.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminNewsletterTable />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            {/* Coaches Portal Tab */}
+
+            {/* === COACHES === */}
             <TabsContent value="coaches">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <UserCog className="w-5 h-5 text-primary" />
-                    <CardTitle>Coaches Portal</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Create coach accounts, send magic-login links, reset passwords, and review access requests.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminCoachesTable />
-                </CardContent>
-              </Card>
+              <Tabs defaultValue="coaches-portal" className="space-y-6">
+                <TabsList className="flex flex-wrap h-auto">
+                  <TabsTrigger value="coaches-portal" className="flex items-center gap-2">
+                    <UserCog className="w-4 h-4" /> Coaches Portal
+                  </TabsTrigger>
+                  <TabsTrigger value="crm" className="flex items-center gap-2">
+                    <Mail className="w-4 h-4" /> Coach CRM
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="coaches-portal">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <UserCog className="w-5 h-5 text-primary" />
+                        <CardTitle>Coaches Portal</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Create coach accounts, send magic-login links, reset passwords, and review access requests.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminCoachesTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="crm">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-5 h-5 text-primary" />
+                        <CardTitle>Coach Outreach CRM</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Manage relationships with high school golf coaches. Send personalized email campaigns to promote CFA to their golf families.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <CoachCRM />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
             </TabsContent>
-            {/* Share Links Tab — public 20-min Member Tools presentation */}
-            <TabsContent value="share-links">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Link2 className="w-5 h-5 text-primary" />
-                    <CardTitle>Member Tools Presentation Links</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Generate, copy, and revoke unguessable share links for the public 20-slide member tools demo. Use these in Zoom sales calls.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminPresentationTokens />
-                </CardContent>
-              </Card>
-            </TabsContent>
-            {/* Slide Editor Tab — edit titles, bullets, images, logo for the public presentation */}
-            <TabsContent value="slide-editor">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <Eye className="w-5 h-5 text-primary" />
-                    <CardTitle>Presentation Slide Editor</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Edit slide titles, bullets, and upload real screenshots and your CFA logo. All share links use this same content — changes go live immediately after Save.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <AdminPresentationSlides />
-                </CardContent>
-              </Card>
+
+            {/* === SALES TOOLS === */}
+            <TabsContent value="sales-tools">
+              <Tabs defaultValue="demo-call" className="space-y-6">
+                <TabsList className="flex flex-wrap h-auto">
+                  <TabsTrigger value="demo-call" className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" /> Demo Call
+                  </TabsTrigger>
+                  <TabsTrigger value="agenda" className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" /> Module Agenda
+                  </TabsTrigger>
+                  <TabsTrigger value="share-links" className="flex items-center gap-2">
+                    <Link2 className="w-4 h-4" /> Share Links
+                  </TabsTrigger>
+                  <TabsTrigger value="slide-editor" className="flex items-center gap-2">
+                    <Eye className="w-4 h-4" /> Slide Editor
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="demo-call">
+                  <DemoCallAgenda />
+                </TabsContent>
+
+                <TabsContent value="agenda">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <BookOpen className="w-5 h-5 text-primary" />
+                        <CardTitle>Module Agenda</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Session-by-session agenda for each coaching module. Use this as your guide during client meetings.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <ModuleAgenda />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="share-links">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <Link2 className="w-5 h-5 text-primary" />
+                        <CardTitle>Member Tools Presentation Links</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Generate, copy, and revoke unguessable share links for the public 20-slide member tools demo. Use these in Zoom sales calls.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminPresentationTokens />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="slide-editor">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <Eye className="w-5 h-5 text-primary" />
+                        <CardTitle>Presentation Slide Editor</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Edit slide titles, bullets, and upload real screenshots and your CFA logo. All share links use this same content — changes go live immediately after Save.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminPresentationSlides />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
             </TabsContent>
           </Tabs>
         </div>
