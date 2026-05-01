@@ -324,7 +324,7 @@ export function CollegeDatabase() {
                         <Link to="/pricing">
                           <Button className="rounded-full cfa-gradient hover:opacity-90 gap-2">
                             <CreditCard className="w-4 h-4" />
-                            View Membership Options
+                            View Pricing & Programs
                             <ArrowRight className="w-4 h-4" />
                           </Button>
                         </Link>
