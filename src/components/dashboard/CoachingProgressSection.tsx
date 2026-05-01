@@ -205,11 +205,18 @@ export function CoachingProgressSection() {
         </div>
         <CardDescription className="flex items-center justify-between">
           <span>Track your one-on-one coaching sessions and access module materials</span>
-          <Link to="/coaching">
-            <Button variant="outline" size="sm" className="gap-1">
-              <ExternalLink className="w-3 h-3" /> Full Coaching View
-            </Button>
-          </Link>
+          <div className="flex gap-2">
+            <Link to="/self-paced">
+              <Button variant="default" size="sm" className="gap-1">
+                <BookOpen className="w-3 h-3" /> Self-Paced Course
+              </Button>
+            </Link>
+            <Link to="/coaching">
+              <Button variant="outline" size="sm" className="gap-1">
+                <ExternalLink className="w-3 h-3" /> Full Coaching View
+              </Button>
+            </Link>
+          </div>
         </CardDescription>
         <div className="mt-3">
           <div className="flex justify-between text-sm mb-1">
