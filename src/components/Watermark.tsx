@@ -23,7 +23,7 @@ export function Watermark() {
     <svg xmlns='http://www.w3.org/2000/svg' width='${tileWidth}' height='${tileHeight}' viewBox='0 0 ${tileWidth} ${tileHeight}'>
       <g transform='rotate(-30 ${tileWidth / 2} ${tileHeight / 2})' fill='hsl(152, 45%, 22%)' fill-opacity='0.08' font-family='Inter, sans-serif' font-size='14' font-weight='500'>
         <text x='${tileWidth / 2}' y='${tileHeight / 2}' text-anchor='middle'>${escapeXml(label)}</text>
-        <text x='${tileWidth / 2}' y='${tileHeight / 2 + 22}' text-anchor='middle' font-size='11' fill-opacity='0.7'>CFA Confidential — Do Not Share</text>
+        <text x='${tileWidth / 2}' y='${tileHeight / 2 + 22}' text-anchor='middle' font-size='11'>CFA Confidential — Do Not Share</text>
       </g>
     </svg>
   `;
