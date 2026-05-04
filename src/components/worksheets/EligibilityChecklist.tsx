@@ -455,7 +455,7 @@ export function EligibilityChecklist({ children }: { children: React.ReactNode }
             <div className="rounded-lg border p-4 space-y-3">
               <h3 className="font-bold text-sm">Part 6: Resources & Contacts</h3>
               <div className="text-xs text-muted-foreground space-y-1">
-                <p>NCAA Eligibility Center: <a href="https://www.eligibilitycenter.org" target="_blank" className="text-primary underline">www.eligibilitycenter.org</a></p>
+                <p>NCAA Eligibility Center: <a href="https://www.eligibilitycenter.org" target="_blank" rel="noopener noreferrer" className="text-primary underline">www.eligibilitycenter.org</a></p>
                 <p>NCAA Customer Service: 317-917-6222</p>
               </div>
               {data.contacts.map((c, idx) => (

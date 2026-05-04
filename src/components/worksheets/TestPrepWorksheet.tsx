@@ -218,10 +218,10 @@ export function TestPrepWorksheet({ children }: { children: React.ReactNode }) {
             <div className="rounded-lg border p-4">
               <h3 className="font-bold text-sm mb-2">Free Official Resources</h3>
               <div className="space-y-2 text-xs">
-                <div className="flex justify-between"><span>Official SAT Practice</span><a href="https://www.khanacademy.org/sat" target="_blank" className="text-primary underline">khanacademy.org/sat</a></div>
-                <div className="flex justify-between"><span>Official ACT Practice</span><a href="https://www.act.org" target="_blank" className="text-primary underline">act.org</a></div>
-                <div className="flex justify-between"><span>College Board (SAT)</span><a href="https://www.collegeboard.org" target="_blank" className="text-primary underline">collegeboard.org</a></div>
-                <div className="flex justify-between"><span>NCAA Eligibility Center</span><a href="https://www.eligibilitycenter.org" target="_blank" className="text-primary underline">eligibilitycenter.org</a></div>
+                <div className="flex justify-between"><span>Official SAT Practice</span><a href="https://www.khanacademy.org/sat" target="_blank" rel="noopener noreferrer" className="text-primary underline">khanacademy.org/sat</a></div>
+                <div className="flex justify-between"><span>Official ACT Practice</span><a href="https://www.act.org" target="_blank" rel="noopener noreferrer" className="text-primary underline">act.org</a></div>
+                <div className="flex justify-between"><span>College Board (SAT)</span><a href="https://www.collegeboard.org" target="_blank" rel="noopener noreferrer" className="text-primary underline">collegeboard.org</a></div>
+                <div className="flex justify-between"><span>NCAA Eligibility Center</span><a href="https://www.eligibilitycenter.org" target="_blank" rel="noopener noreferrer" className="text-primary underline">eligibilitycenter.org</a></div>
               </div>
             </div>
 

@@ -16,6 +16,7 @@ import { useSelfPacedChecklist } from '@/hooks/useSelfPacedChecklist';
 import { WorksheetPreviewDialog } from '@/components/selfpaced/WorksheetPreviewDialog';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { linkifyOrgs } from '@/lib/linkifyOrgs';
 
 const SelfPacedModule = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -109,7 +110,7 @@ const SelfPacedModule = () => {
             <CardContent className="space-y-4">
               {mod.paragraphs.map((p, i) => (
                 <p key={i} className="text-sm text-foreground leading-relaxed">
-                  {p}
+                  {linkifyOrgs(p)}
                 </p>
               ))}
             </CardContent>
@@ -128,7 +129,7 @@ const SelfPacedModule = () => {
                 {mod.takeaways.map((t, i) => (
                   <li key={i} className="text-sm text-foreground flex items-start gap-2">
                     <span className="text-primary mt-0.5">•</span>
-                    {t}
+                    <span>{linkifyOrgs(t)}</span>
                   </li>
                 ))}
               </ul>

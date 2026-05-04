@@ -11,6 +11,7 @@ import { BookOpen, ChevronDown, ChevronUp, Clock, ArrowLeft, Lightbulb, Loader2,
 import { Link } from 'react-router-dom';
 import { MODULES } from '@/data/huddleLessons';
 import { generateHuddleLessonPDF } from '@/lib/huddlePdf';
+import { linkifyOrgs } from '@/lib/linkifyOrgs';
 
 const RecruitingHuddle = () => {
   const { hasToolkitAccess, loading } = useDigitalProducts();
@@ -99,7 +100,7 @@ const RecruitingHuddle = () => {
                           {isExpanded && (
                             <div className="mt-2 ml-11 p-5 bg-muted/30 rounded-lg space-y-4">
                               {lesson.content.map((para, i) => (
-                                <p key={i} className="text-sm text-foreground leading-relaxed">{para}</p>
+                                <p key={i} className="text-sm text-foreground leading-relaxed">{linkifyOrgs(para)}</p>
                               ))}
 
                               <div className="mt-4 p-4 bg-primary/5 rounded-lg border border-primary/10">
@@ -110,7 +111,7 @@ const RecruitingHuddle = () => {
                                 <ul className="space-y-1">
                                   {lesson.keyTakeaways.map((t, i) => (
                                     <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                                      <span className="text-primary mt-1">•</span> {t}
+                                      <span className="text-primary mt-1">•</span> <span>{linkifyOrgs(t)}</span>
                                     </li>
                                   ))}
                                 </ul>
