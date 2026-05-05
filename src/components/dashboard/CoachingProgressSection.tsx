@@ -60,9 +60,9 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "How coaches evaluate your results",
     ],
     resources: [
-      { label: "Scoring Benchmark Guide", href: "/self-paced/performance" },
-      { label: "Tournament Result Log", href: "/tools/tournament-log" },
-      { label: "WAGR Tournament Finder", href: "/tools/wagr-tournaments" },
+      "Scoring Benchmark Guide",
+      "Tournament Result Log",
+      "WAGR Tournament Finder",
     ],
   },
   4: {
