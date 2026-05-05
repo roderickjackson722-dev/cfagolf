@@ -42,6 +42,18 @@ serve(async (req) => {
       throw new Error("RESEND_API_KEY is not configured");
     }
 
+    const escapeHtml = (s: string): string =>
+      s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    const safeName = escapeHtml(name);
+    const safeRole = escapeHtml(role || "Not provided");
+    const safeTestimonial = escapeHtml(testimonial);
+
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h2 style="color: #2d5a3d; border-bottom: 2px solid #2d5a3d; padding-bottom: 10px;">
@@ -50,16 +62,16 @@ serve(async (req) => {
         <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
           <tr>
             <td style="padding: 8px 12px; font-weight: bold; color: #555; width: 120px;">Name:</td>
-            <td style="padding: 8px 12px;">${name}</td>
+            <td style="padding: 8px 12px;">${safeName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 12px; font-weight: bold; color: #555;">Role:</td>
-            <td style="padding: 8px 12px;">${role || "Not provided"}</td>
+            <td style="padding: 8px 12px;">${safeRole}</td>
           </tr>
         </table>
         <div style="margin-top: 20px; padding: 16px; background: #f5f5f0; border-left: 4px solid #2d5a3d; border-radius: 4px;">
           <h3 style="margin: 0 0 8px 0; color: #2d5a3d;">Testimonial:</h3>
-          <p style="margin: 0; line-height: 1.6; white-space: pre-wrap;">${testimonial}</p>
+          <p style="margin: 0; line-height: 1.6; white-space: pre-wrap;">${safeTestimonial}</p>
         </div>
         <p style="margin-top: 20px; font-size: 12px; color: #999;">
           Submitted on ${new Date().toLocaleString("en-US", { timeZone: "America/New_York" })}
