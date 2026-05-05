@@ -74,9 +74,8 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Off-season training strategies",
     ],
     resources: [
-      "Weekly Practice Plan Template",
-      "Fitness Assessment Checklist",
-      "Skill Development Tracker",
+      "Self-Paced Module: Performance & Practice",
+      "Swing Vault",
     ],
   },
   5: {
@@ -89,8 +88,8 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
     ],
     resources: [
       "Athlete Resume Template",
-      "Video Production Guidelines",
-      "Social Media Best Practices Guide",
+      "Email Templates Collection",
+      "Recruiting Roadmap",
     ],
   },
   6: {
@@ -103,8 +102,8 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
     ],
     resources: [
       "Email Templates Collection",
-      "Phone Script Guide",
-      "Campus Visit Prep Checklist",
+      "Coach Contact Tracker",
+      "Campus Visit Tool",
     ],
   },
   7: {
@@ -116,9 +115,9 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Making your final decision framework",
     ],
     resources: [
-      "Offer Comparison Spreadsheet",
-      "Financial Aid Glossary",
-      "Decision Matrix Template",
+      "Scholarship Calculator",
+      "Target School List Builder",
+      "Self-Paced Module: Decision Framework",
     ],
   },
   8: {
@@ -130,9 +129,9 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Celebrating your achievement",
     ],
     resources: [
-      "Portfolio Assembly Checklist",
-      "90-Day Action Plan Template",
-      "NLI Process Guide",
+      "Document Vault",
+      "Recruiting Timeline",
+      "Self-Paced Module: Action Plan",
     ],
   },
   9: {
@@ -144,10 +143,32 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Final review and celebration",
     ],
     resources: [
-      "College Transition Guide",
-      "Student-Athlete Time Management Planner",
+      "Self-Paced Module: Transition",
+      "Coaching Workspace",
     ],
   },
+};
+
+// Resource label → in-app/external destination. Keep keys identical to labels above.
+const RESOURCE_LINKS: Record<string, string> = {
+  "Scoring Benchmark Guide": "/self-paced/performance",
+  "Tournament Result Log": "/tools/tournament-log",
+  "WAGR Tournament Finder": "/tools/wagr-tournaments",
+  "Self-Paced Module: Performance & Practice": "/self-paced/performance",
+  "Swing Vault": "/swing-vault",
+  "Athlete Resume Template": "/toolkit/athlete-resume",
+  "Email Templates Collection": "/toolkit/email-templates",
+  "Recruiting Roadmap": "/toolkit/recruiting-roadmap",
+  "Coach Contact Tracker": "/tools/coach-tracker",
+  "Campus Visit Tool": "/tools/campus-visits",
+  "Scholarship Calculator": "/tools/scholarship-calculator",
+  "Target School List Builder": "/tools/target-schools",
+  "Self-Paced Module: Decision Framework": "/self-paced/decision",
+  "Document Vault": "/documents",
+  "Recruiting Timeline": "/recruiting-timeline",
+  "Self-Paced Module: Action Plan": "/self-paced/action-plan",
+  "Self-Paced Module: Transition": "/self-paced/transition",
+  "Coaching Workspace": "/coaching",
 };
 
 export function CoachingProgressSection() {
