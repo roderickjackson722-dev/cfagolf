@@ -139,18 +139,15 @@ export function AuthForm() {
     
     try {
       const { data, error } = await supabase
-        .from('referrals')
-        .select('discount_percent, is_active')
-        .eq('referral_code', codeToCheck)
-        .eq('is_active', true)
-        .maybeSingle();
+        .rpc('validate_referral_code' as any, { _code: codeToCheck });
 
       if (error) throw error;
 
-      if (data) {
-        setReferralApplied({ discount: data.discount_percent });
+      const row = Array.isArray(data) ? data[0] : data;
+      if (row && row.is_valid) {
+        setReferralApplied({ discount: row.discount_percent });
         if (!promoApplied) {
-          toast.success(`Referral code applied! ${data.discount_percent}% off`);
+          toast.success(`Referral code applied! ${row.discount_percent}% off`);
         }
       } else {
         setReferralApplied(null);
