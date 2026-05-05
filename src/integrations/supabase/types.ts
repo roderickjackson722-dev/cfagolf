@@ -2037,12 +2037,27 @@ export type Database = {
         }
         Returns: boolean
       }
-      increment_promo_uses: { Args: { promo_id: string }; Returns: undefined }
+      increment_promo_uses: { Args: { promo_id: string }; Returns: boolean }
       increment_referral_uses: {
         Args: { referral_id: string }
-        Returns: undefined
+        Returns: boolean
       }
       increment_share_view: { Args: { _token: string }; Returns: undefined }
+      validate_promo_code: {
+        Args: { _code: string }
+        Returns: {
+          discount_percent: number
+          is_valid: boolean
+          name: string
+        }[]
+      }
+      validate_referral_code: {
+        Args: { _code: string }
+        Returns: {
+          discount_percent: number
+          is_valid: boolean
+        }[]
+      }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user" | "coach"
