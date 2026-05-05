@@ -224,9 +224,9 @@ export function CoachingProgressSection() {
             {completedCount}/{MEETING_MODULES.length} Complete
           </Badge>
         </div>
-        <CardDescription className="flex items-center justify-between">
+        <CardDescription className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <span>Track your one-on-one coaching sessions and access module materials</span>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Link to="/self-paced">
               <Button variant="default" size="sm" className="gap-1">
                 <BookOpen className="w-3 h-3" /> Self-Paced Course
