@@ -61,8 +61,8 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
     ],
     resources: [
       "Scoring Benchmark Guide",
-      "Tournament Selection Worksheet",
-      "Stats Tracking Template",
+      "Tournament Result Log",
+      "WAGR Tournament Finder",
     ],
   },
   4: {
@@ -74,9 +74,8 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Off-season training strategies",
     ],
     resources: [
-      "Weekly Practice Plan Template",
-      "Fitness Assessment Checklist",
-      "Skill Development Tracker",
+      "Self-Paced Module: Performance & Practice",
+      "Swing Vault",
     ],
   },
   5: {
@@ -89,8 +88,8 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
     ],
     resources: [
       "Athlete Resume Template",
-      "Video Production Guidelines",
-      "Social Media Best Practices Guide",
+      "Email Templates Collection",
+      "Recruiting Roadmap",
     ],
   },
   6: {
@@ -103,8 +102,8 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
     ],
     resources: [
       "Email Templates Collection",
-      "Phone Script Guide",
-      "Campus Visit Prep Checklist",
+      "Coach Contact Tracker",
+      "Campus Visit Tool",
     ],
   },
   7: {
@@ -116,9 +115,9 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Making your final decision framework",
     ],
     resources: [
-      "Offer Comparison Spreadsheet",
-      "Financial Aid Glossary",
-      "Decision Matrix Template",
+      "Scholarship Calculator",
+      "Target School List Builder",
+      "Self-Paced Module: Decision Framework",
     ],
   },
   8: {
@@ -130,9 +129,9 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Celebrating your achievement",
     ],
     resources: [
-      "Portfolio Assembly Checklist",
-      "90-Day Action Plan Template",
-      "NLI Process Guide",
+      "Document Vault",
+      "Recruiting Timeline",
+      "Self-Paced Module: Action Plan",
     ],
   },
   9: {
@@ -144,10 +143,32 @@ const MODULE_MATERIALS: Record<number, { topics: string[]; resources: string[] }
       "Final review and celebration",
     ],
     resources: [
-      "College Transition Guide",
-      "Student-Athlete Time Management Planner",
+      "Self-Paced Module: Transition",
+      "Coaching Workspace",
     ],
   },
+};
+
+// Resource label → in-app/external destination. Keep keys identical to labels above.
+const RESOURCE_LINKS: Record<string, string> = {
+  "Scoring Benchmark Guide": "/self-paced/performance",
+  "Tournament Result Log": "/tools/tournament-log",
+  "WAGR Tournament Finder": "/tools/wagr-tournaments",
+  "Self-Paced Module: Performance & Practice": "/self-paced/performance",
+  "Swing Vault": "/tools/swing-vault",
+  "Athlete Resume Template": "/ebook/resume",
+  "Email Templates Collection": "/ebook/templates",
+  "Recruiting Roadmap": "/ebook/roadmap",
+  "Coach Contact Tracker": "/tools/coach-tracker",
+  "Campus Visit Tool": "/tools/campus-visits",
+  "Scholarship Calculator": "/tools/scholarship-calculator",
+  "Target School List Builder": "/tools/target-schools",
+  "Self-Paced Module: Decision Framework": "/self-paced/offers",
+  "Document Vault": "/tools/document-vault",
+  "Recruiting Timeline": "/tools/recruiting-timeline",
+  "Self-Paced Module: Action Plan": "/self-paced/capstone",
+  "Self-Paced Module: Transition": "/self-paced/conclusion",
+  "Coaching Workspace": "/coaching",
 };
 
 export function CoachingProgressSection() {
@@ -203,9 +224,9 @@ export function CoachingProgressSection() {
             {completedCount}/{MEETING_MODULES.length} Complete
           </Badge>
         </div>
-        <CardDescription className="flex items-center justify-between">
+        <CardDescription className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <span>Track your one-on-one coaching sessions and access module materials</span>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Link to="/self-paced">
               <Button variant="default" size="sm" className="gap-1">
                 <BookOpen className="w-3 h-3" /> Self-Paced Course
@@ -357,16 +378,20 @@ export function CoachingProgressSection() {
                               </li>
                             );
                           }
+                          const href = RESOURCE_LINKS[resource];
                           return (
                             <li key={i} className="text-sm flex items-center gap-2">
                               <span className="text-primary">📄</span>
-                              <a
-                                href="#"
-                                className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer"
-                                onClick={(e) => e.preventDefault()}
-                              >
-                                {resource}
-                              </a>
+                              {href ? (
+                                <Link
+                                  to={href}
+                                  className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+                                >
+                                  {resource}
+                                </Link>
+                              ) : (
+                                <span className="text-muted-foreground">{resource}</span>
+                              )}
                             </li>
                           );
                         })}
