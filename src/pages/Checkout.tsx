@@ -193,7 +193,7 @@ const Checkout = () => {
       if (row && row.is_valid) {
         setReferralApplied({ discount: row.discount_percent });
         if (!promoApplied) {
-          toast.success(`Referral code applied! ${data.discount_percent}% off`);
+          toast.success(`Referral code applied! ${row.discount_percent}% off`);
         }
       } else {
         setReferralApplied(null);
