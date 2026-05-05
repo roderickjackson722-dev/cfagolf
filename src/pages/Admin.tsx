@@ -296,6 +296,23 @@ const Admin = () => {
                     </CardContent>
                   </Card>
                 </TabsContent>
+
+                <TabsContent value="member-content">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <FolderOpen className="w-5 h-5 text-primary" />
+                        <CardTitle>Member Files & Saved Data</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Pick a member to review every document, worksheet, swing video, and tool entry saved under their account.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminMemberContent />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
               </Tabs>
             </TabsContent>
 
