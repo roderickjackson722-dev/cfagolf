@@ -378,16 +378,20 @@ export function CoachingProgressSection() {
                               </li>
                             );
                           }
+                          const href = RESOURCE_LINKS[resource];
                           return (
                             <li key={i} className="text-sm flex items-center gap-2">
                               <span className="text-primary">📄</span>
-                              <a
-                                href="#"
-                                className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors cursor-pointer"
-                                onClick={(e) => e.preventDefault()}
-                              >
-                                {resource}
-                              </a>
+                              {href ? (
+                                <Link
+                                  to={href}
+                                  className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+                                >
+                                  {resource}
+                                </Link>
+                              ) : (
+                                <span className="text-muted-foreground">{resource}</span>
+                              )}
                             </li>
                           );
                         })}
