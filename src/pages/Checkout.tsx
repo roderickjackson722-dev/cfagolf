@@ -155,18 +155,15 @@ const Checkout = () => {
     
     try {
       const { data, error } = await supabase
-        .from('promo_codes')
-        .select('discount_percent, name, max_uses, uses_count')
-        .eq('code', code)
-        .eq('is_active', true)
-        .maybeSingle();
+        .rpc('validate_promo_code' as any, { _code: code });
 
       if (error) throw error;
 
-      if (data && (!data.max_uses || data.uses_count < data.max_uses)) {
-        setPromoApplied({ discount: data.discount_percent, name: data.name });
+      const row = Array.isArray(data) ? data[0] : data;
+      if (row && row.is_valid) {
+        setPromoApplied({ discount: row.discount_percent, name: row.name });
         setReferralApplied(null);
-        toast.success(`Promo code applied! ${data.discount_percent}% off`);
+        toast.success(`Promo code applied! ${row.discount_percent}% off`);
       } else {
         setPromoApplied(null);
         toast.error('Invalid or expired promo code');
@@ -188,16 +185,13 @@ const Checkout = () => {
     
     try {
       const { data, error } = await supabase
-        .from('referrals')
-        .select('discount_percent, is_active')
-        .eq('referral_code', codeToCheck)
-        .eq('is_active', true)
-        .maybeSingle();
+        .rpc('validate_referral_code' as any, { _code: codeToCheck });
 
       if (error) throw error;
 
-      if (data) {
-        setReferralApplied({ discount: data.discount_percent });
+      const row = Array.isArray(data) ? data[0] : data;
+      if (row && row.is_valid) {
+        setReferralApplied({ discount: row.discount_percent });
         if (!promoApplied) {
           toast.success(`Referral code applied! ${data.discount_percent}% off`);
         }
