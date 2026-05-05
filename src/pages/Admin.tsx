@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature, FolderOpen } from 'lucide-react';
+import { AdminMemberContent } from '@/components/admin/AdminMemberContent';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -222,6 +223,9 @@ const Admin = () => {
                   </TabsTrigger>
                   <TabsTrigger value="releases" className="flex items-center gap-2">
                     <FileSignature className="w-4 h-4" /> Releases
+                  </TabsTrigger>
+                  <TabsTrigger value="member-content" className="flex items-center gap-2">
+                    <FolderOpen className="w-4 h-4" /> Member Files
                   </TabsTrigger>
                 </TabsList>
 
