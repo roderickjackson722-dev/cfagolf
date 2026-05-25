@@ -63,6 +63,11 @@ import SelfPaced from "./pages/SelfPaced";
 import SelfPacedModule from "./pages/SelfPacedModule";
 import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import PlayerSite from "./pages/PlayerSite";
+import PlayerLogin from "./pages/PlayerLogin";
+import PlayerDashboard from "./pages/PlayerDashboard";
+import AdminPlayers from "./pages/admin/AdminPlayers";
+import AdminPlayerEdit from "./pages/admin/AdminPlayerEdit";
 
 
 const queryClient = new QueryClient();
@@ -142,6 +147,12 @@ const App = () => (
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/m/swing" element={<SwingGallery />} />
             <Route path="/m/swing/:userId" element={<SwingProfile />} />
+            <Route path="/p/:slug" element={<PlayerSite />} />
+            <Route path="/player/login" element={<PlayerLogin />} />
+            <Route path="/player/dashboard" element={<PlayerDashboard />} />
+            <Route path="/admin/players" element={<AdminPlayers />} />
+            <Route path="/admin/players/new" element={<AdminPlayerEdit />} />
+            <Route path="/admin/players/:id/edit" element={<AdminPlayerEdit />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
