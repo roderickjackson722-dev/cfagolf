@@ -230,6 +230,9 @@ const Admin = () => {
                   <TabsTrigger value="member-content" className="flex items-center gap-2">
                     <FolderOpen className="w-4 h-4" /> Member Files
                   </TabsTrigger>
+                  <TabsTrigger value="players" className="flex items-center gap-2">
+                    <UserSquare2 className="w-4 h-4" /> Players
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="users">
