@@ -591,4 +591,56 @@ const Admin = () => {
   );
 };
 
+function AdminPlayersPanel() {
+  const { data: players = [], isLoading } = useAllPlayers();
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <UserSquare2 className="w-5 h-5 text-primary" />
+              <CardTitle>Player Portfolio Sites</CardTitle>
+            </div>
+            <CardDescription>
+              Manage student-athlete recruiting websites at /p/&lt;slug&gt; or custom domains.
+            </CardDescription>
+          </div>
+          <Button asChild>
+            <Link to="/admin/players/new">+ New Player</Link>
+          </Button>
+        </div>
+      </CardHeader>
+      <CardContent>
+        {isLoading ? (
+          <p className="text-muted-foreground">Loading…</p>
+        ) : players.length === 0 ? (
+          <p className="text-muted-foreground py-4">No players yet. Create the first one.</p>
+        ) : (
+          <div className="divide-y border rounded-md">
+            {players.map((p) => (
+              <div key={p.id} className="flex items-center justify-between p-3">
+                <div>
+                  <p className="font-medium">{p.full_name}</p>
+                  <p className="text-xs text-muted-foreground">
+                    /p/{p.slug}{p.custom_domain ? ` · ${p.custom_domain}` : ''} · {p.is_active ? 'Active' : 'Inactive'}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="outline" asChild>
+                    <a href={`/p/${p.slug}`} target="_blank" rel="noopener noreferrer">View</a>
+                  </Button>
+                  <Button size="sm" asChild>
+                    <Link to={`/admin/players/${p.id}/edit`}>Edit</Link>
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
 export default Admin;
