@@ -174,10 +174,30 @@ const AdminPlayerEdit = () => {
                   <Switch checked={!!form.allow_editing} onCheckedChange={(v) => set('allow_editing', v)} />
                 </div>
                 <div>
-                  <Label>Linked student account (auth user id)</Label>
-                  <Input value={form.user_id || ''} onChange={(e) => set('user_id', e.target.value || null)} placeholder="paste auth.users id to allow self-edit" />
-                  <p className="text-xs text-muted-foreground mt-1">Have the student sign up first at /player/login, then paste their user id here.</p>
+                  <Label>Custom domain</Label>
+                  <Input
+                    value={form.custom_domain || ''}
+                    onChange={(e) => set('custom_domain', e.target.value.trim().toLowerCase() || null)}
+                    placeholder="johnsmithgolf.com"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Optional. After saving, point the domain's A records to <code>185.158.133.1</code> and add it in Project Settings → Domains so SSL is provisioned. The site will then load at that domain.
+                  </p>
                 </div>
+                <div>
+                  <Label>Linked student account (auth user id)</Label>
+                  <Input value={form.user_id || ''} onChange={(e) => set('user_id', e.target.value || null)} placeholder="auto-filled when you create an account below" />
+                </div>
+
+                {!isNew && id && (
+                  <CreateStudentAccount
+                    playerId={id}
+                    defaultEmail={form.contact_email || ''}
+                    defaultName={form.full_name || ''}
+                    linkedUserId={form.user_id || null}
+                    onCreated={(uid) => set('user_id', uid)}
+                  />
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -203,5 +223,69 @@ function UploadField({ label, value, onUpload, accept }: { label: string; value?
     </div>
   );
 }
+
+function CreateStudentAccount({
+  playerId,
+  defaultEmail,
+  defaultName,
+  linkedUserId,
+  onCreated,
+}: {
+  playerId: string;
+  defaultEmail: string;
+  defaultName: string;
+  linkedUserId: string | null;
+  onCreated: (uid: string) => void;
+}) {
+  const [email, setEmail] = useState(defaultEmail);
+  const [password, setPassword] = useState(() => Math.random().toString(36).slice(-10) + 'A1!');
+  const [busy, setBusy] = useState(false);
+
+  const create = async () => {
+    if (!email || !password) return toast.error('Email and password required');
+    setBusy(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('create-player-account', {
+        body: { email, password, full_name: defaultName, player_id: playerId },
+      });
+      if (error) throw error;
+      if ((data as any)?.error) throw new Error((data as any).error);
+      const uid = (data as any)?.user_id;
+      if (uid) {
+        onCreated(uid);
+        toast.success('Student account created and emailed');
+      }
+    } catch (e: any) {
+      toast.error(e.message || 'Failed to create account');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="border rounded-md p-4 space-y-3 bg-muted/30">
+      <div>
+        <Label className="text-base">Auto-create student account</Label>
+        <p className="text-sm text-muted-foreground">
+          {linkedUserId
+            ? 'A student account is already linked. Use this again only to (re)create or replace.'
+            : 'Creates a Supabase Auth user, links it to this player, and emails the student their login.'}
+        </p>
+      </div>
+      <div className="grid sm:grid-cols-2 gap-3">
+        <div>
+          <Label>Student email</Label>
+          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div>
+          <Label>Temporary password</Label>
+          <Input value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+      </div>
+      <Button onClick={create} disabled={busy}>{busy ? 'Creating…' : 'Create & email login'}</Button>
+    </div>
+  );
+}
+
 
 export default AdminPlayerEdit;

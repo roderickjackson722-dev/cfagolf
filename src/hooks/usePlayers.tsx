@@ -23,6 +23,7 @@ export interface Player {
   resume_url: string | null;
   contact_email: string | null;
   social_links: Record<string, string> | null;
+  custom_domain: string | null;
   is_active: boolean;
   allow_editing: boolean;
   created_at: string;

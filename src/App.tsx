@@ -70,6 +70,9 @@ import AdminPlayers from "./pages/admin/AdminPlayers";
 import AdminPlayerEdit from "./pages/admin/AdminPlayerEdit";
 
 
+import { useCustomDomainRewrite } from "./components/CustomDomainRouter";
+
+
 const queryClient = new QueryClient();
 
 // Component to handle visitor tracking
@@ -78,7 +81,10 @@ function VisitorTracker() {
   return null;
 }
 
-const App = () => (
+const App = () => {
+  const ready = useCustomDomainRewrite();
+  if (!ready) return <div className="min-h-screen flex items-center justify-center">Loading…</div>;
+  return (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <VisitorTracker />
@@ -160,6 +166,7 @@ const App = () => (
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
