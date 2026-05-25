@@ -1230,6 +1230,7 @@ export type Database = {
           bio: string | null
           contact_email: string | null
           created_at: string
+          custom_domain: string | null
           full_name: string
           gpa: number | null
           graduation_year: number | null
@@ -1256,6 +1257,7 @@ export type Database = {
           bio?: string | null
           contact_email?: string | null
           created_at?: string
+          custom_domain?: string | null
           full_name: string
           gpa?: number | null
           graduation_year?: number | null
@@ -1282,6 +1284,7 @@ export type Database = {
           bio?: string | null
           contact_email?: string | null
           created_at?: string
+          custom_domain?: string | null
           full_name?: string
           gpa?: number | null
           graduation_year?: number | null
