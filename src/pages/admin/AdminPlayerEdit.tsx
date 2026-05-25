@@ -174,10 +174,30 @@ const AdminPlayerEdit = () => {
                   <Switch checked={!!form.allow_editing} onCheckedChange={(v) => set('allow_editing', v)} />
                 </div>
                 <div>
-                  <Label>Linked student account (auth user id)</Label>
-                  <Input value={form.user_id || ''} onChange={(e) => set('user_id', e.target.value || null)} placeholder="paste auth.users id to allow self-edit" />
-                  <p className="text-xs text-muted-foreground mt-1">Have the student sign up first at /player/login, then paste their user id here.</p>
+                  <Label>Custom domain</Label>
+                  <Input
+                    value={form.custom_domain || ''}
+                    onChange={(e) => set('custom_domain', e.target.value.trim().toLowerCase() || null)}
+                    placeholder="johnsmithgolf.com"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Optional. After saving, point the domain's A records to <code>185.158.133.1</code> and add it in Project Settings → Domains so SSL is provisioned. The site will then load at that domain.
+                  </p>
                 </div>
+                <div>
+                  <Label>Linked student account (auth user id)</Label>
+                  <Input value={form.user_id || ''} onChange={(e) => set('user_id', e.target.value || null)} placeholder="auto-filled when you create an account below" />
+                </div>
+
+                {!isNew && id && (
+                  <CreateStudentAccount
+                    playerId={id}
+                    defaultEmail={form.contact_email || ''}
+                    defaultName={form.full_name || ''}
+                    linkedUserId={form.user_id || null}
+                    onCreated={(uid) => set('user_id', uid)}
+                  />
+                )}
               </CardContent>
             </Card>
           </TabsContent>
