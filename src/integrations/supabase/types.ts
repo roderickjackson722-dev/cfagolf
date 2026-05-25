@@ -974,6 +974,50 @@ export type Database = {
         }
         Relationships: []
       }
+      player_coach_messages: {
+        Row: {
+          coach_college: string | null
+          coach_email: string
+          coach_name: string
+          coach_phone: string | null
+          created_at: string
+          id: string
+          is_read: boolean
+          message: string
+          player_id: string
+        }
+        Insert: {
+          coach_college?: string | null
+          coach_email: string
+          coach_name: string
+          coach_phone?: string | null
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message: string
+          player_id: string
+        }
+        Update: {
+          coach_college?: string | null
+          coach_email?: string
+          coach_name?: string
+          coach_phone?: string | null
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          player_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "player_coach_messages_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       player_profile_releases: {
         Row: {
           ack_can_withdraw: boolean
@@ -1088,6 +1132,175 @@ export type Database = {
           status?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      player_tournament_results: {
+        Row: {
+          course: string | null
+          created_at: string
+          date: string
+          field_size: number | null
+          finish: string | null
+          id: string
+          notes: string | null
+          player_id: string
+          score: number | null
+          tournament_name: string
+        }
+        Insert: {
+          course?: string | null
+          created_at?: string
+          date: string
+          field_size?: number | null
+          finish?: string | null
+          id?: string
+          notes?: string | null
+          player_id: string
+          score?: number | null
+          tournament_name: string
+        }
+        Update: {
+          course?: string | null
+          created_at?: string
+          date?: string
+          field_size?: number | null
+          finish?: string | null
+          id?: string
+          notes?: string | null
+          player_id?: string
+          score?: number | null
+          tournament_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "player_tournament_results_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      player_videos: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          player_id: string
+          sort_order: number
+          thumbnail_url: string | null
+          title: string
+          url: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          id?: string
+          player_id: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          title: string
+          url: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          player_id?: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          title?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "player_videos_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      players: {
+        Row: {
+          act_score: number | null
+          allow_editing: boolean
+          bio: string | null
+          contact_email: string | null
+          created_at: string
+          full_name: string
+          gpa: number | null
+          graduation_year: number | null
+          handicap: number | null
+          hero_image_url: string | null
+          high_school: string | null
+          home_course: string | null
+          id: string
+          intended_major: string | null
+          is_active: boolean
+          profile_photo_url: string | null
+          resume_url: string | null
+          sat_score: number | null
+          scoring_average: number | null
+          slug: string
+          social_links: Json | null
+          tagline: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          act_score?: number | null
+          allow_editing?: boolean
+          bio?: string | null
+          contact_email?: string | null
+          created_at?: string
+          full_name: string
+          gpa?: number | null
+          graduation_year?: number | null
+          handicap?: number | null
+          hero_image_url?: string | null
+          high_school?: string | null
+          home_course?: string | null
+          id?: string
+          intended_major?: string | null
+          is_active?: boolean
+          profile_photo_url?: string | null
+          resume_url?: string | null
+          sat_score?: number | null
+          scoring_average?: number | null
+          slug: string
+          social_links?: Json | null
+          tagline?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          act_score?: number | null
+          allow_editing?: boolean
+          bio?: string | null
+          contact_email?: string | null
+          created_at?: string
+          full_name?: string
+          gpa?: number | null
+          graduation_year?: number | null
+          handicap?: number | null
+          hero_image_url?: string | null
+          high_school?: string | null
+          home_course?: string | null
+          id?: string
+          intended_major?: string | null
+          is_active?: boolean
+          profile_photo_url?: string | null
+          resume_url?: string | null
+          sat_score?: number | null
+          scoring_average?: number | null
+          slug?: string
+          social_links?: Json | null
+          tagline?: string | null
+          updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
