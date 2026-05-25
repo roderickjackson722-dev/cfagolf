@@ -319,6 +319,10 @@ const Admin = () => {
                     </CardContent>
                   </Card>
                 </TabsContent>
+
+                <TabsContent value="players">
+                  <AdminPlayersPanel />
+                </TabsContent>
               </Tabs>
             </TabsContent>
 
