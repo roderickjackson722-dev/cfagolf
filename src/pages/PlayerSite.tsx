@@ -110,17 +110,12 @@ const PlayerSite = () => {
 
       {/* Tabs */}
       <section className="container mx-auto px-4 py-8 max-w-6xl">
-        <Tabs defaultValue="about">
-          <TabsList className="w-full justify-start overflow-x-auto flex-wrap h-auto">
-            <TabsTrigger value="about">About</TabsTrigger>
-            <TabsTrigger value="resume">Resume</TabsTrigger>
-            <TabsTrigger value="tournaments">Scores</TabsTrigger>
-            {upcoming.length > 0 && <TabsTrigger value="schedule">Schedule</TabsTrigger>}
-            <TabsTrigger value="videos">Videos</TabsTrigger>
-            {gallery.length > 0 && <TabsTrigger value="gallery">Gallery</TabsTrigger>}
-            {references.length > 0 && <TabsTrigger value="references">References</TabsTrigger>}
-            <TabsTrigger value="contact">Contact</TabsTrigger>
-          </TabsList>
+        <PlayerTabs
+          hasSchedule={upcoming.length > 0}
+          hasGallery={gallery.length > 0}
+          hasReferences={references.length > 0}
+        >
+          {/* tab contents below */}
 
           <TabsContent value="about" className="py-6">
             <Card><CardContent className="p-6 space-y-4">
