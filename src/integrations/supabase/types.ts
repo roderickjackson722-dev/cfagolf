@@ -848,6 +848,63 @@ export type Database = {
           },
         ]
       }
+      invoices: {
+        Row: {
+          client_address: string | null
+          client_email: string | null
+          client_name: string
+          created_at: string
+          created_by: string | null
+          discount: number
+          due_date: string | null
+          id: string
+          invoice_number: string
+          issue_date: string
+          items: Json
+          notes: string | null
+          status: string
+          tax_percent: number
+          total: number
+          updated_at: string
+        }
+        Insert: {
+          client_address?: string | null
+          client_email?: string | null
+          client_name?: string
+          created_at?: string
+          created_by?: string | null
+          discount?: number
+          due_date?: string | null
+          id?: string
+          invoice_number: string
+          issue_date?: string
+          items?: Json
+          notes?: string | null
+          status?: string
+          tax_percent?: number
+          total?: number
+          updated_at?: string
+        }
+        Update: {
+          client_address?: string | null
+          client_email?: string | null
+          client_name?: string
+          created_at?: string
+          created_by?: string | null
+          discount?: number
+          due_date?: string | null
+          id?: string
+          invoice_number?: string
+          issue_date?: string
+          items?: Json
+          notes?: string | null
+          status?: string
+          tax_percent?: number
+          total?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       meeting_progress: {
         Row: {
           admin_notes: string | null
