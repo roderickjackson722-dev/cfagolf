@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature, FolderOpen, UserSquare2 } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature, FolderOpen, UserSquare2, Receipt } from 'lucide-react';
+import { AdminInvoiceBuilder } from '@/components/admin/AdminInvoiceBuilder';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAllPlayers } from '@/hooks/usePlayers';
@@ -351,6 +352,9 @@ const Admin = () => {
                   <TabsTrigger value="analytics" className="flex items-center gap-2">
                     <BarChart3 className="w-4 h-4" /> Analytics
                   </TabsTrigger>
+                  <TabsTrigger value="invoices" className="flex items-center gap-2">
+                    <Receipt className="w-4 h-4" /> Invoices
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="sales-log">
@@ -457,6 +461,10 @@ const Admin = () => {
                       <AdminAnalyticsDashboard />
                     </CardContent>
                   </Card>
+                </TabsContent>
+
+                <TabsContent value="invoices">
+                  <AdminInvoiceBuilder />
                 </TabsContent>
               </Tabs>
             </TabsContent>
