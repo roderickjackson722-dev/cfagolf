@@ -13,10 +13,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { PlayerTournamentsManager } from '@/components/players/PlayerTournamentsManager';
 import { PlayerVideosManager } from '@/components/players/PlayerVideosManager';
+import { PlayerGalleryManager } from '@/components/players/PlayerGalleryManager';
+import { PlayerReferencesManager } from '@/components/players/PlayerReferencesManager';
 
 type Form = Partial<Player>;
 
@@ -91,10 +94,12 @@ const AdminPlayerEdit = () => {
         <h1 className="text-3xl font-bold mb-6">{isNew ? 'New Player' : `Edit ${form.full_name}`}</h1>
 
         <Tabs defaultValue="profile">
-          <TabsList>
+          <TabsList className="flex-wrap h-auto">
             <TabsTrigger value="profile">Profile</TabsTrigger>
             <TabsTrigger value="tournaments" disabled={isNew}>Tournaments</TabsTrigger>
             <TabsTrigger value="videos" disabled={isNew}>Videos</TabsTrigger>
+            <TabsTrigger value="gallery" disabled={isNew}>Gallery</TabsTrigger>
+            <TabsTrigger value="references" disabled={isNew}>References</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
 
@@ -131,6 +136,18 @@ const AdminPlayerEdit = () => {
                 <UploadField label="Hero image" value={form.hero_image_url} onUpload={(f) => uploadFile(f, 'player-images', 'hero_image_url')} accept="image/*" />
                 <UploadField label="Profile photo" value={form.profile_photo_url} onUpload={(f) => uploadFile(f, 'player-images', 'profile_photo_url')} accept="image/*" />
                 <UploadField label="Resume PDF" value={form.resume_url} onUpload={(f) => uploadFile(f, 'player-resumes', 'resume_url')} accept="application/pdf" />
+                <div className="md:col-span-2 space-y-2">
+                  <Label>Hero overlay darkness ({form.hero_overlay_opacity ?? 40}%)</Label>
+                  <Slider min={0} max={90} step={5} value={[form.hero_overlay_opacity ?? 40]} onValueChange={(v) => set('hero_overlay_opacity', v[0])} />
+                  <p className="text-xs text-muted-foreground">Higher = darker overlay (better white-text readability).</p>
+                  <div className="flex items-center gap-2 pt-2">
+                    <Label className="m-0">Hero text color:</Label>
+                    <select className="border rounded px-2 py-1 text-sm" value={form.hero_text_color || 'light'} onChange={(e) => set('hero_text_color', e.target.value)}>
+                      <option value="light">Light (white)</option>
+                      <option value="dark">Dark (black)</option>
+                    </select>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
@@ -153,6 +170,14 @@ const AdminPlayerEdit = () => {
 
           <TabsContent value="videos">
             {id && <PlayerVideosManager playerId={id} canEdit={true} />}
+          </TabsContent>
+
+          <TabsContent value="gallery">
+            {id && <PlayerGalleryManager playerId={id} canEdit={true} />}
+          </TabsContent>
+
+          <TabsContent value="references">
+            {id && <PlayerReferencesManager playerId={id} canEdit={true} />}
           </TabsContent>
 
           <TabsContent value="settings">

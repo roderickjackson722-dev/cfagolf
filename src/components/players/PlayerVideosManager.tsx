@@ -78,6 +78,20 @@ export function PlayerVideosManager({ playerId, canEdit }: { playerId: string; c
                     <SelectContent>{CATEGORIES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
                   </Select>
                 </div>
+                <div>
+                  <Label>Custom thumbnail (optional)</Label>
+                  <Input type="file" accept="image/*" onChange={async (e) => {
+                    const file = e.target.files?.[0]; if (!file) return;
+                    const ext = file.name.split('.').pop();
+                    const path = `${playerId}/thumbs/${Date.now()}.${ext}`;
+                    const { error } = await supabase.storage.from('player-gallery').upload(path, file);
+                    if (error) { toast.error(error.message); return; }
+                    const { data } = supabase.storage.from('player-gallery').getPublicUrl(path);
+                    setEditing({ ...editing, thumbnail_url: data.publicUrl });
+                  }} />
+                  {editing?.thumbnail_url && <img src={editing.thumbnail_url} alt="" className="mt-2 w-32 aspect-video object-cover rounded" />}
+                  <p className="text-xs text-muted-foreground mt-1">Leave blank to auto-fetch YouTube thumbnail.</p>
+                </div>
               </div>
               <Button onClick={() => editing && save.mutate(editing)} disabled={!editing?.title || !editing?.url}>Add</Button>
             </DialogContent>
