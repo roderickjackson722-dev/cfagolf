@@ -9,10 +9,13 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Slider } from '@/components/ui/slider';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { PlayerTournamentsManager } from '@/components/players/PlayerTournamentsManager';
 import { PlayerVideosManager } from '@/components/players/PlayerVideosManager';
+import { PlayerGalleryManager } from '@/components/players/PlayerGalleryManager';
+import { PlayerReferencesManager } from '@/components/players/PlayerReferencesManager';
 
 const PlayerDashboard = () => {
   const { user, loading, signOut } = useAuth();
@@ -92,10 +95,12 @@ const PlayerDashboard = () => {
         )}
 
         <Tabs defaultValue="profile">
-          <TabsList>
+          <TabsList className="flex-wrap h-auto">
             <TabsTrigger value="profile">Profile</TabsTrigger>
             <TabsTrigger value="tournaments">Tournaments</TabsTrigger>
             <TabsTrigger value="videos">Videos</TabsTrigger>
+            <TabsTrigger value="gallery">Gallery</TabsTrigger>
+            <TabsTrigger value="references">References</TabsTrigger>
             <TabsTrigger value="media">Photos & Resume</TabsTrigger>
           </TabsList>
 
@@ -117,11 +122,19 @@ const PlayerDashboard = () => {
 
           <TabsContent value="tournaments"><PlayerTournamentsManager playerId={player.id} canEdit={canEdit} /></TabsContent>
           <TabsContent value="videos"><PlayerVideosManager playerId={player.id} canEdit={canEdit} /></TabsContent>
+          <TabsContent value="gallery"><PlayerGalleryManager playerId={player.id} canEdit={canEdit} /></TabsContent>
+          <TabsContent value="references"><PlayerReferencesManager playerId={player.id} canEdit={canEdit} /></TabsContent>
 
           <TabsContent value="media" className="space-y-4">
-            <Card><CardHeader><CardTitle>Hero image</CardTitle></CardHeader><CardContent>
+            <Card><CardHeader><CardTitle>Hero image</CardTitle></CardHeader><CardContent className="space-y-3">
               {player.hero_image_url && <img src={player.hero_image_url} alt="" className="w-full max-w-md aspect-video object-cover rounded mb-3" />}
               <Input type="file" accept="image/*" disabled={!canEdit} onChange={(e) => e.target.files?.[0] && upload(e.target.files[0], 'player-images', 'hero_image_url')} />
+              <div className="pt-2">
+                <Label>Hero darkness ({player.hero_overlay_opacity ?? 40}%)</Label>
+                <Slider min={0} max={90} step={5} disabled={!canEdit} value={[player.hero_overlay_opacity ?? 40]} onValueChange={async (v) => {
+                  await upsert.mutateAsync({ id: player.id, hero_overlay_opacity: v[0] } as any);
+                }} />
+              </div>
             </CardContent></Card>
             <Card><CardHeader><CardTitle>Profile photo</CardTitle></CardHeader><CardContent>
               {player.profile_photo_url && <img src={player.profile_photo_url} alt="" className="w-32 h-32 rounded-full object-cover mb-3" />}
