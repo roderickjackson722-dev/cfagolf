@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Mail, Instagram, Twitter, Linkedin, Youtube, FileText, Play, MapPin, GraduationCap, Calendar, ExternalLink, Quote, X } from 'lucide-react';
+import { Mail, Instagram, Twitter, Linkedin, Youtube, FileText, Play, MapPin, GraduationCap, Calendar, ExternalLink, Quote, X, Menu, Check } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { usePlayerBySlug, usePlayerTournaments, usePlayerVideos } from '@/hooks/usePlayers';
 import { usePlayerGallery, usePlayerReferences } from '@/hooks/usePlayerExtras';
 import { Button } from '@/components/ui/button';
@@ -36,6 +37,7 @@ const PlayerSite = () => {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
   const [galleryFilter, setGalleryFilter] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState('about');
 
   if (isLoading) return <div className="min-h-screen flex items-center justify-center">Loading…</div>;
   if (!player || !player.is_active) {
@@ -109,17 +111,23 @@ const PlayerSite = () => {
 
       {/* Tabs */}
       <section className="container mx-auto px-4 py-8 max-w-6xl">
-        <Tabs defaultValue="about">
-          <TabsList className="w-full justify-start overflow-x-auto flex-wrap h-auto">
-            <TabsTrigger value="about">About</TabsTrigger>
-            <TabsTrigger value="resume">Resume</TabsTrigger>
-            <TabsTrigger value="tournaments">Scores</TabsTrigger>
-            {upcoming.length > 0 && <TabsTrigger value="schedule">Schedule</TabsTrigger>}
-            <TabsTrigger value="videos">Videos</TabsTrigger>
-            {gallery.length > 0 && <TabsTrigger value="gallery">Gallery</TabsTrigger>}
-            {references.length > 0 && <TabsTrigger value="references">References</TabsTrigger>}
-            <TabsTrigger value="contact">Contact</TabsTrigger>
-          </TabsList>
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <PlayerTabsNav
+            value={activeTab}
+            onChange={setActiveTab}
+            items={[
+              { value: 'about', label: 'About' },
+              { value: 'resume', label: 'Resume' },
+              { value: 'tournaments', label: 'Scores' },
+              ...(upcoming.length > 0 ? [{ value: 'schedule', label: 'Schedule' }] : []),
+              { value: 'videos', label: 'Videos' },
+              ...(gallery.length > 0 ? [{ value: 'gallery', label: 'Gallery' }] : []),
+              ...(references.length > 0 ? [{ value: 'references', label: 'References' }] : []),
+              { value: 'contact', label: 'Contact' },
+            ]}
+          />
+
+
 
           <TabsContent value="about" className="py-6">
             <Card><CardContent className="p-6 space-y-4">
@@ -341,6 +349,50 @@ function Row({ label, value }: { label: string; value: any }) {
 
 function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
   return <a href={href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">{icon}</a>;
+}
+
+function PlayerTabsNav({ items, value, onChange }: { items: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
+  const current = items.find((i) => i.value === value) ?? items[0];
+  return (
+    <>
+      {/* Mobile: hamburger dropdown */}
+      <div className="md:hidden mb-4">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground shadow-md font-semibold">
+              <span className="flex items-center gap-2"><Menu className="w-5 h-5" />{current.label}</span>
+              <span className="text-xs opacity-80">Menu</span>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-[calc(100vw-2rem)] sm:w-64">
+            {items.map((item) => (
+              <DropdownMenuItem
+                key={item.value}
+                onSelect={() => onChange(item.value)}
+                className={`cursor-pointer ${item.value === value ? 'bg-accent font-semibold' : ''}`}
+              >
+                <span className="flex-1">{item.label}</span>
+                {item.value === value && <Check className="w-4 h-4" />}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      {/* Desktop: prominent pill tabs */}
+      <TabsList className="hidden md:flex w-full h-auto justify-start gap-1 p-1.5 bg-primary/10 border border-primary/20 rounded-xl shadow-sm">
+        {items.map((item) => (
+          <TabsTrigger
+            key={item.value}
+            value={item.value}
+            className="px-4 py-2 text-sm font-semibold rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all"
+          >
+            {item.label}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+    </>
+  );
 }
 
 function ContactForm({ playerId, playerName, onSent }: { playerId: string; playerName: string; onSent?: () => void }) {
