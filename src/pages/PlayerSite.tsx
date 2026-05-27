@@ -79,6 +79,37 @@ const PlayerSite = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/60" />
         )}
         <div className="absolute inset-0" style={{ background: `linear-gradient(rgba(0,0,0,${overlay}), rgba(0,0,0,${overlay * 1.5}))` }} />
+
+        {/* Hamburger menu in top-right */}
+        <div className="absolute top-4 right-4 z-10">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                aria-label="Open menu"
+                className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/90 hover:bg-white text-foreground shadow-lg backdrop-blur-sm border border-white/40"
+              >
+                <Menu className="w-5 h-5" />
+                <span className="text-sm font-semibold hidden sm:inline">Menu</span>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              {tabItems.map((item) => (
+                <DropdownMenuItem
+                  key={item.value}
+                  onSelect={() => {
+                    setActiveTab(item.value);
+                    setTimeout(() => document.getElementById('player-tabs')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+                  }}
+                  className={`cursor-pointer ${item.value === activeTab ? 'bg-accent font-semibold' : ''}`}
+                >
+                  <span className="flex-1">{item.label}</span>
+                  {item.value === activeTab && <Check className="w-4 h-4" />}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
         <div className={`relative container mx-auto px-4 pb-12 ${textColor}`}>
           <div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6">
             {player.profile_photo_url && (
@@ -99,8 +130,15 @@ const PlayerSite = () => {
         </div>
       </section>
 
+      {/* Tab nav directly below hero */}
+      <section className="container mx-auto px-4 pt-6 max-w-6xl" id="player-tabs">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <PlayerTabsNav value={activeTab} onChange={setActiveTab} items={tabItems} />
+        </Tabs>
+      </section>
+
       {/* Key stats */}
-      <section className="border-b bg-muted/30 py-6">
+      <section className="border-b bg-muted/30 py-6 mt-6">
         <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatCard label="Scoring Avg" value={player.scoring_average} />
           <StatCard label="Handicap" value={player.handicap} />
@@ -109,23 +147,10 @@ const PlayerSite = () => {
         </div>
       </section>
 
-      {/* Tabs */}
+      {/* Tab content */}
       <section className="container mx-auto px-4 py-8 max-w-6xl">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <PlayerTabsNav
-            value={activeTab}
-            onChange={setActiveTab}
-            items={[
-              { value: 'about', label: 'About' },
-              { value: 'resume', label: 'Resume' },
-              { value: 'tournaments', label: 'Scores' },
-              ...(upcoming.length > 0 ? [{ value: 'schedule', label: 'Schedule' }] : []),
-              { value: 'videos', label: 'Videos' },
-              ...(gallery.length > 0 ? [{ value: 'gallery', label: 'Gallery' }] : []),
-              ...(references.length > 0 ? [{ value: 'references', label: 'References' }] : []),
-              { value: 'contact', label: 'Contact' },
-            ]}
-          />
+
 
 
 
