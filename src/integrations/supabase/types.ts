@@ -1018,6 +1018,45 @@ export type Database = {
           },
         ]
       }
+      player_gallery_images: {
+        Row: {
+          angle: string | null
+          category: string | null
+          created_at: string
+          description: string | null
+          display_order: number
+          id: string
+          image_url: string
+          player_id: string
+          thumbnail_url: string | null
+          title: string | null
+        }
+        Insert: {
+          angle?: string | null
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          image_url: string
+          player_id: string
+          thumbnail_url?: string | null
+          title?: string | null
+        }
+        Update: {
+          angle?: string | null
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          id?: string
+          image_url?: string
+          player_id?: string
+          thumbnail_url?: string | null
+          title?: string | null
+        }
+        Relationships: []
+      }
       player_profile_releases: {
         Row: {
           ack_can_withdraw: boolean
@@ -1135,6 +1174,42 @@ export type Database = {
         }
         Relationships: []
       }
+      player_references: {
+        Row: {
+          company: string | null
+          created_at: string
+          display_order: number
+          id: string
+          name: string
+          photo_url: string | null
+          player_id: string
+          quote: string
+          title: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          name: string
+          photo_url?: string | null
+          player_id: string
+          quote: string
+          title: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          name?: string
+          photo_url?: string | null
+          player_id?: string
+          quote?: string
+          title?: string
+        }
+        Relationships: []
+      }
       player_tournament_results: {
         Row: {
           course: string | null
@@ -1143,8 +1218,11 @@ export type Database = {
           field_size: number | null
           finish: string | null
           id: string
+          is_upcoming: boolean
+          location: string | null
           notes: string | null
           player_id: string
+          registration_link: string | null
           score: number | null
           tournament_name: string
         }
@@ -1155,8 +1233,11 @@ export type Database = {
           field_size?: number | null
           finish?: string | null
           id?: string
+          is_upcoming?: boolean
+          location?: string | null
           notes?: string | null
           player_id: string
+          registration_link?: string | null
           score?: number | null
           tournament_name: string
         }
@@ -1167,8 +1248,11 @@ export type Database = {
           field_size?: number | null
           finish?: string | null
           id?: string
+          is_upcoming?: boolean
+          location?: string | null
           notes?: string | null
           player_id?: string
+          registration_link?: string | null
           score?: number | null
           tournament_name?: string
         }
@@ -1236,6 +1320,8 @@ export type Database = {
           graduation_year: number | null
           handicap: number | null
           hero_image_url: string | null
+          hero_overlay_opacity: number
+          hero_text_color: string
           high_school: string | null
           home_course: string | null
           id: string
@@ -1263,6 +1349,8 @@ export type Database = {
           graduation_year?: number | null
           handicap?: number | null
           hero_image_url?: string | null
+          hero_overlay_opacity?: number
+          hero_text_color?: string
           high_school?: string | null
           home_course?: string | null
           id?: string
@@ -1290,6 +1378,8 @@ export type Database = {
           graduation_year?: number | null
           handicap?: number | null
           hero_image_url?: string | null
+          hero_overlay_opacity?: number
+          hero_text_color?: string
           high_school?: string | null
           home_course?: string | null
           id?: string
