@@ -94,6 +94,12 @@ const featureCategories: FeatureCategory[] = [
     category: "Personalized 1-on-1 Consulting",
     features: [
       {
+        title: "Custom Player Recruiting Website",
+        description: "Branded player site at /p/[name] with photo gallery, swing sequence, tournament resume, video highlights, references, and direct coach contact — replaces the traditional PDF and stack of links with one polished destination.",
+        consulting: true,
+        digital: false,
+      },
+      {
         title: "12 One-on-One Consulting Calls",
         description: "Personal consultation with an experienced advisor guiding you step-by-step through every phase of the recruiting process.",
         consulting: true,
