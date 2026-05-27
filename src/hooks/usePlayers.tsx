@@ -24,6 +24,8 @@ export interface Player {
   contact_email: string | null;
   social_links: Record<string, string> | null;
   custom_domain: string | null;
+  hero_overlay_opacity: number | null;
+  hero_text_color: string | null;
   is_active: boolean;
   allow_editing: boolean;
   created_at: string;
@@ -40,6 +42,9 @@ export interface TournamentResult {
   finish: string | null;
   field_size: number | null;
   notes: string | null;
+  is_upcoming: boolean | null;
+  registration_link: string | null;
+  location: string | null;
   created_at: string;
 }
 
