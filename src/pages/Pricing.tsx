@@ -153,6 +153,7 @@ const compareCategories: CompareCategory[] = [
   {
     category: "Personalized 1-on-1 Consulting",
     features: [
+      { title: "Custom Player Recruiting Website", description: "Branded player site at /p/[name] with photo gallery, tournaments, video swings, references, and contact — replaces PDFs and multiple links for coaches.", toolkit: false, portal: false, consulting: true },
       { title: "12 One-on-One Consulting Calls", description: "Personal guidance tailored to your journey.", toolkit: false, portal: false, consulting: true },
       { title: "Personalized Recruiting Roadmap", description: "Custom strategy plan for your profile.", toolkit: false, portal: false, consulting: true },
       { title: "Academic & Eligibility Evaluation", description: "In-depth assessment of your eligibility.", toolkit: false, portal: false, consulting: true },
