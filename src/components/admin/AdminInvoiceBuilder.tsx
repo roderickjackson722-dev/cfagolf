@@ -24,7 +24,7 @@ type CatalogItem = {
 
 const CATALOG: CatalogItem[] = [
   // Core programs
-  { id: 'consulting', category: 'Programs', name: 'Full Recruiting Consulting (HS)', price: 2499, description: '12-module College Fairway Advisors consulting program for high school golfers.' },
+  { id: 'consulting', category: 'Programs', name: 'Full Recruiting Consulting (HS)', price: 2499, description: '12-module CFA consulting program for HS golfers. Includes Custom Player Recruiting Website (photos, tournaments, videos, references, coach contact).' },
   { id: 'transfer', category: 'Programs', name: 'Transfer Student Program', price: 1499, description: '6-module CFA program for transfer portal navigation.' },
   { id: 'portal', category: 'Programs', name: 'Client Portal Access (1 year)', price: 299, description: '12-month access to CFA Client Portal: target schools, coach tracker, tournament log, visit comparison, scholarship calculator.' },
   { id: 'ebook', category: 'Programs', name: 'Recruiting Toolkit eBook', price: 25, description: 'Digital toolkit with templates, timeline, and resources.' },
@@ -36,7 +36,7 @@ const CATALOG: CatalogItem[] = [
   { id: 'family-meeting', category: 'Sessions', name: 'Family Strategy Meeting', price: 249, description: '90-minute strategy meeting with player and parents.' },
 
   // Portfolio / digital
-  { id: 'portfolio-site', category: 'Portfolio', name: 'Player Recruiting Website', price: 499, description: 'Custom player portfolio site at /p/[name] with photo gallery, tournaments, video swings, references.' },
+  { id: 'portfolio-site', category: 'Portfolio', name: 'Custom Player Recruiting Website (à la carte)', price: 499, description: 'Branded player site at /p/[name] with photo gallery, swing sequence, tournament resume, video highlights, references & coach contact. INCLUDED FREE with Full Consulting Program.' },
   { id: 'portfolio-domain', category: 'Portfolio', name: 'Custom Domain Setup', price: 99, description: 'Connect player\'s purchased custom domain to their portfolio site.' },
   { id: 'resume-design', category: 'Portfolio', name: 'Athletic Resume Design', price: 149, description: 'Professionally designed 1-page athletic resume PDF.' },
   { id: 'highlight-edit', category: 'Portfolio', name: 'Highlight Reel Edit', price: 199, description: 'Edit raw swing/tournament footage into a recruiting highlight reel.' },
