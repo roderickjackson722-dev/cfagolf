@@ -37,6 +37,7 @@ const PlayerSite = () => {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [contactOpen, setContactOpen] = useState(false);
   const [galleryFilter, setGalleryFilter] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState('about');
 
   if (isLoading) return <div className="min-h-screen flex items-center justify-center">Loading…</div>;
   if (!player || !player.is_active) {
