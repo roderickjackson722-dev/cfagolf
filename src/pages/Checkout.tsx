@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Link, useSearchParams, useNavigate } from 'react-router-dom';
-import { Check, ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Users, Calendar, Phone, Database, Target, Trophy, MapPin, DollarSign, Clock, Award, MessageCircle, Presentation, FileText as FileTextIcon } from 'lucide-react';
+import { Check, ArrowLeft, ArrowRight, CreditCard, Loader2, Tag, Users, Calendar, Phone, Database, Target, Trophy, MapPin, DollarSign, Clock, Award, MessageCircle, Presentation, Globe, FileText as FileTextIcon } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
@@ -42,6 +42,7 @@ const currentYear = new Date().getFullYear();
 const graduationYears = Array.from({ length: 8 }, (_, i) => currentYear + i - 1);
 
 const consultingFeatures = [
+  { icon: Globe, title: "Custom Player Recruiting Website", description: "Branded player site with photos, tournaments, video swings & references — one link for every coach" },
   { icon: Phone, title: "12 One-on-One Consulting Calls", description: "Personal guidance tailored to your recruiting journey" },
   { icon: Presentation, title: "Partnered Webinars with LPGA and PGA Pros", description: "Learn from the best in the golf industry" },
   { icon: Award, title: "Sessions with Current & Former College Coaches", description: "Get insider perspectives on what coaches look for" },

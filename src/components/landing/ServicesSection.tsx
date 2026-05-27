@@ -31,6 +31,7 @@ const digitalFeatures = [
 ];
 
 const consultingExtras = [
+  "Custom Player Recruiting Website (replaces PDFs & links)",
   "LPGA & PGA Pro Webinars",
   "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",

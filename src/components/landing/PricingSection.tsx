@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 
 const consultingHighlights = [
   "Everything in the Self-Paced Online Course",
+  "Custom Player Recruiting Website",
   "LPGA & PGA Pro Webinars",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
