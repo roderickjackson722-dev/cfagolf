@@ -111,8 +111,10 @@ const PlayerSite = () => {
 
       {/* Tabs */}
       <section className="container mx-auto px-4 py-8 max-w-6xl">
-        <Tabs defaultValue="about">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
           <PlayerTabsNav
+            value={activeTab}
+            onChange={setActiveTab}
             items={[
               { value: 'about', label: 'About' },
               { value: 'resume', label: 'Resume' },
@@ -124,6 +126,7 @@ const PlayerSite = () => {
               { value: 'contact', label: 'Contact' },
             ]}
           />
+
 
 
           <TabsContent value="about" className="py-6">
