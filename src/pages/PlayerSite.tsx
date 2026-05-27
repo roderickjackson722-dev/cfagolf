@@ -69,6 +69,17 @@ const PlayerSite = () => {
   const galleryCategories = Array.from(new Set(gallery.map((g) => g.category).filter(Boolean))) as string[];
   const filteredGallery = galleryFilter === 'all' ? gallery : gallery.filter((g) => g.category === galleryFilter);
 
+  const tabItems = [
+    { value: 'about', label: 'About' },
+    { value: 'resume', label: 'Resume' },
+    { value: 'tournaments', label: 'Scores' },
+    ...(upcoming.length > 0 ? [{ value: 'schedule', label: 'Schedule' }] : []),
+    { value: 'videos', label: 'Videos' },
+    ...(gallery.length > 0 ? [{ value: 'gallery', label: 'Gallery' }] : []),
+    ...(references.length > 0 ? [{ value: 'references', label: 'References' }] : []),
+    { value: 'contact', label: 'Contact' },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero */}
