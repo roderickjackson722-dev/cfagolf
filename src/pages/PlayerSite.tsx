@@ -388,46 +388,18 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
 }
 
 function PlayerTabsNav({ items, value, onChange }: { items: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
-  const current = items.find((i) => i.value === value) ?? items[0];
   return (
-    <>
-      {/* Mobile: hamburger dropdown */}
-      <div className="md:hidden mb-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="w-full flex items-center justify-between gap-2 px-4 py-3 rounded-lg bg-primary text-primary-foreground shadow-md font-semibold">
-              <span className="flex items-center gap-2"><Menu className="w-5 h-5" />{current.label}</span>
-              <span className="text-xs opacity-80">Menu</span>
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-[calc(100vw-2rem)] sm:w-64">
-            {items.map((item) => (
-              <DropdownMenuItem
-                key={item.value}
-                onSelect={() => onChange(item.value)}
-                className={`cursor-pointer ${item.value === value ? 'bg-accent font-semibold' : ''}`}
-              >
-                <span className="flex-1">{item.label}</span>
-                {item.value === value && <Check className="w-4 h-4" />}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-
-      {/* Desktop: prominent pill tabs */}
-      <TabsList className="hidden md:flex w-full h-auto justify-start gap-1 p-1.5 bg-primary/10 border border-primary/20 rounded-xl shadow-sm">
-        {items.map((item) => (
-          <TabsTrigger
-            key={item.value}
-            value={item.value}
-            className="px-4 py-2 text-sm font-semibold rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all"
-          >
-            {item.label}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-    </>
+    <TabsList className="flex w-full h-auto flex-wrap justify-start gap-1 p-1.5 bg-primary/10 border border-primary/20 rounded-xl shadow-sm">
+      {items.map((item) => (
+        <TabsTrigger
+          key={item.value}
+          value={item.value}
+          className="px-3 sm:px-4 py-2 text-sm font-semibold rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all"
+        >
+          {item.label}
+        </TabsTrigger>
+      ))}
+    </TabsList>
   );
 }
 
