@@ -14,7 +14,9 @@ import { setPdfRecipient, clearPdfRecipient } from '@/lib/pdfTemplates';
  */
 export function ProtectedShell() {
   const { user, profile } = useAuth();
-  useProtection(!!user);
+  // Skip watermark on public player portfolio pages
+  const isPublicPlayerPage = typeof window !== 'undefined' && window.location.pathname.startsWith('/p/');
+  useProtection(!!user && !isPublicPlayerPage);
 
   useEffect(() => {
     if (user) {
@@ -27,7 +29,7 @@ export function ProtectedShell() {
     }
   }, [user, profile?.full_name, profile?.email]);
 
-  if (!user) return null;
+  if (!user || isPublicPlayerPage) return null;
   return <Watermark />;
 }
 

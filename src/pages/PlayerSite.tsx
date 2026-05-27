@@ -167,6 +167,7 @@ const PlayerSite = () => {
 
           <TabsContent value="about" className="py-6">
             <Card><CardContent className="p-6 space-y-4">
+              <h2 className="text-2xl font-bold">About Me</h2>
               {player.bio ? <p className="whitespace-pre-wrap leading-relaxed">{player.bio}</p> : <p className="text-muted-foreground">Bio coming soon.</p>}
               <div className="flex gap-3 pt-4 border-t">
                 {social.instagram && <SocialLink href={social.instagram} icon={<Instagram />} />}
