@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Mail, Instagram, Twitter, Linkedin, Youtube, FileText, Play, MapPin, GraduationCap, Calendar, ExternalLink, Quote, X } from 'lucide-react';
+import { Mail, Instagram, Twitter, Linkedin, Youtube, FileText, Play, MapPin, GraduationCap, Calendar, ExternalLink, Quote, X, Menu, Check } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { usePlayerBySlug, usePlayerTournaments, usePlayerVideos } from '@/hooks/usePlayers';
 import { usePlayerGallery, usePlayerReferences } from '@/hooks/usePlayerExtras';
 import { Button } from '@/components/ui/button';
