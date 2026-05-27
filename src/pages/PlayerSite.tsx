@@ -110,12 +110,20 @@ const PlayerSite = () => {
 
       {/* Tabs */}
       <section className="container mx-auto px-4 py-8 max-w-6xl">
-        <PlayerTabs
-          hasSchedule={upcoming.length > 0}
-          hasGallery={gallery.length > 0}
-          hasReferences={references.length > 0}
-        >
-          {/* tab contents below */}
+        <Tabs defaultValue="about">
+          <PlayerTabsNav
+            items={[
+              { value: 'about', label: 'About' },
+              { value: 'resume', label: 'Resume' },
+              { value: 'tournaments', label: 'Scores' },
+              ...(upcoming.length > 0 ? [{ value: 'schedule', label: 'Schedule' }] : []),
+              { value: 'videos', label: 'Videos' },
+              ...(gallery.length > 0 ? [{ value: 'gallery', label: 'Gallery' }] : []),
+              ...(references.length > 0 ? [{ value: 'references', label: 'References' }] : []),
+              { value: 'contact', label: 'Contact' },
+            ]}
+          />
+
 
           <TabsContent value="about" className="py-6">
             <Card><CardContent className="p-6 space-y-4">
