@@ -79,6 +79,7 @@ export function PlayerTournamentsManager({ playerId, canEdit }: { playerId: stri
                     <div><Label>Score</Label><Input type="number" value={editing?.score ?? ''} onChange={(e) => setEditing({ ...editing, score: e.target.value ? Number(e.target.value) : null })} /></div>
                     <div><Label>Finish</Label><Input value={editing?.finish || ''} onChange={(e) => setEditing({ ...editing, finish: e.target.value })} placeholder="T-5" /></div>
                     <div><Label>Field size</Label><Input type="number" value={editing?.field_size ?? ''} onChange={(e) => setEditing({ ...editing, field_size: e.target.value ? Number(e.target.value) : null })} /></div>
+                    <div className="col-span-2"><Label>Tournament Results (link)</Label><Input value={editing?.results_link || ''} onChange={(e) => setEditing({ ...editing, results_link: e.target.value })} placeholder="https://… official results page" /></div>
                   </>
                 )}
                 <div className="col-span-2"><Label>Notes</Label><Textarea value={editing?.notes || ''} onChange={(e) => setEditing({ ...editing, notes: e.target.value })} /></div>
