@@ -44,6 +44,7 @@ export interface TournamentResult {
   notes: string | null;
   is_upcoming: boolean | null;
   registration_link: string | null;
+  results_link: string | null;
   location: string | null;
   created_at: string;
 }
