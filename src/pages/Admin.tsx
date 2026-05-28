@@ -133,6 +133,10 @@ const Admin = () => {
                 <Presentation className="w-4 h-4" />
                 Sales Tools
               </TabsTrigger>
+              <TabsTrigger value="other" className="flex items-center gap-2">
+                <Receipt className="w-4 h-4" />
+                Other
+              </TabsTrigger>
             </TabsList>
 
             {/* === CONTENT === */}
@@ -352,9 +356,6 @@ const Admin = () => {
                   <TabsTrigger value="analytics" className="flex items-center gap-2">
                     <BarChart3 className="w-4 h-4" /> Analytics
                   </TabsTrigger>
-                  <TabsTrigger value="invoices" className="flex items-center gap-2">
-                    <Receipt className="w-4 h-4" /> Invoices
-                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="sales-log">
@@ -461,10 +462,6 @@ const Admin = () => {
                       <AdminAnalyticsDashboard />
                     </CardContent>
                   </Card>
-                </TabsContent>
-
-                <TabsContent value="invoices">
-                  <AdminInvoiceBuilder />
                 </TabsContent>
               </Tabs>
             </TabsContent>
@@ -588,6 +585,21 @@ const Admin = () => {
                       <AdminPresentationSlides />
                     </CardContent>
                   </Card>
+                </TabsContent>
+              </Tabs>
+            </TabsContent>
+
+            {/* === OTHER === */}
+            <TabsContent value="other">
+              <Tabs defaultValue="invoices" className="space-y-6">
+                <TabsList className="flex flex-wrap h-auto">
+                  <TabsTrigger value="invoices" className="flex items-center gap-2">
+                    <Receipt className="w-4 h-4" /> Invoices
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="invoices">
+                  <AdminInvoiceBuilder />
                 </TabsContent>
               </Tabs>
             </TabsContent>
