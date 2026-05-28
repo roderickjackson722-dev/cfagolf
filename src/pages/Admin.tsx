@@ -133,6 +133,10 @@ const Admin = () => {
                 <Presentation className="w-4 h-4" />
                 Sales Tools
               </TabsTrigger>
+              <TabsTrigger value="other" className="flex items-center gap-2">
+                <Receipt className="w-4 h-4" />
+                Other
+              </TabsTrigger>
             </TabsList>
 
             {/* === CONTENT === */}
