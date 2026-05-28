@@ -463,10 +463,6 @@ const Admin = () => {
                     </CardContent>
                   </Card>
                 </TabsContent>
-
-                <TabsContent value="invoices">
-                  <AdminInvoiceBuilder />
-                </TabsContent>
               </Tabs>
             </TabsContent>
 
