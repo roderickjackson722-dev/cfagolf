@@ -1280,6 +1280,7 @@ export type Database = {
           notes: string | null
           player_id: string
           registration_link: string | null
+          results_link: string | null
           score: number | null
           tournament_name: string
         }
@@ -1295,6 +1296,7 @@ export type Database = {
           notes?: string | null
           player_id: string
           registration_link?: string | null
+          results_link?: string | null
           score?: number | null
           tournament_name: string
         }
@@ -1310,6 +1312,7 @@ export type Database = {
           notes?: string | null
           player_id?: string
           registration_link?: string | null
+          results_link?: string | null
           score?: number | null
           tournament_name?: string
         }

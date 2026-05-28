@@ -211,7 +211,7 @@ const PlayerSite = () => {
             <Card><CardContent className="p-0">
               {results.length === 0 ? <p className="text-muted-foreground p-8 text-center">No tournament results posted yet.</p> : (
                 <Table>
-                  <TableHeader><TableRow><TableHead>Date</TableHead><TableHead>Tournament</TableHead><TableHead>Course</TableHead><TableHead>Score</TableHead><TableHead>Finish</TableHead><TableHead>Field</TableHead></TableRow></TableHeader>
+                  <TableHeader><TableRow><TableHead>Date</TableHead><TableHead>Tournament</TableHead><TableHead>Course</TableHead><TableHead>Score</TableHead><TableHead>Finish</TableHead><TableHead>Field</TableHead><TableHead>Results</TableHead></TableRow></TableHeader>
                   <TableBody>
                     {results.map((t) => (
                       <TableRow key={t.id}>
@@ -221,6 +221,13 @@ const PlayerSite = () => {
                         <TableCell>{t.score ?? '—'}</TableCell>
                         <TableCell>{t.finish || '—'}</TableCell>
                         <TableCell>{t.field_size || '—'}</TableCell>
+                        <TableCell>
+                          {t.results_link ? (
+                            <a href={t.results_link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
+                              Tournament Results <ExternalLink className="w-3 h-3" />
+                            </a>
+                          ) : '—'}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

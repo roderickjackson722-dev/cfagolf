@@ -1,0 +1,1 @@
+ALTER TABLE public.player_tournament_results ADD COLUMN IF NOT EXISTS results_link text;
