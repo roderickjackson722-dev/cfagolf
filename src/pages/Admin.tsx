@@ -356,9 +356,6 @@ const Admin = () => {
                   <TabsTrigger value="analytics" className="flex items-center gap-2">
                     <BarChart3 className="w-4 h-4" /> Analytics
                   </TabsTrigger>
-                  <TabsTrigger value="invoices" className="flex items-center gap-2">
-                    <Receipt className="w-4 h-4" /> Invoices
-                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="sales-log">
