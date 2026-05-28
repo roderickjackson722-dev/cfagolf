@@ -588,6 +588,21 @@ const Admin = () => {
                 </TabsContent>
               </Tabs>
             </TabsContent>
+
+            {/* === OTHER === */}
+            <TabsContent value="other">
+              <Tabs defaultValue="invoices" className="space-y-6">
+                <TabsList className="flex flex-wrap h-auto">
+                  <TabsTrigger value="invoices" className="flex items-center gap-2">
+                    <Receipt className="w-4 h-4" /> Invoices
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="invoices">
+                  <AdminInvoiceBuilder />
+                </TabsContent>
+              </Tabs>
+            </TabsContent>
           </Tabs>
         </div>
       </main>
