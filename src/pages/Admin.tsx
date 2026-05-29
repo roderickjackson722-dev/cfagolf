@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature, FolderOpen, UserSquare2, Receipt } from 'lucide-react';
 import { AdminInvoiceBuilder } from '@/components/admin/AdminInvoiceBuilder';
+import Inventory from '@/pages/admin/Inventory';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAllPlayers } from '@/hooks/usePlayers';
