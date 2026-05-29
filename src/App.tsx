@@ -160,6 +160,10 @@ const App = () => {
             <Route path="/admin/players" element={<AdminPlayers />} />
             <Route path="/admin/players/new" element={<AdminPlayerEdit />} />
             <Route path="/admin/players/:id/edit" element={<AdminPlayerEdit />} />
+            <Route path="/admin/inventory" element={<Inventory />} />
+            <Route path="/admin/inventory/settings" element={<Inventory defaultTab="settings" />} />
+            <Route path="/admin/inventory/logs" element={<Inventory defaultTab="logs" />} />
+            <Route path="/admin/inventory/shares" element={<Inventory defaultTab="shares" />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
