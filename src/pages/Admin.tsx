@@ -606,7 +606,7 @@ const Admin = () => {
                   <AdminInvoiceBuilder />
                 </TabsContent>
                 <TabsContent value="inventory">
-                  <Inventory embedded />
+                  <Inventory embedded={true} />
                 </TabsContent>
               </Tabs>
             </TabsContent>
