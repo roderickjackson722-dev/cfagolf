@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature, FolderOpen, UserSquare2, Receipt } from 'lucide-react';
 import { AdminInvoiceBuilder } from '@/components/admin/AdminInvoiceBuilder';
+import Inventory from '@/pages/admin/Inventory';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAllPlayers } from '@/hooks/usePlayers';
@@ -596,10 +597,16 @@ const Admin = () => {
                   <TabsTrigger value="invoices" className="flex items-center gap-2">
                     <Receipt className="w-4 h-4" /> Invoices
                   </TabsTrigger>
+                  <TabsTrigger value="inventory" className="flex items-center gap-2">
+                    <ShoppingBag className="w-4 h-4" /> Inventory
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="invoices">
                   <AdminInvoiceBuilder />
+                </TabsContent>
+                <TabsContent value="inventory">
+                  <Inventory embedded />
                 </TabsContent>
               </Tabs>
             </TabsContent>

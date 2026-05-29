@@ -848,6 +848,295 @@ export type Database = {
           },
         ]
       }
+      inventory_brands: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+        }
+        Relationships: []
+      }
+      inventory_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          is_editable: boolean
+          name: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_editable?: boolean
+          name: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_editable?: boolean
+          name?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      inventory_items: {
+        Row: {
+          brand_id: string | null
+          category_id: string | null
+          color_hex: string | null
+          color_name: string
+          compatible_fabric: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          location: string | null
+          notes: string | null
+          quantity_on_hand: number
+          quantity_reserved: number
+          reorder_point: number
+          selling_price: number | null
+          size_id: string | null
+          style_id: string | null
+          transfer_type: string | null
+          unit_cost: number | null
+          updated_at: string
+        }
+        Insert: {
+          brand_id?: string | null
+          category_id?: string | null
+          color_hex?: string | null
+          color_name?: string
+          compatible_fabric?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          notes?: string | null
+          quantity_on_hand?: number
+          quantity_reserved?: number
+          reorder_point?: number
+          selling_price?: number | null
+          size_id?: string | null
+          style_id?: string | null
+          transfer_type?: string | null
+          unit_cost?: number | null
+          updated_at?: string
+        }
+        Update: {
+          brand_id?: string | null
+          category_id?: string | null
+          color_hex?: string | null
+          color_name?: string
+          compatible_fabric?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          notes?: string | null
+          quantity_on_hand?: number
+          quantity_reserved?: number
+          reorder_point?: number
+          selling_price?: number | null
+          size_id?: string | null
+          style_id?: string | null
+          transfer_type?: string | null
+          unit_cost?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_items_brand_id_fkey"
+            columns: ["brand_id"]
+            isOneToOne: false
+            referencedRelation: "inventory_brands"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_items_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "inventory_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_items_size_id_fkey"
+            columns: ["size_id"]
+            isOneToOne: false
+            referencedRelation: "inventory_sizes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_items_style_id_fkey"
+            columns: ["style_id"]
+            isOneToOne: false
+            referencedRelation: "inventory_styles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inventory_logs: {
+        Row: {
+          change_type: string
+          created_at: string
+          field_name: string | null
+          id: string
+          item_id: string | null
+          new_value: string | null
+          old_value: string | null
+          quantity_change: number | null
+          user_email: string | null
+          user_id: string | null
+        }
+        Insert: {
+          change_type: string
+          created_at?: string
+          field_name?: string | null
+          id?: string
+          item_id?: string | null
+          new_value?: string | null
+          old_value?: string | null
+          quantity_change?: number | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          change_type?: string
+          created_at?: string
+          field_name?: string | null
+          id?: string
+          item_id?: string | null
+          new_value?: string | null
+          old_value?: string | null
+          quantity_change?: number | null
+          user_email?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_logs_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "inventory_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inventory_settings: {
+        Row: {
+          id: string
+          key: string
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          id?: string
+          key: string
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          id?: string
+          key?: string
+          updated_at?: string
+          value?: string | null
+        }
+        Relationships: []
+      }
+      inventory_shares: {
+        Row: {
+          accepted_at: string | null
+          email: string
+          id: string
+          invited_at: string
+          invited_by: string | null
+          is_active: boolean
+          role: string
+          user_id: string | null
+        }
+        Insert: {
+          accepted_at?: string | null
+          email: string
+          id?: string
+          invited_at?: string
+          invited_by?: string | null
+          is_active?: boolean
+          role: string
+          user_id?: string | null
+        }
+        Update: {
+          accepted_at?: string | null
+          email?: string
+          id?: string
+          invited_at?: string
+          invited_by?: string | null
+          is_active?: boolean
+          role?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      inventory_sizes: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      inventory_styles: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+        }
+        Relationships: []
+      }
       invoices: {
         Row: {
           client_address: string | null
@@ -2396,6 +2685,7 @@ export type Database = {
           title: string
         }[]
       }
+      has_inventory_access: { Args: { _min_role?: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -2426,7 +2716,14 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "moderator" | "user" | "coach"
+      app_role:
+        | "admin"
+        | "moderator"
+        | "user"
+        | "coach"
+        | "inventory_admin"
+        | "inventory_editor"
+        | "inventory_viewer"
       division: "D1" | "D2" | "D3" | "NAIA" | "JUCO"
       school_size: "Small" | "Medium" | "Large" | "Very Large"
     }
@@ -2556,7 +2853,15 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "moderator", "user", "coach"],
+      app_role: [
+        "admin",
+        "moderator",
+        "user",
+        "coach",
+        "inventory_admin",
+        "inventory_editor",
+        "inventory_viewer",
+      ],
       division: ["D1", "D2", "D3", "NAIA", "JUCO"],
       school_size: ["Small", "Medium", "Large", "Very Large"],
     },
