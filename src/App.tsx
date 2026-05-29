@@ -68,6 +68,7 @@ import PlayerLogin from "./pages/PlayerLogin";
 import PlayerDashboard from "./pages/PlayerDashboard";
 import AdminPlayers from "./pages/admin/AdminPlayers";
 import AdminPlayerEdit from "./pages/admin/AdminPlayerEdit";
+import Inventory from "./pages/admin/Inventory";
 
 
 import { useCustomDomainRewrite } from "./components/CustomDomainRouter";
