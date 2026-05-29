@@ -596,10 +596,16 @@ const Admin = () => {
                   <TabsTrigger value="invoices" className="flex items-center gap-2">
                     <Receipt className="w-4 h-4" /> Invoices
                   </TabsTrigger>
+                  <TabsTrigger value="inventory" className="flex items-center gap-2">
+                    <ShoppingBag className="w-4 h-4" /> Inventory
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="invoices">
                   <AdminInvoiceBuilder />
+                </TabsContent>
+                <TabsContent value="inventory">
+                  <InventoryEmbedded />
                 </TabsContent>
               </Tabs>
             </TabsContent>
