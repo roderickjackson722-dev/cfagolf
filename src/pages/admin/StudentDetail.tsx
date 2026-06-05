@@ -68,6 +68,7 @@ export default function StudentDetail() {
           <TabsList className="flex flex-wrap h-auto">
             <TabsTrigger value="info">Info</TabsTrigger>
             <TabsTrigger value="content">Content</TabsTrigger>
+            <TabsTrigger value="resume">Resume</TabsTrigger>
             <TabsTrigger value="notes">Notes</TabsTrigger>
             <TabsTrigger value="webpage">Webpage</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
