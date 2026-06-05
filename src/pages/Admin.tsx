@@ -2,6 +2,8 @@ import { Navigate } from 'react-router-dom';
 import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature, FolderOpen, UserSquare2, Receipt } from 'lucide-react';
 import { AdminInvoiceBuilder } from '@/components/admin/AdminInvoiceBuilder';
 import Inventory from '@/pages/admin/Inventory';
+import ContentLibraryEmbedded from '@/pages/admin/ContentLibrary';
+import StudentsEmbedded from '@/pages/admin/Students';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAllPlayers } from '@/hooks/usePlayers';
@@ -600,6 +602,12 @@ const Admin = () => {
                   <TabsTrigger value="inventory" className="flex items-center gap-2">
                     <ShoppingBag className="w-4 h-4" /> Inventory
                   </TabsTrigger>
+                  <TabsTrigger value="content-library" className="flex items-center gap-2">
+                    <FolderOpen className="w-4 h-4" /> Content Library
+                  </TabsTrigger>
+                  <TabsTrigger value="students" className="flex items-center gap-2">
+                    <GraduationCap className="w-4 h-4" /> Students
+                  </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="invoices">
@@ -607,6 +615,12 @@ const Admin = () => {
                 </TabsContent>
                 <TabsContent value="inventory">
                   <Inventory embedded={true} />
+                </TabsContent>
+                <TabsContent value="content-library">
+                  <ContentLibraryEmbedded />
+                </TabsContent>
+                <TabsContent value="students">
+                  <StudentsEmbedded />
                 </TabsContent>
               </Tabs>
             </TabsContent>
