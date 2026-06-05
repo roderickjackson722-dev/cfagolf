@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -56,6 +56,9 @@ export default function StudentDetail() {
             )}
             <Button variant="outline" onClick={() => setEditOpen(true)}>
               <Pencil className="w-4 h-4 mr-1" />Edit
+            </Button>
+            <Button asChild>
+              <Link to={`/admin/students/${student.id}/resume`}>Resume</Link>
             </Button>
           </div>
         </div>

@@ -2582,6 +2582,44 @@ export type Database = {
           },
         ]
       }
+      student_resumes: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          last_generated_at: string | null
+          pdf_url: string | null
+          student_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          id?: string
+          last_generated_at?: string | null
+          pdf_url?: string | null
+          student_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          last_generated_at?: string | null
+          pdf_url?: string | null
+          student_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_resumes_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: true
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       students: {
         Row: {
           created_at: string
