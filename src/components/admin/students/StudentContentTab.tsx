@@ -4,15 +4,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Download, Trash2, Upload, Copy } from 'lucide-react';
+import { Download, Trash2, Upload, Copy, Pencil } from 'lucide-react';
 import {
   useStudentContent,
   useUploadStudentFile,
   useDeleteStudentContent,
   getStudentFileSignedUrl,
+  StudentContent,
 } from '@/hooks/useStudents';
 import { useContentItems, useCopyTemplateToStudents } from '@/hooks/useContentLibrary';
 import { toast } from '@/hooks/use-toast';
+import StudentContentEditDialog from './StudentContentEditDialog';
 
 export default function StudentContentTab({ studentId }: { studentId: string }) {
   const { data: files = [] } = useStudentContent(studentId);
