@@ -12,6 +12,7 @@ import StudentContentTab from '@/components/admin/students/StudentContentTab';
 import StudentNotesTab from '@/components/admin/students/StudentNotesTab';
 import StudentWebpagesTab from '@/components/admin/students/StudentWebpagesTab';
 import StudentActivityTab from '@/components/admin/students/StudentActivityTab';
+import ResumeEditor from '@/components/admin/students/ResumeEditor';
 
 export default function StudentDetail() {
   const { id } = useParams();
