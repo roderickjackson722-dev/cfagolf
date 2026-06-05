@@ -72,7 +72,7 @@ export default function StudentDetail() {
             <TabsTrigger value="resume">Resume</TabsTrigger>
             <TabsTrigger value="agendas">Agendas</TabsTrigger>
             <TabsTrigger value="notes">Notes</TabsTrigger>
-            <TabsTrigger value="webpage">Webpage</TabsTrigger>
+            <TabsTrigger value="webpage">Manage</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
           </TabsList>
 
