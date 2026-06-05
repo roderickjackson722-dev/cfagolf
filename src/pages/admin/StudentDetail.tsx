@@ -109,6 +109,7 @@ export default function StudentDetail() {
             scoringAverage: student.scoring_average != null ? String(student.scoring_average) : '',
           }} /></TabsContent>
           <TabsContent value="notes"><StudentNotesTab studentId={student.id} /></TabsContent>
+          <TabsContent value="agendas"><StudentAgendasTab studentId={student.id} /></TabsContent>
           <TabsContent value="webpage"><StudentWebpagesTab studentId={student.id} /></TabsContent>
           <TabsContent value="activity"><StudentActivityTab studentId={student.id} /></TabsContent>
         </Tabs>
