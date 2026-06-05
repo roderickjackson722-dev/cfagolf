@@ -15,6 +15,8 @@ import StudentActivityTab from '@/components/admin/students/StudentActivityTab';
 
 export default function StudentDetail() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab') || 'info';
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const { data: isAdmin, isLoading: adminLoading } = useIsAdmin();
