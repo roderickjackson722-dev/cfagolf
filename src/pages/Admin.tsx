@@ -233,6 +233,10 @@ const Admin = () => {
                   </Card>
                 </TabsContent>
 
+                <TabsContent value="hbcu">
+                  <HbcuProgramsTable />
+                </TabsContent>
+
                 <TabsContent value="import" className="space-y-6">
                   <CollegeBulkImporter />
                   <ClippdImporter />
