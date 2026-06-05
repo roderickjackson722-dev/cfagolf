@@ -74,6 +74,9 @@ import Students from "./pages/admin/Students";
 import StudentDetail from "./pages/admin/StudentDetail";
 import StudentResume from "./pages/admin/StudentResume";
 import PlayerResume from "./pages/PlayerResume";
+import AdminLinks from "./pages/admin/AdminLinks";
+import PublicLinks from "./pages/PublicLinks";
+
 
 
 import { useCustomDomainRewrite } from "./components/CustomDomainRouter";
