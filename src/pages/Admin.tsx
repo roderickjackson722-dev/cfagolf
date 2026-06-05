@@ -113,12 +113,20 @@ const Admin = () => {
                 Manage college data, users, and system settings
               </p>
             </div>
-            <Button asChild variant="outline">
-              <Link to="/admin/links">
-                <Link2 className="w-4 h-4 mr-2" />
-                Links Library
-              </Link>
-            </Button>
+            <div className="flex gap-2">
+              <Button asChild variant="outline">
+                <Link to="/admin/agenda-templates">
+                  <Link2 className="w-4 h-4 mr-2" />
+                  Agenda Templates
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/admin/links">
+                  <Link2 className="w-4 h-4 mr-2" />
+                  Links Library
+                </Link>
+              </Button>
+            </div>
           </div>
 
 
