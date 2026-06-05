@@ -69,6 +69,9 @@ import PlayerDashboard from "./pages/PlayerDashboard";
 import AdminPlayers from "./pages/admin/AdminPlayers";
 import AdminPlayerEdit from "./pages/admin/AdminPlayerEdit";
 import Inventory from "./pages/admin/Inventory";
+import ContentLibrary from "./pages/admin/ContentLibrary";
+import Students from "./pages/admin/Students";
+import StudentDetail from "./pages/admin/StudentDetail";
 
 
 import { useCustomDomainRewrite } from "./components/CustomDomainRouter";
@@ -164,6 +167,10 @@ const App = () => {
             <Route path="/admin/inventory/settings" element={<Inventory defaultTab="settings" />} />
             <Route path="/admin/inventory/logs" element={<Inventory defaultTab="logs" />} />
             <Route path="/admin/inventory/shares" element={<Inventory defaultTab="shares" />} />
+            <Route path="/admin/content-library" element={<ContentLibrary />} />
+            <Route path="/admin/content-library/categories" element={<ContentLibrary defaultTab="categories" />} />
+            <Route path="/admin/students" element={<Students />} />
+            <Route path="/admin/students/:id" element={<StudentDetail />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
