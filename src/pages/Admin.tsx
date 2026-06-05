@@ -617,10 +617,10 @@ const Admin = () => {
                   <Inventory embedded={true} />
                 </TabsContent>
                 <TabsContent value="content-library">
-                  <ContentLibraryEmbedded />
+                  <ContentLibraryEmbedded embedded={true} />
                 </TabsContent>
                 <TabsContent value="students">
-                  <StudentsEmbedded />
+                  <StudentsEmbedded embedded={true} />
                 </TabsContent>
               </Tabs>
             </TabsContent>

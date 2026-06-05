@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -15,6 +15,8 @@ import StudentActivityTab from '@/components/admin/students/StudentActivityTab';
 
 export default function StudentDetail() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab') || 'info';
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const { data: isAdmin, isLoading: adminLoading } = useIsAdmin();
@@ -58,7 +60,7 @@ export default function StudentDetail() {
           </div>
         </div>
 
-        <Tabs defaultValue="info" className="space-y-4">
+        <Tabs defaultValue={initialTab} className="space-y-4">
           <TabsList className="flex flex-wrap h-auto">
             <TabsTrigger value="info">Info</TabsTrigger>
             <TabsTrigger value="content">Content</TabsTrigger>
