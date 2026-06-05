@@ -1343,6 +1343,36 @@ export type Database = {
         }
         Relationships: []
       }
+      link_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       meeting_progress: {
         Row: {
           admin_notes: string | null
@@ -2200,6 +2230,54 @@ export type Database = {
           total_rewards_earned?: number | null
           updated_at?: string
           uses_count?: number
+        }
+        Relationships: []
+      }
+      resource_links: {
+        Row: {
+          category: string | null
+          click_count: number
+          created_at: string
+          created_by: string | null
+          description: string | null
+          icon: string | null
+          id: string
+          is_active: boolean
+          last_clicked_at: string | null
+          name: string
+          sort_order: number
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          category?: string | null
+          click_count?: number
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean
+          last_clicked_at?: string | null
+          name: string
+          sort_order?: number
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          category?: string | null
+          click_count?: number
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean
+          last_clicked_at?: string | null
+          name?: string
+          sort_order?: number
+          updated_at?: string
+          url?: string
         }
         Relationships: []
       }
