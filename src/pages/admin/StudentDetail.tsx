@@ -60,7 +60,7 @@ export default function StudentDetail() {
           </div>
         </div>
 
-        <Tabs defaultValue="info" className="space-y-4">
+        <Tabs defaultValue={initialTab} className="space-y-4">
           <TabsList className="flex flex-wrap h-auto">
             <TabsTrigger value="info">Info</TabsTrigger>
             <TabsTrigger value="content">Content</TabsTrigger>
