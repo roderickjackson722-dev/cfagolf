@@ -14,6 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
+      agenda_template_tasks: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          description: string | null
+          estimated_duration: number | null
+          id: string
+          link_text: string | null
+          link_url: string | null
+          sort_order: number
+          template_id: string
+          title: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          description?: string | null
+          estimated_duration?: number | null
+          id?: string
+          link_text?: string | null
+          link_url?: string | null
+          sort_order?: number
+          template_id: string
+          title: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          description?: string | null
+          estimated_duration?: number | null
+          id?: string
+          link_text?: string | null
+          link_url?: string | null
+          sort_order?: number
+          template_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agenda_template_tasks_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "agenda_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      agenda_templates: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_default: boolean
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_default?: boolean
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_default?: boolean
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       campus_visits: {
         Row: {
           academics_rating: number | null
@@ -2498,6 +2575,161 @@ export type Database = {
             columns: ["student_id"]
             isOneToOne: false
             referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      student_agenda_comments: {
+        Row: {
+          agenda_id: string
+          comment: string
+          created_at: string
+          created_by: string | null
+          id: string
+          task_id: string | null
+        }
+        Insert: {
+          agenda_id: string
+          comment: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          task_id?: string | null
+        }
+        Update: {
+          agenda_id?: string
+          comment?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          task_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_agenda_comments_agenda_id_fkey"
+            columns: ["agenda_id"]
+            isOneToOne: false
+            referencedRelation: "student_agendas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "student_agenda_comments_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "student_agenda_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      student_agenda_tasks: {
+        Row: {
+          agenda_id: string
+          assigned_to: string | null
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          estimated_duration: number | null
+          id: string
+          link_text: string | null
+          link_url: string | null
+          sort_order: number
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          agenda_id: string
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          estimated_duration?: number | null
+          id?: string
+          link_text?: string | null
+          link_url?: string | null
+          sort_order?: number
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          agenda_id?: string
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          estimated_duration?: number | null
+          id?: string
+          link_text?: string | null
+          link_url?: string | null
+          sort_order?: number
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_agenda_tasks_agenda_id_fkey"
+            columns: ["agenda_id"]
+            isOneToOne: false
+            referencedRelation: "student_agendas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      student_agendas: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          meeting_date: string | null
+          meeting_type: string | null
+          notes: string | null
+          status: string
+          student_id: string
+          template_id: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          meeting_date?: string | null
+          meeting_type?: string | null
+          notes?: string | null
+          status?: string
+          student_id: string
+          template_id?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          meeting_date?: string | null
+          meeting_type?: string | null
+          notes?: string | null
+          status?: string
+          student_id?: string
+          template_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_agendas_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "student_agendas_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "agenda_templates"
             referencedColumns: ["id"]
           },
         ]
