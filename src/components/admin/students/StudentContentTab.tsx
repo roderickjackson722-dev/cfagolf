@@ -26,6 +26,7 @@ export default function StudentContentTab({ studentId }: { studentId: string }) 
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [editing, setEditing] = useState<StudentContent | null>(null);
 
   const templates = items.filter((it) => it.is_template && it.is_global);
 
@@ -116,15 +117,20 @@ export default function StudentContentTab({ studentId }: { studentId: string }) 
             <div className="divide-y border rounded">
               {files.map((f) => (
                 <div key={f.id} className="flex items-center justify-between p-3">
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <div className="font-medium">{f.title}</div>
-                    {f.description && <div className="text-xs text-muted-foreground">{f.description}</div>}
+                    {f.description && (
+                      <div className="text-xs text-muted-foreground whitespace-pre-wrap line-clamp-3">{f.description}</div>
+                    )}
                     <div className="text-xs text-muted-foreground mt-1">
-                      {f.file_name} {f.source_template_id && <Badge variant="outline" className="ml-1">From template</Badge>}
+                      {f.file_name || 'Text template'} {f.source_template_id && <Badge variant="outline" className="ml-1">From template</Badge>}
                       {f.is_customized && <Badge variant="secondary" className="ml-1">Customized</Badge>}
                     </div>
                   </div>
-                  <div className="flex gap-1">
+                  <div className="flex gap-1 shrink-0">
+                    <Button size="sm" variant="ghost" onClick={() => setEditing(f)}>
+                      <Pencil className="w-4 h-4" />
+                    </Button>
                     {f.storage_path && (
                       <Button size="sm" variant="ghost" onClick={() => handleDownload(f.storage_path!)}>
                         <Download className="w-4 h-4" />
