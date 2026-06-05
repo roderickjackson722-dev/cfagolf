@@ -173,6 +173,9 @@ const Admin = () => {
                   <TabsTrigger value="wagr" className="flex items-center gap-2">
                     <Trophy className="w-4 h-4" /> WAGR
                   </TabsTrigger>
+                  <TabsTrigger value="hbcu" className="flex items-center gap-2">
+                    <Trophy className="w-4 h-4" /> HBCU Programs
+                  </TabsTrigger>
                   <TabsTrigger value="import" className="flex items-center gap-2">
                     <Download className="w-4 h-4" /> Data Import
                   </TabsTrigger>
