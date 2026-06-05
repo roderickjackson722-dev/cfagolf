@@ -36,6 +36,7 @@ import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
 import { AdminCoachesTable } from '@/components/admin/AdminCoachesTable';
 import { AdminPresentationTokens } from '@/components/admin/AdminPresentationTokens';
 import { AdminPresentationSlides } from '@/components/admin/AdminPresentationSlides';
+import { HbcuProgramsTable } from '@/components/admin/HbcuProgramsTable';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -172,6 +173,9 @@ const Admin = () => {
                   <TabsTrigger value="wagr" className="flex items-center gap-2">
                     <Trophy className="w-4 h-4" /> WAGR
                   </TabsTrigger>
+                  <TabsTrigger value="hbcu" className="flex items-center gap-2">
+                    <Trophy className="w-4 h-4" /> HBCU Programs
+                  </TabsTrigger>
                   <TabsTrigger value="import" className="flex items-center gap-2">
                     <Download className="w-4 h-4" /> Data Import
                   </TabsTrigger>
@@ -227,6 +231,10 @@ const Admin = () => {
                       <AdminWagrTable />
                     </CardContent>
                   </Card>
+                </TabsContent>
+
+                <TabsContent value="hbcu">
+                  <HbcuProgramsTable />
                 </TabsContent>
 
                 <TabsContent value="import" className="space-y-6">
