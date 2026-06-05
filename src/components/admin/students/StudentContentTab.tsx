@@ -146,6 +146,12 @@ export default function StudentContentTab({ studentId }: { studentId: string }) 
           )}
         </CardContent>
       </Card>
+
+      <StudentContentEditDialog
+        open={!!editing}
+        onOpenChange={(o) => !o && setEditing(null)}
+        content={editing}
+      />
     </div>
   );
 }
