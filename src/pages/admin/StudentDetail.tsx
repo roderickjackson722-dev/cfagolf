@@ -96,6 +96,16 @@ export default function StudentDetail() {
           </TabsContent>
 
           <TabsContent value="content"><StudentContentTab studentId={student.id} /></TabsContent>
+          <TabsContent value="resume"><ResumeEditor studentId={student.id} seed={{
+            fullName: student.full_name,
+            email: student.email || '',
+            phone: student.phone || '',
+            highSchool: student.high_school || '',
+            graduationYear: student.graduation_year ? String(student.graduation_year) : '',
+            gpa: student.gpa ? String(student.gpa) : '',
+            handicap: student.handicap != null ? String(student.handicap) : '',
+            scoringAverage: student.scoring_average != null ? String(student.scoring_average) : '',
+          }} /></TabsContent>
           <TabsContent value="notes"><StudentNotesTab studentId={student.id} /></TabsContent>
           <TabsContent value="webpage"><StudentWebpagesTab studentId={student.id} /></TabsContent>
           <TabsContent value="activity"><StudentActivityTab studentId={student.id} /></TabsContent>
