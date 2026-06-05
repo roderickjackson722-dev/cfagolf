@@ -101,17 +101,26 @@ const Admin = () => {
       <main className="flex-1 py-8">
         <div className="container mx-auto px-4">
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-2">
-              <Shield className="w-8 h-8 text-primary" />
-              <h1 className="font-display text-3xl font-bold text-foreground">
-                Admin Panel
-              </h1>
+          <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <Shield className="w-8 h-8 text-primary" />
+                <h1 className="font-display text-3xl font-bold text-foreground">
+                  Admin Panel
+                </h1>
+              </div>
+              <p className="text-muted-foreground">
+                Manage college data, users, and system settings
+              </p>
             </div>
-            <p className="text-muted-foreground">
-              Manage college data, users, and system settings
-            </p>
+            <Button asChild variant="outline">
+              <Link to="/admin/links">
+                <Link2 className="w-4 h-4 mr-2" />
+                Links Library
+              </Link>
+            </Button>
           </div>
+
 
           {/* Top-level category tabs */}
           <Tabs defaultValue="content" className="space-y-6">
