@@ -13,6 +13,7 @@ import StudentNotesTab from '@/components/admin/students/StudentNotesTab';
 import StudentWebpagesTab from '@/components/admin/students/StudentWebpagesTab';
 import StudentActivityTab from '@/components/admin/students/StudentActivityTab';
 import ResumeEditor from '@/components/admin/students/ResumeEditor';
+import StudentAgendasTab from '@/components/admin/students/StudentAgendasTab';
 
 export default function StudentDetail() {
   const { id } = useParams();
@@ -69,6 +70,7 @@ export default function StudentDetail() {
             <TabsTrigger value="info">Info</TabsTrigger>
             <TabsTrigger value="content">Content</TabsTrigger>
             <TabsTrigger value="resume">Resume</TabsTrigger>
+            <TabsTrigger value="agendas">Agendas</TabsTrigger>
             <TabsTrigger value="notes">Notes</TabsTrigger>
             <TabsTrigger value="webpage">Webpage</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
