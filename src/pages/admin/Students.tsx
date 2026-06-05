@@ -104,6 +104,11 @@ export default function Students({ embedded = false }: Props) {
                   </TableCell>
                   <TableCell className="text-xs text-muted-foreground">{new Date(s.updated_at).toLocaleDateString()}</TableCell>
                   <TableCell className="text-right space-x-1">
+                    <Button size="sm" variant="outline" asChild title="Manage files & templates">
+                      <Link to={`/admin/students/${s.id}?tab=content`}>
+                        <FolderOpen className="w-4 h-4 mr-1" />Files
+                      </Link>
+                    </Button>
                     {s.personal_website_url && (
                       <Button size="sm" variant="ghost" asChild>
                         <a href={s.personal_website_url} target="_blank" rel="noreferrer"><ExternalLink className="w-4 h-4" /></a>
