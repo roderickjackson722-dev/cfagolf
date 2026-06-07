@@ -11,6 +11,7 @@ import StudentDialog from '@/components/admin/students/StudentDialog';
 import StudentContentTab from '@/components/admin/students/StudentContentTab';
 import StudentNotesTab from '@/components/admin/students/StudentNotesTab';
 import StudentWebpagesTab from '@/components/admin/students/StudentWebpagesTab';
+import StudentWebsiteTab from '@/components/admin/students/StudentWebsiteTab';
 import StudentActivityTab from '@/components/admin/students/StudentActivityTab';
 import ResumeEditor from '@/components/admin/students/ResumeEditor';
 import StudentAgendasTab from '@/components/admin/students/StudentAgendasTab';
@@ -72,6 +73,7 @@ export default function StudentDetail() {
             <TabsTrigger value="resume">Resume</TabsTrigger>
             <TabsTrigger value="agendas">Agendas</TabsTrigger>
             <TabsTrigger value="notes">Notes</TabsTrigger>
+            <TabsTrigger value="website">Website</TabsTrigger>
             <TabsTrigger value="webpage">Manage</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
           </TabsList>
@@ -110,6 +112,7 @@ export default function StudentDetail() {
           }} /></TabsContent>
           <TabsContent value="notes"><StudentNotesTab studentId={student.id} /></TabsContent>
           <TabsContent value="agendas"><StudentAgendasTab studentId={student.id} /></TabsContent>
+          <TabsContent value="website"><StudentWebsiteTab studentId={student.id} /></TabsContent>
           <TabsContent value="webpage"><StudentWebpagesTab studentId={student.id} /></TabsContent>
           <TabsContent value="activity"><StudentActivityTab studentId={student.id} /></TabsContent>
         </Tabs>
