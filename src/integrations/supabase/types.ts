@@ -1928,6 +1928,7 @@ export type Database = {
           hero_overlay_opacity: number
           hero_text_color: string
           high_school: string | null
+          highlights: Json
           home_course: string | null
           id: string
           intended_major: string | null
@@ -1957,6 +1958,7 @@ export type Database = {
           hero_overlay_opacity?: number
           hero_text_color?: string
           high_school?: string | null
+          highlights?: Json
           home_course?: string | null
           id?: string
           intended_major?: string | null
@@ -1986,6 +1988,7 @@ export type Database = {
           hero_overlay_opacity?: number
           hero_text_color?: string
           high_school?: string | null
+          highlights?: Json
           home_course?: string | null
           id?: string
           intended_major?: string | null
