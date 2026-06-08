@@ -28,8 +28,15 @@ export interface Player {
   hero_text_color: string | null;
   is_active: boolean;
   allow_editing: boolean;
+  highlights: HighlightItem[] | null;
   created_at: string;
   updated_at: string;
+}
+
+export interface HighlightItem {
+  text: string;
+  link_text?: string;
+  link_url?: string;
 }
 
 export interface TournamentResult {
