@@ -96,7 +96,7 @@ export function PlayerTournamentsManager({ playerId, canEdit }: { playerId: stri
             <TableBody>
               {results.map((r) => (
                 <TableRow key={r.id}>
-                  <TableCell>{new Date(r.date).toLocaleDateString()}</TableCell>
+                  <TableCell>{(() => { const [y,m,d] = (r.date||'').split('-').map(Number); return d ? `${m}/${d}/${y}` : r.date; })()}</TableCell>
                   <TableCell className="font-medium">{r.tournament_name}</TableCell>
                   <TableCell>{r.course || r.location || '—'}</TableCell>
                   <TableCell>{r.score ?? '—'}</TableCell>
