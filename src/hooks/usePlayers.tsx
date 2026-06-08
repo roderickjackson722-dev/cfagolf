@@ -28,9 +28,21 @@ export interface Player {
   hero_text_color: string | null;
   is_active: boolean;
   allow_editing: boolean;
+  highlights: HighlightItem[] | null;
   created_at: string;
   updated_at: string;
 }
+
+export interface HighlightItem {
+  text: string;
+  link_text?: string;
+  link_url?: string;
+}
+
+// Cast helper: Supabase generated types treat jsonb as Json which doesn't
+// structurally match our typed interfaces.
+const asPlayer = (d: any) => d as unknown as Player;
+const asPlayers = (d: any) => ((d || []) as unknown) as Player[];
 
 export interface TournamentResult {
   id: string;
@@ -69,7 +81,7 @@ export function useAllPlayers() {
         .select('*')
         .order('created_at', { ascending: false });
       if (error) throw error;
-      return (data || []) as Player[];
+      return asPlayers(data);
     },
   });
 }
@@ -85,7 +97,7 @@ export function usePlayerBySlug(slug: string | undefined) {
         .eq('slug', slug!)
         .maybeSingle();
       if (error) throw error;
-      return data as Player | null;
+      return data ? asPlayer(data) : null;
     },
   });
 }
@@ -97,7 +109,7 @@ export function usePlayerById(id: string | undefined) {
     queryFn: async () => {
       const { data, error } = await supabase.from('players').select('*').eq('id', id!).maybeSingle();
       if (error) throw error;
-      return data as Player | null;
+      return data ? asPlayer(data) : null;
     },
   });
 }
@@ -114,7 +126,7 @@ export function useMyPlayer() {
         .eq('user_id', user!.id)
         .maybeSingle();
       if (error) throw error;
-      return data as Player | null;
+      return data ? asPlayer(data) : null;
     },
   });
 }
@@ -159,7 +171,7 @@ export function useUpsertPlayer() {
       if (player.id) {
         const { data, error } = await supabase
           .from('players')
-          .update(player)
+          .update(player as any)
           .eq('id', player.id)
           .select()
           .single();

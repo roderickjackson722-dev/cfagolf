@@ -5,7 +5,8 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
-import { usePlayerById, useUpsertPlayer, slugify, Player } from '@/hooks/usePlayers';
+import { usePlayerById, useUpsertPlayer, slugify, Player, HighlightItem } from '@/hooks/usePlayers';
+import { Plus, Trash2, GripVertical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -116,6 +117,19 @@ const AdminPlayerEdit = () => {
                 <div><Label>Contact email</Label><Input type="email" value={form.contact_email || ''} onChange={(e) => set('contact_email', e.target.value)} /></div>
                 <div><Label>Intended major</Label><Input value={form.intended_major || ''} onChange={(e) => set('intended_major', e.target.value)} /></div>
                 <div className="md:col-span-2"><Label>Bio</Label><Textarea rows={4} value={form.bio || ''} onChange={(e) => set('bio', e.target.value)} /></div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Highlights</CardTitle>
+                <p className="text-sm text-muted-foreground">Bullet points shown prominently under the hero (e.g. state rankings, top tournament finishes). Each bullet can include one clickable link.</p>
+              </CardHeader>
+              <CardContent>
+                <HighlightsEditor
+                  value={(form.highlights as HighlightItem[]) || []}
+                  onChange={(v) => set('highlights', v as any)}
+                />
               </CardContent>
             </Card>
 
@@ -313,4 +327,77 @@ function CreateStudentAccount({
 }
 
 
+function HighlightsEditor({ value, onChange }: { value: HighlightItem[]; onChange: (v: HighlightItem[]) => void }) {
+  const items = Array.isArray(value) ? value : [];
+  const update = (i: number, patch: Partial<HighlightItem>) => {
+    const next = items.slice();
+    next[i] = { ...next[i], ...patch };
+    onChange(next);
+  };
+  const add = () => onChange([...items, { text: '', link_text: '', link_url: '' }]);
+  const remove = (i: number) => onChange(items.filter((_, idx) => idx !== i));
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= items.length) return;
+    const next = items.slice();
+    [next[i], next[j]] = [next[j], next[i]];
+    onChange(next);
+  };
+
+  return (
+    <div className="space-y-3">
+      {items.length === 0 && (
+        <p className="text-sm text-muted-foreground">No highlights yet. Add a bullet like "Ranked #4 in Georgia (2025-26)" and optionally link to the rankings page.</p>
+      )}
+      {items.map((h, i) => (
+        <div key={i} className="border rounded-md p-3 space-y-2 bg-muted/30">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-xs font-semibold text-muted-foreground">Highlight #{i + 1}</span>
+            <div className="flex items-center gap-1">
+              <Button type="button" size="sm" variant="ghost" onClick={() => move(i, -1)} disabled={i === 0}>↑</Button>
+              <Button type="button" size="sm" variant="ghost" onClick={() => move(i, 1)} disabled={i === items.length - 1}>↓</Button>
+              <Button type="button" size="sm" variant="ghost" onClick={() => remove(i)}>
+                <Trash2 className="w-4 h-4 text-destructive" />
+              </Button>
+            </div>
+          </div>
+          <div>
+            <Label className="text-xs">Bullet text *</Label>
+            <Textarea
+              rows={2}
+              value={h.text || ''}
+              onChange={(e) => update(i, { text: e.target.value })}
+              placeholder="Ranked #4 in Georgia by Junior Golf Scoreboard (2025-26)"
+            />
+          </div>
+          <div className="grid sm:grid-cols-2 gap-2">
+            <div>
+              <Label className="text-xs">Clickable phrase (optional)</Label>
+              <Input
+                value={h.link_text || ''}
+                onChange={(e) => update(i, { link_text: e.target.value })}
+                placeholder="Junior Golf Scoreboard"
+              />
+              <p className="text-[11px] text-muted-foreground mt-1">Must match part of the bullet text. Leave empty to add a "View" link at the end.</p>
+            </div>
+            <div>
+              <Label className="text-xs">Link URL (opens in new tab)</Label>
+              <Input
+                value={h.link_url || ''}
+                onChange={(e) => update(i, { link_url: e.target.value })}
+                placeholder="https://www.juniorgolfscoreboard.com/..."
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+      <Button type="button" variant="outline" onClick={add}>
+        <Plus className="w-4 h-4 mr-1" />Add highlight
+      </Button>
+      <p className="text-xs text-muted-foreground">Tip: remember to click "Save changes" at the bottom to publish edits.</p>
+    </div>
+  );
+}
+
 export default AdminPlayerEdit;
+

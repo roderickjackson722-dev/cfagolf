@@ -26,6 +26,30 @@ function getEmbedUrl(url: string): string | null {
   return null;
 }
 
+function renderHighlight(h: { text?: string; link_text?: string; link_url?: string }) {
+  const text = h?.text || '';
+  const url = h?.link_url?.trim();
+  if (!url) return text;
+  const linkText = (h?.link_text || '').trim();
+  const linkEl = (label: string) => (
+    <a href={url} target="_blank" rel="noopener noreferrer" className="text-primary font-semibold underline hover:no-underline inline-flex items-center gap-1">
+      {label}<ExternalLink className="w-3 h-3" />
+    </a>
+  );
+  if (!linkText) {
+    return (<>{text} {linkEl('View')}</>);
+  }
+  const idx = text.toLowerCase().indexOf(linkText.toLowerCase());
+  if (idx === -1) return (<>{text} {linkEl(linkText)}</>);
+  return (
+    <>
+      {text.slice(0, idx)}
+      {linkEl(text.slice(idx, idx + linkText.length))}
+      {text.slice(idx + linkText.length)}
+    </>
+  );
+}
+
 const PlayerSite = () => {
   const { slug } = useParams();
   const { data: player, isLoading } = usePlayerBySlug(slug);
@@ -142,12 +166,37 @@ const PlayerSite = () => {
         </div>
       </section>
 
+      {/* Highlights */}
+      {Array.isArray(player.highlights) && player.highlights.length > 0 && (
+        <section className="container mx-auto px-4 pt-8 max-w-6xl">
+          <Card className="border-primary/30 bg-primary/5">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-1.5 h-6 bg-primary rounded-full" />
+                <h2 className="text-xl sm:text-2xl font-bold">Highlights</h2>
+              </div>
+              <ul className="grid sm:grid-cols-2 gap-3">
+                {player.highlights.map((h: any, i: number) => (
+                  <li key={i} className="flex gap-3 items-start bg-background/70 rounded-lg p-3 border">
+                    <span className="mt-1.5 w-2 h-2 rounded-full bg-primary shrink-0" />
+                    <p className="text-sm sm:text-base leading-relaxed">
+                      {renderHighlight(h)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
+      )}
+
       {/* Tab nav directly below hero */}
       <section className="container mx-auto px-4 pt-6 max-w-6xl" id="player-tabs">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <PlayerTabsNav value={activeTab} onChange={setActiveTab} items={tabItems} />
         </Tabs>
       </section>
+
 
       {/* Key stats */}
       <section className="border-b bg-muted/30 py-6 mt-6">
