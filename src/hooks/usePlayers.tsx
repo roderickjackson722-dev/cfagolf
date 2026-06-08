@@ -39,6 +39,11 @@ export interface HighlightItem {
   link_url?: string;
 }
 
+// Cast helper: Supabase generated types treat jsonb as Json which doesn't
+// structurally match our typed interfaces.
+const asPlayer = (d: any) => d as Player;
+const asPlayers = (d: any) => (d || []) as Player[];
+
 export interface TournamentResult {
   id: string;
   player_id: string;
