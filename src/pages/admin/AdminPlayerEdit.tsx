@@ -121,6 +121,19 @@ const AdminPlayerEdit = () => {
             </Card>
 
             <Card>
+              <CardHeader>
+                <CardTitle>Highlights</CardTitle>
+                <p className="text-sm text-muted-foreground">Bullet points shown prominently under the hero (e.g. state rankings, top tournament finishes). Each bullet can include one clickable link.</p>
+              </CardHeader>
+              <CardContent>
+                <HighlightsEditor
+                  value={(form.highlights as HighlightItem[]) || []}
+                  onChange={(v) => set('highlights', v as any)}
+                />
+              </CardContent>
+            </Card>
+
+            <Card>
               <CardHeader><CardTitle>Stats (admin only)</CardTitle></CardHeader>
               <CardContent className="grid md:grid-cols-3 gap-4">
                 <div><Label>Handicap</Label><Input type="number" step="0.1" value={form.handicap ?? ''} onChange={(e) => set('handicap', e.target.value ? Number(e.target.value) : null)} /></div>
