@@ -26,6 +26,30 @@ function getEmbedUrl(url: string): string | null {
   return null;
 }
 
+function renderHighlight(h: { text?: string; link_text?: string; link_url?: string }) {
+  const text = h?.text || '';
+  const url = h?.link_url?.trim();
+  if (!url) return text;
+  const linkText = (h?.link_text || '').trim();
+  const linkEl = (label: string) => (
+    <a href={url} target="_blank" rel="noopener noreferrer" className="text-primary font-semibold underline hover:no-underline inline-flex items-center gap-1">
+      {label}<ExternalLink className="w-3 h-3" />
+    </a>
+  );
+  if (!linkText) {
+    return (<>{text} {linkEl('View')}</>);
+  }
+  const idx = text.toLowerCase().indexOf(linkText.toLowerCase());
+  if (idx === -1) return (<>{text} {linkEl(linkText)}</>);
+  return (
+    <>
+      {text.slice(0, idx)}
+      {linkEl(text.slice(idx, idx + linkText.length))}
+      {text.slice(idx + linkText.length)}
+    </>
+  );
+}
+
 const PlayerSite = () => {
   const { slug } = useParams();
   const { data: player, isLoading } = usePlayerBySlug(slug);
