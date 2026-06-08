@@ -52,6 +52,8 @@ export type OutreachRecord = {
   sent_at: string;
   status: string;
   notes: string | null;
+  cc: string[] | null;
+  bcc: string[] | null;
 };
 
 export type FullTemplate = EmailTemplate & {
