@@ -878,6 +878,123 @@ export type Database = {
         }
         Relationships: []
       }
+      email_template_action_items: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          link_text: string | null
+          link_url: string | null
+          section_id: string
+          sort_order: number
+          task: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          link_text?: string | null
+          link_url?: string | null
+          section_id: string
+          sort_order?: number
+          task: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          link_text?: string | null
+          link_url?: string | null
+          section_id?: string
+          sort_order?: number
+          task?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_template_action_items_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "email_template_sections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_template_sections: {
+        Row: {
+          content: string
+          created_at: string
+          has_action_items: boolean
+          id: string
+          sort_order: number
+          template_id: string
+          title: string | null
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          has_action_items?: boolean
+          id?: string
+          sort_order?: number
+          template_id: string
+          title?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          has_action_items?: boolean
+          id?: string
+          sort_order?: number
+          template_id?: string
+          title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_template_sections_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "email_templates_v2"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_template_variables: {
+        Row: {
+          created_at: string
+          id: string
+          is_required: boolean
+          template_id: string
+          variable_label: string | null
+          variable_name: string
+          variable_type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_required?: boolean
+          template_id: string
+          variable_label?: string | null
+          variable_name: string
+          variable_type?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_required?: boolean
+          template_id?: string
+          variable_label?: string | null
+          variable_name?: string
+          variable_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_template_variables_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "email_templates_v2"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       email_templates: {
         Row: {
           body: string
@@ -902,6 +1019,42 @@ export type Database = {
           category?: string
           created_at?: string
           id?: string
+          name?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      email_templates_v2: {
+        Row: {
+          category: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
           name?: string
           subject?: string
           updated_at?: string
@@ -1575,6 +1728,66 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      outreach_history: {
+        Row: {
+          body: string | null
+          id: string
+          notes: string | null
+          recipient_email: string
+          recipient_name: string | null
+          sent_at: string
+          sent_by: string | null
+          status: string
+          student_id: string | null
+          subject: string | null
+          template_id: string | null
+          variables_used: Json | null
+        }
+        Insert: {
+          body?: string | null
+          id?: string
+          notes?: string | null
+          recipient_email: string
+          recipient_name?: string | null
+          sent_at?: string
+          sent_by?: string | null
+          status?: string
+          student_id?: string | null
+          subject?: string | null
+          template_id?: string | null
+          variables_used?: Json | null
+        }
+        Update: {
+          body?: string | null
+          id?: string
+          notes?: string | null
+          recipient_email?: string
+          recipient_name?: string | null
+          sent_at?: string
+          sent_by?: string | null
+          status?: string
+          student_id?: string | null
+          subject?: string | null
+          template_id?: string | null
+          variables_used?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outreach_history_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "outreach_history_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "email_templates_v2"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       player_coach_messages: {
         Row: {
