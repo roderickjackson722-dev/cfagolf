@@ -114,7 +114,13 @@ const Admin = () => {
                 Manage college data, users, and system settings
               </p>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
+              <Button asChild variant="outline">
+                <Link to="/admin/email-templates">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Email Templates
+                </Link>
+              </Button>
               <Button asChild variant="outline">
                 <Link to="/admin/agenda-templates">
                   <Link2 className="w-4 h-4 mr-2" />

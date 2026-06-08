@@ -77,6 +77,7 @@ import PlayerResume from "./pages/PlayerResume";
 import AdminLinks from "./pages/admin/AdminLinks";
 import PublicLinks from "./pages/PublicLinks";
 import AdminAgendaTemplates from "./pages/admin/AdminAgendaTemplates";
+import AdminEmailTemplates from "./pages/admin/EmailTemplates";
 import StudentAgendaDetail from "./pages/admin/StudentAgendaDetail";
 import PlayerAgendas from "./pages/PlayerAgendas";
 import PlayerAgendaDetail from "./pages/PlayerAgendaDetail";
@@ -188,6 +189,8 @@ const App = () => {
             <Route path="/admin/students/:id/agendas/:agendaId" element={<StudentAgendaDetail />} />
             <Route path="/player/agendas" element={<PlayerAgendas />} />
             <Route path="/player/agendas/:agendaId" element={<PlayerAgendaDetail />} />
+            <Route path="/admin/email-templates" element={<AdminEmailTemplates />} />
+
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
