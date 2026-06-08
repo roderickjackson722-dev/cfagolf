@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Edit, Trash2, Copy, Send, Eye, ArrowLeft } from 'lucide-react';
+import { Plus, Edit, Trash2, Copy, Send, Eye, ArrowLeft, X } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
