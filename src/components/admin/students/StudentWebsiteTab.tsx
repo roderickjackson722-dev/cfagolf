@@ -23,15 +23,15 @@ function useMatchedPlayer(studentId: string) {
       // Try slug first
       if (student?.slug) {
         const { data } = await supabase.from('players').select('*').eq('slug', student.slug).maybeSingle();
-        if (data) return data as Player;
+        if (data) return data as unknown as Player;
       }
       if (student?.email) {
         const { data } = await supabase.from('players').select('*').eq('contact_email', student.email).maybeSingle();
-        if (data) return data as Player;
+        if (data) return data as unknown as Player;
       }
       if (student?.full_name) {
         const { data } = await supabase.from('players').select('*').ilike('full_name', student.full_name).maybeSingle();
-        if (data) return data as Player;
+        if (data) return data as unknown as Player;
       }
       return null;
     },
