@@ -1731,7 +1731,9 @@ export type Database = {
       }
       outreach_history: {
         Row: {
+          bcc: string[] | null
           body: string | null
+          cc: string[] | null
           id: string
           notes: string | null
           recipient_email: string
@@ -1745,7 +1747,9 @@ export type Database = {
           variables_used: Json | null
         }
         Insert: {
+          bcc?: string[] | null
           body?: string | null
+          cc?: string[] | null
           id?: string
           notes?: string | null
           recipient_email: string
@@ -1759,7 +1763,9 @@ export type Database = {
           variables_used?: Json | null
         }
         Update: {
+          bcc?: string[] | null
           body?: string | null
+          cc?: string[] | null
           id?: string
           notes?: string | null
           recipient_email?: string

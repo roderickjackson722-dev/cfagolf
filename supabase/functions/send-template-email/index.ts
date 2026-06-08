@@ -1,10 +1,7 @@
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
+import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 
 Deno.serve(async (req) => {
-  if (req.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
 
   try {
     const resendApiKey = Deno.env.get('RESEND_API_KEY');
@@ -14,12 +11,22 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { to, subject, html, text } = await req.json();
+    const { to, subject, html, text, cc, bcc } = await req.json();
     if (!to || !subject || !html) {
       return new Response(JSON.stringify({ error: 'to, subject, html required' }), {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+
+    const payload: Record<string, any> = {
+      from: 'Coach Rod at CFA <contact@cfa.golf>',
+      to: Array.isArray(to) ? to : [to],
+      subject,
+      html,
+      text,
+    };
+    if (cc && Array.isArray(cc) && cc.length > 0) payload.cc = cc;
+    if (bcc && Array.isArray(bcc) && bcc.length > 0) payload.bcc = bcc;
 
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -27,13 +34,7 @@ Deno.serve(async (req) => {
         Authorization: `Bearer ${resendApiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        from: 'Coach Rod at CFA <contact@cfa.golf>',
-        to: Array.isArray(to) ? to : [to],
-        subject,
-        html,
-        text,
-      }),
+      body: JSON.stringify(payload),
     });
 
     const data = await r.json();
