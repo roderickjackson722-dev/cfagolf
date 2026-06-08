@@ -51,8 +51,10 @@ const PlayerSite = () => {
   }
 
   const social = (player.social_links || {}) as Record<string, string>;
-  const upcoming = tournaments.filter((t) => t.is_upcoming);
-  const results = tournaments.filter((t) => !t.is_upcoming);
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const isUpcoming = (t: any) => t.is_upcoming || (t.date && t.date >= todayStr && t.score == null && !t.finish);
+  const upcoming = tournaments.filter(isUpcoming);
+  const results = tournaments.filter((t) => !isUpcoming(t));
   const wins = results.filter((t) => {
     const f = (t.finish || '').toLowerCase();
     return f === '1' || f === '1st' || f === 'win' || f === 'w';
