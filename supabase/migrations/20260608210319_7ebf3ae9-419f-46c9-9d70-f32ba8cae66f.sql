@@ -1,0 +1,1 @@
+ALTER TABLE public.outreach_history ADD COLUMN IF NOT EXISTS cc TEXT[], ADD COLUMN IF NOT EXISTS bcc TEXT[];
