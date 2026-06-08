@@ -364,6 +364,9 @@ function SendTemplateDialog({ templateId, onClose }: { templateId: string; onClo
   const [vars, setVars] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
   const [activeStudent, setActiveStudent] = useState<string | null>(null);
+  const [customEmails, setCustomEmails] = useState<Record<string, string>>({});
+  const [ccInput, setCcInput] = useState('');
+  const [bccInput, setBccInput] = useState('');
 
   if (!full) return null;
 
@@ -386,29 +389,54 @@ function SendTemplateDialog({ templateId, onClose }: { templateId: string; onClo
     };
   };
 
+  const parseEmails = (raw: string): string[] =>
+    raw
+      .split(/[,;]/)
+      .map((e) => e.trim())
+      .filter((e) => e.length > 0);
+
+  const cc = parseEmails(ccInput);
+  const bcc = parseEmails(bccInput);
+
+  const getRecipientEmail = (s: any): string | null => {
+    const custom = customEmails[s.id]?.trim();
+    if (custom) return custom;
+    return s.email || null;
+  };
+
   const handleSend = async () => {
     setSending(true);
     try {
       for (const s of selectedStudents) {
-        if (!s.email) {
+        const email = getRecipientEmail(s);
+        if (!email) {
           toast({ title: `${s.full_name} has no email`, variant: 'destructive' });
           continue;
         }
         const v = studentVars(s);
         const rendered = renderForStudent(s);
         const { error } = await supabase.functions.invoke('send-template-email', {
-          body: { to: s.email, subject: rendered.subject, html: rendered.html, text: rendered.text },
+          body: {
+            to: email,
+            subject: rendered.subject,
+            html: rendered.html,
+            text: rendered.text,
+            cc: cc.length ? cc : undefined,
+            bcc: bcc.length ? bcc : undefined,
+          },
         });
         if (error) throw error;
         await log.mutateAsync({
           template_id: templateId,
           student_id: s.id,
-          recipient_email: s.email,
+          recipient_email: email,
           recipient_name: s.full_name,
           subject: rendered.subject,
           body: rendered.html,
           variables_used: v,
           status: 'sent',
+          cc: cc.length ? cc : null,
+          bcc: bcc.length ? bcc : null,
         });
       }
       toast({ title: `Sent to ${selectedStudents.length} student(s)` });
@@ -447,17 +475,51 @@ function SendTemplateDialog({ templateId, onClose }: { templateId: string; onClo
               <Label>Recipients</Label>
               <div className="border rounded p-2 max-h-48 overflow-y-auto space-y-1">
                 {students.map((s) => (
-                  <label key={s.id} className="flex items-center gap-2 text-sm">
-                    <Checkbox
-                      checked={studentIds.includes(s.id)}
-                      onCheckedChange={(c) =>
-                        setStudentIds(c ? [...studentIds, s.id] : studentIds.filter((id) => id !== s.id))
-                      }
-                    />
-                    <span>{s.full_name}</span>
-                    <span className="text-xs text-muted-foreground">{s.email || '(no email)'}</span>
-                  </label>
+                  <div key={s.id} className="space-y-1">
+                    <label className="flex items-center gap-2 text-sm">
+                      <Checkbox
+                        checked={studentIds.includes(s.id)}
+                        onCheckedChange={(c) =>
+                          setStudentIds(c ? [...studentIds, s.id] : studentIds.filter((id) => id !== s.id))
+                        }
+                      />
+                      <span className="font-medium">{s.full_name}</span>
+                      <span className="text-xs text-muted-foreground">{s.email || '(no email)'}</span>
+                    </label>
+                    {studentIds.includes(s.id) && (
+                      <div className="pl-6">
+                        <Input
+                          size={1}
+                          className="h-8 text-xs"
+                          placeholder="Override email address"
+                          value={customEmails[s.id] || ''}
+                          onChange={(e) => setCustomEmails({ ...customEmails, [s.id]: e.target.value })}
+                        />
+                      </div>
+                    )}
+                  </div>
                 ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div>
+                <Label className="text-xs">CC (comma-separated)</Label>
+                <Input
+                  className="h-8 text-xs"
+                  placeholder="parent@example.com, coach@example.com"
+                  value={ccInput}
+                  onChange={(e) => setCcInput(e.target.value)}
+                />
+              </div>
+              <div>
+                <Label className="text-xs">BCC (comma-separated)</Label>
+                <Input
+                  className="h-8 text-xs"
+                  placeholder="hidden@example.com"
+                  value={bccInput}
+                  onChange={(e) => setBccInput(e.target.value)}
+                />
               </div>
             </div>
 
