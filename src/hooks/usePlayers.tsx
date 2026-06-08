@@ -171,7 +171,7 @@ export function useUpsertPlayer() {
       if (player.id) {
         const { data, error } = await supabase
           .from('players')
-          .update(player)
+          .update(player as any)
           .eq('id', player.id)
           .select()
           .single();
