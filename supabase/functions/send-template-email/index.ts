@@ -11,22 +11,46 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { to, subject, html, text, cc, bcc } = await req.json();
+    const { to, subject, html, text, cc, bcc, replyTo } = await req.json();
     if (!to || !subject || !html) {
       return new Response(JSON.stringify({ error: 'to, subject, html required' }), {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
+    const norm = (v: unknown): string[] | undefined => {
+      if (!v) return undefined;
+      const arr = Array.isArray(v) ? v : [v];
+      const cleaned = arr
+        .map((x) => String(x).trim())
+        .filter((x) => x.length > 0 && /.+@.+\..+/.test(x));
+      return cleaned.length ? cleaned : undefined;
+    };
+
+    const toArr = norm(to);
+    const ccArr = norm(cc);
+    const bccArr = norm(bcc);
+
+    if (!toArr) {
+      return new Response(JSON.stringify({ error: 'Invalid "to" address' }), {
+        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     const payload: Record<string, any> = {
       from: 'Coach Rod at CFA <contact@cfa.golf>',
-      to: Array.isArray(to) ? to : [to],
+      to: toArr,
       subject,
       html,
       text,
+      reply_to: replyTo || 'contact@cfa.golf',
     };
-    if (cc && Array.isArray(cc) && cc.length > 0) payload.cc = cc;
-    if (bcc && Array.isArray(bcc) && bcc.length > 0) payload.bcc = bcc;
+    if (ccArr) payload.cc = ccArr;
+    if (bccArr) payload.bcc = bccArr;
+
+    console.log('[send-template-email] sending', {
+      to: toArr, cc: ccArr, bcc: bccArr, subject,
+    });
 
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -38,15 +62,22 @@ Deno.serve(async (req) => {
     });
 
     const data = await r.json();
+    console.log('[send-template-email] resend response', r.status, data);
+
     if (!r.ok) {
       return new Response(JSON.stringify({ error: data.message || 'Send failed', details: data }), {
         status: r.status, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
-    return new Response(JSON.stringify({ success: true, id: data.id }), {
+    return new Response(JSON.stringify({
+      success: true,
+      id: data.id,
+      delivered: { to: toArr, cc: ccArr || [], bcc: bccArr || [] },
+    }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (e) {
+    console.error('[send-template-email] error', e);
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : 'Unknown' }), {
       status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
