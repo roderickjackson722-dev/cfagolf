@@ -265,7 +265,7 @@ const PlayerSite = () => {
                   {upcoming.sort((a, b) => a.date.localeCompare(b.date)).map((t) => (
                     <Card key={t.id}><CardContent className="p-5">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Calendar className="w-4 h-4" />{new Date(t.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                        <Calendar className="w-4 h-4" />{(() => { const [y,m,d] = (t.date||'').split('-').map(Number); return d ? new Date(y, m-1, d).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' }) : t.date; })()}
                       </div>
                       <h4 className="font-semibold mt-1">{t.tournament_name}</h4>
                       {(t.course || t.location) && <p className="text-sm text-muted-foreground mt-1">{[t.course, t.location].filter(Boolean).join(' · ')}</p>}
