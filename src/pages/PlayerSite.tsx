@@ -74,8 +74,7 @@ const PlayerSite = () => {
   const tabItems = [
     { value: 'about', label: 'About' },
     { value: 'resume', label: 'Resume' },
-    { value: 'tournaments', label: 'Scores' },
-    ...(upcoming.length > 0 ? [{ value: 'schedule', label: 'Schedule' }] : []),
+    { value: 'tournaments', label: 'Tournaments' },
     { value: 'videos', label: 'Videos' },
     ...(gallery.length > 0 ? [{ value: 'gallery', label: 'Gallery' }] : []),
     ...(references.length > 0 ? [{ value: 'references', label: 'References' }] : []),
