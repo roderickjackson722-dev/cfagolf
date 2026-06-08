@@ -26,6 +26,7 @@ import {
   useSaveTemplate,
   useDeleteTemplate,
   useLogOutreach,
+  useOutreachHistory,
   renderEmailHtml,
   renderEmailPlainText,
   replaceVariables,
