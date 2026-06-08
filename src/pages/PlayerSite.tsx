@@ -51,8 +51,10 @@ const PlayerSite = () => {
   }
 
   const social = (player.social_links || {}) as Record<string, string>;
-  const upcoming = tournaments.filter((t) => t.is_upcoming);
-  const results = tournaments.filter((t) => !t.is_upcoming);
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const isUpcoming = (t: any) => t.is_upcoming || (t.date && t.date >= todayStr && t.score == null && !t.finish);
+  const upcoming = tournaments.filter(isUpcoming);
+  const results = tournaments.filter((t) => !isUpcoming(t));
   const wins = results.filter((t) => {
     const f = (t.finish || '').toLowerCase();
     return f === '1' || f === '1st' || f === 'win' || f === 'w';
@@ -72,8 +74,7 @@ const PlayerSite = () => {
   const tabItems = [
     { value: 'about', label: 'About' },
     { value: 'resume', label: 'Resume' },
-    { value: 'tournaments', label: 'Scores' },
-    ...(upcoming.length > 0 ? [{ value: 'schedule', label: 'Schedule' }] : []),
+    { value: 'tournaments', label: 'Tournaments' },
     { value: 'videos', label: 'Videos' },
     ...(gallery.length > 0 ? [{ value: 'gallery', label: 'Gallery' }] : []),
     ...(references.length > 0 ? [{ value: 'references', label: 'References' }] : []),
@@ -207,55 +208,60 @@ const PlayerSite = () => {
             )}
           </TabsContent>
 
-          <TabsContent value="tournaments" className="py-6">
-            <Card><CardContent className="p-0">
-              {results.length === 0 ? <p className="text-muted-foreground p-8 text-center">No tournament results posted yet.</p> : (
-                <Table>
-                  <TableHeader><TableRow><TableHead>Date</TableHead><TableHead>Tournament</TableHead><TableHead>Course</TableHead><TableHead>Score</TableHead><TableHead>Finish</TableHead><TableHead>Field</TableHead><TableHead>Results</TableHead></TableRow></TableHeader>
-                  <TableBody>
-                    {results.map((t) => (
-                      <TableRow key={t.id}>
-                        <TableCell>{new Date(t.date).toLocaleDateString()}</TableCell>
-                        <TableCell className="font-medium">{t.tournament_name}</TableCell>
-                        <TableCell>{t.course || t.location || '—'}</TableCell>
-                        <TableCell>{t.score ?? '—'}</TableCell>
-                        <TableCell>{t.finish || '—'}</TableCell>
-                        <TableCell>{t.field_size || '—'}</TableCell>
-                        <TableCell>
-                          {t.results_link ? (
-                            <a href={t.results_link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
-                              Tournament Results <ExternalLink className="w-3 h-3" />
-                            </a>
-                          ) : '—'}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              )}
-            </CardContent></Card>
+          <TabsContent value="tournaments" className="py-6 space-y-6">
+            {upcoming.length > 0 && (
+              <div className="space-y-3">
+                <h3 className="text-lg font-semibold">Upcoming Tournaments</h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {upcoming.sort((a, b) => a.date.localeCompare(b.date)).map((t) => (
+                    <Card key={t.id}><CardContent className="p-5">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Calendar className="w-4 h-4" />{new Date(t.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
+                      </div>
+                      <h4 className="font-semibold mt-1">{t.tournament_name}</h4>
+                      {(t.course || t.location) && <p className="text-sm text-muted-foreground mt-1">{[t.course, t.location].filter(Boolean).join(' · ')}</p>}
+                      {t.registration_link && (
+                        <Button asChild variant="outline" size="sm" className="mt-3">
+                          <a href={t.registration_link} target="_blank" rel="noopener noreferrer">Registration <ExternalLink className="w-3 h-3 ml-1" /></a>
+                        </Button>
+                      )}
+                    </CardContent></Card>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-3">
+              {upcoming.length > 0 && <h3 className="text-lg font-semibold">Tournament Results</h3>}
+              <Card><CardContent className="p-0">
+                {results.length === 0 ? <p className="text-muted-foreground p-8 text-center">No tournament results posted yet.</p> : (
+                  <Table>
+                    <TableHeader><TableRow><TableHead>Date</TableHead><TableHead>Tournament</TableHead><TableHead>Course</TableHead><TableHead>Score</TableHead><TableHead>Finish</TableHead><TableHead>Field</TableHead><TableHead>Results</TableHead></TableRow></TableHeader>
+                    <TableBody>
+                      {results.map((t) => (
+                        <TableRow key={t.id}>
+                          <TableCell>{new Date(t.date).toLocaleDateString()}</TableCell>
+                          <TableCell className="font-medium">{t.tournament_name}</TableCell>
+                          <TableCell>{t.course || t.location || '—'}</TableCell>
+                          <TableCell>{t.score ?? '—'}</TableCell>
+                          <TableCell>{t.finish || '—'}</TableCell>
+                          <TableCell>{t.field_size || '—'}</TableCell>
+                          <TableCell>
+                            {t.results_link ? (
+                              <a href={t.results_link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
+                                Tournament Results <ExternalLink className="w-3 h-3" />
+                              </a>
+                            ) : '—'}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                )}
+              </CardContent></Card>
+            </div>
           </TabsContent>
 
-          {upcoming.length > 0 && (
-            <TabsContent value="schedule" className="py-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                {upcoming.sort((a, b) => a.date.localeCompare(b.date)).map((t) => (
-                  <Card key={t.id}><CardContent className="p-5">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Calendar className="w-4 h-4" />{new Date(t.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
-                    </div>
-                    <h3 className="font-semibold mt-1">{t.tournament_name}</h3>
-                    {(t.course || t.location) && <p className="text-sm text-muted-foreground mt-1">{[t.course, t.location].filter(Boolean).join(' · ')}</p>}
-                    {t.registration_link && (
-                      <Button asChild variant="outline" size="sm" className="mt-3">
-                        <a href={t.registration_link} target="_blank" rel="noopener noreferrer">Registration <ExternalLink className="w-3 h-3 ml-1" /></a>
-                      </Button>
-                    )}
-                  </CardContent></Card>
-                ))}
-              </div>
-            </TabsContent>
-          )}
 
           <TabsContent value="videos" className="py-6">
             {videos.length === 0 ? <p className="text-muted-foreground p-8 text-center">No videos posted yet.</p> : (
