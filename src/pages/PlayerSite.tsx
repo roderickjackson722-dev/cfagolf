@@ -289,7 +289,7 @@ const PlayerSite = () => {
                     <TableBody>
                       {results.map((t) => (
                         <TableRow key={t.id}>
-                          <TableCell>{new Date(t.date).toLocaleDateString()}</TableCell>
+                          <TableCell>{(() => { const [y,m,d] = (t.date||'').split('-').map(Number); return d ? `${m}/${d}/${y}` : t.date; })()}</TableCell>
                           <TableCell className="font-medium">{t.tournament_name}</TableCell>
                           <TableCell>{t.course || t.location || '—'}</TableCell>
                           <TableCell>{t.score ?? '—'}</TableCell>
