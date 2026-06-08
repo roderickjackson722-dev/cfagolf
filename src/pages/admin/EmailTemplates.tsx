@@ -541,7 +541,6 @@ function PreviewDialog({ templateId, onClose }: { templateId: string; onClose: (
 
 // ───────── History ─────────
 function OutreachHistoryTable() {
-  const { useOutreachHistory } = require('@/hooks/useEmailOutreach');
   const { data: history = [] } = useOutreachHistory();
   const [viewId, setViewId] = useState<string | null>(null);
   const view = history.find((h: any) => h.id === viewId);
