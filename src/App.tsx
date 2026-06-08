@@ -77,6 +77,7 @@ import PlayerResume from "./pages/PlayerResume";
 import AdminLinks from "./pages/admin/AdminLinks";
 import PublicLinks from "./pages/PublicLinks";
 import AdminAgendaTemplates from "./pages/admin/AdminAgendaTemplates";
+import EmailTemplates from "./pages/admin/EmailTemplates";
 import StudentAgendaDetail from "./pages/admin/StudentAgendaDetail";
 import PlayerAgendas from "./pages/PlayerAgendas";
 import PlayerAgendaDetail from "./pages/PlayerAgendaDetail";
