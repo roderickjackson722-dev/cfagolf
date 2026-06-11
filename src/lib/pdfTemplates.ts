@@ -823,7 +823,7 @@ export const generateMarketingFlyer = (): void => {
 
   const services = [
     ['12 One-on-One Consulting Calls', 'One-on-one guidance through every phase of recruiting'],
-    ['LPGA & PGA Pro Webinars', 'Exclusive sessions with touring professionals'],
+    ['Coaches Outreach', 'Curated coach list, intro emails, follow-ups, and direct distribution of your player site & highlight video'],
     ['College Coach Sessions', 'Learn what coaches look for in recruits'],
     ['Target School List Builder', 'Strategic school matching based on your profile'],
     ['Tournament Result Log', 'Track competitive results for your recruiting resume'],

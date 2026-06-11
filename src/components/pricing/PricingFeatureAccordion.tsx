@@ -71,12 +71,6 @@ const featureCategories: FeatureCategory[] = [
     category: "Webinars & Educational Content",
     features: [
       {
-        title: "LPGA & PGA Pro Webinars",
-        description: "Exclusive partnered webinars featuring LPGA and PGA professionals sharing insights on collegiate golf and beyond. Available in 1-on-1 Consulting only.",
-        consulting: true,
-        digital: false,
-      },
-      {
         title: "College Coach Q&A Sessions",
         description: "Learn directly from current and former college golf coaches about what they look for in recruits.",
         consulting: true,
@@ -120,6 +114,12 @@ const featureCategories: FeatureCategory[] = [
       {
         title: "Coach Communication Management",
         description: "Expert guidance on how to reach out to coaches, craft compelling emails, and build meaningful relationships with programs.",
+        consulting: true,
+        digital: false,
+      },
+      {
+        title: "Coaches Outreach",
+        description: "Done-with-you outreach campaign that puts your name in front of the right college coaches. Includes: a curated target coach list built around your academic and athletic profile; custom-written introduction emails sent on your behalf; structured follow-up cadence so no opportunity goes cold; response tracking and reply coaching; direct distribution of your player recruiting website, golf resume, and highlight video to coaches; and ongoing updates to coaches after tournaments, visits, and milestones.",
         consulting: true,
         digital: false,
       },

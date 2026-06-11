@@ -41,7 +41,7 @@ const portalFeatures = [
 const consultingFeatures = [
   "Everything in the Self-Paced Online Course",
   "Custom Player Recruiting Website",
-  "LPGA & PGA Pro Webinars",
+  "Coaches Outreach",
   "College Coach Q&A Sessions",
   "12 One-on-One Consulting Calls",
   "Personalized Recruiting Roadmap",
@@ -145,7 +145,7 @@ const compareCategories: CompareCategory[] = [
   {
     category: "Webinars & Educational Content",
     features: [
-      { title: "LPGA & PGA Pro Webinars", description: "Exclusive partnered webinars with golf professionals (Consulting only).", toolkit: false, portal: false, consulting: true },
+      
       { title: "College Coach Q&A Sessions", description: "Learn directly from current and former college coaches.", toolkit: false, portal: false, consulting: true },
       { title: "Recruiting Strategy Workshops", description: "Self-paced workshops on recruiting best practices.", toolkit: false, portal: true, consulting: true },
     ],
@@ -158,6 +158,7 @@ const compareCategories: CompareCategory[] = [
       { title: "Personalized Recruiting Roadmap", description: "Custom strategy plan for your profile.", toolkit: false, portal: false, consulting: true },
       { title: "Academic & Eligibility Evaluation", description: "In-depth assessment of your eligibility.", toolkit: false, portal: false, consulting: true },
       { title: "Coach Communication Management", description: "Expert guidance on coach outreach.", toolkit: false, portal: false, consulting: true },
+      { title: "Coaches Outreach", description: "Done-with-you outreach campaign: curated target coach list, custom-written introduction emails, follow-up cadence, response tracking, and direct distribution of your player website, resume, and highlight video to coaches.", toolkit: false, portal: false, consulting: true },
       { title: "Highlight Video Review & Feedback", description: "Professional review of your highlight videos.", toolkit: false, portal: false, consulting: true },
       { title: "Scholarship Negotiation Strategy", description: "Evaluate and negotiate scholarship offers.", toolkit: false, portal: false, consulting: true },
       { title: "Campus Visit Preparation & Coaching", description: "Personalized preparation for campus visits.", toolkit: false, portal: false, consulting: true },
