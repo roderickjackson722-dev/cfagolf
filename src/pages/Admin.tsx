@@ -139,6 +139,12 @@ const Admin = () => {
                   Social Clips
                 </Link>
               </Button>
+              <Button asChild variant="outline">
+                <Link to="/admin/resources">
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Free Resources
+                </Link>
+              </Button>
             </div>
           </div>
 
