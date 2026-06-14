@@ -1183,6 +1183,63 @@ export type Database = {
         }
         Relationships: []
       }
+      free_resources: {
+        Row: {
+          category: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          download_count: number
+          file_path: string | null
+          file_size: string | null
+          file_type: string | null
+          file_url: string | null
+          id: string
+          is_active: boolean
+          name: string
+          slug: string
+          sort_order: number
+          thumbnail_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          download_count?: number
+          file_path?: string | null
+          file_size?: string | null
+          file_type?: string | null
+          file_url?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          slug: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          download_count?: number
+          file_path?: string | null
+          file_size?: string | null
+          file_type?: string | null
+          file_url?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          slug?: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       high_schools: {
         Row: {
           area_coordinator_name: string | null
@@ -2604,6 +2661,41 @@ export type Database = {
         }
         Relationships: []
       }
+      resource_download_logs: {
+        Row: {
+          created_at: string
+          downloaded_by: string | null
+          id: string
+          ip_address: string | null
+          resource_id: string | null
+          source: string | null
+        }
+        Insert: {
+          created_at?: string
+          downloaded_by?: string | null
+          id?: string
+          ip_address?: string | null
+          resource_id?: string | null
+          source?: string | null
+        }
+        Update: {
+          created_at?: string
+          downloaded_by?: string | null
+          id?: string
+          ip_address?: string | null
+          resource_id?: string | null
+          source?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_download_logs_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "free_resources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       resource_links: {
         Row: {
           category: string | null
@@ -3807,6 +3899,10 @@ export type Database = {
       increment_referral_uses: {
         Args: { referral_id: string }
         Returns: boolean
+      }
+      increment_resource_download: {
+        Args: { _downloaded_by?: string; _slug: string; _source?: string }
+        Returns: undefined
       }
       increment_share_view: { Args: { _token: string }; Returns: undefined }
       validate_promo_code: {
