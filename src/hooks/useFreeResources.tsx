@@ -32,7 +32,7 @@ export function useFreeResources() {
         .order('sort_order', { ascending: true })
         .order('created_at', { ascending: false });
       if (error) throw error;
-      return (data || []) as FreeResource[];
+      return ((data || []) as unknown) as FreeResource[];
     },
   });
 }
@@ -49,7 +49,7 @@ export function useFreeResourceBySlug(slug: string | undefined) {
         .eq('is_active', true)
         .maybeSingle();
       if (error) throw error;
-      return (data || null) as FreeResource | null;
+      return ((data || null) as unknown) as FreeResource | null;
     },
   });
 }
