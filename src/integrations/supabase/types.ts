@@ -168,6 +168,78 @@ export type Database = {
           },
         ]
       }
+      clip_batches: {
+        Row: {
+          clip_ids: string[] | null
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          clip_ids?: string[] | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          clip_ids?: string[] | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      clip_templates: {
+        Row: {
+          base_prompt: string
+          created_at: string
+          default_aspect_ratio: string
+          default_duration: number
+          default_music: string | null
+          default_text_overlays: Json | null
+          description: string | null
+          id: string
+          is_active: boolean
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          base_prompt: string
+          created_at?: string
+          default_aspect_ratio?: string
+          default_duration?: number
+          default_music?: string | null
+          default_text_overlays?: Json | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          base_prompt?: string
+          created_at?: string
+          default_aspect_ratio?: string
+          default_duration?: number
+          default_music?: string | null
+          default_text_overlays?: Json | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       coach_access_requests: {
         Row: {
           college_name: string
@@ -2763,6 +2835,72 @@ export type Database = {
           region?: string | null
           user_agent?: string | null
           visitor_id?: string
+        }
+        Relationships: []
+      }
+      social_clips: {
+        Row: {
+          aspect_ratio: string
+          created_at: string
+          created_by: string | null
+          description: string | null
+          duration: number | null
+          generated_by: string | null
+          generation_params: Json | null
+          id: string
+          is_published: boolean
+          music_track: string | null
+          prompt: string
+          published_at: string | null
+          social_platforms: string[] | null
+          status: string
+          text_overlays: Json | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          aspect_ratio?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration?: number | null
+          generated_by?: string | null
+          generation_params?: Json | null
+          id?: string
+          is_published?: boolean
+          music_track?: string | null
+          prompt: string
+          published_at?: string | null
+          social_platforms?: string[] | null
+          status?: string
+          text_overlays?: Json | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          aspect_ratio?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration?: number | null
+          generated_by?: string | null
+          generation_params?: Json | null
+          id?: string
+          is_published?: boolean
+          music_track?: string | null
+          prompt?: string
+          published_at?: string | null
+          social_platforms?: string[] | null
+          status?: string
+          text_overlays?: Json | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          video_url?: string | null
         }
         Relationships: []
       }
