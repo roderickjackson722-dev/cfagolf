@@ -81,6 +81,9 @@ import AdminEmailTemplates from "./pages/admin/EmailTemplates";
 import SocialClips from "./pages/admin/SocialClips";
 import SocialClipNew from "./pages/admin/SocialClipNew";
 import SocialClipEdit from "./pages/admin/SocialClipEdit";
+import FreeResources from "./pages/admin/FreeResources";
+import FreeResourcesStats from "./pages/admin/FreeResourcesStats";
+import ResourceDownload from "./pages/ResourceDownload";
 import StudentAgendaDetail from "./pages/admin/StudentAgendaDetail";
 import PlayerAgendas from "./pages/PlayerAgendas";
 import PlayerAgendaDetail from "./pages/PlayerAgendaDetail";
@@ -196,6 +199,9 @@ const App = () => {
             <Route path="/admin/social-clips" element={<SocialClips />} />
             <Route path="/admin/social-clips/new" element={<SocialClipNew />} />
             <Route path="/admin/social-clips/:id/edit" element={<SocialClipEdit />} />
+            <Route path="/admin/resources" element={<FreeResources />} />
+            <Route path="/admin/resources/stats" element={<FreeResourcesStats />} />
+            <Route path="/resources/download/:slug" element={<ResourceDownload />} />
 
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
