@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature, FolderOpen, UserSquare2, Receipt } from 'lucide-react';
+import { Shield, Database, Users, CreditCard, Download, Eye, MessageSquare, FileText, Tag, GraduationCap, Mail, BookOpen, Trophy, ShoppingBag, MailPlus, Newspaper, Phone, BarChart3, DollarSign, UserCog, Link2, Megaphone, Briefcase, Presentation, FileSignature, FolderOpen, UserSquare2, Receipt, Film } from 'lucide-react';
 import { AdminInvoiceBuilder } from '@/components/admin/AdminInvoiceBuilder';
 import Inventory from '@/pages/admin/Inventory';
 import ContentLibraryEmbedded from '@/pages/admin/ContentLibrary';
@@ -131,6 +131,12 @@ const Admin = () => {
                 <Link to="/admin/links">
                   <Link2 className="w-4 h-4 mr-2" />
                   Links Library
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/admin/social-clips">
+                  <Film className="w-4 h-4 mr-2" />
+                  Social Clips
                 </Link>
               </Button>
             </div>

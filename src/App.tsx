@@ -78,6 +78,9 @@ import AdminLinks from "./pages/admin/AdminLinks";
 import PublicLinks from "./pages/PublicLinks";
 import AdminAgendaTemplates from "./pages/admin/AdminAgendaTemplates";
 import AdminEmailTemplates from "./pages/admin/EmailTemplates";
+import SocialClips from "./pages/admin/SocialClips";
+import SocialClipNew from "./pages/admin/SocialClipNew";
+import SocialClipEdit from "./pages/admin/SocialClipEdit";
 import StudentAgendaDetail from "./pages/admin/StudentAgendaDetail";
 import PlayerAgendas from "./pages/PlayerAgendas";
 import PlayerAgendaDetail from "./pages/PlayerAgendaDetail";
@@ -190,6 +193,9 @@ const App = () => {
             <Route path="/player/agendas" element={<PlayerAgendas />} />
             <Route path="/player/agendas/:agendaId" element={<PlayerAgendaDetail />} />
             <Route path="/admin/email-templates" element={<AdminEmailTemplates />} />
+            <Route path="/admin/social-clips" element={<SocialClips />} />
+            <Route path="/admin/social-clips/new" element={<SocialClipNew />} />
+            <Route path="/admin/social-clips/:id/edit" element={<SocialClipEdit />} />
 
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
