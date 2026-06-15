@@ -29,10 +29,11 @@ export default function ResourceDownload() {
   }, [resource]);
 
   const startDownload = async () => {
-    if (!resource?.file_url) return;
+    if (!resource) return;
     setDownloaded(true);
     try { await trackResourceDownload(resource.slug, source); } catch {}
-    window.location.href = resource.file_url;
+    const url = await resolveDownloadUrl(resource);
+    if (url) window.location.href = url;
   };
 
   useEffect(() => {
