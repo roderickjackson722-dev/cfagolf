@@ -26,7 +26,8 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table';
 import { toast } from 'sonner';
-import { ArrowLeft, BarChart3, Copy, Edit, ExternalLink, Plus, Trash2, Upload } from 'lucide-react';
+import { ArrowLeft, BarChart3, Copy, Edit, ExternalLink, Plus, Trash2, Upload, Stamp } from 'lucide-react';
+import { watermarkPdf, watermarkPdfFile } from '@/lib/pdfWatermark';
 
 const CATEGORIES = ['Timeline', 'Templates', 'Template', 'Checklist', 'Worksheet', 'Planner', 'Guide', 'Other'];
 const SITE = 'https://www.cfa.golf';
