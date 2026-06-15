@@ -102,10 +102,18 @@ export default function FreeResourcesAdmin() {
     try {
       const payload: any = { ...editing, slug };
       if (file) {
-        const up = await uploadTo('free-resources', file, slug);
+        let toUpload = file;
+        if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+          try {
+            toUpload = await watermarkPdfFile(file);
+          } catch (err) {
+            console.warn('Watermark failed, uploading original:', err);
+          }
+        }
+        const up = await uploadTo('free-resources', toUpload, slug);
         payload.file_path = up.path;
         payload.file_url = up.url;
-        payload.file_size = formatSize(file.size);
+        payload.file_size = formatSize(toUpload.size);
         const ext = (file.name.split('.').pop() || 'PDF').toUpperCase();
         payload.file_type = ext;
       }
