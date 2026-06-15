@@ -121,10 +121,7 @@ export function useDeleteCategory() {
 
 export async function trackLinkClick(link: ResourceLink) {
   try {
-    await supabase
-      .from('resource_links')
-      .update({ click_count: (link.click_count || 0) + 1, last_clicked_at: new Date().toISOString() })
-      .eq('id', link.id);
+    await supabase.rpc('increment_resource_link_click', { _id: link.id });
   } catch (e) {
     // silent fail
   }
