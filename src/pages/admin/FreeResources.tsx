@@ -143,6 +143,44 @@ export default function FreeResourcesAdmin() {
     toast.success('Link copied');
   };
 
+  const handleRewatermarkAll = async () => {
+    const pdfs = resources.filter(
+      (r) => r.file_path && (r.file_type?.toUpperCase() === 'PDF' || r.file_path.toLowerCase().endsWith('.pdf'))
+    );
+    if (pdfs.length === 0) { toast.info('No PDFs to watermark'); return; }
+    if (!confirm(`Re-watermark ${pdfs.length} PDF(s)? This will overwrite the stored files.`)) return;
+    setRewatermarking(true);
+    let ok = 0, fail = 0;
+    try {
+      for (let i = 0; i < pdfs.length; i++) {
+        const r = pdfs[i];
+        setRewatermarkStatus(`Processing ${i + 1}/${pdfs.length}: ${r.name}`);
+        try {
+          const { data: blob, error: dlErr } = await supabase.storage
+            .from('free-resources').download(r.file_path!);
+          if (dlErr || !blob) throw dlErr || new Error('download failed');
+          const buf = await blob.arrayBuffer();
+          const stamped = await watermarkPdf(buf);
+          const { error: upErr } = await supabase.storage
+            .from('free-resources')
+            .upload(r.file_path!, new Blob([stamped as BlobPart], { type: 'application/pdf' }), {
+              upsert: true,
+              contentType: 'application/pdf',
+            });
+          if (upErr) throw upErr;
+          ok++;
+        } catch (e) {
+          console.error('Watermark failed for', r.slug, e);
+          fail++;
+        }
+      }
+      toast.success(`Watermarked ${ok} PDF(s)${fail ? `, ${fail} failed` : ''}`);
+    } finally {
+      setRewatermarking(false);
+      setRewatermarkStatus('');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto p-6 space-y-6">
