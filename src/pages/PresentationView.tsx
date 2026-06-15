@@ -29,16 +29,9 @@ const PresentationView = () => {
       return;
     }
     (async () => {
-      const { data, error } = await supabase
-        .from("presentation_tokens")
-        .select("id, is_active, expires_at")
-        .eq("token", token)
-        .maybeSingle();
-      if (error || !data || !data.is_active) {
-        setStatus("invalid");
-        return;
-      }
-      if (data.expires_at && new Date(data.expires_at) < new Date()) {
+      const { data, error } = await supabase.rpc("validate_presentation_token", { _token: token });
+      const row = Array.isArray(data) ? data[0] : data;
+      if (error || !row?.valid) {
         setStatus("invalid");
         return;
       }

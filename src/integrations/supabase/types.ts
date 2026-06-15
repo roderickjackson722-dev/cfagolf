@@ -3904,7 +3904,19 @@ export type Database = {
         Args: { _downloaded_by?: string; _slug: string; _source?: string }
         Returns: undefined
       }
+      increment_resource_link_click: {
+        Args: { _id: string }
+        Returns: undefined
+      }
       increment_share_view: { Args: { _token: string }; Returns: undefined }
+      validate_presentation_token: {
+        Args: { _token: string }
+        Returns: {
+          expires_at: string
+          label: string
+          valid: boolean
+        }[]
+      }
       validate_promo_code: {
         Args: { _code: string }
         Returns: {
