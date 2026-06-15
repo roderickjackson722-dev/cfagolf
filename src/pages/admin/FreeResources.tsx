@@ -26,7 +26,8 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table';
 import { toast } from 'sonner';
-import { ArrowLeft, BarChart3, Copy, Edit, ExternalLink, Plus, Trash2, Upload } from 'lucide-react';
+import { ArrowLeft, BarChart3, Copy, Edit, ExternalLink, Plus, Trash2, Upload, Stamp } from 'lucide-react';
+import { watermarkPdf, watermarkPdfFile } from '@/lib/pdfWatermark';
 
 const CATEGORIES = ['Timeline', 'Templates', 'Template', 'Checklist', 'Worksheet', 'Planner', 'Guide', 'Other'];
 const SITE = 'https://www.cfa.golf';
@@ -51,6 +52,8 @@ export default function FreeResourcesAdmin() {
   const [file, setFile] = useState<File | null>(null);
   const [thumb, setThumb] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [rewatermarking, setRewatermarking] = useState(false);
+  const [rewatermarkStatus, setRewatermarkStatus] = useState('');
 
   if (loading || roleLoading) return <div className="p-8">Loading...</div>;
   if (!user) { navigate('/login'); return null; }
@@ -99,10 +102,18 @@ export default function FreeResourcesAdmin() {
     try {
       const payload: any = { ...editing, slug };
       if (file) {
-        const up = await uploadTo('free-resources', file, slug);
+        let toUpload = file;
+        if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+          try {
+            toUpload = await watermarkPdfFile(file);
+          } catch (err) {
+            console.warn('Watermark failed, uploading original:', err);
+          }
+        }
+        const up = await uploadTo('free-resources', toUpload, slug);
         payload.file_path = up.path;
         payload.file_url = up.url;
-        payload.file_size = formatSize(file.size);
+        payload.file_size = formatSize(toUpload.size);
         const ext = (file.name.split('.').pop() || 'PDF').toUpperCase();
         payload.file_type = ext;
       }
@@ -132,6 +143,44 @@ export default function FreeResourcesAdmin() {
     toast.success('Link copied');
   };
 
+  const handleRewatermarkAll = async () => {
+    const pdfs = resources.filter(
+      (r) => r.file_path && (r.file_type?.toUpperCase() === 'PDF' || r.file_path.toLowerCase().endsWith('.pdf'))
+    );
+    if (pdfs.length === 0) { toast.info('No PDFs to watermark'); return; }
+    if (!confirm(`Re-watermark ${pdfs.length} PDF(s)? This will overwrite the stored files.`)) return;
+    setRewatermarking(true);
+    let ok = 0, fail = 0;
+    try {
+      for (let i = 0; i < pdfs.length; i++) {
+        const r = pdfs[i];
+        setRewatermarkStatus(`Processing ${i + 1}/${pdfs.length}: ${r.name}`);
+        try {
+          const { data: blob, error: dlErr } = await supabase.storage
+            .from('free-resources').download(r.file_path!);
+          if (dlErr || !blob) throw dlErr || new Error('download failed');
+          const buf = await blob.arrayBuffer();
+          const stamped = await watermarkPdf(buf);
+          const { error: upErr } = await supabase.storage
+            .from('free-resources')
+            .upload(r.file_path!, new Blob([stamped as BlobPart], { type: 'application/pdf' }), {
+              upsert: true,
+              contentType: 'application/pdf',
+            });
+          if (upErr) throw upErr;
+          ok++;
+        } catch (e) {
+          console.error('Watermark failed for', r.slug, e);
+          fail++;
+        }
+      }
+      toast.success(`Watermarked ${ok} PDF(s)${fail ? `, ${fail} failed` : ''}`);
+    } finally {
+      setRewatermarking(false);
+      setRewatermarkStatus('');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto p-6 space-y-6">
@@ -146,6 +195,10 @@ export default function FreeResourcesAdmin() {
           <div className="flex gap-2">
             <Button asChild variant="outline">
               <Link to="/admin/resources/stats"><BarChart3 className="w-4 h-4 mr-2" /> Stats</Link>
+            </Button>
+            <Button variant="outline" onClick={handleRewatermarkAll} disabled={rewatermarking}>
+              <Stamp className="w-4 h-4 mr-2" />
+              {rewatermarking ? (rewatermarkStatus || 'Watermarking...') : 'Re-watermark PDFs'}
             </Button>
             <Button onClick={openNew}><Plus className="w-4 h-4 mr-2" /> Add Resource</Button>
           </div>
