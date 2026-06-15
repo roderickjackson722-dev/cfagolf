@@ -52,6 +52,8 @@ export default function FreeResourcesAdmin() {
   const [file, setFile] = useState<File | null>(null);
   const [thumb, setThumb] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [rewatermarking, setRewatermarking] = useState(false);
+  const [rewatermarkStatus, setRewatermarkStatus] = useState('');
 
   if (loading || roleLoading) return <div className="p-8">Loading...</div>;
   if (!user) { navigate('/login'); return null; }
