@@ -196,6 +196,10 @@ export default function FreeResourcesAdmin() {
             <Button asChild variant="outline">
               <Link to="/admin/resources/stats"><BarChart3 className="w-4 h-4 mr-2" /> Stats</Link>
             </Button>
+            <Button variant="outline" onClick={handleRewatermarkAll} disabled={rewatermarking}>
+              <Stamp className="w-4 h-4 mr-2" />
+              {rewatermarking ? (rewatermarkStatus || 'Watermarking...') : 'Re-watermark PDFs'}
+            </Button>
             <Button onClick={openNew}><Plus className="w-4 h-4 mr-2" /> Add Resource</Button>
           </div>
         </div>
