@@ -1,9 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { useFreeResourceBySlug, trackResourceDownload } from '@/hooks/useFreeResources';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Download, FileText, ArrowLeft } from 'lucide-react';
+
+async function resolveDownloadUrl(resource: { file_path?: string | null; file_url?: string | null }) {
+  if (resource.file_path) {
+    const { data, error } = await supabase.storage
+      .from('free-resources')
+      .createSignedUrl(resource.file_path, 300, { download: true });
+    if (!error && data?.signedUrl) return data.signedUrl;
+  }
+  return resource.file_url || null;
+}
 
 export default function ResourceDownload() {
   const { slug } = useParams<{ slug: string }>();
