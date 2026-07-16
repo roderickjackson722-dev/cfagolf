@@ -145,6 +145,12 @@ const Admin = () => {
                   Free Resources
                 </Link>
               </Button>
+              <Button asChild variant="outline">
+                <Link to="/admin/testimonials">
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Testimonials
+                </Link>
+              </Button>
             </div>
           </div>
 
