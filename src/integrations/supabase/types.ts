@@ -3536,31 +3536,97 @@ export type Database = {
       }
       testimonials: {
         Row: {
-          content: string
+          additional_comments: string | null
+          admin_notes: string | null
+          advice_to_others: string | null
+          approved_at: string | null
+          biggest_challenge: string | null
+          content: string | null
           created_at: string
+          display_order: number | null
+          entered_at: string | null
+          entered_by: string | null
+          how_helped: string | null
+          how_journey_changed: string | null
           id: string
-          name: string
+          is_anonymous: boolean | null
+          is_featured: boolean | null
+          is_public: boolean | null
+          name: string | null
+          published_at: string | null
           role: string | null
+          share_first_name: string | null
+          share_grade_level: string | null
+          share_location: string | null
+          source: string | null
           status: string
+          submitted_at: string | null
           updated_at: string
+          video_file_path: string | null
+          video_url: string | null
+          what_valued_most: string | null
         }
         Insert: {
-          content: string
+          additional_comments?: string | null
+          admin_notes?: string | null
+          advice_to_others?: string | null
+          approved_at?: string | null
+          biggest_challenge?: string | null
+          content?: string | null
           created_at?: string
+          display_order?: number | null
+          entered_at?: string | null
+          entered_by?: string | null
+          how_helped?: string | null
+          how_journey_changed?: string | null
           id?: string
-          name: string
+          is_anonymous?: boolean | null
+          is_featured?: boolean | null
+          is_public?: boolean | null
+          name?: string | null
+          published_at?: string | null
           role?: string | null
+          share_first_name?: string | null
+          share_grade_level?: string | null
+          share_location?: string | null
+          source?: string | null
           status?: string
+          submitted_at?: string | null
           updated_at?: string
+          video_file_path?: string | null
+          video_url?: string | null
+          what_valued_most?: string | null
         }
         Update: {
-          content?: string
+          additional_comments?: string | null
+          admin_notes?: string | null
+          advice_to_others?: string | null
+          approved_at?: string | null
+          biggest_challenge?: string | null
+          content?: string | null
           created_at?: string
+          display_order?: number | null
+          entered_at?: string | null
+          entered_by?: string | null
+          how_helped?: string | null
+          how_journey_changed?: string | null
           id?: string
-          name?: string
+          is_anonymous?: boolean | null
+          is_featured?: boolean | null
+          is_public?: boolean | null
+          name?: string | null
+          published_at?: string | null
           role?: string | null
+          share_first_name?: string | null
+          share_grade_level?: string | null
+          share_location?: string | null
+          source?: string | null
           status?: string
+          submitted_at?: string | null
           updated_at?: string
+          video_file_path?: string | null
+          video_url?: string | null
+          what_valued_most?: string | null
         }
         Relationships: []
       }
