@@ -87,6 +87,9 @@ import ResourceDownload from "./pages/ResourceDownload";
 import StudentAgendaDetail from "./pages/admin/StudentAgendaDetail";
 import PlayerAgendas from "./pages/PlayerAgendas";
 import PlayerAgendaDetail from "./pages/PlayerAgendaDetail";
+import TestimonialSubmit from "./pages/TestimonialSubmit";
+import TestimonialsPublic from "./pages/TestimonialsPublic";
+import AdminTestimonials from "./pages/admin/AdminTestimonials";
 
 
 
@@ -202,6 +205,9 @@ const App = () => {
             <Route path="/admin/resources" element={<FreeResources />} />
             <Route path="/admin/resources/stats" element={<FreeResourcesStats />} />
             <Route path="/resources/download/:slug" element={<ResourceDownload />} />
+            <Route path="/testimonial" element={<TestimonialSubmit />} />
+            <Route path="/testimonials" element={<TestimonialsPublic />} />
+            <Route path="/admin/testimonials" element={<AdminTestimonials />} />
 
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
