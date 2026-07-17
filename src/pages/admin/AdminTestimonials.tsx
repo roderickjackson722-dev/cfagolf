@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Navigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import { Plus, Search, Edit, Trash2, Eye, Video } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Eye, Video, Copy, Share2, Mail, Settings, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
