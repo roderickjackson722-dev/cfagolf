@@ -18,6 +18,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { getEmbedUrl, detectProvider } from '@/lib/videoEmbed';
 
 const STATUSES = ['pending', 'approved', 'published', 'archived'];
 const GRADES = ['', '9th', '10th', '11th', '12th', 'College'];
