@@ -287,6 +287,23 @@ export default function AdminTestimonials() {
               <Button size="sm" variant="secondary" onClick={shareSms}>Text invitation</Button>
               <Button size="sm" variant="outline" onClick={() => setGuideOpen(true)}><Settings className="w-4 h-4 mr-2" />Edit guide & template</Button>
             </div>
+            <div className="mt-2 pt-3 border-t border-primary/20">
+              <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Public Testimonial Gallery</p>
+              <p className="text-sm text-muted-foreground mb-2">
+                Published testimonials (with "Public" toggled on) appear on this shareable gallery page:
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Input readOnly value={galleryUrl} className="font-mono text-sm" onFocus={(e) => e.currentTarget.select()} />
+                <div className="flex gap-2">
+                  <Button variant="outline" onClick={async () => { try { await navigator.clipboard.writeText(galleryUrl); toast.success('Gallery link copied'); } catch { toast.error('Copy failed'); } }}>
+                    <Copy className="w-4 h-4 mr-2" />Copy
+                  </Button>
+                  <Button variant="outline" onClick={() => window.open(galleryUrl, '_blank')}>
+                    <Eye className="w-4 h-4 mr-2" />View gallery
+                  </Button>
+                </div>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
