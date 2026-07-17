@@ -43,6 +43,92 @@ export default function AdminTestimonials() {
   const [viewing, setViewing] = useState<any | null>(null);
   const [addOpen, setAddOpen] = useState(false);
   const [form, setForm] = useState<any>(emptyForm);
+  const [guideOpen, setGuideOpen] = useState(false);
+  const [guideForm, setGuideForm] = useState({
+    id: null as string | null,
+    intro_heading: '',
+    intro_body: '',
+    guide_points: [] as string[],
+    privacy_note: '',
+  });
+
+  const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonial` : '/testimonial';
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success('Link copied to clipboard');
+    } catch {
+      toast.error('Could not copy — please copy manually');
+    }
+  };
+
+  const shareEmail = () => {
+    const subject = encodeURIComponent('Share your College Fairway Advisors experience');
+    const body = encodeURIComponent(
+      `Hi!\n\nWe'd love to hear about your experience with College Fairway Advisors. Your story helps other families navigating the college golf recruiting journey.\n\nYou can share a written testimonial or record a short video (whichever you prefer) using this private link:\n\n${shareUrl}\n\nFor privacy, please use first names only.\n\nThank you!\nCollege Fairway Advisors\ncontact@cfa.golf`
+    );
+    window.open(`mailto:?subject=${subject}&body=${body}`);
+  };
+
+  const shareSms = () => {
+    const body = encodeURIComponent(
+      `Hi! Would you share your College Fairway Advisors experience? Written or short video — first names only for privacy. Thank you! ${shareUrl}`
+    );
+    window.open(`sms:?&body=${body}`);
+  };
+
+  const { data: promptRow } = useQuery({
+    queryKey: ['testimonial-prompt-settings'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('testimonial_prompt_settings')
+        .select('*')
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!isAdmin,
+  });
+
+  useEffect(() => {
+    if (promptRow) {
+      setGuideForm({
+        id: promptRow.id,
+        intro_heading: promptRow.intro_heading || '',
+        intro_body: promptRow.intro_body || '',
+        guide_points: Array.isArray(promptRow.guide_points) ? (promptRow.guide_points as string[]) : [],
+        privacy_note: promptRow.privacy_note || '',
+      });
+    }
+  }, [promptRow]);
+
+  const saveGuide = useMutation({
+    mutationFn: async () => {
+      const payload = {
+        intro_heading: guideForm.intro_heading.trim(),
+        intro_body: guideForm.intro_body.trim(),
+        guide_points: guideForm.guide_points.map((s) => s.trim()).filter(Boolean),
+        privacy_note: guideForm.privacy_note.trim(),
+        is_active: true,
+      };
+      if (guideForm.id) {
+        const { error } = await supabase.from('testimonial_prompt_settings').update(payload).eq('id', guideForm.id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from('testimonial_prompt_settings').insert(payload);
+        if (error) throw error;
+      }
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['testimonial-prompt-settings'] });
+      toast.success('Guide saved');
+      setGuideOpen(false);
+    },
+    onError: (e: any) => toast.error(e.message || 'Save failed'),
+  });
 
   const { data: rows = [], isLoading } = useQuery({
     queryKey: ['admin-testimonials-v2'],
