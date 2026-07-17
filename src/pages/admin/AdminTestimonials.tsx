@@ -18,6 +18,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { getEmbedUrl, detectProvider } from '@/lib/videoEmbed';
 
 const STATUSES = ['pending', 'approved', 'published', 'archived'];
 const GRADES = ['', '9th', '10th', '11th', '12th', 'College'];
@@ -53,6 +54,20 @@ export default function AdminTestimonials() {
   });
 
   const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonial` : '/testimonial';
+  const galleryUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonials` : '/testimonials';
+  const [videoSignedUrl, setVideoSignedUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setVideoSignedUrl(null);
+    if (viewing?.video_file_path) {
+      supabase.storage
+        .from('testimonial-videos')
+        .createSignedUrl(viewing.video_file_path, 3600)
+        .then(({ data }) => { if (!cancelled) setVideoSignedUrl(data?.signedUrl || null); });
+    }
+    return () => { cancelled = true; };
+  }, [viewing]);
 
   const copyLink = async () => {
     try {
@@ -272,6 +287,23 @@ export default function AdminTestimonials() {
               <Button size="sm" variant="secondary" onClick={shareSms}>Text invitation</Button>
               <Button size="sm" variant="outline" onClick={() => setGuideOpen(true)}><Settings className="w-4 h-4 mr-2" />Edit guide & template</Button>
             </div>
+            <div className="mt-2 pt-3 border-t border-primary/20">
+              <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Public Testimonial Gallery</p>
+              <p className="text-sm text-muted-foreground mb-2">
+                Published testimonials (with "Public" toggled on) appear on this shareable gallery page:
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Input readOnly value={galleryUrl} className="font-mono text-sm" onFocus={(e) => e.currentTarget.select()} />
+                <div className="flex gap-2">
+                  <Button variant="outline" onClick={async () => { try { await navigator.clipboard.writeText(galleryUrl); toast.success('Gallery link copied'); } catch { toast.error('Copy failed'); } }}>
+                    <Copy className="w-4 h-4 mr-2" />Copy
+                  </Button>
+                  <Button variant="outline" onClick={() => window.open(galleryUrl, '_blank')}>
+                    <Eye className="w-4 h-4 mr-2" />View gallery
+                  </Button>
+                </div>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
@@ -370,6 +402,40 @@ export default function AdminTestimonials() {
                 {viewing.is_public && <Badge className="bg-green-100 text-green-800">Public</Badge>}
                 {viewing.is_featured && <Badge className="bg-purple-100 text-purple-800">Featured</Badge>}
               </div>
+
+              {(viewing.video_url || viewing.video_file_path) && (
+                <div className="space-y-2 rounded-lg border bg-muted/30 p-3">
+                  <div className="font-semibold text-muted-foreground text-xs uppercase flex items-center gap-2">
+                    <Video className="w-4 h-4" /> Video preview
+                  </div>
+                  {viewing.video_url && (() => {
+                    const embed = getEmbedUrl(viewing.video_url);
+                    const provider = detectProvider(viewing.video_url);
+                    if (embed) {
+                      return (
+                        <div className="aspect-video rounded overflow-hidden bg-black">
+                          <iframe src={embed} className="w-full h-full" allowFullScreen title="Testimonial video" />
+                        </div>
+                      );
+                    }
+                    return (
+                      <div className="text-xs text-muted-foreground">
+                        Preview not available for this link ({provider}). <a href={viewing.video_url} target="_blank" rel="noreferrer" className="text-primary underline">Open in new tab</a>
+                      </div>
+                    );
+                  })()}
+                  {viewing.video_file_path && (
+                    videoSignedUrl ? (
+                      <video src={videoSignedUrl} controls playsInline className="w-full rounded bg-black aspect-video" />
+                    ) : (
+                      <div className="text-xs text-muted-foreground">Loading uploaded video…</div>
+                    )
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    Review the video here before toggling <strong>Public</strong> or clicking <strong>Publish</strong>.
+                  </p>
+                </div>
+              )}
               {[
                 ['Biggest challenge', viewing.biggest_challenge],
                 ['How CFA helped', viewing.how_helped],
