@@ -139,9 +139,30 @@ export default function TestimonialSubmit() {
             </CardContent>
           </Card>
         ) : (
-          <Card>
-            <CardContent className="pt-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+          <>
+            <Card className="mb-6 border-primary/30 bg-primary/5">
+              <CardContent className="pt-6 space-y-4">
+                <div className="flex items-start gap-3">
+                  <Lightbulb className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <h2 className="font-display text-lg font-bold mb-1">{guide.intro_heading}</h2>
+                    <p className="text-sm text-muted-foreground">{guide.intro_body}</p>
+                  </div>
+                </div>
+                {guide.guide_points.length > 0 && (
+                  <ul className="list-disc pl-8 space-y-1.5 text-sm">
+                    {guide.guide_points.map((p, i) => <li key={i}>{p}</li>)}
+                  </ul>
+                )}
+                <div className="flex items-start gap-3 rounded-md border border-cfa-gold/40 bg-cfa-gold/10 p-3">
+                  <Shield className="w-4 h-4 text-cfa-gold shrink-0 mt-0.5" />
+                  <p className="text-xs font-medium">{guide.privacy_note}</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
                 {[
                   ['biggest_challenge', 'What was your biggest challenge before working with College Fairway Advisors?'],
                   ['how_helped', 'How did College Fairway Advisors help you overcome that challenge?'],
