@@ -402,6 +402,40 @@ export default function AdminTestimonials() {
                 {viewing.is_public && <Badge className="bg-green-100 text-green-800">Public</Badge>}
                 {viewing.is_featured && <Badge className="bg-purple-100 text-purple-800">Featured</Badge>}
               </div>
+
+              {(viewing.video_url || viewing.video_file_path) && (
+                <div className="space-y-2 rounded-lg border bg-muted/30 p-3">
+                  <div className="font-semibold text-muted-foreground text-xs uppercase flex items-center gap-2">
+                    <Video className="w-4 h-4" /> Video preview
+                  </div>
+                  {viewing.video_url && (() => {
+                    const embed = getEmbedUrl(viewing.video_url);
+                    const provider = detectProvider(viewing.video_url);
+                    if (embed) {
+                      return (
+                        <div className="aspect-video rounded overflow-hidden bg-black">
+                          <iframe src={embed} className="w-full h-full" allowFullScreen title="Testimonial video" />
+                        </div>
+                      );
+                    }
+                    return (
+                      <div className="text-xs text-muted-foreground">
+                        Preview not available for this link ({provider}). <a href={viewing.video_url} target="_blank" rel="noreferrer" className="text-primary underline">Open in new tab</a>
+                      </div>
+                    );
+                  })()}
+                  {viewing.video_file_path && (
+                    videoSignedUrl ? (
+                      <video src={videoSignedUrl} controls playsInline className="w-full rounded bg-black aspect-video" />
+                    ) : (
+                      <div className="text-xs text-muted-foreground">Loading uploaded video…</div>
+                    )
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    Review the video here before toggling <strong>Public</strong> or clicking <strong>Publish</strong>.
+                  </p>
+                </div>
+              )}
               {[
                 ['Biggest challenge', viewing.biggest_challenge],
                 ['How CFA helped', viewing.how_helped],
