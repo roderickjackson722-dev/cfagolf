@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,12 +6,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { CheckCircle, Send, Star } from 'lucide-react';
+import { CheckCircle, Send, Star, Lightbulb, Shield } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 const GRADES = ['9th', '10th', '11th', '12th', 'College'];
+
+const DEFAULT_GUIDE = {
+  intro_heading: "Not sure what to say? Here's a quick guide",
+  intro_body: 'Share what feels most authentic. A few sentences from the heart mean more than a polished script.',
+  guide_points: [] as string[],
+  privacy_note: 'For privacy, please use FIRST NAMES ONLY. Never share last names, school names, or coach names.',
+};
 
 export default function TestimonialSubmit() {
   const [form, setForm] = useState({
