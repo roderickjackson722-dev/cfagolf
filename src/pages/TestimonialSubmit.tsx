@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,12 +6,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { CheckCircle, Send, Star } from 'lucide-react';
+import { CheckCircle, Send, Star, Lightbulb, Shield } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 const GRADES = ['9th', '10th', '11th', '12th', 'College'];
+
+const DEFAULT_GUIDE = {
+  intro_heading: "Not sure what to say? Here's a quick guide",
+  intro_body: 'Share what feels most authentic. A few sentences from the heart mean more than a polished script.',
+  guide_points: [] as string[],
+  privacy_note: 'For privacy, please use FIRST NAMES ONLY. Never share last names, school names, or coach names.',
+};
 
 export default function TestimonialSubmit() {
   const [form, setForm] = useState({
@@ -32,6 +39,25 @@ export default function TestimonialSubmit() {
   const [shareLoc, setShareLoc] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [guide, setGuide] = useState(DEFAULT_GUIDE);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from('testimonial_prompt_settings')
+        .select('intro_heading, intro_body, guide_points, privacy_note')
+        .eq('is_active', true)
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (data) setGuide({
+        intro_heading: data.intro_heading,
+        intro_body: data.intro_body,
+        guide_points: Array.isArray(data.guide_points) ? (data.guide_points as string[]) : [],
+        privacy_note: data.privacy_note,
+      });
+    })();
+  }, []);
 
   const set = (k: keyof typeof form, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
@@ -113,9 +139,30 @@ export default function TestimonialSubmit() {
             </CardContent>
           </Card>
         ) : (
-          <Card>
-            <CardContent className="pt-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+          <>
+            <Card className="mb-6 border-primary/30 bg-primary/5">
+              <CardContent className="pt-6 space-y-4">
+                <div className="flex items-start gap-3">
+                  <Lightbulb className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <h2 className="font-display text-lg font-bold mb-1">{guide.intro_heading}</h2>
+                    <p className="text-sm text-muted-foreground">{guide.intro_body}</p>
+                  </div>
+                </div>
+                {guide.guide_points.length > 0 && (
+                  <ul className="list-disc pl-8 space-y-1.5 text-sm">
+                    {guide.guide_points.map((p, i) => <li key={i}>{p}</li>)}
+                  </ul>
+                )}
+                <div className="flex items-start gap-3 rounded-md border border-cfa-gold/40 bg-cfa-gold/10 p-3">
+                  <Shield className="w-4 h-4 text-cfa-gold shrink-0 mt-0.5" />
+                  <p className="text-xs font-medium">{guide.privacy_note}</p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
                 {[
                   ['biggest_challenge', 'What was your biggest challenge before working with College Fairway Advisors?'],
                   ['how_helped', 'How did College Fairway Advisors help you overcome that challenge?'],
@@ -221,8 +268,9 @@ export default function TestimonialSubmit() {
                   {submitting ? 'Submitting…' : (<><Send className="w-4 h-4 mr-2" /> Submit Testimonial</>)}
                 </Button>
               </form>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </>
         )}
       </main>
     </div>

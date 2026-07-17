@@ -3534,6 +3534,39 @@ export type Database = {
           },
         ]
       }
+      testimonial_prompt_settings: {
+        Row: {
+          created_at: string
+          guide_points: Json
+          id: string
+          intro_body: string
+          intro_heading: string
+          is_active: boolean
+          privacy_note: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          guide_points?: Json
+          id?: string
+          intro_body?: string
+          intro_heading?: string
+          is_active?: boolean
+          privacy_note?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          guide_points?: Json
+          id?: string
+          intro_body?: string
+          intro_heading?: string
+          is_active?: boolean
+          privacy_note?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       testimonials: {
         Row: {
           additional_comments: string | null

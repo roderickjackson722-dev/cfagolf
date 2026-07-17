@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Navigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import { Plus, Search, Edit, Trash2, Eye, Video } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Eye, Video, Copy, Share2, Mail, Settings, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
@@ -43,6 +43,92 @@ export default function AdminTestimonials() {
   const [viewing, setViewing] = useState<any | null>(null);
   const [addOpen, setAddOpen] = useState(false);
   const [form, setForm] = useState<any>(emptyForm);
+  const [guideOpen, setGuideOpen] = useState(false);
+  const [guideForm, setGuideForm] = useState({
+    id: null as string | null,
+    intro_heading: '',
+    intro_body: '',
+    guide_points: [] as string[],
+    privacy_note: '',
+  });
+
+  const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonial` : '/testimonial';
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success('Link copied to clipboard');
+    } catch {
+      toast.error('Could not copy — please copy manually');
+    }
+  };
+
+  const shareEmail = () => {
+    const subject = encodeURIComponent('Share your College Fairway Advisors experience');
+    const body = encodeURIComponent(
+      `Hi!\n\nWe'd love to hear about your experience with College Fairway Advisors. Your story helps other families navigating the college golf recruiting journey.\n\nYou can share a written testimonial or record a short video (whichever you prefer) using this private link:\n\n${shareUrl}\n\nFor privacy, please use first names only.\n\nThank you!\nCollege Fairway Advisors\ncontact@cfa.golf`
+    );
+    window.open(`mailto:?subject=${subject}&body=${body}`);
+  };
+
+  const shareSms = () => {
+    const body = encodeURIComponent(
+      `Hi! Would you share your College Fairway Advisors experience? Written or short video — first names only for privacy. Thank you! ${shareUrl}`
+    );
+    window.open(`sms:?&body=${body}`);
+  };
+
+  const { data: promptRow } = useQuery({
+    queryKey: ['testimonial-prompt-settings'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('testimonial_prompt_settings')
+        .select('*')
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!isAdmin,
+  });
+
+  useEffect(() => {
+    if (promptRow) {
+      setGuideForm({
+        id: promptRow.id,
+        intro_heading: promptRow.intro_heading || '',
+        intro_body: promptRow.intro_body || '',
+        guide_points: Array.isArray(promptRow.guide_points) ? (promptRow.guide_points as string[]) : [],
+        privacy_note: promptRow.privacy_note || '',
+      });
+    }
+  }, [promptRow]);
+
+  const saveGuide = useMutation({
+    mutationFn: async () => {
+      const payload = {
+        intro_heading: guideForm.intro_heading.trim(),
+        intro_body: guideForm.intro_body.trim(),
+        guide_points: guideForm.guide_points.map((s) => s.trim()).filter(Boolean),
+        privacy_note: guideForm.privacy_note.trim(),
+        is_active: true,
+      };
+      if (guideForm.id) {
+        const { error } = await supabase.from('testimonial_prompt_settings').update(payload).eq('id', guideForm.id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from('testimonial_prompt_settings').insert(payload);
+        if (error) throw error;
+      }
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['testimonial-prompt-settings'] });
+      toast.success('Guide saved');
+      setGuideOpen(false);
+    },
+    onError: (e: any) => toast.error(e.message || 'Save failed'),
+  });
 
   const { data: rows = [], isLoading } = useQuery({
     queryKey: ['admin-testimonials-v2'],
@@ -163,6 +249,32 @@ export default function AdminTestimonials() {
           </div>
           <Button onClick={openAdd}><Plus className="w-4 h-4 mr-2" />Add Manual Testimonial</Button>
         </div>
+
+        <Card className="mb-6 border-primary/30 bg-primary/5">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Share2 className="w-5 h-5 text-primary" /> Shareable Testimonial Link
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Send this private link to families so they can share a written or video testimonial. The page includes a guide and a reminder to use first names only.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Input readOnly value={shareUrl} className="font-mono text-sm" onFocus={(e) => e.currentTarget.select()} />
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={copyLink}><Copy className="w-4 h-4 mr-2" />Copy</Button>
+                <Button variant="outline" onClick={() => window.open(shareUrl, '_blank')}><Eye className="w-4 h-4 mr-2" />Preview</Button>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 pt-1">
+              <Button size="sm" variant="secondary" onClick={shareEmail}><Mail className="w-4 h-4 mr-2" />Email invitation</Button>
+              <Button size="sm" variant="secondary" onClick={shareSms}>Text invitation</Button>
+              <Button size="sm" variant="outline" onClick={() => setGuideOpen(true)}><Settings className="w-4 h-4 mr-2" />Edit guide & template</Button>
+            </div>
+          </CardContent>
+        </Card>
+
 
         <Card className="mb-6">
           <CardContent className="pt-6 grid gap-3 md:grid-cols-5">
@@ -337,6 +449,67 @@ export default function AdminTestimonials() {
           <DialogFooter>
             <Button variant="outline" onClick={() => { setAddOpen(false); setEditing(null); }}>Cancel</Button>
             <Button onClick={() => saveForm.mutate()} disabled={saveForm.isPending}>{saveForm.isPending ? 'Saving…' : 'Save'}</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit guide/template */}
+      <Dialog open={guideOpen} onOpenChange={setGuideOpen}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Edit Testimonial Guide & Template</DialogTitle>
+            <p className="text-sm text-muted-foreground">This appears at the top of the public /testimonial page to help families know what to share.</p>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <Label>Intro heading</Label>
+              <Input value={guideForm.intro_heading} onChange={(e) => setGuideForm({ ...guideForm, intro_heading: e.target.value })} />
+            </div>
+            <div className="space-y-1">
+              <Label>Intro body</Label>
+              <Textarea rows={3} value={guideForm.intro_body} onChange={(e) => setGuideForm({ ...guideForm, intro_body: e.target.value })} />
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label>Guide points / prompts</Label>
+                <Button size="sm" variant="outline" onClick={() => setGuideForm({ ...guideForm, guide_points: [...guideForm.guide_points, ''] })}>
+                  <Plus className="w-4 h-4 mr-1" /> Add point
+                </Button>
+              </div>
+              {guideForm.guide_points.length === 0 && (
+                <p className="text-xs text-muted-foreground">No prompts yet. Click "Add point" to guide families on what to share.</p>
+              )}
+              {guideForm.guide_points.map((pt, i) => (
+                <div key={i} className="flex gap-2">
+                  <Textarea
+                    rows={2}
+                    value={pt}
+                    onChange={(e) => {
+                      const next = [...guideForm.guide_points];
+                      next[i] = e.target.value;
+                      setGuideForm({ ...guideForm, guide_points: next });
+                    }}
+                  />
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="text-destructive shrink-0"
+                    onClick={() => setGuideForm({ ...guideForm, guide_points: guideForm.guide_points.filter((_, j) => j !== i) })}
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+            <div className="space-y-1">
+              <Label>Privacy / first-name reminder</Label>
+              <Textarea rows={2} value={guideForm.privacy_note} onChange={(e) => setGuideForm({ ...guideForm, privacy_note: e.target.value })} />
+              <p className="text-xs text-muted-foreground">Shown as a highlighted callout on the form.</p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setGuideOpen(false)}>Cancel</Button>
+            <Button onClick={() => saveGuide.mutate()} disabled={saveGuide.isPending}>{saveGuide.isPending ? 'Saving…' : 'Save guide'}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
