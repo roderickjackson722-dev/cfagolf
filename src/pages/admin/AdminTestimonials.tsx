@@ -452,6 +452,67 @@ export default function AdminTestimonials() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Edit guide/template */}
+      <Dialog open={guideOpen} onOpenChange={setGuideOpen}>
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Edit Testimonial Guide & Template</DialogTitle>
+            <p className="text-sm text-muted-foreground">This appears at the top of the public /testimonial page to help families know what to share.</p>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <Label>Intro heading</Label>
+              <Input value={guideForm.intro_heading} onChange={(e) => setGuideForm({ ...guideForm, intro_heading: e.target.value })} />
+            </div>
+            <div className="space-y-1">
+              <Label>Intro body</Label>
+              <Textarea rows={3} value={guideForm.intro_body} onChange={(e) => setGuideForm({ ...guideForm, intro_body: e.target.value })} />
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label>Guide points / prompts</Label>
+                <Button size="sm" variant="outline" onClick={() => setGuideForm({ ...guideForm, guide_points: [...guideForm.guide_points, ''] })}>
+                  <Plus className="w-4 h-4 mr-1" /> Add point
+                </Button>
+              </div>
+              {guideForm.guide_points.length === 0 && (
+                <p className="text-xs text-muted-foreground">No prompts yet. Click "Add point" to guide families on what to share.</p>
+              )}
+              {guideForm.guide_points.map((pt, i) => (
+                <div key={i} className="flex gap-2">
+                  <Textarea
+                    rows={2}
+                    value={pt}
+                    onChange={(e) => {
+                      const next = [...guideForm.guide_points];
+                      next[i] = e.target.value;
+                      setGuideForm({ ...guideForm, guide_points: next });
+                    }}
+                  />
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className="text-destructive shrink-0"
+                    onClick={() => setGuideForm({ ...guideForm, guide_points: guideForm.guide_points.filter((_, j) => j !== i) })}
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+            <div className="space-y-1">
+              <Label>Privacy / first-name reminder</Label>
+              <Textarea rows={2} value={guideForm.privacy_note} onChange={(e) => setGuideForm({ ...guideForm, privacy_note: e.target.value })} />
+              <p className="text-xs text-muted-foreground">Shown as a highlighted callout on the form.</p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setGuideOpen(false)}>Cancel</Button>
+            <Button onClick={() => saveGuide.mutate()} disabled={saveGuide.isPending}>{saveGuide.isPending ? 'Saving…' : 'Save guide'}</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
