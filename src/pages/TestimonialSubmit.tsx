@@ -39,6 +39,25 @@ export default function TestimonialSubmit() {
   const [shareLoc, setShareLoc] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [guide, setGuide] = useState(DEFAULT_GUIDE);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from('testimonial_prompt_settings')
+        .select('intro_heading, intro_body, guide_points, privacy_note')
+        .eq('is_active', true)
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (data) setGuide({
+        intro_heading: data.intro_heading,
+        intro_body: data.intro_body,
+        guide_points: Array.isArray(data.guide_points) ? (data.guide_points as string[]) : [],
+        privacy_note: data.privacy_note,
+      });
+    })();
+  }, []);
 
   const set = (k: keyof typeof form, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
