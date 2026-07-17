@@ -250,6 +250,32 @@ export default function AdminTestimonials() {
           <Button onClick={openAdd}><Plus className="w-4 h-4 mr-2" />Add Manual Testimonial</Button>
         </div>
 
+        <Card className="mb-6 border-primary/30 bg-primary/5">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Share2 className="w-5 h-5 text-primary" /> Shareable Testimonial Link
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Send this private link to families so they can share a written or video testimonial. The page includes a guide and a reminder to use first names only.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Input readOnly value={shareUrl} className="font-mono text-sm" onFocus={(e) => e.currentTarget.select()} />
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={copyLink}><Copy className="w-4 h-4 mr-2" />Copy</Button>
+                <Button variant="outline" onClick={() => window.open(shareUrl, '_blank')}><Eye className="w-4 h-4 mr-2" />Preview</Button>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 pt-1">
+              <Button size="sm" variant="secondary" onClick={shareEmail}><Mail className="w-4 h-4 mr-2" />Email invitation</Button>
+              <Button size="sm" variant="secondary" onClick={shareSms}>Text invitation</Button>
+              <Button size="sm" variant="outline" onClick={() => setGuideOpen(true)}><Settings className="w-4 h-4 mr-2" />Edit guide & template</Button>
+            </div>
+          </CardContent>
+        </Card>
+
+
         <Card className="mb-6">
           <CardContent className="pt-6 grid gap-3 md:grid-cols-5">
             <div className="relative md:col-span-2">
