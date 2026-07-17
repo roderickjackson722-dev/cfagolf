@@ -54,6 +54,20 @@ export default function AdminTestimonials() {
   });
 
   const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonial` : '/testimonial';
+  const galleryUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonials` : '/testimonials';
+  const [videoSignedUrl, setVideoSignedUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setVideoSignedUrl(null);
+    if (viewing?.video_file_path) {
+      supabase.storage
+        .from('testimonial-videos')
+        .createSignedUrl(viewing.video_file_path, 3600)
+        .then(({ data }) => { if (!cancelled) setVideoSignedUrl(data?.signedUrl || null); });
+    }
+    return () => { cancelled = true; };
+  }, [viewing]);
 
   const copyLink = async () => {
     try {
