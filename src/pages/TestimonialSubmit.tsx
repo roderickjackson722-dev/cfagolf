@@ -268,8 +268,9 @@ export default function TestimonialSubmit() {
                   {submitting ? 'Submitting…' : (<><Send className="w-4 h-4 mr-2" /> Submit Testimonial</>)}
                 </Button>
               </form>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </>
         )}
       </main>
     </div>
