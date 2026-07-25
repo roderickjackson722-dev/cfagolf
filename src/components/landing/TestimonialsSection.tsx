@@ -20,6 +20,42 @@ function useTestimonialImageUrl(path?: string | null) {
   return url;
 }
 
+type TestimonialItem = { name: string; role: string; content: string; image_url?: string | null };
+
+function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
+  const imgUrl = useTestimonialImageUrl(testimonial.image_url);
+  return (
+    <Card className="relative bg-card border-border/50">
+      <CardContent className="pt-8 pb-6">
+        <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
+        {imgUrl && (
+          <div className="mb-4 rounded-md overflow-hidden bg-muted">
+            <img src={imgUrl} alt={`${testimonial.name} testimonial`} className="w-full h-48 object-cover" loading="lazy" />
+          </div>
+        )}
+        <div className="flex gap-1 mb-4">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-4 h-4 fill-cfa-gold text-cfa-gold" />
+          ))}
+        </div>
+        <p className="text-foreground mb-6 leading-relaxed">"{testimonial.content}"</p>
+        <div className="flex items-center gap-3">
+          <Avatar className="w-12 h-12 bg-primary">
+            {imgUrl && <AvatarImage src={imgUrl} alt={testimonial.name} />}
+            <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
+              {testimonial.name.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="font-semibold text-foreground">{testimonial.name}</p>
+            <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 const fallbackTestimonials = [
   {
     name: "Parent",
