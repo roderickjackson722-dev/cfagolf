@@ -44,7 +44,7 @@ export function TestimonialsSection() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('testimonials')
-        .select('name, role, content, curated_content, share_first_name, share_grade_level, share_location, is_featured, display_order, submitted_at')
+        .select('name, role, content, curated_content, share_first_name, share_grade_level, share_location, image_url, is_featured, display_order, submitted_at')
         .eq('is_public', true)
         .in('status', ['approved', 'published'])
         .order('is_featured', { ascending: false })
@@ -56,6 +56,7 @@ export function TestimonialsSection() {
           name: t.share_first_name || t.name || 'Anonymous',
           role: [t.share_grade_level, t.share_location].filter(Boolean).join(' • ') || t.role || 'CFA Family',
           content: t.curated_content || t.content || '',
+          image_url: t.image_url as string | null,
         }))
         .filter((t) => t.content);
     },
