@@ -21,8 +21,8 @@ function TestimonialImage({ path }: { path: string }) {
   }, [path]);
   if (!url) return null;
   return (
-    <div className="rounded-md overflow-hidden bg-muted">
-      <img src={url} alt="Testimonial" className="w-full h-48 object-cover" loading="lazy" />
+    <div className="rounded-md overflow-hidden bg-muted flex items-center justify-center min-h-48 max-h-96">
+      <img src={url} alt="Testimonial" className="max-h-96 w-full object-contain" loading="lazy" />
     </div>
   );
 }
