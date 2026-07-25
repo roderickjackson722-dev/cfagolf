@@ -66,6 +66,7 @@ serve(async (req) => {
         is_anonymous,
         video_url,
         video_file_path,
+        image_url,
       } = body;
 
       const allAnswers = [
@@ -113,6 +114,7 @@ serve(async (req) => {
         is_anonymous: is_anonymous !== false && !share_first_name && !share_grade_level && !share_location,
         video_url: video_url || null,
         video_file_path: video_file_path || null,
+        image_url: image_url || null,
       };
 
       const q = (label: string, val?: string) =>

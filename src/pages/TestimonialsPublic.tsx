@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
@@ -6,6 +7,25 @@ import { Badge } from '@/components/ui/badge';
 import { Star, Quote } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { getEmbedUrl } from '@/lib/videoEmbed';
+
+function TestimonialImage({ path }: { path: string }) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (/^https?:\/\//i.test(path)) { setUrl(path); return; }
+    let cancelled = false;
+    supabase.storage
+      .from('testimonial-images')
+      .createSignedUrl(path, 60 * 60 * 24 * 365)
+      .then(({ data }) => { if (!cancelled) setUrl(data?.signedUrl || null); });
+    return () => { cancelled = true; };
+  }, [path]);
+  if (!url) return null;
+  return (
+    <div className="rounded-md overflow-hidden bg-muted">
+      <img src={url} alt="Testimonial" className="w-full h-48 object-cover" loading="lazy" />
+    </div>
+  );
+}
 
 export default function TestimonialsPublic() {
   const { data: items = [], isLoading } = useQuery({
@@ -55,6 +75,7 @@ export default function TestimonialsPublic() {
                     <div className="flex gap-1">
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-cfa-gold text-cfa-gold" />)}
                     </div>
+                    {t.image_url && <TestimonialImage path={t.image_url} />}
                     {embed && (
                       <div className="aspect-video rounded overflow-hidden bg-muted">
                         <iframe src={embed} className="w-full h-full" allowFullScreen title={`Testimonial from ${name}`} />

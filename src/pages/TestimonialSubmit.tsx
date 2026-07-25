@@ -34,6 +34,8 @@ export default function TestimonialSubmit() {
     video_url: '',
   });
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [shareName, setShareName] = useState(false);
   const [shareGrade, setShareGrade] = useState(false);
   const [shareLoc, setShareLoc] = useState(false);
@@ -88,6 +90,22 @@ export default function TestimonialSubmit() {
         video_file_path = path;
       }
 
+      let image_url: string | null = null;
+      if (imageFile) {
+        if (imageFile.size > 10 * 1024 * 1024) {
+          toast.error('Image must be under 10 MB.');
+          setSubmitting(false);
+          return;
+        }
+        const ext = imageFile.name.split('.').pop() || 'jpg';
+        const path = `${crypto.randomUUID()}.${ext}`;
+        const { error: upErr } = await supabase.storage
+          .from('testimonial-images')
+          .upload(path, imageFile, { contentType: imageFile.type });
+        if (upErr) throw upErr;
+        image_url = path;
+      }
+
       const payload = {
         ...form,
         share_first_name: shareName ? form.share_first_name.trim().slice(0, 50) : '',
@@ -95,6 +113,7 @@ export default function TestimonialSubmit() {
         share_location: shareLoc ? form.share_location.trim().slice(0, 100) : '',
         is_anonymous: !shareName && !shareGrade && !shareLoc,
         video_file_path,
+        image_url,
       };
 
       const { error } = await supabase.functions.invoke('submit-testimonial', { body: payload });
@@ -185,8 +204,30 @@ export default function TestimonialSubmit() {
                 ))}
 
                 <div className="space-y-3 rounded-lg border p-4">
+                  <h3 className="font-semibold">Photo (Optional)</h3>
+                  <p className="text-xs text-muted-foreground">
+                    Add a photo to display next to your testimonial on the public gallery — e.g., a golf photo of your student or family. Under 10 MB.
+                  </p>
+                  <Input
+                    id="image_file"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0] || null;
+                      setImageFile(f);
+                      if (imagePreview) URL.revokeObjectURL(imagePreview);
+                      setImagePreview(f ? URL.createObjectURL(f) : null);
+                    }}
+                  />
+                  {imagePreview && (
+                    <img src={imagePreview} alt="Preview" className="mt-2 h-32 w-32 object-cover rounded-md border" />
+                  )}
+                </div>
+
+                <div className="space-y-3 rounded-lg border p-4">
                   <h3 className="font-semibold">Video Testimonial (Optional)</h3>
                   <div className="space-y-2">
+
                     <Label htmlFor="video_file">Upload a video (MP4, MOV, WebM — under 200MB)</Label>
                     <Input
                       id="video_file"
