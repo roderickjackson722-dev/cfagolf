@@ -3576,6 +3576,7 @@ export type Database = {
           biggest_challenge: string | null
           content: string | null
           created_at: string
+          curated_content: string | null
           display_order: number | null
           entered_at: string | null
           entered_by: string | null
@@ -3607,6 +3608,7 @@ export type Database = {
           biggest_challenge?: string | null
           content?: string | null
           created_at?: string
+          curated_content?: string | null
           display_order?: number | null
           entered_at?: string | null
           entered_by?: string | null
@@ -3638,6 +3640,7 @@ export type Database = {
           biggest_challenge?: string | null
           content?: string | null
           created_at?: string
+          curated_content?: string | null
           display_order?: number | null
           entered_at?: string | null
           entered_by?: string | null
