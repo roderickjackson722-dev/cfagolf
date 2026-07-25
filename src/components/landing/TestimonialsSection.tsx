@@ -29,8 +29,8 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
       <CardContent className="pt-8 pb-6">
         <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
         {imgUrl && (
-          <div className="mb-4 rounded-md overflow-hidden bg-muted">
-            <img src={imgUrl} alt={`${testimonial.name} testimonial`} className="w-full h-48 object-cover" loading="lazy" />
+          <div className="mb-4 rounded-md overflow-hidden bg-muted flex items-center justify-center min-h-48 max-h-96">
+            <img src={imgUrl} alt={`${testimonial.name} testimonial`} className="max-h-96 w-full object-contain" loading="lazy" />
           </div>
         )}
         <div className="flex gap-1 mb-4">
