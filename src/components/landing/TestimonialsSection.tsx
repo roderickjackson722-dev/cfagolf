@@ -48,7 +48,7 @@ export function TestimonialsSection() {
   const testimonials = dbTestimonials && dbTestimonials.length > 0 ? dbTestimonials : fallbackTestimonials;
 
   return (
-    <section className="section-padding bg-background">
+    <section id="testimonials" className="section-padding bg-background scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
