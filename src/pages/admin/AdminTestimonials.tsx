@@ -56,10 +56,13 @@ export default function AdminTestimonials() {
   const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonial` : '/testimonial';
   const galleryUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonials` : '/testimonials';
   const [videoSignedUrl, setVideoSignedUrl] = useState<string | null>(null);
+  const [curatedDraft, setCuratedDraft] = useState('');
+  const [savingCurated, setSavingCurated] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     setVideoSignedUrl(null);
+    setCuratedDraft(viewing?.curated_content || '');
     if (viewing?.video_file_path) {
       supabase.storage
         .from('testimonial-videos')
@@ -68,6 +71,33 @@ export default function AdminTestimonials() {
     }
     return () => { cancelled = true; };
   }, [viewing]);
+
+  const buildParagraphFromResponses = (r: any) => {
+    return [
+      r?.biggest_challenge, r?.how_helped, r?.what_valued_most,
+      r?.how_journey_changed, r?.advice_to_others, r?.additional_comments,
+    ].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+  };
+
+  const saveCurated = async () => {
+    if (!viewing) return;
+    setSavingCurated(true);
+    try {
+      const { error } = await supabase
+        .from('testimonials')
+        .update({ curated_content: curatedDraft || null })
+        .eq('id', viewing.id);
+      if (error) throw error;
+      qc.invalidateQueries({ queryKey: ['admin-testimonials-v2'] });
+      setViewing({ ...viewing, curated_content: curatedDraft || null });
+      toast.success('Curated paragraph saved');
+    } catch (e: any) {
+      toast.error(e.message || 'Save failed');
+    } finally {
+      setSavingCurated(false);
+    }
+  };
+
 
   const copyLink = async () => {
     try {
