@@ -3583,6 +3583,7 @@ export type Database = {
           how_helped: string | null
           how_journey_changed: string | null
           id: string
+          image_url: string | null
           is_anonymous: boolean | null
           is_featured: boolean | null
           is_public: boolean | null
@@ -3615,6 +3616,7 @@ export type Database = {
           how_helped?: string | null
           how_journey_changed?: string | null
           id?: string
+          image_url?: string | null
           is_anonymous?: boolean | null
           is_featured?: boolean | null
           is_public?: boolean | null
@@ -3647,6 +3649,7 @@ export type Database = {
           how_helped?: string | null
           how_journey_changed?: string | null
           id?: string
+          image_url?: string | null
           is_anonymous?: boolean | null
           is_featured?: boolean | null
           is_public?: boolean | null
