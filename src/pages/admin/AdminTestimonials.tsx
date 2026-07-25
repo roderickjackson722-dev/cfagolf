@@ -58,10 +58,13 @@ export default function AdminTestimonials() {
   const [videoSignedUrl, setVideoSignedUrl] = useState<string | null>(null);
   const [curatedDraft, setCuratedDraft] = useState('');
   const [savingCurated, setSavingCurated] = useState(false);
+  const [imageSignedUrl, setImageSignedUrl] = useState<string | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     setVideoSignedUrl(null);
+    setImageSignedUrl(null);
     setCuratedDraft(viewing?.curated_content || '');
     if (viewing?.video_file_path) {
       supabase.storage
@@ -69,8 +72,62 @@ export default function AdminTestimonials() {
         .createSignedUrl(viewing.video_file_path, 3600)
         .then(({ data }) => { if (!cancelled) setVideoSignedUrl(data?.signedUrl || null); });
     }
+    if (viewing?.image_url) {
+      if (/^https?:\/\//i.test(viewing.image_url)) {
+        setImageSignedUrl(viewing.image_url);
+      } else {
+        supabase.storage
+          .from('testimonial-images')
+          .createSignedUrl(viewing.image_url, 3600)
+          .then(({ data }) => { if (!cancelled) setImageSignedUrl(data?.signedUrl || null); });
+      }
+    }
     return () => { cancelled = true; };
   }, [viewing]);
+
+  const handleImageUpload = async (file: File) => {
+    if (!viewing) return;
+    if (file.size > 10 * 1024 * 1024) { toast.error('Image must be under 10 MB'); return; }
+    setUploadingImage(true);
+    try {
+      const ext = file.name.split('.').pop() || 'jpg';
+      const path = `${crypto.randomUUID()}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from('testimonial-images')
+        .upload(path, file, { contentType: file.type });
+      if (upErr) throw upErr;
+      const { error } = await supabase
+        .from('testimonials')
+        .update({ image_url: path })
+        .eq('id', viewing.id);
+      if (error) throw error;
+      qc.invalidateQueries({ queryKey: ['admin-testimonials-v2'] });
+      setViewing({ ...viewing, image_url: path });
+      toast.success('Photo added');
+    } catch (e: any) {
+      toast.error(e.message || 'Upload failed');
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleImageRemove = async () => {
+    if (!viewing) return;
+    try {
+      const { error } = await supabase
+        .from('testimonials')
+        .update({ image_url: null })
+        .eq('id', viewing.id);
+      if (error) throw error;
+      qc.invalidateQueries({ queryKey: ['admin-testimonials-v2'] });
+      setViewing({ ...viewing, image_url: null });
+      setImageSignedUrl(null);
+      toast.success('Photo removed');
+    } catch (e: any) {
+      toast.error(e.message || 'Remove failed');
+    }
+  };
+
 
   const buildParagraphFromResponses = (r: any) => {
     return [
