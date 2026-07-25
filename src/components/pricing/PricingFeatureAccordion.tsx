@@ -174,9 +174,9 @@ const featureCategories: FeatureCategory[] = [
   },
 ];
 
-function AvailabilityBadge({ available, label }: { available: boolean; label: string }) {
+function AvailabilityBadge({ available }: { available: boolean }) {
   return (
-    <div className="flex items-center gap-2">
+    <>
       {available ? (
         <div className="w-6 h-6 rounded-full bg-success/20 flex items-center justify-center flex-shrink-0">
           <Check className="w-4 h-4 text-success" />
@@ -186,8 +186,19 @@ function AvailabilityBadge({ available, label }: { available: boolean; label: st
           <X className="w-4 h-4 text-destructive" />
         </div>
       )}
-      <span className="text-xs text-muted-foreground hidden sm:inline">
-        {available ? `Included` : `Not included`}
+    </>
+  );
+}
+
+function TierCell({ available, label }: { available: boolean; label: string }) {
+  return (
+    <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
+      <AvailabilityBadge available={available} />
+      <span className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight sm:hidden">
+        {label}
+      </span>
+      <span className="hidden sm:inline text-xs text-muted-foreground">
+        {available ? 'Included' : 'Not included'}
       </span>
     </div>
   );
@@ -196,7 +207,7 @@ function AvailabilityBadge({ available, label }: { available: boolean; label: st
 export function PricingFeatureAccordion() {
   return (
     <div className="max-w-5xl mx-auto mt-20">
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 px-4">
         <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
           What's Included
         </span>
@@ -209,16 +220,16 @@ export function PricingFeatureAccordion() {
       </div>
 
       {/* Sticky tier headers */}
-      <div className="grid grid-cols-[1fr_auto_auto] gap-4 items-center mb-2 px-4 py-3 bg-muted/50 rounded-lg sticky top-0 z-10">
-        <span className="font-semibold text-foreground text-sm">Feature</span>
-        <div className="text-center w-24 sm:w-32">
-          <Badge className="bg-primary text-primary-foreground">Consulting</Badge>
+      <div className="grid grid-cols-[1fr_70px_70px] sm:grid-cols-[1fr_128px_128px] gap-2 sm:gap-4 items-center mb-2 px-3 sm:px-4 py-3 bg-muted/50 rounded-lg sticky top-0 z-10 backdrop-blur">
+        <span className="font-semibold text-foreground text-xs sm:text-sm">Feature</span>
+        <div className="text-center">
+          <Badge className="bg-primary text-primary-foreground text-[10px] sm:text-xs px-1.5 sm:px-2.5">Consulting</Badge>
           <p className="text-[10px] text-muted-foreground mt-1">
             <span className="line-through mr-1">$3,499</span>$2,499
           </p>
         </div>
-        <div className="text-center w-24 sm:w-32">
-          <Badge variant="secondary">Self-Paced</Badge>
+        <div className="text-center">
+          <Badge variant="secondary" className="text-[10px] sm:text-xs px-1.5 sm:px-2.5">Self-Paced</Badge>
           <p className="text-[10px] text-muted-foreground mt-1">
             <span className="line-through mr-1">$499</span>$299
           </p>
@@ -227,29 +238,31 @@ export function PricingFeatureAccordion() {
 
       <Accordion type="multiple" defaultValue={["Digital Tools & Platform Access"]} className="space-y-2">
         {featureCategories.map((category) => (
-          <AccordionItem key={category.category} value={category.category} className="border rounded-lg px-4 bg-card">
-            <AccordionTrigger className="text-base font-semibold text-foreground hover:no-underline">
-              {category.category}
-              <span className="ml-2 text-xs font-normal text-muted-foreground">
-                ({category.features.length} features)
+          <AccordionItem key={category.category} value={category.category} className="border rounded-lg px-3 sm:px-4 bg-card">
+            <AccordionTrigger className="text-sm sm:text-base font-semibold text-foreground hover:no-underline text-left">
+              <span className="flex-1 pr-2">
+                {category.category}
+                <span className="ml-2 text-xs font-normal text-muted-foreground whitespace-nowrap">
+                  ({category.features.length})
+                </span>
               </span>
             </AccordionTrigger>
             <AccordionContent>
-              <div className="space-y-4">
+              <div className="space-y-2">
                 {category.features.map((feature, idx) => (
                   <div
                     key={idx}
-                    className="grid grid-cols-[1fr_auto_auto] gap-4 items-start py-3 border-b border-border/50 last:border-0"
+                    className="grid grid-cols-[1fr_70px_70px] sm:grid-cols-[1fr_128px_128px] gap-2 sm:gap-4 items-center py-3 border-b border-border/50 last:border-0"
                   >
-                    <div>
+                    <div className="min-w-0">
                       <p className="font-medium text-foreground text-sm">{feature.title}</p>
                       <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{feature.description}</p>
                     </div>
-                    <div className="w-24 sm:w-32 flex justify-center">
-                      <AvailabilityBadge available={feature.consulting} label="Consulting" />
+                    <div className="flex justify-center">
+                      <TierCell available={feature.consulting} label="Consulting" />
                     </div>
-                    <div className="w-24 sm:w-32 flex justify-center">
-                      <AvailabilityBadge available={feature.digital} label="Digital" />
+                    <div className="flex justify-center">
+                      <TierCell available={feature.digital} label="Self-Paced" />
                     </div>
                   </div>
                 ))}
