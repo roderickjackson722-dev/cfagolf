@@ -204,7 +204,26 @@ export default function TestimonialSubmit() {
                 ))}
 
                 <div className="space-y-3 rounded-lg border p-4">
-                  <h3 className="font-semibold">Video Testimonial (Optional)</h3>
+                  <h3 className="font-semibold">Photo (Optional)</h3>
+                  <p className="text-xs text-muted-foreground">
+                    Add a photo to display next to your testimonial on the public gallery — e.g., a golf photo of your student or family. Under 10 MB.
+                  </p>
+                  <Input
+                    id="image_file"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0] || null;
+                      setImageFile(f);
+                      if (imagePreview) URL.revokeObjectURL(imagePreview);
+                      setImagePreview(f ? URL.createObjectURL(f) : null);
+                    }}
+                  />
+                  {imagePreview && (
+                    <img src={imagePreview} alt="Preview" className="mt-2 h-32 w-32 object-cover rounded-md border" />
+                  )}
+                </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="video_file">Upload a video (MP4, MOV, WebM — under 200MB)</Label>
                     <Input
