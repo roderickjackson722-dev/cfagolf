@@ -90,6 +90,28 @@ export default function TestimonialSubmit() {
         video_file_path = path;
       }
 
+      let image_url: string | null = null;
+      if (imageFile) {
+        if (imageFile.size > 10 * 1024 * 1024) {
+          toast.error('Image must be under 10 MB.');
+          setSubmitting(false);
+          return;
+        }
+        const ext = imageFile.name.split('.').pop() || 'jpg';
+        const path = `${crypto.randomUUID()}.${ext}`;
+        const { error: upErr } = await supabase.storage
+          .from('testimonial-images')
+          .upload(path, imageFile, { contentType: imageFile.type });
+        if (upErr) throw upErr;
+        image_url = path;
+      }
+        const { error: upErr } = await supabase.storage
+          .from('testimonial-videos')
+          .upload(path, videoFile, { contentType: videoFile.type });
+        if (upErr) throw upErr;
+        video_file_path = path;
+      }
+
       const payload = {
         ...form,
         share_first_name: shareName ? form.share_first_name.trim().slice(0, 50) : '',
