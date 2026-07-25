@@ -28,18 +28,27 @@ export function TestimonialsSection() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('testimonials')
-        .select('name, role, content')
-        .eq('status', 'approved')
-        .order('created_at', { ascending: false });
+        .select('name, role, content, curated_content, share_first_name, share_grade_level, share_location, is_featured, display_order, submitted_at')
+        .eq('is_public', true)
+        .in('status', ['approved', 'published'])
+        .order('is_featured', { ascending: false })
+        .order('display_order', { ascending: true })
+        .order('submitted_at', { ascending: false });
       if (error) throw error;
-      return data;
+      return (data || [])
+        .map((t: any) => ({
+          name: t.share_first_name || t.name || 'Anonymous',
+          role: [t.share_grade_level, t.share_location].filter(Boolean).join(' • ') || t.role || 'CFA Family',
+          content: t.curated_content || t.content || '',
+        }))
+        .filter((t) => t.content);
     },
   });
 
   const testimonials = dbTestimonials && dbTestimonials.length > 0 ? dbTestimonials : fallbackTestimonials;
 
   return (
-    <section className="section-padding bg-background">
+    <section id="testimonials" className="section-padding bg-background scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-primary/10 rounded-full">
