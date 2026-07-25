@@ -1,8 +1,60 @@
 import { Star, Quote } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+
+function useTestimonialImageUrl(path?: string | null) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (!path) { setUrl(null); return; }
+    if (/^https?:\/\//i.test(path)) { setUrl(path); return; }
+    let cancelled = false;
+    supabase.storage
+      .from('testimonial-images')
+      .createSignedUrl(path, 60 * 60 * 24 * 7)
+      .then(({ data }) => { if (!cancelled) setUrl(data?.signedUrl || null); });
+    return () => { cancelled = true; };
+  }, [path]);
+  return url;
+}
+
+type TestimonialItem = { name: string; role: string; content: string; image_url?: string | null };
+
+function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
+  const imgUrl = useTestimonialImageUrl(testimonial.image_url);
+  return (
+    <Card className="relative bg-card border-border/50">
+      <CardContent className="pt-8 pb-6">
+        <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
+        {imgUrl && (
+          <div className="mb-4 rounded-md overflow-hidden bg-muted">
+            <img src={imgUrl} alt={`${testimonial.name} testimonial`} className="w-full h-48 object-cover" loading="lazy" />
+          </div>
+        )}
+        <div className="flex gap-1 mb-4">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-4 h-4 fill-cfa-gold text-cfa-gold" />
+          ))}
+        </div>
+        <p className="text-foreground mb-6 leading-relaxed">"{testimonial.content}"</p>
+        <div className="flex items-center gap-3">
+          <Avatar className="w-12 h-12 bg-primary">
+            {imgUrl && <AvatarImage src={imgUrl} alt={testimonial.name} />}
+            <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
+              {testimonial.name.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <p className="font-semibold text-foreground">{testimonial.name}</p>
+            <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 const fallbackTestimonials = [
   {
@@ -28,7 +80,7 @@ export function TestimonialsSection() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('testimonials')
-        .select('name, role, content, curated_content, share_first_name, share_grade_level, share_location, is_featured, display_order, submitted_at')
+        .select('name, role, content, curated_content, share_first_name, share_grade_level, share_location, image_url, is_featured, display_order, submitted_at')
         .eq('is_public', true)
         .in('status', ['approved', 'published'])
         .order('is_featured', { ascending: false })
@@ -40,6 +92,7 @@ export function TestimonialsSection() {
           name: t.share_first_name || t.name || 'Anonymous',
           role: [t.share_grade_level, t.share_location].filter(Boolean).join(' • ') || t.role || 'CFA Family',
           content: t.curated_content || t.content || '',
+          image_url: t.image_url as string | null,
         }))
         .filter((t) => t.content);
     },
@@ -65,33 +118,7 @@ export function TestimonialsSection() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="relative bg-card border-border/50">
-              <CardContent className="pt-8 pb-6">
-                <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
-                
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-cfa-gold text-cfa-gold" />
-                  ))}
-                </div>
-
-                <p className="text-foreground mb-6 leading-relaxed">
-                  "{testimonial.content}"
-                </p>
-
-                <div className="flex items-center gap-3">
-                  <Avatar className="w-12 h-12 bg-primary">
-                    <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
-                      {testimonial.name.charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="font-semibold text-foreground">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <TestimonialCard key={index} testimonial={testimonial as any} />
           ))}
         </div>
       </div>
