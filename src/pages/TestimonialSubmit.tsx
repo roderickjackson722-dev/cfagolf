@@ -34,6 +34,8 @@ export default function TestimonialSubmit() {
     video_url: '',
   });
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [shareName, setShareName] = useState(false);
   const [shareGrade, setShareGrade] = useState(false);
   const [shareLoc, setShareLoc] = useState(false);
