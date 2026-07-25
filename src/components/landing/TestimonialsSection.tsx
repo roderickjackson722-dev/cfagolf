@@ -28,11 +28,20 @@ export function TestimonialsSection() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('testimonials')
-        .select('name, role, content')
-        .eq('status', 'approved')
-        .order('created_at', { ascending: false });
+        .select('name, role, content, curated_content, share_first_name, share_grade_level, share_location, is_featured, display_order, submitted_at')
+        .eq('is_public', true)
+        .in('status', ['approved', 'published'])
+        .order('is_featured', { ascending: false })
+        .order('display_order', { ascending: true })
+        .order('submitted_at', { ascending: false });
       if (error) throw error;
-      return data;
+      return (data || [])
+        .map((t: any) => ({
+          name: t.share_first_name || t.name || 'Anonymous',
+          role: [t.share_grade_level, t.share_location].filter(Boolean).join(' • ') || t.role || 'CFA Family',
+          content: t.curated_content || t.content || '',
+        }))
+        .filter((t) => t.content);
     },
   });
 
