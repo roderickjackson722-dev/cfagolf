@@ -56,10 +56,13 @@ export default function AdminTestimonials() {
   const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonial` : '/testimonial';
   const galleryUrl = typeof window !== 'undefined' ? `${window.location.origin}/testimonials` : '/testimonials';
   const [videoSignedUrl, setVideoSignedUrl] = useState<string | null>(null);
+  const [curatedDraft, setCuratedDraft] = useState('');
+  const [savingCurated, setSavingCurated] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     setVideoSignedUrl(null);
+    setCuratedDraft(viewing?.curated_content || '');
     if (viewing?.video_file_path) {
       supabase.storage
         .from('testimonial-videos')
@@ -68,6 +71,33 @@ export default function AdminTestimonials() {
     }
     return () => { cancelled = true; };
   }, [viewing]);
+
+  const buildParagraphFromResponses = (r: any) => {
+    return [
+      r?.biggest_challenge, r?.how_helped, r?.what_valued_most,
+      r?.how_journey_changed, r?.advice_to_others, r?.additional_comments,
+    ].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+  };
+
+  const saveCurated = async () => {
+    if (!viewing) return;
+    setSavingCurated(true);
+    try {
+      const { error } = await supabase
+        .from('testimonials')
+        .update({ curated_content: curatedDraft || null })
+        .eq('id', viewing.id);
+      if (error) throw error;
+      qc.invalidateQueries({ queryKey: ['admin-testimonials-v2'] });
+      setViewing({ ...viewing, curated_content: curatedDraft || null });
+      toast.success('Curated paragraph saved');
+    } catch (e: any) {
+      toast.error(e.message || 'Save failed');
+    } finally {
+      setSavingCurated(false);
+    }
+  };
+
 
   const copyLink = async () => {
     try {
@@ -456,6 +486,44 @@ export default function AdminTestimonials() {
               {viewing.video_url && <p><strong>Video URL:</strong> <a href={viewing.video_url} target="_blank" rel="noreferrer" className="text-primary underline">{viewing.video_url}</a></p>}
               {viewing.video_file_path && <p><strong>Video file:</strong> {viewing.video_file_path}</p>}
               {viewing.admin_notes && <p><strong>Admin notes:</strong> {viewing.admin_notes}</p>}
+
+              <div className="rounded-lg border bg-primary/5 p-3 space-y-2">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <div>
+                    <div className="font-semibold text-sm">Curated paragraph (used on public gallery)</div>
+                    <p className="text-xs text-muted-foreground">Rewrite the responses above into a clean, flowing paragraph or two. When set, this is shown publicly instead of the raw answers.</p>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    type="button"
+                    onClick={() => setCuratedDraft(buildParagraphFromResponses(viewing))}
+                  >
+                    Pre-fill from responses
+                  </Button>
+                </div>
+                <Textarea
+                  rows={6}
+                  placeholder="Write the polished testimonial paragraph here…"
+                  value={curatedDraft}
+                  onChange={(e) => setCuratedDraft(e.target.value)}
+                />
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs text-muted-foreground">{curatedDraft.length} characters</span>
+                  <div className="flex gap-2">
+                    {viewing.curated_content && (
+                      <Button size="sm" variant="ghost" type="button" onClick={() => { setCuratedDraft(''); }}>
+                        Clear
+                      </Button>
+                    )}
+                    <Button size="sm" type="button" disabled={savingCurated} onClick={saveCurated}>
+                      {savingCurated ? 'Saving…' : 'Save paragraph'}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+
               <DialogFooter className="pt-4 gap-2 flex-wrap">
                 <Button size="sm" variant="outline" onClick={() => patch.mutate({ id: viewing.id, values: { status: 'approved', approved_at: new Date().toISOString() } })}>Approve</Button>
                 <Button size="sm" onClick={() => patch.mutate({ id: viewing.id, values: { status: 'published', is_public: true, published_at: new Date().toISOString() } })}>Publish</Button>

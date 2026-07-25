@@ -60,10 +60,10 @@ export default function TestimonialsPublic() {
                         <iframe src={embed} className="w-full h-full" allowFullScreen title={`Testimonial from ${name}`} />
                       </div>
                     )}
-                    {t.content && (
+                    {(t.curated_content || t.content) && (
                       <div className="relative">
                         <Quote className="absolute -top-1 -left-1 w-6 h-6 text-primary/20" />
-                        <p className="pl-6 text-sm whitespace-pre-wrap leading-relaxed">{t.content}</p>
+                        <p className="pl-6 text-sm whitespace-pre-wrap leading-relaxed">{t.curated_content || t.content}</p>
                       </div>
                     )}
                     <div className="pt-2 border-t text-sm text-muted-foreground">
