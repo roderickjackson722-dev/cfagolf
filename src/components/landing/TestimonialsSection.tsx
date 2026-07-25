@@ -1,8 +1,24 @@
 import { Star, Quote } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+
+function useTestimonialImageUrl(path?: string | null) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (!path) { setUrl(null); return; }
+    if (/^https?:\/\//i.test(path)) { setUrl(path); return; }
+    let cancelled = false;
+    supabase.storage
+      .from('testimonial-images')
+      .createSignedUrl(path, 60 * 60 * 24 * 7)
+      .then(({ data }) => { if (!cancelled) setUrl(data?.signedUrl || null); });
+    return () => { cancelled = true; };
+  }, [path]);
+  return url;
+}
 
 const fallbackTestimonials = [
   {
