@@ -75,6 +75,7 @@ export default function TestimonialsPublic() {
                     <div className="flex gap-1">
                       {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-cfa-gold text-cfa-gold" />)}
                     </div>
+                    {t.image_url && <TestimonialImage path={t.image_url} />}
                     {embed && (
                       <div className="aspect-video rounded overflow-hidden bg-muted">
                         <iframe src={embed} className="w-full h-full" allowFullScreen title={`Testimonial from ${name}`} />
