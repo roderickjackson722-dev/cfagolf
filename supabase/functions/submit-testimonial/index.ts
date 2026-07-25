@@ -66,6 +66,7 @@ serve(async (req) => {
         is_anonymous,
         video_url,
         video_file_path,
+        image_url,
       } = body;
 
       const allAnswers = [
