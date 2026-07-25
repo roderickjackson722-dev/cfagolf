@@ -105,12 +105,6 @@ export default function TestimonialSubmit() {
         if (upErr) throw upErr;
         image_url = path;
       }
-        const { error: upErr } = await supabase.storage
-          .from('testimonial-videos')
-          .upload(path, videoFile, { contentType: videoFile.type });
-        if (upErr) throw upErr;
-        video_file_path = path;
-      }
 
       const payload = {
         ...form,
@@ -119,6 +113,7 @@ export default function TestimonialSubmit() {
         share_location: shareLoc ? form.share_location.trim().slice(0, 100) : '',
         is_anonymous: !shareName && !shareGrade && !shareLoc,
         video_file_path,
+        image_url,
       };
 
       const { error } = await supabase.functions.invoke('submit-testimonial', { body: payload });
