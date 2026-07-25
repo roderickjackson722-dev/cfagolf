@@ -544,6 +544,43 @@ export default function AdminTestimonials() {
               {viewing.video_file_path && <p><strong>Video file:</strong> {viewing.video_file_path}</p>}
               {viewing.admin_notes && <p><strong>Admin notes:</strong> {viewing.admin_notes}</p>}
 
+              <div className="rounded-lg border p-3 space-y-2">
+                <div className="font-semibold text-sm">Photo (shown next to testimonial publicly)</div>
+                {imageSignedUrl ? (
+                  <div className="flex items-start gap-3">
+                    <img src={imageSignedUrl} alt="Testimonial" className="h-28 w-28 object-cover rounded-md border" />
+                    <div className="flex flex-col gap-2">
+                      <label className="inline-block">
+                        <input
+                          type="file"
+                          accept="image/png,image/jpeg,image/webp"
+                          className="hidden"
+                          onChange={(e) => { const f = e.target.files?.[0]; if (f) handleImageUpload(f); e.target.value = ''; }}
+                        />
+                        <Button size="sm" variant="outline" type="button" disabled={uploadingImage} asChild>
+                          <span>{uploadingImage ? 'Uploading…' : 'Replace photo'}</span>
+                        </Button>
+                      </label>
+                      <Button size="sm" variant="ghost" type="button" onClick={handleImageRemove} className="text-destructive">Remove</Button>
+                    </div>
+                  </div>
+                ) : (
+                  <label className="inline-block">
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                      className="hidden"
+                      onChange={(e) => { const f = e.target.files?.[0]; if (f) handleImageUpload(f); e.target.value = ''; }}
+                    />
+                    <Button size="sm" variant="outline" type="button" disabled={uploadingImage} asChild>
+                      <span>{uploadingImage ? 'Uploading…' : 'Upload photo'}</span>
+                    </Button>
+                  </label>
+                )}
+                <p className="text-xs text-muted-foreground">PNG, JPG, or WebP up to 10 MB.</p>
+              </div>
+
+
               <div className="rounded-lg border bg-primary/5 p-3 space-y-2">
                 <div className="flex items-center justify-between gap-2 flex-wrap">
                   <div>
