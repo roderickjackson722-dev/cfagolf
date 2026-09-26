@@ -6,6 +6,7 @@ import { Footer } from '@/components/landing/Footer';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
 import { usePlayerById, useUpsertPlayer, slugify, Player, HighlightItem } from '@/hooks/usePlayers';
+import { fetchProfileByUserId, mergeProfileIntoPlayer } from '@/lib/memberWebsite';
 import { Plus, Trash2, GripVertical } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -38,6 +39,14 @@ const AdminPlayerEdit = () => {
   useEffect(() => {
     if (existing) setForm(existing);
   }, [existing]);
+
+  const syncFromProfile = async () => {
+    if (!form.user_id) return toast.error('No member linked to this site');
+    const profile = await fetchProfileByUserId(form.user_id);
+    if (!profile) return toast.error('Member profile not found');
+    setForm((f) => mergeProfileIntoPlayer(f as any, profile));
+    toast.success('Filled empty fields from member profile — click Save to keep');
+  };
 
   if (loading || adminLoading) return <div className="min-h-screen flex items-center justify-center">Loading…</div>;
   if (!user) return <Navigate to="/login" replace />;
@@ -83,6 +92,9 @@ const AdminPlayerEdit = () => {
           <Button variant="ghost" asChild>
             <Link to="/admin/players"><ArrowLeft className="w-4 h-4 mr-2" />Back to players</Link>
           </Button>
+          {form.user_id && (
+            <Button variant="outline" onClick={syncFromProfile}>Sync from member profile</Button>
+          )}
           {!isNew && form.slug && (
             <Button variant="outline" asChild>
               <a href={`/p/${form.slug}`} target="_blank" rel="noopener noreferrer">
