@@ -14,6 +14,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAllProfiles, useUpdateUserProfile, useDeleteUserProfile, UserProfile } from '@/hooks/useAdminUsers';
 import { MeetingProgressTracker } from '@/components/admin/MeetingProgressTracker';
 import { format } from 'date-fns';
+import { Globe } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
+import { getOrCreateMemberSite } from '@/lib/memberWebsite';
 
 export function AdminUserTable() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,6 +28,28 @@ export function AdminUserTable() {
   const { data: profiles = [], isLoading } = useAllProfiles();
   const updateProfile = useUpdateUserProfile();
   const deleteProfile = useDeleteUserProfile();
+  const navigate = useNavigate();
+  const [buildingFor, setBuildingFor] = useState<string | null>(null);
+  const { data: sitesByUser = {} } = useQuery({
+    queryKey: ['players', 'by-user-map'],
+    queryFn: async () => {
+      const { data } = await supabase.from('players').select('id,user_id').not('user_id', 'is', null);
+      const map: Record<string, string> = {};
+      (data || []).forEach((p: any) => { map[p.user_id] = p.id; });
+      return map;
+    },
+  });
+  const openSite = async (profile: UserProfile) => {
+    setBuildingFor(profile.user_id);
+    try {
+      const id = await getOrCreateMemberSite(profile);
+      navigate(`/admin/players/${id}/edit`);
+    } catch (e: any) {
+      toast.error(e.message || 'Could not open site');
+    } finally {
+      setBuildingFor(null);
+    }
+  };
 
   const filteredUsers = profiles.filter((profile) =>
     (profile.full_name?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
@@ -78,13 +106,14 @@ export function AdminUserTable() {
               <TableHead>Program</TableHead>
               <TableHead>Paid Access</TableHead>
               <TableHead>Joined</TableHead>
+              <TableHead>Website</TableHead>
               <TableHead className="w-16">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredUsers.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
+                <TableCell colSpan={10} className="text-center py-8 text-muted-foreground">
                   No users found
                 </TableCell>
               </TableRow>
@@ -130,6 +159,17 @@ export function AdminUserTable() {
                   </TableCell>
                   <TableCell className="text-muted-foreground text-sm">
                     {format(new Date(profile.created_at), 'MMM d, yyyy')}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant={sitesByUser[profile.user_id] ? 'outline' : 'default'}
+                      size="sm"
+                      disabled={buildingFor === profile.user_id}
+                      onClick={() => openSite(profile)}
+                    >
+                      <Globe className="w-4 h-4 mr-1" />
+                      {buildingFor === profile.user_id ? 'Opening…' : sitesByUser[profile.user_id] ? 'Edit Site' : 'Build Site'}
+                    </Button>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-1">
