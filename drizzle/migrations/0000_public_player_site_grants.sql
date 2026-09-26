@@ -1,0 +1,1 @@
+GRANT SELECT ON public.players, public.player_videos, public.player_tournament_results, public.player_gallery_images, public.player_references TO anon;
