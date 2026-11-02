@@ -112,7 +112,7 @@ const buildCertificate = (input: CertificateInput): jsPDF => {
   doc.setFontSize(10);
   doc.setTextColor(102, 140, 115);
   doc.text(
-    'College Fairway Advisors  •  www.cfa.golf  •  Guiding the path to your future',
+    'College Fairway Advisors  •  cfagolf.lovable.app  •  Guiding the path to your future',
     pageWidth / 2,
     pageHeight - 50,
     { align: 'center' },

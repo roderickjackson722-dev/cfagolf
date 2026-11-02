@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
         <hr/>
         <p style="white-space:pre-wrap">${message.replace(/</g, '&lt;')}</p>
         <hr/>
-        <p style="font-size:12px;color:#666">Sent via cfa.golf/p/${player.slug}</p>
+        <p style="font-size:12px;color:#666">Sent via cfagolf.lovable.app/p/${player.slug}</p>
       `;
       await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -51,7 +51,7 @@ Deno.serve(async (req) => {
           <hr/>
           <p style="white-space:pre-wrap">${message.replace(/</g, '&lt;')}</p>
           <hr/>
-          <p style="font-size:12px;color:#666">College Fairway Advisors · cfa.golf/p/${player.slug}</p>
+          <p style="font-size:12px;color:#666">College Fairway Advisors · cfagolf.lovable.app/p/${player.slug}</p>
         `;
         await fetch('https://api.resend.com/emails', {
           method: 'POST',

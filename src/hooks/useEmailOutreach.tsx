@@ -270,7 +270,7 @@ export function renderEmailHtml(opts: {
     </div>
     <div style="background:#f8fafc;padding:24px;text-align:center;border-top:1px solid #e2e8f0;">
       <p style="font-size:12px;color:#64748b;margin:4px 0;">© ${year} College Fairway Advisors. All rights reserved.</p>
-      <p style="font-size:12px;color:#64748b;margin:4px 0;"><a href="https://www.cfa.golf" style="color:#c8a954;text-decoration:none;">www.cfa.golf</a></p>
+      <p style="font-size:12px;color:#64748b;margin:4px 0;"><a href="https://cfagolf.lovable.app" style="color:#c8a954;text-decoration:none;">cfagolf.lovable.app</a></p>
     </div>
   </div>
 </body></html>`;
@@ -296,6 +296,6 @@ export function renderEmailPlainText(opts: {
       });
     }
   });
-  lines.push('', 'Best regards,', 'Coach Rod', 'College Fairway Advisors', 'www.cfa.golf');
+  lines.push('', 'Best regards,', 'Coach Rod', 'College Fairway Advisors', 'cfagolf.lovable.app');
   return lines.join('\n');
 }

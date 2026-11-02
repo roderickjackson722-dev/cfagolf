@@ -49,7 +49,7 @@ const addFooter = (doc: jsPDF, pageNum: number) => {
   const pageHeight = doc.internal.pageSize.getHeight();
   doc.setFontSize(8);
   doc.setTextColor(120, 120, 120);
-  doc.text('www.cfa.golf | College Fairway Advisors', pageWidth / 2, pageHeight - 10, { align: 'center' });
+  doc.text('cfagolf.lovable.app | College Fairway Advisors', pageWidth / 2, pageHeight - 10, { align: 'center' });
   doc.text(`Page ${pageNum}`, pageWidth - 20, pageHeight - 10);
 };
 

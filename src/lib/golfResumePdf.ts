@@ -204,7 +204,7 @@ export function generateGolfResumePdf(r: ResumeData): jsPDF {
     doc.setFont('times', 'italic');
     doc.setFontSize(8);
     doc.setTextColor(120);
-    doc.text('College Fairway Advisors  |  www.cfa.golf', pw / 2, 770, { align: 'center' });
+    doc.text('College Fairway Advisors  |  cfagolf.lovable.app', pw / 2, 770, { align: 'center' });
     doc.text(`Page ${i} of ${pages}`, pw - margin, 770, { align: 'right' });
     doc.setTextColor(0);
   }

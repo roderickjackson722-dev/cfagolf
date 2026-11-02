@@ -97,7 +97,7 @@ export default function StudentDialog({ open, onOpenChange, student }: Props) {
           </div>
           <div className="col-span-2">
             <Label>Personal Website URL (e.g. /p/john-smith)</Label>
-            <Input value={form.personal_website_url ?? ''} onChange={(e) => set('personal_website_url', e.target.value)} placeholder="https://cfa.golf/p/john-smith" />
+            <Input value={form.personal_website_url ?? ''} onChange={(e) => set('personal_website_url', e.target.value)} placeholder="https://cfagolf.lovable.app/p/john-smith" />
           </div>
           <div className="col-span-2">
             <Label>Admin Notes</Label>

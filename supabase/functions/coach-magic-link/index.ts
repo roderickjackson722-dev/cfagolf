@@ -84,7 +84,7 @@ Deno.serve(async (req) => {
                 <p>Hi ${coach.full_name},</p>
                 <p>Your password has been reset. Use the temporary password below to log in.</p>
                 <div style="background:#F5F1E8;padding:16px;border-radius:8px;">
-                  <p><strong>Login:</strong> <a href="https://www.cfa.golf/coach/login">https://www.cfa.golf/coach/login</a></p>
+                  <p><strong>Login:</strong> <a href="https://cfagolf.lovable.app/coach/login">https://cfagolf.lovable.app/coach/login</a></p>
                   <p><strong>Email:</strong> ${coach.email}</p>
                   <p><strong>Temporary Password:</strong> <code>${newPassword}</code></p>
                 </div>
@@ -102,7 +102,7 @@ Deno.serve(async (req) => {
     const { data: link, error: linkErr } = await admin.auth.admin.generateLink({
       type: "magiclink",
       email: coach.email,
-      options: { redirectTo: "https://www.cfa.golf/coach/dashboard" },
+      options: { redirectTo: "https://cfagolf.lovable.app/coach/dashboard" },
     });
     if (linkErr || !link) {
       return new Response(JSON.stringify({ error: linkErr?.message }), {

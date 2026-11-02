@@ -55,8 +55,8 @@ function getMonthlyEmailHtml(tip: Tip, subscriberName?: string, subscriberEmail?
           </div>
 
           <div style="text-align: center; margin: 30px 0;">
-            <a href="https://cfa.golf/pricing" style="display: inline-block; background-color: #166534; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">Explore CFA Programs →</a>
-            <p style="font-size: 12px; color: #6b7280; margin: 10px 0 0;">Already a member? <a href="https://cfa.golf/login" style="color: #166534;">Log in here</a></p>
+            <a href="https://cfagolf.lovable.app/pricing" style="display: inline-block; background-color: #166534; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px;">Explore CFA Programs →</a>
+            <p style="font-size: 12px; color: #6b7280; margin: 10px 0 0;">Already a member? <a href="https://cfagolf.lovable.app/login" style="color: #166534;">Log in here</a></p>
           </div>
 
           <p style="font-size: 15px;">Keep grinding — your college golf future is being built right now!</p>

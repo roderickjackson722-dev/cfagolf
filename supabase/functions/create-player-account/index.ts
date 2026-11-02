@@ -82,7 +82,7 @@ Deno.serve(async (req) => {
             html: `
               <p>Hi ${full_name || 'there'},</p>
               <p>Your recruiting website has been set up. You can log in and edit your bio, photos, tournament results and videos here:</p>
-              <p><strong>Login:</strong> <a href="https://www.cfa.golf/player/login">https://www.cfa.golf/player/login</a></p>
+              <p><strong>Login:</strong> <a href="https://cfagolf.lovable.app/player/login">https://cfagolf.lovable.app/player/login</a></p>
               <p><strong>Email:</strong> ${email}<br/>
               <strong>Temporary password:</strong> ${password}</p>
               <p>Please change your password after first login.</p>

@@ -23,7 +23,7 @@ export default function PrivacyPolicy() {
           <p>
             <strong>College Fairway Advisors</strong> ("Company," "we," "us," or "our") respects your privacy. This
             Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our
-            website www.cfa.golf (the "Site") or use our Services (ebook, self-paced online course, member dashboard,
+            website cfagolf.lovable.app (the "Site") or use our Services (ebook, self-paced online course, member dashboard,
             and consulting).
           </p>
           <p>
@@ -153,7 +153,7 @@ export default function PrivacyPolicy() {
           <p>
             <strong>College Fairway Advisors</strong><br />
             Email: <a href="mailto:contact@cfa.golf">contact@cfa.golf</a><br />
-            Website: <a href="https://www.cfa.golf">www.cfa.golf</a>
+            Website: <a href="https://cfagolf.lovable.app">cfagolf.lovable.app</a>
           </p>
 
           <hr />
