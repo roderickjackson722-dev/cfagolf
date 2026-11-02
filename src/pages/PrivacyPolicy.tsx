@@ -107,7 +107,7 @@ export default function PrivacyPolicy() {
             <li><strong>Opt-Out:</strong> Opt out of marketing communications (by clicking "unsubscribe" in our emails).</li>
           </ul>
           <p>
-            To exercise any of these rights, please contact us at <a href="mailto:collegefairwayadvisors.com">collegefairwayadvisors.com</a>.
+            To exercise any of these rights, please contact us at <a href="mailto:collegefairwayadvisors@gmail.com">collegefairwayadvisors@gmail.com</a>.
             We will respond within 30 days.
           </p>
 
@@ -152,7 +152,7 @@ export default function PrivacyPolicy() {
           </p>
           <p>
             <strong>College Fairway Advisors</strong><br />
-            Email: <a href="mailto:collegefairwayadvisors.com">collegefairwayadvisors.com</a><br />
+            Email: <a href="mailto:collegefairwayadvisors@gmail.com">collegefairwayadvisors@gmail.com</a><br />
             Website: <a href="https://cfagolf.lovable.app">cfagolf.lovable.app</a>
           </p>
 

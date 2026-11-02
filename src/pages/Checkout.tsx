@@ -730,8 +730,8 @@ const Checkout = () => {
 
                       <p className="text-center text-sm text-muted-foreground">
                         Have questions? Email us at{' '}
-                        <a href="mailto:collegefairwayadvisors.com" className="text-primary hover:underline">
-                          collegefairwayadvisors.com
+                        <a href="mailto:collegefairwayadvisors@gmail.com" className="text-primary hover:underline">
+                          collegefairwayadvisors@gmail.com
                         </a>
                       </p>
                     </div>

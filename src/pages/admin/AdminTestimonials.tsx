@@ -168,7 +168,7 @@ export default function AdminTestimonials() {
   const shareEmail = () => {
     const subject = encodeURIComponent('Share your College Fairway Advisors experience');
     const body = encodeURIComponent(
-      `Hi!\n\nWe'd love to hear about your experience with College Fairway Advisors. Your story helps other families navigating the college golf recruiting journey.\n\nYou can share a written testimonial or record a short video (whichever you prefer) using this private link:\n\n${shareUrl}\n\nFor privacy, please use first names only.\n\nThank you!\nCollege Fairway Advisors\ncollegefairwayadvisors.com`
+      `Hi!\n\nWe'd love to hear about your experience with College Fairway Advisors. Your story helps other families navigating the college golf recruiting journey.\n\nYou can share a written testimonial or record a short video (whichever you prefer) using this private link:\n\n${shareUrl}\n\nFor privacy, please use first names only.\n\nThank you!\nCollege Fairway Advisors\ncollegefairwayadvisors@gmail.com`
     );
     window.open(`mailto:?subject=${subject}&body=${body}`);
   };

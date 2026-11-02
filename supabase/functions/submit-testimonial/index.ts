@@ -164,8 +164,8 @@ serve(async (req) => {
           headers: { "Content-Type": "application/json", Authorization: `Bearer ${RESEND_API_KEY}` },
           body: JSON.stringify({
             from: "College Fairway Advisors <contact@cfa.golf>",
-            reply_to: "collegefairwayadvisors.com",
-            to: ["collegefairwayadvisors.com"],
+            reply_to: "collegefairwayadvisors@gmail.com",
+            to: ["collegefairwayadvisors@gmail.com"],
             subject: `⭐ New Testimonial Submission from ${displayName}`,
             html: emailHtml,
           }),

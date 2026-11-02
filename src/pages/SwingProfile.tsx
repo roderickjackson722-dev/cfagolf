@@ -138,7 +138,7 @@ export default function SwingProfile() {
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 w-full sm:w-auto">
-                  <a href="mailto:collegefairwayadvisors.com?subject=Recruiting interest"><Button className="w-full"><Mail className="h-4 w-4 mr-1" />Contact via CFA</Button></a>
+                  <a href="mailto:collegefairwayadvisors@gmail.com?subject=Recruiting interest"><Button className="w-full"><Mail className="h-4 w-4 mr-1" />Contact via CFA</Button></a>
                 </div>
               </CardContent>
             </Card>

@@ -237,7 +237,7 @@ const Review = () => {
         <div className="max-w-4xl mx-auto text-center space-y-1 text-sm">
           <p>© {new Date().getFullYear()} College Fairway Advisors</p>
           <p>cfagolf.lovable.app</p>
-          <p>collegefairwayadvisors.com</p>
+          <p>collegefairwayadvisors@gmail.com</p>
         </div>
       </footer>
     </div>

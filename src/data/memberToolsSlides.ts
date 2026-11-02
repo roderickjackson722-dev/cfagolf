@@ -205,7 +205,7 @@ export const memberToolsSlides: MemberToolsSlide[] = [
     index: 20,
     title: "Q&A / Contact",
     bullets: [
-      "collegefairwayadvisors.com",
+      "collegefairwayadvisors@gmail.com",
       "cfagolf.lovable.app",
       "Book a free 15-minute call",
     ],

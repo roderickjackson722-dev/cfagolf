@@ -19,11 +19,11 @@ export function Footer() {
               Expert guidance for junior golfers and their families navigating the college golf recruiting process.
             </p>
             <a 
-              href="mailto:collegefairwayadvisors.com" 
+              href="mailto:collegefairwayadvisors@gmail.com" 
               className="inline-flex items-center gap-2 text-cfa-gold hover:text-cfa-gold/80 transition-colors"
             >
               <Mail className="w-4 h-4" />
-              collegefairwayadvisors.com
+              collegefairwayadvisors@gmail.com
             </a>
           </div>
 

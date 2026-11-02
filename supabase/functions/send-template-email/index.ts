@@ -43,7 +43,7 @@ Deno.serve(async (req) => {
       subject,
       html,
       text,
-      reply_to: replyTo || 'collegefairwayadvisors.com',
+      reply_to: replyTo || 'collegefairwayadvisors@gmail.com',
     };
     if (ccArr) payload.cc = ccArr;
     if (bccArr) payload.bcc = bccArr;

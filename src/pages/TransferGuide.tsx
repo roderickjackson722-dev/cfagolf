@@ -488,7 +488,7 @@ const TransferGuide = () => {
               </a>
               <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2 border-t">
                 <span>Your CFA Advisor: </span>
-                <a href="mailto:collegefairwayadvisors.com" className="text-primary hover:underline">collegefairwayadvisors.com</a>
+                <a href="mailto:collegefairwayadvisors@gmail.com" className="text-primary hover:underline">collegefairwayadvisors@gmail.com</a>
               </div>
             </CardContent>
           </Card>

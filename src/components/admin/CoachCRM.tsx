@@ -371,7 +371,7 @@ export function CoachCRM() {
 
                     <div className="flex items-center gap-3 p-3 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg text-sm">
                       <AlertCircle className="w-5 h-5 text-amber-600 shrink-0" />
-                      <p>This will send <strong>{emailableSelected.length} real emails</strong> from collegefairwayadvisors.com. Make sure your content is ready.</p>
+                      <p>This will send <strong>{emailableSelected.length} real emails</strong> from collegefairwayadvisors@gmail.com. Make sure your content is ready.</p>
                     </div>
 
                     <Button 
