@@ -1,3 +1,4 @@
+import { safeSessionStorage } from '@/lib/safeStorage';
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -37,9 +38,9 @@ const PaymentSuccess = () => {
           setVerified(true);
           // Refresh auth context so hasPaidAccess updates immediately
           await refreshSubscription();
-          const isNewSignup = sessionStorage.getItem('cfa_new_signup');
+          const isNewSignup = safeSessionStorage.getItem('cfa_new_signup');
           if (isNewSignup) {
-            sessionStorage.removeItem('cfa_new_signup');
+            safeSessionStorage.removeItem('cfa_new_signup');
           }
           setShowOnboardingDialog(!isNewSignup);
           toast.success('Payment verified! Welcome to CFA Golf!');
@@ -82,13 +83,13 @@ const PaymentSuccess = () => {
               </p>
               <Button 
                 onClick={() => {
-                  const isNew = sessionStorage.getItem('cfa_new_signup');
+                  const isNew = safeSessionStorage.getItem('cfa_new_signup');
                   navigate(isNew ? '/welcome' : '/dashboard');
-                  sessionStorage.removeItem('cfa_new_signup');
+                  safeSessionStorage.removeItem('cfa_new_signup');
                 }} 
                 className="w-full"
               >
-                {sessionStorage.getItem('cfa_new_signup') ? 'Continue to Welcome' : 'Go to Dashboard'}
+                {safeSessionStorage.getItem('cfa_new_signup') ? 'Continue to Welcome' : 'Go to Dashboard'}
               </Button>
             </>
           ) : (

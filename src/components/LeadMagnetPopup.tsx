@@ -1,3 +1,4 @@
+import { safeLocalStorage } from '@/lib/safeStorage';
 import { useState, useEffect } from 'react';
 import { X, Download, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,7 +18,7 @@ export function LeadMagnetPopup() {
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
-    const dismissed = localStorage.getItem(POPUP_DISMISSED_KEY);
+    const dismissed = safeLocalStorage.getItem(POPUP_DISMISSED_KEY);
     if (dismissed) return;
 
     const timer = setTimeout(() => setIsOpen(true), POPUP_DELAY_MS);
@@ -26,7 +27,7 @@ export function LeadMagnetPopup() {
 
   const handleDismiss = () => {
     setIsOpen(false);
-    localStorage.setItem(POPUP_DISMISSED_KEY, Date.now().toString());
+    safeLocalStorage.setItem(POPUP_DISMISSED_KEY, Date.now().toString());
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,7 +50,7 @@ export function LeadMagnetPopup() {
       }
 
       setIsSuccess(true);
-      localStorage.setItem(POPUP_DISMISSED_KEY, Date.now().toString());
+      safeLocalStorage.setItem(POPUP_DISMISSED_KEY, Date.now().toString());
 
       // Generate and download PDF
       generateEligibilityChecklistPdf();

@@ -1,3 +1,4 @@
+import { safeLocalStorage } from '@/lib/safeStorage';
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
@@ -16,10 +17,10 @@ import { Eye, MapPin, Trophy, Mail } from 'lucide-react';
 
 function getOrCreateSessionId(): string {
   const key = 'cfa_session_id';
-  let id = localStorage.getItem(key);
+  let id = safeLocalStorage.getItem(key);
   if (!id) {
     id = crypto.randomUUID();
-    localStorage.setItem(key, id);
+    safeLocalStorage.setItem(key, id);
   }
   return id;
 }

@@ -1,14 +1,15 @@
+import { safeLocalStorage, safeSessionStorage } from '@/lib/safeStorage';
 import { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
 // Generate or retrieve a unique visitor ID
 const getVisitorId = (): string => {
   const storageKey = 'cfa_visitor_id';
-  let visitorId = localStorage.getItem(storageKey);
+  let visitorId = safeLocalStorage.getItem(storageKey);
   
   if (!visitorId) {
     visitorId = `v_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
-    localStorage.setItem(storageKey, visitorId);
+    safeLocalStorage.setItem(storageKey, visitorId);
   }
   
   return visitorId;
@@ -17,10 +18,10 @@ const getVisitorId = (): string => {
 // Check if this is a new session (visitor hasn't been tracked in this session)
 const isNewSession = (): boolean => {
   const sessionKey = 'cfa_session_tracked';
-  const tracked = sessionStorage.getItem(sessionKey);
+  const tracked = safeSessionStorage.getItem(sessionKey);
   
   if (!tracked) {
-    sessionStorage.setItem(sessionKey, 'true');
+    safeSessionStorage.setItem(sessionKey, 'true');
     return true;
   }
   
