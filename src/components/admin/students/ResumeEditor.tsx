@@ -384,7 +384,7 @@ function ResumePreview({ r }: { r: ResumeData }) {
       {r.extracurriculars && <Section title="Extracurriculars"><p className="whitespace-pre-wrap">{r.extracurriculars}</p></Section>}
       {r.personalStatement && <Section title="Why I Want to Play College Golf"><p className="whitespace-pre-wrap">{r.personalStatement}</p></Section>}
 
-      <div className="text-center text-[10px] italic text-gray-500 mt-4 border-t pt-2">College Fairway Advisors · www.cfa.golf</div>
+      <div className="text-center text-[10px] italic text-gray-500 mt-4 border-t pt-2">College Fairway Advisors · cfagolf.lovable.app</div>
     </div>
   );
 }

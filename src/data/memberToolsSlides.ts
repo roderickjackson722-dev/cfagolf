@@ -206,7 +206,7 @@ export const memberToolsSlides: MemberToolsSlide[] = [
     title: "Q&A / Contact",
     bullets: [
       "contact@cfa.golf",
-      "www.cfa.golf",
+      "cfagolf.lovable.app",
       "Book a free 15-minute call",
     ],
     image: ph("Questions? Contact CFA"),

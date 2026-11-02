@@ -144,7 +144,7 @@ export default function SharedDocuments() {
         </Card>
 
         <p className="text-center text-xs text-muted-foreground mt-6">
-          College Fairway Advisors · cfa.golf
+          College Fairway Advisors · cfagolf.lovable.app
         </p>
       </div>
     </div>

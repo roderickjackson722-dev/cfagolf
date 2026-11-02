@@ -149,8 +149,8 @@ Deno.serve(async (req) => {
         /supabase\.co.*/,
         "",
       )}`;
-      const siteUrl = "https://www.cfa.golf/coach/login";
-      const profileUrl = `https://www.cfa.golf/coach/${slug}`;
+      const siteUrl = "https://cfagolf.lovable.app/coach/login";
+      const profileUrl = `https://cfagolf.lovable.app/coach/${slug}`;
       try {
         await fetch("https://api.resend.com/emails", {
           method: "POST",

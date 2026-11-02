@@ -30,7 +30,7 @@ import { ArrowLeft, BarChart3, Copy, Edit, ExternalLink, Plus, Trash2, Upload, S
 import { watermarkPdf, watermarkPdfFile } from '@/lib/pdfWatermark';
 
 const CATEGORIES = ['Timeline', 'Templates', 'Template', 'Checklist', 'Worksheet', 'Planner', 'Guide', 'Other'];
-const SITE = 'https://www.cfa.golf';
+const SITE = 'https://cfagolf.lovable.app';
 
 function formatSize(bytes: number) {
   if (bytes < 1024) return `${bytes} B`;

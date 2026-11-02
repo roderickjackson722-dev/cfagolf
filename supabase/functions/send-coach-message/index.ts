@@ -71,7 +71,7 @@ Deno.serve(async (req) => {
                 <blockquote style="border-left:3px solid #1B4332;padding:12px 16px;background:#F5F1E8;margin:16px 0;">
                   ${message.replace(/\n/g, "<br/>")}
                 </blockquote>
-                <p>View in your inbox: <a href="https://www.cfa.golf/coach/dashboard">https://www.cfa.golf/coach/dashboard</a></p>
+                <p>View in your inbox: <a href="https://cfagolf.lovable.app/coach/dashboard">https://cfagolf.lovable.app/coach/dashboard</a></p>
               </div>`,
           }),
         });

@@ -104,7 +104,7 @@ const addFooter = (doc: jsPDF) => {
   
   doc.setFontSize(8);
   doc.setTextColor(120, 120, 120);
-  doc.text('www.cfa.golf | College Fairway Advisors', pageWidth / 2, pageHeight - 10, { align: 'center' });
+  doc.text('cfagolf.lovable.app | College Fairway Advisors', pageWidth / 2, pageHeight - 10, { align: 'center' });
   doc.text(`Page ${doc.internal.pages.length - 1}`, pageWidth - 20, pageHeight - 10);
 };
 
@@ -799,7 +799,7 @@ export const generateMarketingFlyer = (): void => {
   // Tagline
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(10);
-  doc.text('www.cfa.golf', pageWidth - margin, 56, { align: 'right' });
+  doc.text('cfagolf.lovable.app', pageWidth - margin, 56, { align: 'right' });
 
   let y = 68;
 
@@ -908,7 +908,7 @@ export const generateMarketingFlyer = (): void => {
   // Footer
   doc.setFontSize(9);
   doc.setTextColor(120, 120, 120);
-  doc.text('College Fairway Advisors  |  www.cfa.golf  |  contact@cfa.golf', pageWidth / 2, pageHeight - 12, { align: 'center' });
+  doc.text('College Fairway Advisors  |  cfagolf.lovable.app  |  contact@cfa.golf', pageWidth / 2, pageHeight - 12, { align: 'center' });
   doc.text('Follow us on Instagram @collegefairwayadvisors', pageWidth / 2, pageHeight - 7, { align: 'center' });
 
   addWatermark(doc);

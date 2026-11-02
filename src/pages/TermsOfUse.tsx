@@ -21,7 +21,7 @@ export default function TermsOfUse() {
           <p><strong>Effective Date:</strong> {EFFECTIVE_DATE}</p>
 
           <p>
-            <strong>College Fairway Advisors</strong> ("Company," "we," "us," or "our") operates the website www.cfa.golf
+            <strong>College Fairway Advisors</strong> ("Company," "we," "us," or "our") operates the website cfagolf.lovable.app
             (the "Site") and provides digital products including an ebook, self-paced online course, member dashboard,
             and consulting services (collectively, the "Services").
           </p>
@@ -122,7 +122,7 @@ export default function TermsOfUse() {
           <p>
             <strong>College Fairway Advisors</strong><br />
             Email: <a href="mailto:contact@cfa.golf">contact@cfa.golf</a><br />
-            Website: <a href="https://www.cfa.golf">www.cfa.golf</a>
+            Website: <a href="https://cfagolf.lovable.app">cfagolf.lovable.app</a>
           </p>
 
           <hr />

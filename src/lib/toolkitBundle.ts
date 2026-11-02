@@ -54,7 +54,7 @@ function addHeader(doc: jsPDF, title: string) {
   doc.text(title, pw / 2, 20, { align: 'center' });
   doc.setTextColor(200, 200, 200);
   doc.setFontSize(8);
-  doc.text('College Fairway Advisors | www.cfa.golf', pw / 2, 30, { align: 'center' });
+  doc.text('College Fairway Advisors | cfagolf.lovable.app', pw / 2, 30, { align: 'center' });
 }
 
 function addFooter(doc: jsPDF) {
@@ -62,7 +62,7 @@ function addFooter(doc: jsPDF) {
   const ph = doc.internal.pageSize.getHeight();
   doc.setFontSize(7);
   doc.setTextColor(150, 150, 150);
-  doc.text('© College Fairway Advisors — www.cfa.golf', pw / 2, ph - 8, { align: 'center' });
+  doc.text('© College Fairway Advisors — cfagolf.lovable.app', pw / 2, ph - 8, { align: 'center' });
 }
 
 function addSectionHeader(doc: jsPDF, title: string, y: number): number {

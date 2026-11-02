@@ -236,7 +236,7 @@ const Review = () => {
       <footer className="bg-[#1A2B4C] text-white py-8 px-4">
         <div className="max-w-4xl mx-auto text-center space-y-1 text-sm">
           <p>© {new Date().getFullYear()} College Fairway Advisors</p>
-          <p>www.cfa.golf</p>
+          <p>cfagolf.lovable.app</p>
           <p>info@cfa.golf</p>
         </div>
       </footer>
