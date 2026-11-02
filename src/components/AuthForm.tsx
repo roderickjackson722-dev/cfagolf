@@ -1,3 +1,4 @@
+import { safeSessionStorage } from '@/lib/safeStorage';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -239,7 +240,7 @@ export function AuthForm() {
 
       if (data.url) {
         // Store flag so after payment success we redirect to welcome
-        sessionStorage.setItem('cfa_new_signup', 'true');
+        safeSessionStorage.setItem('cfa_new_signup', 'true');
         window.location.href = data.url;
       } else {
         throw new Error('No checkout URL returned');

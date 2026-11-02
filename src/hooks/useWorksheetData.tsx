@@ -1,3 +1,4 @@
+import { safeLocalStorage } from '@/lib/safeStorage';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -16,7 +17,7 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
   useEffect(() => {
     if (!effectiveUserId) {
       // Fall back to localStorage for non-authenticated users
-      const saved = localStorage.getItem(`cfa-${worksheetKey}`);
+      const saved = safeLocalStorage.getItem(`cfa-${worksheetKey}`);
       if (saved) {
         try { setData(JSON.parse(saved)); } catch {}
       }
@@ -39,7 +40,7 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
           setData(row.data as unknown as T);
         } else if (!isAdminView) {
           // Migrate from localStorage if exists (only for own data)
-          const saved = localStorage.getItem(`cfa-${worksheetKey}`);
+          const saved = safeLocalStorage.getItem(`cfa-${worksheetKey}`);
           if (saved) {
             try {
               const parsed = JSON.parse(saved);
@@ -49,7 +50,7 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
                 worksheet_key: worksheetKey,
                 data: parsed as any,
               }, { onConflict: 'user_id,worksheet_key' });
-              localStorage.removeItem(`cfa-${worksheetKey}`);
+              safeLocalStorage.removeItem(`cfa-${worksheetKey}`);
             } catch {}
           }
         }
@@ -72,7 +73,7 @@ export function useWorksheetData<T>(worksheetKey: string, defaultData: T, overri
 
     saveTimeoutRef.current = setTimeout(async () => {
       if (!effectiveUserId) {
-        localStorage.setItem(`cfa-${worksheetKey}`, JSON.stringify(newData));
+        safeLocalStorage.setItem(`cfa-${worksheetKey}`, JSON.stringify(newData));
         return;
       }
 
