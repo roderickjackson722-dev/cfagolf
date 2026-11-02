@@ -300,7 +300,7 @@ const Pricing = () => {
             </a>
             <p className="text-sm text-muted-foreground mt-3">
               Book a free 15-minute call, or email{' '}
-              <a href="mailto:contact@cfa.golf" className="text-primary hover:underline">contact@cfa.golf</a>
+              <a href="mailto:collegefairwayadvisors.com" className="text-primary hover:underline">collegefairwayadvisors.com</a>
             </p>
           </div>
 

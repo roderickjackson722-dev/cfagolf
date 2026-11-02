@@ -116,7 +116,8 @@ serve(async (req) => {
             },
             body: JSON.stringify({
               from: "CFA Golf <notifications@cfa.golf>",
-              to: ["contact@cfa.golf"],
+              reply_to: "collegefairwayadvisors.com",
+              to: ["collegefairwayadvisors.com"],
               subject: "New Ebook Sale! 🎉",
               html: `
                 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;">
@@ -168,6 +169,7 @@ serve(async (req) => {
             },
             body: JSON.stringify({
               from: "CFA Golf <contact@cfa.golf>",
+              reply_to: "collegefairwayadvisors.com",
               to: [buyerEmail],
               subject: "Your CFA Recruiting Toolkit — Access Links Inside",
               html: `
@@ -177,7 +179,7 @@ serve(async (req) => {
                   <ul style="padding-left:20px;line-height:2;">${productListHtml}</ul>
                   <p style="margin-top:24px;">To get the most out of the toolkit, we recommend creating a free account at <a href="https://cfagolf.lovable.app/login" style="color:#166534;">cfagolf.lovable.app</a> so your progress is saved.</p>
                   <hr style="margin:32px 0;border:none;border-top:1px solid #e5e7eb;" />
-                  <p style="color:#6b7280;font-size:14px;">Questions? Reply to this email or contact us at contact@cfa.golf</p>
+                  <p style="color:#6b7280;font-size:14px;">Questions? Reply to this email or contact us at collegefairwayadvisors.com</p>
                 </div>
               `,
             }),

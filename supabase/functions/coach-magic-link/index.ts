@@ -76,6 +76,7 @@ Deno.serve(async (req) => {
           },
           body: JSON.stringify({
             from: "College Fairway Advisors <contact@cfa.golf>",
+            reply_to: "collegefairwayadvisors.com",
             to: [coach.email],
             subject: "Your CFA Coach Portal Password Was Reset",
             html: `
@@ -121,6 +122,7 @@ Deno.serve(async (req) => {
         },
         body: JSON.stringify({
           from: "College Fairway Advisors <contact@cfa.golf>",
+          reply_to: "collegefairwayadvisors.com",
           to: [coach.email],
           subject: "Your CFA Coach Portal Login Link",
           html: `

@@ -110,6 +110,7 @@ const handler = async (req: Request): Promise<Response> => {
     if (test_email) {
       const emailResponse = await resend.emails.send({
         from: "College Fairway Advisors <contact@cfa.golf>",
+        reply_to: "collegefairwayadvisors.com",
         to: [test_email],
         subject: `[TEST] ${tipData.subject}`,
         html: getMonthlyEmailHtml(tipData as Tip, "Test User", test_email),
@@ -147,6 +148,7 @@ const handler = async (req: Request): Promise<Response> => {
         batch.map(sub =>
           resend.emails.send({
             from: "College Fairway Advisors <contact@cfa.golf>",
+            reply_to: "collegefairwayadvisors.com",
             to: [sub.email],
             subject: tipData.subject,
             html: getMonthlyEmailHtml(tipData as Tip, sub.full_name || undefined, sub.email),

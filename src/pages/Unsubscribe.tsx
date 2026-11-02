@@ -36,7 +36,7 @@ const Unsubscribe = () => {
                 <CardTitle>You've been unsubscribed</CardTitle>
                 <CardDescription>
                   You will no longer receive monthly recruiting tip emails from CFA Golf. Changed your mind? Email{' '}
-                  <a href="mailto:contact@cfa.golf" className="text-primary underline">contact@cfa.golf</a> to re-subscribe.
+                  <a href="mailto:collegefairwayadvisors.com" className="text-primary underline">collegefairwayadvisors.com</a> to re-subscribe.
                 </CardDescription>
               </>
             ) : (

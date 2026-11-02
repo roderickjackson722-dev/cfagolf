@@ -79,6 +79,7 @@ Deno.serve(async (req) => {
           },
           body: JSON.stringify({
             from: 'Rod at CFA <contact@cfa.golf>',
+            reply_to: "collegefairwayadvisors.com",
             to: [recipient.coachEmail],
             subject: personalizedSubject,
             html: `

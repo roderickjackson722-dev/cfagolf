@@ -142,7 +142,7 @@ export const presentationSlides: PresentationSlide[] = [
     showOnScreen: "Camera only",
     speakerNotes: [
       "Confirm the booked time and what they'll receive",
-      "Tell them you'll send a recap email + checkout link to contact@cfa.golf",
+      "Tell them you'll send a recap email + checkout link to collegefairwayadvisors.com",
       "Thank them by name, reinforce excitement about working together",
       "End on a high note",
     ],

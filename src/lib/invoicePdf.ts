@@ -58,7 +58,7 @@ export function generateInvoicePdf(data: InvoiceData): jsPDF {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
   doc.text('College Fairway Advisors', pageW - 15, 14, { align: 'right' });
-  doc.text('contact@cfa.golf  |  cfagolf.lovable.app', pageW - 15, 20, { align: 'right' });
+  doc.text('collegefairwayadvisors.com  |  cfagolf.lovable.app', pageW - 15, 20, { align: 'right' });
 
   // Invoice meta
   doc.setTextColor(0, 0, 0);
@@ -169,7 +169,7 @@ export function generateInvoicePdf(data: InvoiceData): jsPDF {
   doc.setFontSize(8);
   doc.setTextColor(110, 110, 110);
   doc.text(
-    'College Fairway Advisors  •  contact@cfa.golf  •  cfagolf.lovable.app',
+    'College Fairway Advisors  •  collegefairwayadvisors.com  •  cfagolf.lovable.app',
     pageW / 2,
     pageH - 10,
     { align: 'center' },

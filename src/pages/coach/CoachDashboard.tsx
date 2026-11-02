@@ -126,7 +126,7 @@ const CoachDashboard = () => {
             <CardHeader>
               <CardTitle>No Coach Profile</CardTitle>
               <CardDescription>
-                This account isn't linked to a coach profile. Please contact contact@cfa.golf.
+                This account isn't linked to a coach profile. Please contact collegefairwayadvisors.com.
               </CardDescription>
             </CardHeader>
           </Card>

@@ -121,7 +121,7 @@ export default function TermsOfUse() {
           <p>If you have any questions about these Terms, please contact us at:</p>
           <p>
             <strong>College Fairway Advisors</strong><br />
-            Email: <a href="mailto:contact@cfa.golf">contact@cfa.golf</a><br />
+            Email: <a href="mailto:collegefairwayadvisors.com">collegefairwayadvisors.com</a><br />
             Website: <a href="https://cfagolf.lovable.app">cfagolf.lovable.app</a>
           </p>
 

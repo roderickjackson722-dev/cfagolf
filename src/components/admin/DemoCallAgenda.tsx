@@ -164,7 +164,7 @@ const AGENDA: AgendaSection[] = [
         title: 'Confirm action & close',
         bullets: [
           'Confirm enrollment or booked time and what they\'ll receive next.',
-          'Send recap email + checkout link to contact@cfa.golf same day.',
+          'Send recap email + checkout link to collegefairwayadvisors.com same day.',
           'Thank them by name; reinforce excitement about working together.',
         ],
       },

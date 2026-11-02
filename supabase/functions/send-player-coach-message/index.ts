@@ -18,7 +18,7 @@ Deno.serve(async (req) => {
     const { data: player } = await supabase.from('players').select('full_name, contact_email, slug').eq('id', player_id).maybeSingle();
     if (!player) return new Response(JSON.stringify({ error: 'Player not found' }), { status: 404, headers: corsHeaders });
 
-    const recipients = [player.contact_email, 'contact@cfa.golf'].filter(Boolean);
+    const recipients = [player.contact_email, 'collegefairwayadvisors.com'].filter(Boolean);
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
     if (RESEND_API_KEY && recipients.length) {
       const html = `
@@ -47,7 +47,7 @@ Deno.serve(async (req) => {
         const ack = `
           <h2>Thanks for reaching out about ${player.full_name}</h2>
           <p>This is a copy of the inquiry you just sent.</p>
-          <p>${player.full_name} (or their team) will be in touch shortly. You can reach them directly at <a href="mailto:${player.contact_email || 'contact@cfa.golf'}">${player.contact_email || 'contact@cfa.golf'}</a>.</p>
+          <p>${player.full_name} (or their team) will be in touch shortly. You can reach them directly at <a href="mailto:${player.contact_email || 'collegefairwayadvisors.com'}">${player.contact_email || 'collegefairwayadvisors.com'}</a>.</p>
           <hr/>
           <p style="white-space:pre-wrap">${message.replace(/</g, '&lt;')}</p>
           <hr/>
