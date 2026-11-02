@@ -77,7 +77,7 @@ const handler = async (req: Request): Promise<Response> => {
             <strong>${email}</strong> has been removed from the CFA Golf mailing list.
           </p>
           <p style="color: #999; font-size: 13px; margin-top: 20px;">
-            Changed your mind? Email <a href="mailto:contact@cfa.golf" style="color: #166534;">contact@cfa.golf</a> to re-subscribe.
+            Changed your mind? Email <a href="mailto:collegefairwayadvisors@gmail.com" style="color: #166534;">collegefairwayadvisors@gmail.com</a> to re-subscribe.
           </p>
           <a href="https://cfagolf.lovable.app" style="display: inline-block; margin-top: 20px; background-color: #166534; color: white; padding: 10px 24px; text-decoration: none; border-radius: 8px; font-size: 14px;">Visit CFA Golf</a>
         </div>

@@ -77,6 +77,7 @@ Deno.serve(async (req) => {
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendKey}` },
           body: JSON.stringify({
             from: 'College Fairway Advisors <contact@cfa.golf>',
+            reply_to: "collegefairwayadvisors@gmail.com",
             to: [email],
             subject: 'Your College Fairway Advisors Player Site is Ready',
             html: `

@@ -31,6 +31,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const emailResponse = await resend.emails.send({
       from: "CFA Golf <contact@cfa.golf>",
+      reply_to: "collegefairwayadvisors@gmail.com",
       to: [email],
       subject: "Welcome to CFA Golf - Let's Schedule Your Onboarding Call!",
       html: `
@@ -88,7 +89,7 @@ const handler = async (req: Request): Promise<Response> => {
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
           
           <p style="font-size: 13px; color: #6b7280; text-align: center;">
-            Questions? Reply to this email or reach out at <a href="mailto:contact@cfa.golf" style="color: #166534;">contact@cfa.golf</a>
+            Questions? Reply to this email or reach out at <a href="mailto:collegefairwayadvisors@gmail.com" style="color: #166534;">collegefairwayadvisors@gmail.com</a>
           </p>
         </body>
         </html>

@@ -9,7 +9,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const ADMIN_EMAIL = "contact@cfa.golf";
+const ADMIN_EMAIL = "collegefairwayadvisors@gmail.com";
 
 interface VisitorNotification {
   type: "visitor";
@@ -119,6 +119,7 @@ serve(async (req) => {
 
     const emailResponse = await resend.emails.send({
       from: "CFA Golf <notifications@cfa.golf>",
+      reply_to: "collegefairwayadvisors@gmail.com",
       to: [ADMIN_EMAIL],
       subject,
       html: htmlContent,

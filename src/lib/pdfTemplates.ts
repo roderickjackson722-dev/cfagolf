@@ -908,7 +908,7 @@ export const generateMarketingFlyer = (): void => {
   // Footer
   doc.setFontSize(9);
   doc.setTextColor(120, 120, 120);
-  doc.text('College Fairway Advisors  |  cfagolf.lovable.app  |  contact@cfa.golf', pageWidth / 2, pageHeight - 12, { align: 'center' });
+  doc.text('College Fairway Advisors  |  cfagolf.lovable.app  |  collegefairwayadvisors@gmail.com', pageWidth / 2, pageHeight - 12, { align: 'center' });
   doc.text('Follow us on Instagram @collegefairwayadvisors', pageWidth / 2, pageHeight - 7, { align: 'center' });
 
   addWatermark(doc);

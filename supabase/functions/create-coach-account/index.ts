@@ -160,6 +160,7 @@ Deno.serve(async (req) => {
           },
           body: JSON.stringify({
             from: "College Fairway Advisors <contact@cfa.golf>",
+            reply_to: "collegefairwayadvisors@gmail.com",
             to: [email],
             subject: "Your CFA Coach Portal Access",
             html: `
@@ -175,7 +176,7 @@ Deno.serve(async (req) => {
                 <p>Your public profile: <a href="${profileUrl}" style="color:#1B4332;">${profileUrl}</a></p>
                 <p style="font-size:12px;color:#666;">Please change your password after your first login.</p>
                 <hr style="border:none;border-top:1px solid #e5e5e5;margin:24px 0;" />
-                <p style="font-size:12px;color:#666;">College Fairway Advisors · contact@cfa.golf</p>
+                <p style="font-size:12px;color:#666;">College Fairway Advisors · collegefairwayadvisors@gmail.com</p>
               </div>`,
           }),
         });
