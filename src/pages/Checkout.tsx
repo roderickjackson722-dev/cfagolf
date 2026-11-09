@@ -576,7 +576,7 @@ const Checkout = () => {
                               ({getActiveDiscount()}% off)
                             </span>
                           ) : (
-                            {program.originalPrice && (<span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>)}
+                            program.originalPrice && (<span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>)
                           )}
                         </div>
                       </div>
