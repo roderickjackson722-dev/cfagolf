@@ -1,25 +1,11 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { PROGRAMS } from "./programs.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
-};
-
-const PROGRAMS: Record<string, { priceId: string; amount: number; name: string; mode: "payment" | "subscription" }> = {
-  consulting: {
-    priceId: "price_1TAf5QLXW44Q7xfEt31BZ91E",
-    amount: 249900, // $2,499
-    name: "CFA Golf 1-on-1 Consulting Program",
-    mode: "payment",
-  },
-  digital: {
-    priceId: "price_1TK1IyLXW44Q7xfEFeqlEVdj",
-    amount: 29900, // $299/year
-    name: "CFA Golf Self-Paced Online Course",
-    mode: "payment",
-  },
 };
 
 serve(async (req) => {
@@ -47,7 +33,8 @@ serve(async (req) => {
     const PROGRAM_NAME = selectedProgram.name;
     const CHECKOUT_MODE = selectedProgram.mode;
     
-    const authHeader = req.headers.get("Authorization")!;
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) throw new Error("User not authenticated");
     const token = authHeader.replace("Bearer ", "");
     const { data } = await supabaseClient.auth.getUser(token);
     const user = data.user;
@@ -188,6 +175,10 @@ serve(async (req) => {
       }
     } else {
       // Full price
+      const price = await stripe.prices.retrieve(MEMBERSHIP_PRICE_ID);
+      if (price.unit_amount !== MEMBERSHIP_AMOUNT || price.currency !== "usd" || price.type !== "one_time" || !price.active) {
+        throw new Error("Checkout pricing is not configured correctly. Please contact College Fairway Advisors.");
+      }
       checkoutConfig.line_items = [
         {
           price: MEMBERSHIP_PRICE_ID,
