@@ -75,7 +75,7 @@ export default function TermsOfUse() {
           <ul>
             <li><strong>Ebook ($25):</strong> Due to the digital nature of this product, all sales are final.</li>
             <li><strong>Self-Paced Online Course ($299):</strong> Due to immediate access to all course materials and downloadable worksheets, all sales are final.</li>
-            <li><strong>One-on-One Consulting ($2,499):</strong> Refunds are governed by the separate consulting agreement signed by both parties.</li>
+            <li><strong>One-on-One Consulting ($3,499):</strong> Refunds are governed by the separate consulting agreement signed by both parties.</li>
           </ul>
           <p>We reserve the right to change prices at any time without prior notice.</p>
 

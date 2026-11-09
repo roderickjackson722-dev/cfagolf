@@ -84,14 +84,14 @@ const cards: PricingCard[] = [
   {
     title: "1-on-1 Consulting",
     description: "Full-service personalized guidance",
-    price: "$2,499",
-    originalPrice: "$3,499",
+    price: "$3,499",
+
     priceNote: "One-time • 12 consulting calls included",
     features: consultingFeatures,
     ctaLabel: "Get Started",
     ctaLink: "/checkout?plan=consulting",
     icon: Handshake,
-    badge: "Sale • Most Comprehensive",
+    badge: "Most Comprehensive",
     highlighted: true,
   },
 ];

@@ -132,7 +132,7 @@ const AGENDA: AgendaSection[] = [
         timeRange: '8:30 – 9:00',
         title: 'Slide 15 — Next Steps / How to Enroll',
         bullets: [
-          'Self-Paced Online Course $299 (was $499, one-time) or 1-on-1 Consulting $2,499 (was $3,499, one-time, Klarna available).',
+          'Self-Paced Online Course $299 (was $499, one-time) or 1-on-1 Consulting $3,499 (one-time, Klarna available).',
           '"You can start onboarding the same day."',
         ],
       },
