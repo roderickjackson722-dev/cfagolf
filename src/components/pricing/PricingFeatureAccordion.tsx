@@ -225,7 +225,7 @@ export function PricingFeatureAccordion() {
         <div className="text-center">
           <Badge className="bg-primary text-primary-foreground text-[10px] sm:text-xs px-1.5 sm:px-2.5">Consulting</Badge>
           <p className="text-[10px] text-muted-foreground mt-1">
-            <span className="line-through mr-1">$3,499</span>$2,499
+            $3,499
           </p>
         </div>
         <div className="text-center">

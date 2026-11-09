@@ -79,8 +79,7 @@ export function ServicesSection() {
                 Full-service personalized recruiting guidance
               </CardDescription>
               <div className="pt-4">
-                <span className="text-2xl text-muted-foreground line-through mr-2 align-middle">$3,499</span>
-                <span className="text-4xl font-bold text-foreground">$2,499</span>
+                <span className="text-4xl font-bold text-foreground">$3,499</span>
                 <p className="text-sm text-muted-foreground mt-1">One-time • 12 consulting calls included</p>
               </div>
             </CardHeader>

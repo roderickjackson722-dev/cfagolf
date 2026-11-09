@@ -19,8 +19,8 @@ const CALENDLY_URL = 'https://calendly.com/contact-cfa/30min?month=2025-12';
 
 const PROGRAMS = {
   consulting: {
-    price: 2499,
-    originalPrice: 3499,
+    price: 3499,
+    originalPrice: undefined,
     label: '1-on-1 Consulting Program',
     shortLabel: 'CFA 1-on-1 Consulting',
     description: 'Full-service personalized recruiting guidance with 12 coaching sessions',
@@ -348,13 +348,15 @@ const Checkout = () => {
                   
                   <div className="bg-muted/50 rounded-lg p-4 text-center">
                     <div className="flex items-baseline justify-center gap-2 flex-wrap">
-                      <span className="text-lg line-through text-muted-foreground">
-                        ${getActiveDiscount() > 0 ? MEMBERSHIP_PRICE.toLocaleString() : program.originalPrice.toLocaleString()}
-                      </span>
+                      {(getActiveDiscount() > 0 || program.originalPrice) && (
+                        <span className="text-lg line-through text-muted-foreground">
+                          ${(getActiveDiscount() > 0 ? MEMBERSHIP_PRICE : program.originalPrice)?.toLocaleString()}
+                        </span>
+                      )}
                       <span className="text-3xl font-bold text-primary">
                         ${getDiscountedPrice().toLocaleString()}
                       </span>
-                      <span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>
+                      {program.originalPrice && (<span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>)}
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
                       {program.programType === 'consulting' ? '12 coaching sessions included' : 'One-time annual purchase'}
@@ -561,9 +563,11 @@ const Checkout = () => {
                         </p>
                         
                         <div className="flex items-baseline gap-2 flex-wrap">
-                          <span className="text-lg line-through text-muted-foreground">
-                            ${getActiveDiscount() > 0 ? MEMBERSHIP_PRICE.toLocaleString() : program.originalPrice.toLocaleString()}
-                          </span>
+                          {(getActiveDiscount() > 0 || program.originalPrice) && (
+                            <span className="text-lg line-through text-muted-foreground">
+                              ${(getActiveDiscount() > 0 ? MEMBERSHIP_PRICE : program.originalPrice)?.toLocaleString()}
+                            </span>
+                          )}
                           <span className="text-2xl font-bold text-primary">
                             ${getDiscountedPrice().toLocaleString()}
                           </span>
@@ -572,7 +576,7 @@ const Checkout = () => {
                               ({getActiveDiscount()}% off)
                             </span>
                           ) : (
-                            <span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>
+                            {program.originalPrice && (<span className="text-[10px] font-semibold uppercase tracking-wide text-destructive bg-destructive/10 px-2 py-0.5 rounded-full">Sale</span>)}
                           )}
                         </div>
                       </div>

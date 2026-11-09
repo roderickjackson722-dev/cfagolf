@@ -96,14 +96,14 @@ const tiers: TierCard[] = [
   {
     title: "1-on-1 Consulting",
     description: "Full-service personalized guidance",
-    price: "$2,499",
-    originalPrice: "$3,499",
+    price: "$3,499",
+
     priceNote: "One-time • 12 consulting calls included",
     features: consultingFeatures,
     ctaLabel: "Get Started",
     ctaLink: "/checkout?plan=consulting",
     icon: Handshake,
-    badge: "Sale • Most Comprehensive",
+    badge: "Most Comprehensive",
     highlighted: true,
   },
 ];
@@ -331,7 +331,7 @@ const Pricing = () => {
               <div className="text-center w-20 sm:w-28">
                 <Badge className="bg-primary text-primary-foreground">Consulting</Badge>
                 <p className="text-[10px] text-muted-foreground mt-1">
-                  <span className="line-through mr-1">$3,499</span>$2,499
+                  $3,499
                 </p>
               </div>
             </div>
@@ -376,7 +376,7 @@ const Pricing = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/checkout?plan=consulting">
                 <Button size="lg" className="rounded-full font-semibold px-8 cfa-gradient hover:opacity-90 transition-opacity">
-                  1-on-1 Consulting — $2,499
+                  1-on-1 Consulting — $3,499
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
