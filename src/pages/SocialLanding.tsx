@@ -187,7 +187,7 @@ export default function SocialLanding() {
       {/* Minimal footer */}
       <footer className="py-6 bg-foreground text-center">
         <p className="text-sm text-background/60">
-          © {new Date().getFullYear()} College Fairway Advisors · <Link to="/" className="hover:underline text-background/80">cfagolf.com</Link>
+          © {new Date().getFullYear()} College Fairway Advisors · <Link to="/" className="hover:underline text-background/80">cfagolf.lovable.app</Link>
         </p>
       </footer>
     </div>

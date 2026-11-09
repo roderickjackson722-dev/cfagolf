@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
-const SITE_URL = 'https://cfagolf.com';
+const SITE_URL = 'https://cfagolf.lovable.app';
 
 const captions = {
   instagram: [
@@ -36,7 +36,7 @@ College Fairway Advisors gives you ONE platform to navigate the entire college g
 
 From finding the right programs to tracking coach outreach to comparing scholarship offers — we've got you covered.
 
-🔗 cfagolf.com/go
+🔗 cfagolf.lovable.app/go
 
 #collegegolfrecruiting #juniorgolfer #golfscholarship #collegeathletes #golflife`,
     },
@@ -68,7 +68,7 @@ College Fairway Advisors is the only all-in-one recruiting platform built specif
 
 We take the guesswork out of college golf recruiting so you can focus on what matters — supporting your athlete.
 
-Learn more at cfagolf.com`,
+Learn more at cfagolf.lovable.app`,
     },
     {
       title: 'Success Story Hook',
@@ -81,7 +81,7 @@ With College Fairway Advisors, families get:
 
 Whether your junior golfer is dreaming of D1 or finding the perfect D3 fit, we're here to help.
 
-Get started: cfagolf.com/go`,
+Get started: cfagolf.lovable.app/go`,
     },
   ],
   twitter: [
@@ -93,7 +93,7 @@ College Fairway Advisors: The only all-in-one college golf recruiting platform.
 
 1,000+ programs. Expert guidance. One platform.
 
-cfagolf.com/go`,
+cfagolf.lovable.app/go`,
     },
     {
       title: 'Stats Thread Starter',
@@ -103,7 +103,7 @@ Finding the right fit is overwhelming.
 
 That's why we built @CFAgolf — searchable database, coach tracker, scholarship calculator, and 12 months of expert support.
 
-All in one platform. cfagolf.com`,
+All in one platform. cfagolf.lovable.app`,
     },
     {
       title: 'Problem/Solution',
@@ -113,7 +113,7 @@ Comparing scholarships in your head ❌
 
 College Fairway Advisors gives you ONE platform for the entire recruiting process ✅
 
-cfagolf.com/go`,
+cfagolf.lovable.app/go`,
     },
   ],
   linkedin: [
@@ -133,7 +133,7 @@ That's exactly what CFA provides:
 
 Where swing coaches build the game, we build the path to a roster spot.
 
-Learn more: cfagolf.com`,
+Learn more: cfagolf.lovable.app`,
     },
   ],
   tiktok: [
@@ -525,7 +525,7 @@ export default function SocialKit() {
               onClick={() => copyToClipboard(`${SITE_URL}/go`, 'link-go')}
             >
               {copiedId === 'link-go' ? <Check className="w-3 h-3 mr-1" /> : <Copy className="w-3 h-3 mr-1" />}
-              cfagolf.com/go
+              cfagolf.lovable.app/go
             </Button>
             <Button 
               variant="outline" 
@@ -533,7 +533,7 @@ export default function SocialKit() {
               onClick={() => copyToClipboard(SITE_URL, 'link-main')}
             >
               {copiedId === 'link-main' ? <Check className="w-3 h-3 mr-1" /> : <Copy className="w-3 h-3 mr-1" />}
-              cfagolf.com
+              cfagolf.lovable.app
             </Button>
             <Button 
               variant="outline" 
@@ -541,7 +541,7 @@ export default function SocialKit() {
               onClick={() => copyToClipboard(`${SITE_URL}/checkout`, 'link-checkout')}
             >
               {copiedId === 'link-checkout' ? <Check className="w-3 h-3 mr-1" /> : <Copy className="w-3 h-3 mr-1" />}
-              cfagolf.com/checkout
+              cfagolf.lovable.app/checkout
             </Button>
           </div>
         </section>
