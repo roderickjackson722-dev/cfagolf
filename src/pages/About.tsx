@@ -3,8 +3,7 @@ import { Footer } from '@/components/landing/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Lightbulb, Users, Target, ArrowRight, Quote, HelpCircle } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Lightbulb, Users, Target, ArrowRight, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Import about page images
@@ -46,36 +45,6 @@ const galleryImages = [
   { src: sasChampionship, alt: 'SAS Championship event' },
 ];
 
-const faqs = [
-  {
-    question: 'Are you affiliated with the NCAA or any HBCU?',
-    answer: 'No. We are an independent educational consulting service. We work for the family, not the schools, which allows us to provide objective advice.',
-  },
-  {
-    question: 'Are your services compliant with NCAA rules?',
-    answer: 'Absolutely. We are an independent educational consulting service for families, not an agent or a representative of any university. We operate strictly within NCAA bylaws. We coach and advise the student and family on how to navigate the process, but all direct communication with coaches must come from the student-athlete.',
-  },
-  {
-    question: 'Do you offer payment plans?',
-    answer: 'Yes, we understand that this is a significant investment. We offer Klarna payment plans to make our services accessible to dedicated families. We can discuss the options during your free consultation.',
-  },
-  {
-    question: 'What is the investment for your services?',
-    answer: 'Our 1-on-1 Consulting package is a one-time $3,499 investment that includes 12 consulting calls and full platform access. We also offer our Self-Paced Online Course at $299 — a one-time fee for lifetime access to the full recruiting curriculum and platform tools — and our "Want to Play College Golf?" ebook for $25. Book a free 30-minute consultation to discuss which option is the best fit for your family.',
-  },
-  {
-    question: 'Do you guarantee a scholarship?',
-    answer: 'We cannot and do not guarantee scholarships or roster spots. We provide the strategy, tools, and guidance to maximize your opportunities. The final outcome depends on the student\'s performance and the coach\'s decisions.',
-  },
-  {
-    question: 'How is your service different from a recruiting service that charges a huge fee?',
-    answer: 'We charge a transparent, flat fee for our time and expertise. We do not charge "finder\'s fees" or a percentage of scholarships, which eliminates a major conflict of interest. Our goal is the right fit, not just a placement.',
-  },
-  {
-    question: 'What makes College Fairway Advisors different from other recruiting services?',
-    answer: 'While many services just send your profile to coaches, we provide a strategic partnership. Our founder, Rod Jackson, is a former HBCU golfer and has been the Tournament Director for HBCU golf events for over a decade. This gives us insider knowledge and relationships that no other service can offer. We focus on finding the right fit, not just any placement.',
-  },
-];
 
 export default function About() {
   return (
@@ -117,12 +86,6 @@ export default function About() {
                   We are not a swing coach. While your coach perfects your game, we navigate the collegiate landscape, 
                   advocate on your behalf, and build the bridge that connects your talent with a college roster spot.
                 </p>
-                <Link to="/member-preview">
-                  <Button className="rounded-full">
-                    Explore Our Services
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </Link>
               </div>
               <div className="relative">
                 <img 
@@ -282,39 +245,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-16 md:py-24 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <HelpCircle className="w-8 h-8 text-primary" />
-                </div>
-                <Badge variant="outline" className="mb-4">FAQ</Badge>
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  You've Got Questions. We've Got Answers.
-                </h2>
-                <p className="text-muted-foreground">
-                  Common questions about our services, compliance, and what makes us different.
-                </p>
-              </div>
-              
-              <Accordion type="single" collapsible className="w-full">
-                {faqs.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="border-b border-border/50">
-                    <AccordionTrigger className="text-left hover:no-underline py-5 text-base font-medium">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground pb-5">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-16 md:py-24 bg-primary/5">
           <div className="container mx-auto px-4">
@@ -340,11 +270,6 @@ export default function About() {
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </a>
-                  <Link to="/member-preview">
-                    <Button size="lg" variant="outline" className="rounded-full px-8">
-                      Explore Our Services
-                    </Button>
-                  </Link>
                 </div>
               </CardContent>
             </Card>
