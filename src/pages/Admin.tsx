@@ -279,6 +279,9 @@ const Admin = () => {
                   <TabsTrigger value="memberships" className="flex items-center gap-2">
                     <CreditCard className="w-4 h-4" /> Memberships
                   </TabsTrigger>
+                  <TabsTrigger value="applications" className="flex items-center gap-2">
+                    <FileText className="w-4 h-4" /> Applications
+                  </TabsTrigger>
                   <TabsTrigger value="subscribers" className="flex items-center gap-2">
                     <MailPlus className="w-4 h-4" /> Subscribers
                   </TabsTrigger>
