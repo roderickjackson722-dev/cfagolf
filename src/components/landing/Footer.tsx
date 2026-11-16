@@ -1,11 +1,9 @@
 import { Mail, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
 import cfaLogo from '@/assets/cfa-logo-transparent.png';
 import { FooterEmailOptIn } from '@/components/FooterEmailOptIn';
 
 export function Footer() {
-  const { user } = useAuth();
   return (
     <footer className="bg-cfa-charcoal text-white">
       <div className="container mx-auto px-4 py-12 md:py-16">
@@ -36,9 +34,6 @@ export function Footer() {
               </li>
               <li>
                 <Link to="/database" className="text-white/70 hover:text-white transition-colors">College Database</Link>
-              </li>
-              <li>
-                <Link to="/dashboard" className="text-white/70 hover:text-white transition-colors">Member Portal</Link>
               </li>
               <li>
                 <Link to="/login" className="text-white/70 hover:text-white transition-colors">Sign In</Link>

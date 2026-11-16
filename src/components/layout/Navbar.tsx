@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, GraduationCap, Database, User, LogIn, Shield } from 'lucide-react';
+import { Menu, X, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsAdmin } from '@/hooks/useAdmin';
@@ -9,7 +9,7 @@ import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, loading, hasPaidAccess } = useAuth();
+  const { user, loading } = useAuth();
   const { data: isAdmin } = useIsAdmin();
   const location = useLocation();
 
@@ -46,32 +46,18 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            {user && (
-              <>
-                <Link
-                  to="/dashboard"
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    isActive('/dashboard')
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                  }`}
-                >
-                  Dashboard
-                </Link>
-                {isAdmin && (
-                  <Link
-                    to="/admin"
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                      isActive('/admin')
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                  >
-                    <Shield className="w-4 h-4" />
-                    Admin
-                  </Link>
-                )}
-              </>
+            {user && isAdmin && (
+              <Link
+                to="/admin"
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                  isActive('/admin')
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                }`}
+              >
+                <Shield className="w-4 h-4" />
+                Admin
+              </Link>
             )}
           </nav>
 
@@ -117,34 +103,19 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              {user && (
-                <>
-                  <Link
-                    to="/dashboard"
-                    onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                      isActive('/dashboard')
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                    }`}
-                  >
-                    Dashboard
-                  </Link>
-                  {isAdmin && (
-                    <Link
-                      to="/admin"
-                      onClick={() => setIsOpen(false)}
-                      className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
-                        isActive('/admin')
-                          ? 'bg-primary/10 text-primary'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                      }`}
-                    >
-                      <Shield className="w-4 h-4" />
-                      Admin
-                    </Link>
-                  )}
-                </>
+              {user && isAdmin && (
+                <Link
+                  to="/admin"
+                  onClick={() => setIsOpen(false)}
+                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
+                    isActive('/admin')
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  }`}
+                >
+                  <Shield className="w-4 h-4" />
+                  Admin
+                </Link>
               )}
               {user && (
                 <div className="pt-2 border-t border-border/50 mt-2">

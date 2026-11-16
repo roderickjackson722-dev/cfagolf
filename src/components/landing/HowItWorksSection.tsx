@@ -47,17 +47,15 @@ export function HowItWorksSection() {
             {steps.map((step, index) => (
               <li
                 key={step.title}
-                className={`flex items-start gap-5 sm:gap-6 md:gap-10 ${
-                  index % 2 === 1 ? 'md:flex-row-reverse' : ''
-                }`}
+                className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-6 shadow-card sm:gap-6"
               >
                 <div
                   aria-hidden="true"
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-4 border-background bg-primary font-display text-xl font-bold text-primary-foreground shadow-card sm:h-14 sm:w-14 sm:text-2xl md:h-16 md:w-16"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary font-display text-xl font-bold text-primary-foreground"
                 >
                   {index + 1}
                 </div>
-                <div className="min-w-0 flex-1 rounded-2xl border border-border/70 bg-card p-6 shadow-card sm:p-7 md:p-8">
+                <div className="min-w-0">
                   <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                     Step {index + 1}
                   </p>

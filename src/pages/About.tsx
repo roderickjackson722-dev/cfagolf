@@ -1,10 +1,9 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Lightbulb, Users, Target, ArrowRight, Quote } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Lightbulb, Users, Target, Quote } from 'lucide-react';
+import { ContactUsForm } from '@/components/ContactUsForm';
 
 // Import about page images
 import hbcuGolfTeam from '@/assets/about/hbcu-golf-team.jpg';
@@ -249,28 +248,8 @@ export default function About() {
         <section className="py-16 md:py-24 bg-primary/5">
           <div className="container mx-auto px-4">
             <Card className="bg-gradient-to-br from-primary/10 via-background to-primary/5 border-primary/20">
-              <CardContent className="py-12 text-center">
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  Ready to Move from Hoping to Having a Plan?
-                </h2>
-                <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                  If you're ready to take the next step in your college golf journey, we should talk. 
-                  Schedule a complimentary <strong>Recruiting Roadmap Call</strong> to discuss your goals 
-                  and how we can help you achieve them.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a 
-                    href="https://calendly.com/cfagolf/free-consultation"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button size="lg" className="rounded-full px-8">
-                      Schedule Free Consultation
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                  </a>
-                </div>
+              <CardContent className="px-6 py-12 sm:px-10">
+                <ContactUsForm />
               </CardContent>
             </Card>
           </div>

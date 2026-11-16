@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, X } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { Button } from '@/components/ui/button';
@@ -51,14 +51,9 @@ const Pricing = () => (
           <p className="mt-5 font-display text-4xl font-bold text-primary sm:text-5xl">
             $699 <span className="font-sans text-lg font-medium text-muted-foreground sm:text-xl">one time</span>
           </p>
-          <p className="mt-2 text-base text-muted-foreground">or $350 now and $349 in 30 days, $699 total.</p>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
             One time program for one player. Apply first. Rod reviews the player before accepting a family, and payment is only taken after the player is accepted.
           </p>
-          <div className="mx-auto mt-5 flex max-w-2xl items-start justify-center gap-3 text-left text-base leading-relaxed text-muted-foreground">
-            <X aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-destructive" />
-            <p>No guarantee of an offer, a roster spot, or a scholarship. That decision is always up to the coach.</p>
-          </div>
         </div>
 
         <div className="mx-auto mt-16 max-w-3xl">
