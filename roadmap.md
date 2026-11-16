@@ -1,4 +1,10 @@
 # Current tasks
+- [ ] Align all homepage How It Works numbers on the left and match the Pricing steps.
+- [ ] Remove the public payment-plan line and guarantee line from Pricing.
+- [ ] Replace the signed-in name/email watermark with the CFA logo.
+- [ ] Replace About scheduling with a Contact Us email form.
+- [ ] Remove Dashboard/Member Portal from site menus without deleting the page.
+- [ ] Verify the updated pages, email content, menus, and mobile layout.
 - [x] Add the seven-item Questions Families Ask section with one application button after the application work is verified.
 - [x] Verify FAQ expansion, exact order, mobile readability, and unchanged surrounding sections.
 - [x] Store each guidance application and show it in the admin dashboard.

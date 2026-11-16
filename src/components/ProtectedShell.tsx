@@ -7,7 +7,7 @@ import { setPdfRecipient, clearPdfRecipient } from '@/lib/pdfTemplates';
 /**
  * Global protection layer. Active whenever a user is signed in.
  * - Disables right-click, copy, and print shortcuts (deterrent only)
- * - Renders a fixed diagonal watermark with the user's name + email
+ * - Renders a fixed repeating CFA logo watermark without personal details
  * - Registers the user's identity for per-user PDF watermarking
  *
  * Mounted once in App.tsx — applies to every authenticated page.

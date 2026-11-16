@@ -1,6 +1,5 @@
 import { Mail, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
 import cfaLogo from '@/assets/cfa-logo-transparent.png';
 import { FooterEmailOptIn } from '@/components/FooterEmailOptIn';
 
