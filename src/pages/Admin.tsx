@@ -330,6 +330,23 @@ const Admin = () => {
                   </Card>
                 </TabsContent>
 
+                <TabsContent value="applications">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <FileText className="w-5 h-5 text-primary" />
+                        <CardTitle>1 on 1 Guidance Applications</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Review new player applications and contact parents or guardians to schedule a free fit conversation.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminGuidanceApplications />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
                 <TabsContent value="subscribers">
                   <Card>
                     <CardHeader>
