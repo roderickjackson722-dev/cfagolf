@@ -30,6 +30,7 @@ import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
 import { AdminSalesTable } from '@/components/admin/AdminSalesTable';
 import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
+import { AdminGuidanceApplications } from '@/components/admin/AdminGuidanceApplications';
 import { AdminReleasesTable } from '@/components/admin/AdminReleasesTable';
 import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
 import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
@@ -278,6 +279,9 @@ const Admin = () => {
                   <TabsTrigger value="memberships" className="flex items-center gap-2">
                     <CreditCard className="w-4 h-4" /> Memberships
                   </TabsTrigger>
+                  <TabsTrigger value="applications" className="flex items-center gap-2">
+                    <FileText className="w-4 h-4" /> Applications
+                  </TabsTrigger>
                   <TabsTrigger value="subscribers" className="flex items-center gap-2">
                     <MailPlus className="w-4 h-4" /> Subscribers
                   </TabsTrigger>
@@ -322,6 +326,23 @@ const Admin = () => {
                     </CardHeader>
                     <CardContent>
                       <AdminMembershipTable />
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="applications">
+                  <Card>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        <FileText className="w-5 h-5 text-primary" />
+                        <CardTitle>1 on 1 Guidance Applications</CardTitle>
+                      </div>
+                      <CardDescription>
+                        Review new player applications and contact parents or guardians to schedule a free fit conversation.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <AdminGuidanceApplications />
                     </CardContent>
                   </Card>
                 </TabsContent>
