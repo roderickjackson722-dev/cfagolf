@@ -11,6 +11,7 @@ const Landing = () => {
       <Navbar />
       <main>
         <HeroSection />
+        <HowItWorksSection />
         <TestimonialsSection />
         <CTASection />
       </main>
