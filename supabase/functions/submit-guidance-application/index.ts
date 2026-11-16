@@ -84,7 +84,6 @@ Deno.serve(async (req) => {
       grade_level: values.gradeLevel,
       gpa: Number(values.gpa),
       scoring_average: Number(values.scoringAverage),
-      hbcu_profile_link: '',
       swing_video_link: values.swingVideoLink,
       parent_name: values.parentName,
       parent_email: values.parentEmail,

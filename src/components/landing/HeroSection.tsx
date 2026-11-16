@@ -23,22 +23,11 @@ export function HeroSection() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-primary-foreground/85 sm:text-lg md:text-xl">
-            Expert 1 on 1 guidance for junior golfers and their families navigating HBCU college golf recruiting. We review grade level, GPA, scoring average, and swing video, then help put your player in front of the right HBCU coaches.
+            Expert 1 on 1 guidance for junior golfers and their families navigating HBCU college golf recruiting.
           </p>
 
-          <div className="mx-auto mt-8 max-w-3xl space-y-4 text-left text-base leading-relaxed text-primary-foreground sm:text-lg">
-            <p>
-              <strong className="font-semibold text-cfa-gold">Free first:</strong>{' '}
-              Create a free player profile on HBCU.GOLF. Coaches can search and track players there. The free profile stays free.
-            </p>
-            <p>
-              <strong className="font-semibold text-cfa-gold">Paid 1 on 1:</strong>{' '}
-              College Fairway Advisors works with a small number of players 1 on 1, with a tailored HBCU target list, templates, and guided coach outreach for a specific player.
-            </p>
-          </div>
-
           <p className="mx-auto mt-8 max-w-3xl border-t border-primary-foreground/20 pt-6 text-sm leading-relaxed text-primary-foreground/80 sm:text-base">
-            We cannot guarantee an offer or a scholarship. That decision is always up to the coach. What we do is put your player in front of the right coaches with a clear plan, and guide your family through real conversations.
+            We cannot guarantee an offer or a scholarship. That decision is always up to the coach. What we do is give your family a clear plan, the right templates, and guided 1 on 1 support so your player is seen by the right coaches.
           </p>
 
           <div className="mt-8 flex flex-col items-center">
@@ -52,14 +41,6 @@ export function HeroSection() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </Button>
-            <a
-              href="https://hbcu.golf"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 text-sm font-medium text-primary-foreground/80 underline decoration-primary-foreground/40 underline-offset-4 transition-colors hover:text-primary-foreground"
-            >
-              Create a free HBCU.GOLF profile
-            </a>
           </div>
         </div>
       </div>
