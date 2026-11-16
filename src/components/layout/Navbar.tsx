@@ -20,8 +20,6 @@ export function Navbar() {
     { to: '/about', label: 'About' },
     { to: '/pricing', label: 'Pricing' },
     { to: '/testimonials', label: 'Testimonials' },
-    { to: '/ebook', label: 'E-Book' },
-    { to: '/member-preview', label: 'Member Preview' },
   ];
 
   return (
@@ -85,21 +83,7 @@ export function Navbar() {
                   <div className="hidden md:block">
                     <UserMenu />
                   </div>
-                ) : (
-                  <div className="hidden md:flex items-center gap-2">
-                    <Link to="/coach/login">
-                      <Button variant="outline" className="rounded-full">
-                        Coaches
-                      </Button>
-                    </Link>
-                    <Link to="/login">
-                      <Button className="rounded-full">
-                        <LogIn className="w-4 h-4 mr-2" />
-                        Sign In
-                      </Button>
-                    </Link>
-                  </div>
-                )}
+                ) : null}
               </>
             )}
 
@@ -160,24 +144,6 @@ export function Navbar() {
                       Admin
                     </Link>
                   )}
-                </>
-              )}
-              {!loading && !user && (
-                <>
-                  <Link
-                    to="/coach/login"
-                    onClick={() => setIsOpen(false)}
-                    className="px-4 py-3 rounded-lg text-sm font-medium text-foreground border border-border"
-                  >
-                    Coaches Login
-                  </Link>
-                  <Link
-                    to="/login"
-                    onClick={() => setIsOpen(false)}
-                    className="px-4 py-3 rounded-lg text-sm font-medium text-primary bg-primary/10"
-                  >
-                    Sign In
-                  </Link>
                 </>
               )}
               {user && (

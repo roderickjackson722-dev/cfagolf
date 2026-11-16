@@ -5,7 +5,7 @@ const steps = [
   {
     title: 'Planning',
     description:
-      'Your player recruiting process is unique. We start with the free HBCU.GOLF profile, grade level, GPA, scoring average, and swing video, then build a tailored strategy and target list of HBCU programs that fit academically, athletically, and financially, with a clear timeline.',
+      'Your player recruiting process is unique. We start with grade level, GPA, scoring average, and swing video, then build a tailored strategy and target list of programs that fit academically, athletically, and financially, with a clear timeline.',
   },
   {
     title: 'Player Profile and Video',
@@ -20,7 +20,7 @@ const steps = [
   {
     title: 'Exposure to Specific Coaches',
     description:
-      'A free profile puts a player in a pool coaches can search. CFA is different. We help your family reach out to specific coaches about a specific player, at programs that fit, on a steady schedule, and track who replies.',
+      'We help your family reach out directly to specific coaches at programs that fit your player, with personal outreach on your behalf, not a big database that never sends one email.',
   },
   {
     title: 'Guidance Through Replies to Commitment',

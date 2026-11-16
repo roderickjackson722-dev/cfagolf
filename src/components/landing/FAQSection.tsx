@@ -8,6 +8,10 @@ const faqs = [
     answer: 'Start as early as you can, and do not wait for a perfect scoring average. We work most with juniors and seniors. A junior gets more time to build a target list and build coach relationships. A senior can still move fast if the grades, scores, and video are ready and there are open spots. Apply, and Rod will tell you straight if the timing works for your player, or if you need a different plan.',
   },
   {
+    question: 'Can you guarantee an offer or a scholarship?',
+    answer: 'No. A coach makes that decision, and no advisor can make it for them. What Rod will do is put your player in front of the right coaches with a clear plan, and guide your family through every real conversation that comes from it. If he does not believe he can help your player, he will tell you that before you pay.',
+  },
+  {
     question: 'What does CFA actually do for our family?',
     answer: 'Rod looks at your player as one player, not as a list. He reviews grade level, GPA, scoring average, and swing video, builds a target list of HBCU programs that fit, and gives your family a clear outreach plan. You get a player resume, email and DM templates, a follow up schedule, and coaching on what to say when coaches reply, from the first message to a visit or an offer conversation.',
   },
@@ -25,11 +29,7 @@ const faqs = [
   },
   {
     question: 'Do you only help with HBCU golf?',
-    answer: 'Yes. CFA is golf only, and the focus is HBCU golf programs. That is why the target list is built around HBCU programs that fit your player academically and athletically, not a long list of schools that will never be a fit.',
-  },
-  {
-    question: 'Can you guarantee an offer or a scholarship?',
-    answer: 'No. A coach makes that decision, and no advisor can make it for them. What Rod will do is put your player in front of the right coaches with a clear plan, and guide your family through every real conversation that comes from it. If he does not believe he can help your player, he will tell you that before you pay.',
+    answer: 'We can prepare your player for any college program. Our main focus is HBCU programs, where we have strong, direct relationships with coaches, and that focus helps us guide your player with real connections and clear next steps. That focus does not limit your player to HBCU programs only.',
   },
 ];
 

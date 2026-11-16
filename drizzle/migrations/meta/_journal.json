@@ -36,6 +36,13 @@
       "when": 1794842223773,
       "tag": "0004_drop_duplicate_free_resources_read_policy",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1794843785965,
+      "tag": "0005_retire_guidance_profile_link",
+      "breakpoints": true
     }
   ]
 }

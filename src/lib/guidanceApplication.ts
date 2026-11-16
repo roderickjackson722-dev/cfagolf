@@ -31,7 +31,6 @@ export const guidanceApplicationSchema = z.object({
   gradeLevel: z.string().trim().min(1, 'Enter the grade level').max(30, 'Keep the grade level under 30 characters'),
   gpa: numericText('GPA', 10),
   scoringAverage: numericText('scoring average', 200),
-  profileLink: httpLink('HBCU.GOLF profile link'),
   swingVideoLink: httpLink('swing video link'),
   parentName: z.string().trim().min(1, 'Enter the parent or guardian name').max(100, 'Keep the name under 100 characters'),
   parentEmail: z.string().trim().min(1, 'Enter the parent or guardian email').max(255, 'Keep the email under 255 characters').email('Enter a valid email address'),

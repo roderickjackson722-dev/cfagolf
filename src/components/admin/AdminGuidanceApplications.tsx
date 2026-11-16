@@ -81,9 +81,11 @@ export function AdminGuidanceApplications() {
                   </a>
                 </TableCell>
                 <TableCell>
-                  <a href={application.hbcu_profile_link} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-primary hover:underline">
-                    <ExternalLink className="h-4 w-4" /> HBCU.GOLF profile
-                  </a>
+                  {application.hbcu_profile_link && (
+                    <a href={application.hbcu_profile_link} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                      <ExternalLink className="h-4 w-4" /> HBCU.GOLF profile
+                    </a>
+                  )}
                   <a href={application.swing_video_link} target="_blank" rel="noreferrer" className="mt-2 flex items-center gap-2 text-sm text-primary hover:underline">
                     <ExternalLink className="h-4 w-4" /> Swing video
                   </a>
