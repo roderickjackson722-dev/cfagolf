@@ -1,6 +1,6 @@
 # Current tasks
-- [ ] Add the five-step How It Works section with one application button.
-- [ ] Verify step order, mobile readability, scrolling, and unchanged surrounding sections.
+- [x] Add the five-step How It Works section with one application button.
+- [x] Verify step order, mobile readability, scrolling, and unchanged surrounding sections.
 - [x] Replace the homepage hero with the HBCU-focused single-offer content and application/free-profile links.
 - [x] Remove the homepage three-card pricing section without changing other screens.
 - [x] Verify desktop and mobile homepage content, scrolling, and links.
