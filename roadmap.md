@@ -1,9 +1,10 @@
 # Current tasks
-- [ ] Add the seven-item Questions Families Ask section with one application button after the application work is verified.
-- [ ] Verify FAQ expansion, exact order, mobile readability, and unchanged surrounding sections.
-- [ ] Store each guidance application and show it in the admin dashboard.
-- [ ] Send Rod an immediate email alert and update the family confirmation to the 24–48 hour free fit conversation.
-- [ ] Verify a real submission, stored copy, owner email result, responsive layout, and single-offer content.
+- [x] Add the seven-item Questions Families Ask section with one application button after the application work is verified.
+- [x] Verify FAQ expansion, exact order, mobile readability, and unchanged surrounding sections.
+- [x] Store each guidance application and show it in the admin dashboard.
+- [x] Update the family confirmation to the 24–48 hour free fit conversation.
+- [ ] Send Rod an immediate email alert for each application. Blocked: no verified sender domain is configured.
+- [x] Verify a real submission, stored copy, owner email result, responsive layout, and single-offer content.
 - [x] Add the five-step How It Works section with one application button.
 - [x] Verify step order, mobile readability, scrolling, and unchanged surrounding sections.
 - [x] Replace the homepage hero with the HBCU-focused single-offer content and application/free-profile links.
