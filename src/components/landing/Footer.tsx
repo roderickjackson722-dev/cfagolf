@@ -4,7 +4,6 @@ import cfaLogo from '@/assets/cfa-logo-transparent.png';
 import { FooterEmailOptIn } from '@/components/FooterEmailOptIn';
 
 export function Footer() {
-  const { user } = useAuth();
   return (
     <footer className="bg-cfa-charcoal text-white">
       <div className="container mx-auto px-4 py-12 md:py-16">

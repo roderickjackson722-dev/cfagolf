@@ -51,7 +51,6 @@ const Pricing = () => (
           <p className="mt-5 font-display text-4xl font-bold text-primary sm:text-5xl">
             $699 <span className="font-sans text-lg font-medium text-muted-foreground sm:text-xl">one time</span>
           </p>
-          <p className="mt-2 text-base text-muted-foreground">or $350 now and $349 in 30 days, $699 total.</p>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
             One time program for one player. Apply first. Rod reviews the player before accepting a family, and payment is only taken after the player is accepted.
           </p>

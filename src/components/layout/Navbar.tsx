@@ -9,7 +9,7 @@ import cfaLogo from '@/assets/cfa-logo-transparent.png';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, loading, hasPaidAccess } = useAuth();
+  const { user, loading } = useAuth();
   const { data: isAdmin } = useIsAdmin();
   const location = useLocation();
 

@@ -2,8 +2,8 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/landing/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Lightbulb, Users, Target, ArrowRight, Quote } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Lightbulb, Users, Target, Quote } from 'lucide-react';
+import { ContactUsForm } from '@/components/ContactUsForm';
 
 // Import about page images
 import hbcuGolfTeam from '@/assets/about/hbcu-golf-team.jpg';
