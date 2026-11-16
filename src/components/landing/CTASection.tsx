@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export function CTASection() {
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden">
+    <section id="application" className="py-20 md:py-28 relative overflow-hidden scroll-mt-20">
       <div className="absolute inset-0 cfa-gradient" />
       <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
 
