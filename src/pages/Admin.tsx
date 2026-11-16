@@ -30,6 +30,7 @@ import { AdminWagrTable } from '@/components/admin/AdminWagrTable';
 import { AdminToolkitTable } from '@/components/admin/AdminToolkitTable';
 import { AdminSalesTable } from '@/components/admin/AdminSalesTable';
 import { AdminSubscriberTable } from '@/components/admin/AdminSubscriberTable';
+import { AdminGuidanceApplications } from '@/components/admin/AdminGuidanceApplications';
 import { AdminReleasesTable } from '@/components/admin/AdminReleasesTable';
 import { AdminNewsletterTable } from '@/components/admin/AdminNewsletterTable';
 import { DemoCallAgenda } from '@/components/admin/DemoCallAgenda';
