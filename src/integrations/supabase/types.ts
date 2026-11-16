@@ -1258,7 +1258,7 @@ export type Database = {
           created_at?: string
           gpa: number
           grade_level: string
-          hbcu_profile_link: string
+          hbcu_profile_link?: string
           id?: string
           parent_email: string
           parent_name: string
