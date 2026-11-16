@@ -1,7 +1,7 @@
 # Current tasks
-- [ ] Replace the homepage hero with the HBCU-focused single-offer content and application/free-profile links.
-- [ ] Remove the homepage three-card pricing section without changing other screens.
-- [ ] Verify desktop and mobile homepage content, scrolling, and links.
+- [x] Replace the homepage hero with the HBCU-focused single-offer content and application/free-profile links.
+- [x] Remove the homepage three-card pricing section without changing other screens.
+- [x] Verify desktop and mobile homepage content, scrolling, and links.
 
 # Consulting price restoration
 - [x] Verify and correct the Social Kit share addresses and social landing page address.
