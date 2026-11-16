@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Public read free-resources" ON storage.objects;
