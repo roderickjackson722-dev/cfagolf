@@ -1,6 +1,6 @@
 # Current tasks
-- [ ] Add the seven-item Questions Families Ask section with one application button after the application work is verified.
-- [ ] Verify FAQ expansion, exact order, mobile readability, and unchanged surrounding sections.
+- [x] Add the seven-item Questions Families Ask section with one application button after the application work is verified.
+- [x] Verify FAQ expansion, exact order, mobile readability, and unchanged surrounding sections.
 - [x] Store each guidance application and show it in the admin dashboard.
 - [x] Update the family confirmation to the 24–48 hour free fit conversation.
 - [ ] Send Rod an immediate email alert for each application. Blocked: no verified sender domain is configured.
