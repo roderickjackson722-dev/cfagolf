@@ -1240,6 +1240,48 @@ export type Database = {
         }
         Relationships: []
       }
+      guidance_applications: {
+        Row: {
+          created_at: string
+          gpa: number
+          grade_level: string
+          hbcu_profile_link: string
+          id: string
+          parent_email: string
+          parent_name: string
+          parent_phone: string
+          player_name: string
+          scoring_average: number
+          swing_video_link: string
+        }
+        Insert: {
+          created_at?: string
+          gpa: number
+          grade_level: string
+          hbcu_profile_link: string
+          id?: string
+          parent_email: string
+          parent_name: string
+          parent_phone: string
+          player_name: string
+          scoring_average: number
+          swing_video_link: string
+        }
+        Update: {
+          created_at?: string
+          gpa?: number
+          grade_level?: string
+          hbcu_profile_link?: string
+          id?: string
+          parent_email?: string
+          parent_name?: string
+          parent_phone?: string
+          player_name?: string
+          scoring_average?: number
+          swing_video_link?: string
+        }
+        Relationships: []
+      }
       high_schools: {
         Row: {
           area_coordinator_name: string | null
