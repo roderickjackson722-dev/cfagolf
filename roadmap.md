@@ -1,4 +1,6 @@
 # Current tasks
+- [ ] Add the seven-item Questions Families Ask section with one application button after the application work is verified.
+- [ ] Verify FAQ expansion, exact order, mobile readability, and unchanged surrounding sections.
 - [ ] Store each guidance application and show it in the admin dashboard.
 - [ ] Send Rod an immediate email alert and update the family confirmation to the 24–48 hour free fit conversation.
 - [ ] Verify a real submission, stored copy, owner email result, responsive layout, and single-offer content.
