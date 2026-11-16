@@ -54,10 +54,6 @@ const Pricing = () => (
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
             One time program for one player. Apply first. Rod reviews the player before accepting a family, and payment is only taken after the player is accepted.
           </p>
-          <div className="mx-auto mt-5 flex max-w-2xl items-start justify-center gap-3 text-left text-base leading-relaxed text-muted-foreground">
-            <X aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-destructive" />
-            <p>No guarantee of an offer, a roster spot, or a scholarship. That decision is always up to the coach.</p>
-          </div>
         </div>
 
         <div className="mx-auto mt-16 max-w-3xl">

@@ -36,9 +36,6 @@ export function Footer() {
                 <Link to="/database" className="text-white/70 hover:text-white transition-colors">College Database</Link>
               </li>
               <li>
-                <Link to="/dashboard" className="text-white/70 hover:text-white transition-colors">Member Portal</Link>
-              </li>
-              <li>
                 <Link to="/login" className="text-white/70 hover:text-white transition-colors">Sign In</Link>
               </li>
             </ul>
