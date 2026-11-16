@@ -1,4 +1,6 @@
 # Current tasks
+- [ ] Replace the homepage closing CTA with one $699 pricing card and the nine-field application form.
+- [ ] Verify the required content, confirmation-only submission, responsive layout, and unchanged surrounding sections.
 - [x] Add the five-step How It Works section with one application button.
 - [x] Verify step order, mobile readability, scrolling, and unchanged surrounding sections.
 - [x] Replace the homepage hero with the HBCU-focused single-offer content and application/free-profile links.
