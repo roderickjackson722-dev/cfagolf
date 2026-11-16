@@ -11,7 +11,6 @@ const validApplication: GuidanceApplicationValues = {
   gradeLevel: '11',
   gpa: '3.8',
   scoringAverage: '78',
-  profileLink: 'https://hbcu.golf/player/test',
   swingVideoLink: 'https://youtube.com/watch?v=test',
   parentName: 'Test Parent',
   parentEmail: 'parent@example.com',
@@ -33,7 +32,6 @@ describe('guidance program rules', () => {
   });
 
   it('accepts only http or https player links', () => {
-    expect(guidanceApplicationSchema.safeParse({ ...validApplication, profileLink: 'javascript:alert(1)' }).success).toBe(false);
     expect(guidanceApplicationSchema.safeParse({ ...validApplication, swingVideoLink: 'javascript:alert(1)' }).success).toBe(false);
     expect(guidanceApplicationSchema.safeParse(validApplication).success).toBe(true);
   });

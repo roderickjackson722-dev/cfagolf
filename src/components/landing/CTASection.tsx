@@ -12,7 +12,7 @@ import {
 } from '@/lib/guidanceApplication';
 
 const included = [
-  'Review of the free HBCU.GOLF profile, grade level, GPA, scoring average, and swing video',
+  'Review of the player profile, grade level, GPA, scoring average, and swing video',
   'Tailored HBCU target list, built for that player',
   'Player resume template, email templates, and DM templates',
   'Coach outreach plan and follow up schedule',
@@ -29,7 +29,6 @@ const initialValues: ApplicationValues = {
   gradeLevel: '',
   gpa: '',
   scoringAverage: '',
-  profileLink: '',
   swingVideoLink: '',
   parentName: '',
   parentEmail: '',
@@ -48,7 +47,6 @@ const fields: Array<{
   { name: 'gradeLevel', label: 'Grade level', placeholder: 'e.g. 11th grade' },
   { name: 'gpa', label: 'GPA', placeholder: 'e.g. 3.8', inputMode: 'decimal' },
   { name: 'scoringAverage', label: 'Scoring average', placeholder: 'e.g. 78', inputMode: 'decimal' },
-  { name: 'profileLink', label: 'HBCU.GOLF profile link', placeholder: 'https://hbcu.golf/...', type: 'url', inputMode: 'url' },
   { name: 'swingVideoLink', label: 'Swing video link', placeholder: 'https://...', type: 'url', inputMode: 'url' },
   { name: 'parentName', label: 'Parent or guardian name', placeholder: 'Parent or guardian name', autoComplete: 'name' },
   { name: 'parentEmail', label: 'Parent or guardian email', placeholder: 'you@example.com', type: 'email', inputMode: 'email', autoComplete: 'email' },
@@ -143,7 +141,7 @@ export function CTASection() {
           <div className="text-center">
             <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">Apply for 1 on 1 Guidance</h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Tell us about your player. Rod reviews every application and only takes players he believes he can genuinely help.
+              Tell us about your player. Rod reviews every application and only takes players he believes he can guide well.
             </p>
           </div>
 
